@@ -1,3 +1,5 @@
+// import 'package:diyar_express/app/app.dart';
+import 'package:diyar_express/modules/modules.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
@@ -19,15 +21,13 @@ class DiyarExpress extends StatefulWidget {
 class _DiyarExpressState extends State<DiyarExpress> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('DiyarExpress'),
-        ),
-        body: const Center(
-          child: Text('DiyarExpress'),
-        ),
-      ),
+    // return MaterialApp.router(
+    //   debugShowCheckedModeBanner: false,
+    //   routerConfig: AppRouter.router,
+    // );
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AuthView(),
     );
   }
 }
