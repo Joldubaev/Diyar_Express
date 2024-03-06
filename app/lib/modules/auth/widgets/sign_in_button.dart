@@ -20,8 +20,8 @@ class SignInButton extends StatelessWidget {
       onTap: onPressed,
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          border: Border.all(color: Colors.grey.shade300),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: Colors.grey.shade500),
         ),
         child: ListTile(
           contentPadding: const EdgeInsets.symmetric(horizontal: 20),

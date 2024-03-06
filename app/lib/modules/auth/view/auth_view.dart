@@ -9,6 +9,7 @@ class AuthView extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 240, 118, 32),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(top: 20),
@@ -46,9 +47,16 @@ class _BottomSheet extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
             const SizedBox(height: 20),
-            const Center(child: Text('Добро пожаловать!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
+            const Align(
+              alignment: Alignment.center,
+              child: Text(
+                'Добро пожаловать!',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
             const SizedBox(height: 20),
             ListTile(
+              contentPadding: const EdgeInsets.only(left: 50, right: 50),
               title: const Text('У вас уже есть аккаунт?'),
               trailing: TextButton(onPressed: () {}, child: const Text('Войти')),
             ),
@@ -58,7 +66,7 @@ class _BottomSheet extends StatelessWidget {
               iconPath: 'assets/icons/google.svg',
               onPressed: () {},
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 40),
             TextButton(onPressed: () {}, child: const Text('Продолжая вы соглашаетесь с политикой')),
           ],
         );
