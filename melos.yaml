@@ -1,0 +1,86 @@
+name: mdc
+
+packages:
+  - app
+  - packages/**
+
+command:
+  bootstrap:
+    runPubGetInParallel: false
+    usePubspecOverrides: true
+
+scripts:
+  format:
+    run: >-
+      flutter pub global run melos exec \
+      dart format . --line-length 120
+    description: "Format all Dart code"
+
+  format-check:
+    run: >-
+      flutter pub global run melos exec \
+      dart format . --line-length 120 --set-exit-if-changed
+    description: "Check format all Dart code"
+
+  analyze:
+    run: >-
+      flutter pub global run melos exec \
+      flutter analyze
+    description: "Analyze all Dart code"
+
+  analyze-check:
+    run: >-
+      flutter pub global run melos exec \
+      flutter analyze --fatal-warnings
+    description: "Analyze all Dart code and exit if there are any fatal warnings"
+
+  flutter-clean:
+    run: >-
+      flutter pub global run melos exec \
+      flutter clean
+    description: "Clean pub dependencies"
+
+  pub-get:
+    run: >-
+      flutter pub global run melos exec \
+      flutter pub get
+    description: "Get pub dependencies"
+
+  unit-test:
+    run: >-
+      flutter pub global run melos exec \
+      flutter test
+    description: "Run unit tests (all packages)"
+
+  doctor:
+    run: flutter doctor
+    description: "Run Flutter doctor"
+
+  run-build-runner:
+    run: >-
+      flutter pub global run melos exec --depends-on="build_runner" -- \
+      flutter pub run build_runner build --delete-conflicting-outputs
+    description: "Generate code with build_runner"
+
+  # Run Mdc App
+  run-app:
+    run: cd app && flutter run
+    description: "Run mdc_app"
+
+  # Build apk and appbundle Mdc App
+  build-apk:
+    run: cd app && flutter build apk
+    description: "Build an APK file"
+
+  build-ios:
+    run: cd app && flutter build ios --release --no-codesign
+    description: "Build an IOS file"
+
+  build-appbundle:
+    run: cd app && flutter build appbundle
+    description: "Build an appbundle file"
+
+  # Integration test My Quran
+  integration-test:
+    run: cd app && flutter drive --target=test_driver/app.dart --no-enable-impeller
+    description: "Run integration tests for the mdc_app"
