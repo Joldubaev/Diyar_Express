@@ -1,68 +1,91 @@
+import 'package:diyar_express/components/custom_input_widget.dart';
+import 'package:diyar_express/components/submit_button_widget.dart';
+import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/utils/validators.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/sign_in_button.dart';
-
-class AuthView extends StatelessWidget {
+class AuthView extends StatefulWidget {
   const AuthView({super.key});
 
   @override
+  State<AuthView> createState() => _AuthViewState();
+}
+
+class _AuthViewState extends State<AuthView> {
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: Image.asset(
-              'assets/images/auth_images.png',
-              height: screenHeight * 0.2,
+          padding: const EdgeInsets.fromLTRB(16, 12, 16, 2),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Вход', style: theme.textTheme.titleLarge),
+                const SizedBox(height: 20),
+                CustomInputWidget(
+                  title: 'Email',
+                  hintText: "asanov@gmail.com",
+                  inputType: TextInputType.emailAddress,
+                  controller: _emailController,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Пожалуйста, введите email.';
+                    } else if (!isEmailValid(value)) {
+                      return 'Пожалуйста, введите корректный email.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 10),
+                CustomInputWidget(
+                  hintText: "********",
+                  title: 'Пароль',
+                  controller: _passwordController,
+                  isPasswordField: true,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Пожалуйста, введите пароль.';
+                    } else if (value.length < 6 && isPasswordValid(value)) {
+                      return 'Пароль должен содержать не менее 6 символов.';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                SubmitButtonWidget(
+                  title: "Войти",
+                  onTap: () {
+                    if (_formKey.currentState!.validate()) {
+                      print('Email: ${_emailController.text}');
+                      print('Password: ${_passwordController.text}');
+                    }
+                  },
+                  bgColor: AppColors.primary,
+                  textStyle: theme.textTheme.bodyLarge!.copyWith(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
       ),
-      bottomSheet: _BottomSheet(screenHeight: screenHeight),
-    );
-  }
-}
-
-class _BottomSheet extends StatelessWidget {
-  const _BottomSheet({Key? key, required this.screenHeight}) : super(key: key);
-  final double screenHeight;
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomSheet(
-      enableDrag: false,
-      showDragHandle: true,
-      constraints: const BoxConstraints(
-            maxHeight: 0.53,
-            minHeight: 0.53,
-          ) *
-          screenHeight,
-      onClosing: () {},
-      builder: (context) {
-        return ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          children: [
-            const SizedBox(height: 20),
-            const Center(child: Text('Добро пожаловать!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
-            const SizedBox(height: 20),
-            ListTile(
-              title: const Text('У вас уже есть аккаунт?'),
-              trailing: TextButton(onPressed: () {}, child: const Text('Войти')),
-            ),
-            SignInButton(
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              text: 'Sign in with Google',
-              iconPath: 'assets/icons/google.svg',
-              onPressed: () {},
-            ),
-            const SizedBox(height: 20),
-            TextButton(onPressed: () {}, child: const Text('Продолжая вы соглашаетесь с политикой')),
-          ],
-        );
-      },
     );
   }
 }
