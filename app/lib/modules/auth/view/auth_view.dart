@@ -46,15 +46,11 @@ class _BottomSheet extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20),
           children: [
             const SizedBox(height: 20),
-            const Center(
-                child: Text('Добро пожаловать!',
-                    style:
-                        TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
+            const Center(child: Text('Добро пожаловать!', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold))),
             const SizedBox(height: 20),
             ListTile(
               title: const Text('У вас уже есть аккаунт?'),
-              trailing:
-                  TextButton(onPressed: () {}, child: const Text('Войти')),
+              trailing: TextButton(onPressed: () {}, child: const Text('Войти')),
             ),
             SignInButton(
               margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -63,9 +59,7 @@ class _BottomSheet extends StatelessWidget {
               onPressed: () {},
             ),
             const SizedBox(height: 20),
-            TextButton(
-                onPressed: () {},
-                child: const Text('Продолжая вы соглашаетесь с политикой')),
+            TextButton(onPressed: () {}, child: const Text('Продолжая вы соглашаетесь с политикой')),
           ],
         );
       },

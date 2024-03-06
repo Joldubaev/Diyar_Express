@@ -4,8 +4,7 @@ import 'package:go_router/go_router.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 final _sectionNavigatorKey1 = GlobalKey<NavigatorState>(debugLabel: 'home');
-final _sectionNavigatorKey2 =
-    GlobalKey<NavigatorState>(debugLabel: 'restaurant');
+final _sectionNavigatorKey2 = GlobalKey<NavigatorState>(debugLabel: 'restaurant');
 final _sectionNavigatorKey3 = GlobalKey<NavigatorState>(debugLabel: 'cart');
 final _sectionNavigatorKey4 = GlobalKey<NavigatorState>(debugLabel: 'profile');
 
