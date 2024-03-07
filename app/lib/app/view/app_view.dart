@@ -1,3 +1,4 @@
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/modules/modules.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,8 @@ class DiyarExpress extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: theme,
       home: const AuthView(),
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }

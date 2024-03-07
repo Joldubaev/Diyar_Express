@@ -2,20 +2,6 @@ import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomInputWidget extends StatefulWidget {
-  final String hintText;
-  final TextEditingController? controller;
-  final bool? isPasswordField;
-  final String? title;
-  final FormFieldValidator<String>? validator;
-  final TextInputType? inputType;
-  final VoidCallback? onTap;
-  final void Function(String)? onChanged;
-  final Color? filledColor;
-  final Color? titleColor;
-  final int? maxLines;
-  final Widget? leading;
-  final bool? isReadOnly;
-
   const CustomInputWidget({
     super.key,
     required this.hintText,
@@ -32,6 +18,19 @@ class CustomInputWidget extends StatefulWidget {
     this.leading,
     this.isReadOnly = false,
   });
+  final String hintText;
+  final TextEditingController? controller;
+  final bool? isPasswordField;
+  final String? title;
+  final FormFieldValidator<String>? validator;
+  final TextInputType? inputType;
+  final VoidCallback? onTap;
+  final void Function(String)? onChanged;
+  final Color? filledColor;
+  final Color? titleColor;
+  final int? maxLines;
+  final Widget? leading;
+  final bool? isReadOnly;
 
   @override
   State<CustomInputWidget> createState() => _CustomInputWidgetState();
@@ -104,9 +103,7 @@ class _CustomInputWidgetState extends State<CustomInputWidget> {
                           setState(() {});
                         },
                         child: Icon(
-                          _obsecureText
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
+                          _obsecureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                           color: AppColors.black1.withOpacity(.6),
                         ),
                       )
