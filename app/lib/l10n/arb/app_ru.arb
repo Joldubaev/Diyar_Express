@@ -1,3 +1,7 @@
 {
-    "@@locale": "ru"
+    "@@locale": "ru",
+    "entrance": "Вход",
+    "welcome": "Добро пожаловать"
+
+
 }

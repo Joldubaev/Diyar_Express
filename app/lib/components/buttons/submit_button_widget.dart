@@ -2,15 +2,6 @@ import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class SubmitButtonWidget extends StatelessWidget {
-  final VoidCallback? onTap;
-  final String title;
-  final Color bgColor;
-  final TextStyle textStyle;
-  final bool? isLoading;
-  final double? height;
-  final double? width;
-  final Color? borderColor;
-
   const SubmitButtonWidget({
     super.key,
     this.onTap,
@@ -22,6 +13,14 @@ class SubmitButtonWidget extends StatelessWidget {
     this.width,
     this.borderColor,
   });
+  final VoidCallback? onTap;
+  final String title;
+  final Color bgColor;
+  final TextStyle textStyle;
+  final bool? isLoading;
+  final double? height;
+  final double? width;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
