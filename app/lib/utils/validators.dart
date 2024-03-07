@@ -19,5 +19,3 @@ bool isPasswordValid(String password) {
   // Use the RegExp object to match the password against the pattern
   return regex.hasMatch(password);
 }
-
-

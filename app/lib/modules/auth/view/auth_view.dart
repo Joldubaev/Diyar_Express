@@ -1,5 +1,7 @@
-import 'package:diyar_express/components/custom_input_widget.dart';
-import 'package:diyar_express/components/submit_button_widget.dart';
+import 'dart:developer';
+
+import 'package:diyar_express/components/input/custom_input_widget.dart';
+import 'package:diyar_express/components/buttons/submit_button_widget.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/validators.dart';
 import 'package:flutter/material.dart';
@@ -72,8 +74,8 @@ class _AuthViewState extends State<AuthView> {
                   title: "Войти",
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      print('Email: ${_emailController.text}');
-                      print('Password: ${_passwordController.text}');
+                      log('Email: ${_emailController.text}');
+                      log('Password: ${_passwordController.text}');
                     }
                   },
                   bgColor: AppColors.primary,

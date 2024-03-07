@@ -104,9 +104,7 @@ class _CustomInputWidgetState extends State<CustomInputWidget> {
                           setState(() {});
                         },
                         child: Icon(
-                          _obsecureText
-                              ? Icons.visibility_off_outlined
-                              : Icons.visibility_outlined,
+                          _obsecureText ? Icons.visibility_off_outlined : Icons.visibility_outlined,
                           color: AppColors.black1.withOpacity(.6),
                         ),
                       )

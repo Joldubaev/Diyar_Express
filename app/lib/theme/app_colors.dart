@@ -8,8 +8,7 @@ class AppColors {
   static const Color green = Color(0xFF219653);
 
   /// The color swatch for the application's primary color.
-  static const MaterialColor primary =
-      MaterialColor(_primaryPrimaryValue, <int, Color>{
+  static const MaterialColor primary = MaterialColor(_primaryPrimaryValue, <int, Color>{
     50: Color(0xFFFFF2E9),
     100: Color(0xFFFFDFC8),
     200: Color(0xFFFFCAA3),
@@ -23,8 +22,7 @@ class AppColors {
   });
   static const int _primaryPrimaryValue = 0xFFFF9446;
 
-  static const MaterialColor primaryAccent =
-      MaterialColor(_primaryAccentValue, <int, Color>{
+  static const MaterialColor primaryAccent = MaterialColor(_primaryAccentValue, <int, Color>{
     100: Color(0xFFFFFFFF),
     200: Color(_primaryAccentValue),
     400: Color(0xFFFFDDCF),
