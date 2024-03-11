@@ -66,7 +66,7 @@ class _LoginBodyState extends State<LoginBody> {
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'Please enter your full name';
-                } else if (!isEmailValid(value)) {
+                } else if (!isNameValid(value)) {
                   return 'Please enter a full name.';
                 }
                 return null;
@@ -81,7 +81,7 @@ class _LoginBodyState extends State<LoginBody> {
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'Пожалуйста, введите номер телефона.';
-                } else if (!isEmailValid(value)) {
+                } else if (!isPhoneNumberValid(value)) {
                   return 'Пожалуйста, введите корректный номер телефона.';
                 }
                 return null;
