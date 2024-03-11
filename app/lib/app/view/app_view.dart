@@ -20,7 +20,7 @@ class DiyarExpress extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: const AuthView(),
+      home: const Auth(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );
