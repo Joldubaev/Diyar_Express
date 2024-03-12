@@ -19,3 +19,13 @@ bool isPasswordValid(String password) {
   // Use the RegExp object to match the password against the pattern
   return regex.hasMatch(password);
 }
+
+bool isNameValid(String name) {
+  final usernameRegExp = RegExp(r'^[a-zA-Z0-9_]+$');
+  return usernameRegExp.hasMatch(name) && name.isNotEmpty;
+}
+
+bool isPhoneNumberValid(String phoneNumber) {
+  final phoneNumberRegExp = RegExp(r'^\d{11}$');
+  return phoneNumberRegExp.hasMatch(phoneNumber);
+}

@@ -1,11 +1,28 @@
 import 'dart:developer';
 
-import 'package:diyar_express/components/input/custom_input_widget.dart';
-import 'package:diyar_express/components/buttons/submit_button_widget.dart';
-import 'package:diyar_express/l10n/l10n.dart';
+import 'package:diyar_express/components/components.dart';
+import 'package:diyar_express/modules/modules.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/validators.dart';
 import 'package:flutter/material.dart';
+
+class Auth extends StatelessWidget {
+  const Auth({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: AppColors.primary,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
+          child: Image.asset('assets/images/auth_images.png'),
+        ),
+      ),
+      bottomSheet: const AuthView(),
+    );
+  }
+}
 
 class AuthView extends StatefulWidget {
   const AuthView({super.key});
@@ -29,17 +46,38 @@ class _AuthViewState extends State<AuthView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
+    return BottomSheet(
+      enableDrag: false,
+      backgroundColor: Colors.white,
+      showDragHandle: true,
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.58,
+        minHeight: MediaQuery.of(context).size.height * 0.58,
+      ),
+      onClosing: () {},
+      builder: (context) {
+        return Padding(
           padding: const EdgeInsets.fromLTRB(16, 12, 16, 2),
           child: Form(
             key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: ListView(
               children: [
-                Text(context.l10n.entrance, style: theme.textTheme.titleLarge),
+                Center(
+                  child: Text('Добро пожаловать!', style: theme.textTheme.titleLarge),
+                ),
+                const SizedBox(height: 10),
+                TextButtonLogin(
+                  title: 'Войдите в свой аккаунт',
+                  traling: 'Регистрация',
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginView(),
+                      ),
+                    );
+                  },
+                ),
                 const SizedBox(height: 20),
                 CustomInputWidget(
                   title: 'Email',
@@ -55,7 +93,7 @@ class _AuthViewState extends State<AuthView> {
                     return null;
                   },
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 20),
                 CustomInputWidget(
                   hintText: "********",
                   title: 'Пароль',
@@ -71,6 +109,7 @@ class _AuthViewState extends State<AuthView> {
                   },
                 ),
                 const SizedBox(height: 20),
+                TextButton(child: const Text('Продолжая вы соглашаетесь с политикой'), onPressed: () {}),
                 SubmitButtonWidget(
                   title: "Войти",
                   onTap: () {
@@ -78,17 +117,24 @@ class _AuthViewState extends State<AuthView> {
                       log('Email: ${_emailController.text}');
                       log('Password: ${_passwordController.text}');
                     }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomeView(),
+                      ),
+                    );
                   },
                   bgColor: AppColors.primary,
                   textStyle: theme.textTheme.bodyLarge!.copyWith(
                     color: Colors.white,
                   ),
                 ),
+                const SizedBox(height: 40),
               ],
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
