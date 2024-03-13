@@ -1,4 +1,5 @@
 import 'package:diyar_express/components/components.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/modules/home/home.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -18,13 +19,13 @@ class SuccesView extends StatelessWidget {
           const SizedBox(height: 20),
           Center(
             child: Text(
-              'Аккаунт успешно создан!',
+              context.l10n.accountCreated,
               style: theme.textTheme.titleLarge,
             ),
           ),
           const SizedBox(height: 120),
           SubmitButtonWidget(
-            title: "Войти",
+            title: context.l10n.signIn,
             onTap: () {
               Navigator.pushAndRemoveUntil(
                 context,
@@ -44,3 +45,4 @@ class SuccesView extends StatelessWidget {
     );
   }
 }
+
