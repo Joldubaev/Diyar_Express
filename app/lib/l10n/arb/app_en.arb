@@ -11,5 +11,9 @@
     "characters": "The password must contain at least 6 characters",
     "policy": "By continuing you agree to the policy",
     "signIn": "Sign in",
-    "accountCreated":"Account created successfully"
+    "accountCreated":"Account created successfully",
+    "phoneNumber":"'Please enter a phone number",
+    "phoneValid": "Please enter a valid phone number",
+    "enterName": "Please enter your full name",
+    "nameValid": "Please enter your valid name"
 }

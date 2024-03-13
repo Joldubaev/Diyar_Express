@@ -1,6 +1,6 @@
 import 'dart:developer';
-
 import 'package:diyar_express/components/components.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/modules/modules.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/validators.dart';
@@ -63,12 +63,12 @@ class _AuthViewState extends State<AuthView> {
             child: ListView(
               children: [
                 Center(
-                  child: Text('Добро пожаловать!', style: theme.textTheme.titleLarge),
+                  child: Text(context.l10n.welcome, style: theme.textTheme.titleLarge),
                 ),
                 const SizedBox(height: 10),
                 TextButtonLogin(
-                  title: 'Войдите в свой аккаунт',
-                  traling: 'Регистрация',
+                  title: context.l10n.account,
+                  traling: context.l10n.registration,
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -86,9 +86,9 @@ class _AuthViewState extends State<AuthView> {
                   controller: _emailController,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Пожалуйста, введите email.';
+                      return context.l10n.enterEmail;
                     } else if (!isEmailValid(value)) {
-                      return 'Пожалуйста, введите корректный email.';
+                      return context.l10n.emailValid;
                     }
                     return null;
                   },
@@ -101,17 +101,17 @@ class _AuthViewState extends State<AuthView> {
                   isPasswordField: true,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Пожалуйста, введите пароль.';
+                      return context.l10n.enterPassword;
                     } else if (value.length < 6 && isPasswordValid(value)) {
-                      return 'Пароль должен содержать не менее 6 символов.';
+                      return context.l10n.characters;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
-                TextButton(child: const Text('Продолжая вы соглашаетесь с политикой'), onPressed: () {}),
+                TextButton(child: Text(context.l10n.policy), onPressed: () {}),
                 SubmitButtonWidget(
-                  title: "Войти",
+                  title: context.l10n.signIn,
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       log('Email: ${_emailController.text}');

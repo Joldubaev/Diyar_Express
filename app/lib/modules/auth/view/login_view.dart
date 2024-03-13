@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:diyar_express/components/components.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/modules/modules.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/utils.dart';
@@ -56,18 +57,18 @@ class _LoginBodyState extends State<LoginBody> {
         key: _formKey,
         child: ListView(
           children: [
-            Text('Регистрация!', style: theme.textTheme.titleLarge),
+            Text(context.l10n.registration, style: theme.textTheme.titleLarge),
             const SizedBox(height: 30),
             CustomInputWidget(
-              title: 'Your full name',
+              title: context.l10n.enterName,
               hintText: "John Doe",
               inputType: TextInputType.name,
               controller: _emailController,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter your full name';
+                  return context.l10n.enterName;
                 } else if (!isNameValid(value)) {
-                  return 'Please enter a full name.';
+                  return context.l10n.nameValid;
                 }
                 return null;
               },
@@ -80,9 +81,9 @@ class _LoginBodyState extends State<LoginBody> {
               controller: _emailController,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Пожалуйста, введите номер телефона.';
+                  return context.l10n.phoneNumber;
                 } else if (!isPhoneNumberValid(value)) {
-                  return 'Пожалуйста, введите корректный номер телефона.';
+                  return context.l10n.phoneValid;
                 }
                 return null;
               },
@@ -95,9 +96,9 @@ class _LoginBodyState extends State<LoginBody> {
               controller: _emailController,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Пожалуйста, введите email.';
+                  return context.l10n.enterEmail;
                 } else if (!isEmailValid(value)) {
-                  return 'Пожалуйста, введите корректный email.';
+                  return context.l10n.emailValid;
                 }
                 return null;
               },
@@ -105,21 +106,21 @@ class _LoginBodyState extends State<LoginBody> {
             const SizedBox(height: 20),
             CustomInputWidget(
               hintText: "********",
-              title: 'Пароль',
+              title: context.l10n.password,
               controller: _passwordController,
               isPasswordField: true,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Пожалуйста, введите пароль.';
+                  return context.l10n.password;
                 } else if (value.length < 6 && isPasswordValid(value)) {
-                  return 'Пароль должен содержать не менее 6 символов.';
+                  return context.l10n.policy;
                 }
                 return null;
               },
             ),
             const SizedBox(height: 120),
             SubmitButtonWidget(
-              title: "Войти",
+              title: context.l10n.signIn,
               onTap: () {
                 if (_formKey.currentState!.validate()) {
                   log('Email: ${_emailController.text}');
