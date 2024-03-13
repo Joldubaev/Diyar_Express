@@ -1,5 +1,15 @@
 {
     "@@locale": "en",
+    "account":"Login to your account",
+    "registration": "Registration",
     "entrance": "Entrance",
-    "welcome": "Welcome"
+    "welcome": "Welcome",
+    "password": "Password",
+    "enterEmail": "Please enter email",
+    "emailValid": "Please enter valid email",
+    "enterPassword": "Please enter password",
+    "characters": "The password must contain at least 6 characters",
+    "policy": "By continuing you agree to the policy",
+    "signIn": "Sign in",
+    "accountCreated":"Account created successfully"
 }

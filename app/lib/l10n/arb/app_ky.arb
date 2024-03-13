@@ -1,5 +1,15 @@
 {
     "@@locale": "ky",
+    "account": "Өз аккаунтуңузга кириңиз",
+    "registration": "Каттоо",
     "entrance": "Кирүү",
-    "welcome": "Кош Келиниздер"
+    "welcome": "Кош Келиниздер",
+    "password": "Сыр сөз",
+    "enterEmail": "email киргизиңиз",
+    "emailValid": "email туура киргизиңиз",
+    "enterPassword": "Сыр сөзүңүздү киргизиңиз",
+    "characters": "Сырсөз 6 белгиден аз болбошу керек",
+    "policy": "Улантуу менен саясатка макул болосуз",
+    "signIn": "Кирүү",
+    "accountCreated":"Аккаунт ийгиликтүү түзүлдү"
 }
