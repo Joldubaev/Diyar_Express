@@ -42,8 +42,8 @@ ThemeData theme = ThemeData(
       color: AppColors.black1,
     ),
     bodyLarge: TextStyle(
-      fontSize: 18,
-      fontWeight: FontWeight.w600,
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
       color: AppColors.black1,
     ),
     titleLarge: TextStyle(

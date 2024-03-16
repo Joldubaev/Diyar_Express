@@ -63,7 +63,8 @@ class _AuthViewState extends State<AuthView> {
             child: ListView(
               children: [
                 Center(
-                  child: Text('Добро пожаловать!', style: theme.textTheme.titleLarge),
+                  child: Text('Добро пожаловать!',
+                      style: theme.textTheme.titleLarge),
                 ),
                 const SizedBox(height: 10),
                 TextButtonLogin(
@@ -109,7 +110,9 @@ class _AuthViewState extends State<AuthView> {
                   },
                 ),
                 const SizedBox(height: 20),
-                TextButton(child: const Text('Продолжая вы соглашаетесь с политикой'), onPressed: () {}),
+                TextButton(
+                    child: const Text('Продолжая вы соглашаетесь с политикой'),
+                    onPressed: () {}),
                 SubmitButtonWidget(
                   title: "Войти",
                   onTap: () {
@@ -120,7 +123,7 @@ class _AuthViewState extends State<AuthView> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const HomeView(),
+                        builder: (context) => const HomePage(),
                       ),
                     );
                   },

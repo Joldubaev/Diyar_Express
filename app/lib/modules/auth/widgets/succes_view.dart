@@ -29,7 +29,7 @@ class SuccesView extends StatelessWidget {
               Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const HomeView(),
+                  builder: (context) => const HomePage(),
                 ),
                 (route) => false,
               );
