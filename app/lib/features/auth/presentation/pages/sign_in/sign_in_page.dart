@@ -1,37 +1,20 @@
-import 'dart:developer';
-
+import 'package:auto_route/annotations.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/components/components.dart';
-import 'package:diyar_express/modules/modules.dart';
 import 'package:diyar_express/theme/theme.dart';
-import 'package:diyar_express/utils/validators.dart';
+import 'package:diyar_express/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class Auth extends StatelessWidget {
-  const Auth({super.key});
+@RoutePage()
+class SignInPage extends StatefulWidget {
+  const SignInPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: AppColors.primary,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20, right: 20, left: 20),
-          child: Image.asset('assets/images/auth_images.png'),
-        ),
-      ),
-      bottomSheet: const AuthView(),
-    );
-  }
+  State<SignInPage> createState() => _SignInPageState();
 }
 
-class AuthView extends StatefulWidget {
-  const AuthView({super.key});
-
-  @override
-  State<AuthView> createState() => _AuthViewState();
-}
-
-class _AuthViewState extends State<AuthView> {
+class _SignInPageState extends State<SignInPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -71,12 +54,7 @@ class _AuthViewState extends State<AuthView> {
                   title: 'Войдите в свой аккаунт',
                   traling: 'Регистрация',
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginView(),
-                      ),
-                    );
+                    context.pushRoute(const SignInRoute());
                   },
                 ),
                 const SizedBox(height: 20),
@@ -116,16 +94,8 @@ class _AuthViewState extends State<AuthView> {
                 SubmitButtonWidget(
                   title: "Войти",
                   onTap: () {
-                    if (_formKey.currentState!.validate()) {
-                      log('Email: ${_emailController.text}');
-                      log('Password: ${_passwordController.text}');
-                    }
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
+                    if (_formKey.currentState!.validate()) {}
+                    context.pushRoute(const HomeRoute());
                   },
                   bgColor: AppColors.primary,
                   textStyle: theme.textTheme.bodyLarge!.copyWith(

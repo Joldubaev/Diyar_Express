@@ -21,4 +21,10 @@ class AppConst {
   static bool isLocalSupport(String deviceLocal) {
     return switch (deviceLocal) { 'en' || 'ru' || 'ky' => true, _ => false };
   }
+
+  static const refreshToken = 'REFRESH_TOKEN';
+  static const accessToken = 'ACCESS_TOKEN';
+  static const langCode = 'LANGUAGE_CODE';
+  static const userInfo = 'USER_INFORMATION';
+  static const userId = 'USER_ID';
 }

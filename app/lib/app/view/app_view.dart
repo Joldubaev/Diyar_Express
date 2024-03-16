@@ -1,3 +1,4 @@
+import 'package:diyar_express/app/app.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/modules/modules.dart';
 import 'package:diyar_express/theme/theme.dart';
@@ -13,15 +14,17 @@ class App extends StatelessWidget {
   }
 }
 
+var appRoute = AppRouter();
+
 class DiyarExpress extends StatelessWidget {
   const DiyarExpress({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       theme: theme,
-      home: const Auth(),
+      routerConfig: appRoute.config(),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
     );

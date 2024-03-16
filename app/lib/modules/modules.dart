@@ -4,3 +4,5 @@ export 'cart/cart.dart';
 export 'profile/profile.dart';
 export 'restaurant/restaurant.dart';
 export 'auth/auth.dart';
+export 'orders/orders.dart';
+export 'menu/menu.dart';
