@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i9;
-import 'package:diyar_express/app/view/main_page.dart' as _i4;
+import 'package:diyar_express/app/pages/main_home/main_page.dart' as _i4;
 import 'package:diyar_express/features/about_us/presentation/pages/about_us_page.dart'
     as _i1;
 import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart'
@@ -18,8 +18,7 @@ import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_p
     as _i8;
 import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart'
     as _i2;
-import 'package:diyar_express/features/menu/presentation/pages/home_page.dart'
-    as _i3;
+import 'package:diyar_express/app/pages/main_home/home_page.dart' as _i3;
 import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart'
     as _i5;
 import 'package:diyar_express/features/profile/presentation/pages/profile_page.dart'

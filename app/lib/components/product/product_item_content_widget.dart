@@ -1,11 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:diyar_express/theme/theme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class ProductItemContentWidget extends StatelessWidget {
-  const ProductItemContentWidget({super.key});
+  final VoidCallback? onTap;
+  const ProductItemContentWidget({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -25,27 +24,30 @@ class ProductItemContentWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 6, right: 6, top: 0),
-              child: CachedNetworkImage(
-                imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-                errorWidget: (context, url, error) =>
-                    Image.asset('assets/images/placeholder.png'),
-                width: double.infinity,
-                height: 120,
-                placeholder: (context, url) => const Center(
-                  child: SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: CircularProgressIndicator(),
+          GestureDetector(
+            onTap: onTap,
+            child: ClipRRect(
+              borderRadius: const BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 6, right: 6, top: 0),
+                child: CachedNetworkImage(
+                  imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+                  errorWidget: (context, url, error) =>
+                      Image.asset('assets/images/placeholder.png'),
+                  width: double.infinity,
+                  height: 120,
+                  placeholder: (context, url) => const Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(),
+                    ),
                   ),
+                  fit: BoxFit.contain,
                 ),
-                fit: BoxFit.contain,
               ),
             ),
           ),

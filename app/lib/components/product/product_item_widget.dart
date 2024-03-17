@@ -14,7 +14,6 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
     return const ProductItemContentWidget();
   }
 
-  /// Shows the details of the product in a modal bottom sheet.
   showProductDetails() {
     return showModalBottomSheet(
       context: context,
@@ -22,19 +21,7 @@ class _ProductItemWidgetState extends State<ProductItemWidget> {
         return Container(
           height: 200,
           color: Colors.white,
-          child: Column(
-            children: [
-              const Text('Product Name'),
-              const Text('Product Price'),
-              const Text('Product Description'),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Close'),
-              ),
-            ],
-          ),
+          child: const ProductItemContentWidget(),
         );
       },
     );

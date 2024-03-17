@@ -1,2 +1,2 @@
-export 'view/app_view.dart';
+export 'pages/pages.dart';
 export 'router/routes.dart';
