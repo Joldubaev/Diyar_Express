@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:diyar_express/app/models/token_model.dart';
+import 'package:diyar_express/app/models/user_model.dart';
 import 'package:diyar_express/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -6,7 +10,7 @@ abstract class AuthLocalDataSource {
   Future<String?> getLangFromCache();
   Future<void> logout();
   Future<void> setLangToCache(String langCode);
-  Future<void> setUserToCache(String user);
+  Future<void> setUserToCache(TokenModel user);
   String? getUserFromCache();
   Future<void> setTokenToCache({
     required String refresh,
@@ -59,10 +63,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   }
 
   @override
-  Future<void> setUserToCache(String user) async {
+  Future<void> setUserToCache(TokenModel user) async {
     try {
-      // var userString = StringToJson(user);
-      // await prefs.setString(AppConst.userInfo, userString);
+      var userString = user.toJson();
+      await prefs.setString(AppConst.userInfo, jsonEncode(userString));
     } catch (e) {
       throw CacheException();
     }
@@ -73,8 +77,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     try {
       var jsonUser = prefs.getString(AppConst.userInfo);
       if (jsonUser != null) {
-        return null;
-        // return UserModel.FromJson(jsonUser);
+        return UserModel.fromJson(jsonDecode(jsonUser)).userName;
       }
       return null;
     } catch (e) {

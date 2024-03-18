@@ -27,4 +27,6 @@ class AppConst {
   static const langCode = 'LANGUAGE_CODE';
   static const userInfo = 'USER_INFORMATION';
   static const userId = 'USER_ID';
+  static const userRole = 'USER_ROLE';
+  static const prefs = 'PREFS';
 }

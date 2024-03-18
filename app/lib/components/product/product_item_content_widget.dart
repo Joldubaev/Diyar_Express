@@ -35,8 +35,7 @@ class ProductItemContentWidget extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 6, right: 6, top: 0),
                 child: CachedNetworkImage(
                   imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-                  errorWidget: (context, url, error) =>
-                      Image.asset('assets/images/placeholder.png'),
+                  errorWidget: (context, url, error) => Image.asset('assets/images/placeholder.png'),
                   width: double.infinity,
                   height: 120,
                   placeholder: (context, url) => const Center(
