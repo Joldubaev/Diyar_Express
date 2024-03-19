@@ -8,12 +8,26 @@ class AppRouter extends $AppRouter {
         AutoRoute(
           page: SignInRoute.page,
         ),
-        AutoRoute(page: SignUpRoute.page, initial: true),
-        AutoRoute(page: MainRoute.page, children: [
+        AutoRoute(
+          page: SignUpRoute.page,
+        ),
+        AutoRoute(page: MainRoute.page, initial: true, children: [
           AutoRoute(page: HomeRoute.page),
           AutoRoute(page: MenuRoute.page),
           AutoRoute(page: CartRoute.page),
           AutoRoute(page: ProfileRoute.page)
+        ]),
+        // AutoRoute(page: ProfileRoute.page, children: [
+        //   AutoRoute(page: UserRoute.page),
+        //   AutoRoute(page: AboutUsRoute.page),
+        //   AutoRoute(page: ContactRoute.page),
+        //   AutoRoute(page: OrderHistoryRoute.page),
+        // ]),
+        AutoRoute(page: ProfileRoute.page, children: [
+          AutoRoute(page: UserRoute.page),
+          AutoRoute(page: AboutUsRoute.page),
+          AutoRoute(page: ContactRoute.page),
+          AutoRoute(page: OrderHistoryRoute.page),
         ]),
       ];
 }
