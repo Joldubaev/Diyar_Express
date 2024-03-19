@@ -1,14 +1,21 @@
 import 'package:diyar_express/app/app.dart';
+import 'package:diyar_express/features/auth/presentation/cubit/sign_in/sign_in_cubit.dart';
+import 'package:diyar_express/features/auth/presentation/cubit/sign_up/sign_up_cubit.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:diyar_express/injection_container.dart' as di;
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const DiyarExpress();
+    return MultiBlocProvider(providers: [
+      BlocProvider(create: (context) => di.sl<SignUpCubit>()),
+      BlocProvider(create: (context) => di.sl<SignInCubit>())
+    ], child: const DiyarExpress());
   }
 }
 
