@@ -11,19 +11,31 @@ class ProductItemWidget extends StatefulWidget {
 class _ProductItemWidgetState extends State<ProductItemWidget> {
   @override
   Widget build(BuildContext context) {
-    return const ProductItemContentWidget();
+    return ProductItemContentWidget(
+      onTap: () => showProductDetails(),
+    );
   }
 
   showProductDetails() {
     return showModalBottomSheet(
       context: context,
-      builder: (context) {
-        return Container(
-          height: 200,
-          color: Colors.white,
-          child: const ProductItemContentWidget(),
-        );
-      },
+      useSafeArea: true,
+      isScrollControlled: true,
+      showDragHandle: true,
+      backgroundColor: Colors.white,
+      constraints: const BoxConstraints(
+        minHeight: 430,
+        maxHeight: 435,
+      ),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
+      builder: (context) => const ProductItemContentWidget(
+        isShadowVisible: false,
+      ),
     );
   }
 }
