@@ -13,17 +13,25 @@ class ProfileTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 50,
-          child: Image.asset(
-            iconPath,
+    return Container(
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      child: Row(
+        children: [
+          CircleAvatar(radius: 40, child: Image.asset(iconPath)),
+          const SizedBox(width: 10),
+          Expanded(child: Text(text, style: theme.textTheme.bodyLarge)),
+          const SizedBox(width: 10),
+          Icon(
+            Icons.arrow_forward_ios,
+            size: 20,
+            color: theme.colorScheme.onSurface.withOpacity(0.6),
           ),
-        ),
-        const SizedBox(height: 10),
-        Text(text, style: theme.textTheme.bodyLarge),
-      ],
+        ],
+      ),
     );
   }
 }
