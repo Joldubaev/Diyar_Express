@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/features/profile/presentation/presentation.dart';
+import 'package:diyar_express/features/profile/prof.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +47,7 @@ class _ProfilePageState extends State<ProfilePage> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const OrderHistoryPage(),
+                  builder: (context) => const StOrderHistoryPage(),
                 ),
               );
             },

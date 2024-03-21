@@ -18,7 +18,7 @@ class TextCheckButton extends StatelessWidget {
         Text(text),
         TextButton(
           onPressed: onPressed,
-          child: Text(route),
+          child: FittedBox(child: Text(route)),
         )
       ],
     );

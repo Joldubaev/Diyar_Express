@@ -25,7 +25,7 @@ class SettingsTile extends StatelessWidget {
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(text, style: theme.textTheme.bodyLarge),
+          Text(text, style: theme.textTheme.bodyMedium),
           Badge(isLabelVisible: hasNotification),
         ],
       ),

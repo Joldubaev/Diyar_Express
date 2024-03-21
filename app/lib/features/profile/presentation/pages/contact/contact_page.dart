@@ -28,7 +28,6 @@ class ContactBody extends StatefulWidget {
 
 class _ContactBodyState extends State<ContactBody> {
   bool _hasCallSupport = false;
-  Future<void>? launched;
   final String delivery = ' 0777 99 77 99';
   final String diyarExpress = '0559 69 47 77';
   final String diyarRestaurant = '0550 55 59 99';

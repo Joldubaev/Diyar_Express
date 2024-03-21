@@ -17,12 +17,6 @@ class AppRouter extends $AppRouter {
           AutoRoute(page: CartRoute.page),
           AutoRoute(page: ProfileRoute.page)
         ]),
-        // AutoRoute(page: ProfileRoute.page, children: [
-        //   AutoRoute(page: UserRoute.page),
-        //   AutoRoute(page: AboutUsRoute.page),
-        //   AutoRoute(page: ContactRoute.page),
-        //   AutoRoute(page: OrderHistoryRoute.page),
-        // ]),
         AutoRoute(page: ProfileRoute.page, children: [
           AutoRoute(page: UserRoute.page),
           AutoRoute(page: AboutUsRoute.page),

@@ -18,7 +18,7 @@ import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart' a
 import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart' as _i7;
 import 'package:diyar_express/features/profile/presentation/pages/about_us/about_us_page.dart' as _i2;
 import 'package:diyar_express/features/profile/presentation/pages/contact/contact_page.dart' as _i4;
-import 'package:diyar_express/features/profile/presentation/pages/order_history/order_history_page.dart' as _i8;
+import 'package:diyar_express/features/profile/presentation/pages/order_history/st_order_history_page.dart' as _i8;
 import 'package:diyar_express/features/profile/presentation/pages/profile_setting/profile_page.dart' as _i9;
 import 'package:diyar_express/features/profile/presentation/pages/user/user_page.dart' as _i12;
 
@@ -72,7 +72,7 @@ abstract class $AppRouter extends _i13.RootStackRouter {
     OrderHistoryRoute.name: (routeData) {
       return _i13.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.OrderHistoryPage(),
+        child: const _i8.StOrderHistoryPage(),
       );
     },
     ProfileRoute.name: (routeData) {
@@ -201,7 +201,7 @@ class MenuRoute extends _i13.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.OrderHistoryPage]
+/// [_i8.StOrderHistoryPage]
 class OrderHistoryRoute extends _i13.PageRouteInfo<void> {
   const OrderHistoryRoute({List<_i13.PageRouteInfo>? children})
       : super(

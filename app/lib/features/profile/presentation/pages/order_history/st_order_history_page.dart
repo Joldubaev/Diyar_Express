@@ -3,8 +3,8 @@ import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class OrderHistoryPage extends StatelessWidget {
-  const OrderHistoryPage({super.key});
+class StOrderHistoryPage extends StatelessWidget {
+  const StOrderHistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {

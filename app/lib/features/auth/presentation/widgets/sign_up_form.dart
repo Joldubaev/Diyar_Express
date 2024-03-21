@@ -1,12 +1,7 @@
-import 'dart:developer';
-
 import 'package:diyar_express/app/pages/pages.dart';
-import 'package:diyar_express/components/buttons/google_button.dart';
-import 'package:diyar_express/components/buttons/text_check_button.dart';
 import 'package:diyar_express/components/components.dart';
-import 'package:diyar_express/components/loading/line_or_wid.dart';
 import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
-import 'package:diyar_express/features/auth/presentation/presentation.dart';
+import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/snackbar/snackbar_message.dart';
 import 'package:email_validator/email_validator.dart';
@@ -22,15 +17,12 @@ class SignUpForm extends StatefulWidget {
 }
 
 class _SignUpFormState extends State<SignUpForm> {
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  bool isVisible = false;
-  String initialCountry = 'KG';
   PhoneNumber number = PhoneNumber(isoCode: 'KG');
   void getPhoneNumber(String phoneNumber) async {
     PhoneNumber number = await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'KG');
@@ -57,49 +49,21 @@ class _SignUpFormState extends State<SignUpForm> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           CustomInputWidget(
-            title: 'User Name',
-            hintText: "John Doe",
+            title: 'Ваше имя',
+            hintText: "Асанов Асан",
             controller: _usernameController,
             isPasswordField: false,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter your User Name';
+                return 'Пожалуйста, введите ваше имя';
               } else if (value.length < 3) {
-                return 'User Name must be at least 3 characters';
+                return 'Имя должно содержать более трех символов.';
               }
               return null;
             },
           ),
           const SizedBox(height: 10),
-          Card(
-            margin: EdgeInsets.zero,
-            color: const Color.fromARGB(255, 254, 251, 251),
-            child: InternationalPhoneNumberInput(
-              onInputChanged: (PhoneNumber number) {
-                log("${number.phoneNumber}");
-              },
-              onInputValidated: (bool value) {
-                log("$value");
-              },
-              selectorConfig: const SelectorConfig(
-                selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-                useBottomSheetSafeArea: true,
-              ),
-              ignoreBlank: false,
-              maxLength: 11,
-              autoValidateMode: AutovalidateMode.disabled,
-              selectorTextStyle: const TextStyle(color: Colors.black),
-              initialValue: number,
-              textFieldController: _phoneController,
-              formatInput: true,
-              inputDecoration: const InputDecoration.collapsed(
-                  hintText: "Phone Number", hintStyle: TextStyle(fontSize: 16, color: Colors.black)),
-              keyboardType: const TextInputType.numberWithOptions(signed: true, decimal: true),
-              onSaved: (PhoneNumber number) {
-                log("$number");
-              },
-            ),
-          ),
+          PhoneNumberWidget(number: number, phoneController: _phoneController),
           const SizedBox(height: 10),
           CustomInputWidget(
             title: 'E-Mail',
@@ -108,43 +72,39 @@ class _SignUpFormState extends State<SignUpForm> {
             isPasswordField: false,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter your E-Mail';
+                return 'Пожалуйста, введите ваш E-Mail';
               } else if (!EmailValidator.validate(value)) {
-                return 'Please enter a valid E-Mail';
+                return 'Пожалуйста, введите корректный E-Mail адрес.';
               }
               return null;
             },
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           CustomInputWidget(
-            title: 'Password',
+            title: 'Пароль',
             hintText: "********",
             controller: _passwordController,
             isPasswordField: true,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter your password';
+                return 'Пожалуйста, введите ваш пароль';
               } else if (value.length < 5) {
-                return 'The password must contains more than five characters.';
+                return 'Пароль должен содержать более пяти символов.';
               }
               return null;
             },
           ),
-          const SizedBox(
-            height: 10,
-          ),
+          const SizedBox(height: 10),
           CustomInputWidget(
-            title: 'Confirm Password',
+            title: 'Подтвердите пароль',
             hintText: "********",
             controller: _confirmPasswordController,
             isPasswordField: true,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Please enter your password confirmation';
+                return 'Пожалуйста, подтвердите ваш пароль';
               } else if (value != _passwordController.text) {
-                return "Password doesn't match.";
+                return "Пароли не совпадают";
               }
               return null;
             },
@@ -170,20 +130,18 @@ class _SignUpFormState extends State<SignUpForm> {
               } else if (state is SignUpFailure) {
                 return Column(
                   children: [
-                    const Padding(
-                      padding: EdgeInsets.all(20),
+                    Padding(
+                      padding: const EdgeInsets.all(20),
                       child: Center(
                         child: Text(
-                          'Sign Up',
-                          style: TextStyle(color: Colors.red),
+                          'Регистрация не удалась. Пожалуйста, попробуйте еще раз.',
+                          style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
                         ),
                       ),
                     ),
                     SubmitButtonWidget(
                       isLoading: state is SignUpLoading,
-                      textStyle: theme.textTheme.bodyLarge!.copyWith(
-                        color: Colors.white,
-                      ),
+                      textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
                       bgColor: AppColors.primary,
                       title: state.message,
                       onTap: () {
@@ -204,11 +162,9 @@ class _SignUpFormState extends State<SignUpForm> {
               }
               return SubmitButtonWidget(
                 isLoading: state is SignUpLoading,
-                textStyle: theme.textTheme.bodyLarge!.copyWith(
-                  color: Colors.white,
-                ),
+                textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
                 bgColor: AppColors.primary,
-                title: 'Sign Up',
+                title: 'Зарегистрироваться',
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     getPhoneNumber(_phoneController.text);
@@ -229,14 +185,14 @@ class _SignUpFormState extends State<SignUpForm> {
             color: AppColors.primary,
             onPressed: () {
               SnackBarMessage().showErrorSnackBar(
-                message: "Google Sign In is not implemented yet.",
+                message: "Пока не доступно. Пожалуйста, попробуйте позже",
                 context: context,
               );
             },
           ),
           TextCheckButton(
-            text: "Already have an account? ",
-            route: "Sign In",
+            text: "Уже есть аккаунт?",
+            route: "Войти",
             onPressed: () {
               Navigator.push(
                 context,
