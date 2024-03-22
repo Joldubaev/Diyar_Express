@@ -22,7 +22,7 @@ class CartItemWidgets extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(4.0),
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.white,
@@ -37,28 +37,41 @@ class CartItemWidgets extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(5),
           child: Row(
             children: [
               Expanded(
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: imageUrl,
-                    errorWidget: (context, url, error) => Image.asset('assets/images/placeholder.png'),
-                    width: 120,
-                    height: 120,
-                    placeholder: (context, url) => const Center(
-                      child: SizedBox(
-                        width: 50,
-                        height: 50,
-                        child: CircularProgressIndicator(),
+                child: DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 5,
+                        offset: const Offset(0, 0),
                       ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(4.0),
+                    child: CachedNetworkImage(
+                      fadeInCurve: Curves.easeIn,
+                      fadeOutCurve: Curves.easeOut,
+                      imageUrl: imageUrl,
+                      errorWidget: (context, url, error) => Image.asset('assets/images/placeholder.png'),
+                      width: 120,
+                      height: 120,
+                      placeholder: (context, url) => const Center(
+                        child: SizedBox(
+                          width: 50,
+                          height: 50,
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                      fit: BoxFit.contain,
                     ),
-                    fit: BoxFit.contain,
                   ),
                 ),
               ),
