@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 
 class ProductItemContentWidget extends StatelessWidget {
   final VoidCallback? onTap;
-  const ProductItemContentWidget({super.key, this.onTap});
+  final bool? isShadowVisible;
+
+  const ProductItemContentWidget({
+    super.key,
+    this.onTap,
+    this.isShadowVisible = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,14 +18,16 @@ class ProductItemContentWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 1,
-            blurRadius: 5,
-            offset: const Offset(0, 0),
-          ),
-        ],
+        boxShadow: isShadowVisible!
+            ? [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.2),
+                  spreadRadius: 1,
+                  blurRadius: 5,
+                  offset: const Offset(0, 0),
+                )
+              ]
+            : null,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -76,7 +84,7 @@ class ProductItemContentWidget extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Container(
             height: 35,
             margin: const EdgeInsets.symmetric(horizontal: 10),
@@ -89,15 +97,26 @@ class ProductItemContentWidget extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisSize:
+                  isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
               children: [
                 GestureDetector(
                   onTap: () {},
-                  child: const Icon(Icons.remove),
+                  child: const Padding(
+                    padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                    child: Icon(Icons.remove),
+                  ),
                 ),
-                Text('1', style: theme.textTheme.bodyMedium),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                  child: Text('1', style: theme.textTheme.bodyMedium),
+                ),
                 GestureDetector(
                   onTap: () {},
-                  child: const Icon(Icons.add),
+                  child: const Padding(
+                    padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                    child: Icon(Icons.add),
+                  ),
                 ),
               ],
             ),

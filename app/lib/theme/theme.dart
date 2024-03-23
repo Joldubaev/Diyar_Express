@@ -9,7 +9,7 @@ ThemeData theme = ThemeData(
   primaryColor: AppColors.primary,
   primarySwatch: AppColors.primary,
   fontFamily: "Roboto",
-  scaffoldBackgroundColor: Colors.white,
+  scaffoldBackgroundColor: const Color(0xffFAFAFA),
   colorScheme: const ColorScheme(
     primary: AppColors.primary,
     secondary: AppColors.primary,

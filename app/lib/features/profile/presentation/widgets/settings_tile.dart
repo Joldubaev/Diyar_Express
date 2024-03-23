@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class SettingsTile extends StatelessWidget {
   const SettingsTile({
     required this.text,
-    this.hasNotification = false,
     this.onPressed,
     this.icon,
     this.color,
@@ -14,29 +13,28 @@ class SettingsTile extends StatelessWidget {
   final String text;
   final Color? color;
   final IconData? icon;
-  final bool hasNotification;
   final void Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onPressed,
-      contentPadding: const EdgeInsets.fromLTRB(12, 4, 6, 4),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(text, style: theme.textTheme.bodyMedium),
-          Badge(isLabelVisible: hasNotification),
-        ],
-      ),
-      trailing: Icon(
-        icon ?? Icons.arrow_forward_ios,
-        color: color ?? theme.colorScheme.onSurface,
-        size: 20,
-      ),
-      shape: Border(
-        bottom: BorderSide(color: theme.colorScheme.onSurface.withOpacity(0.1)),
-      ),
+    return Column(
+      children: [
+        ListTile(
+          onTap: onPressed,
+          hoverColor: Colors.black26,
+          contentPadding: const EdgeInsets.all(0),
+          title: Text(
+            text,
+            style: theme.textTheme.bodyLarge,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+          ),
+          trailing: Icon(
+            icon ?? Icons.arrow_forward_ios,
+            color: color ?? theme.colorScheme.onSurface.withOpacity(0.6),
+          ),
+        ),
+      ],
     );
   }
 }
