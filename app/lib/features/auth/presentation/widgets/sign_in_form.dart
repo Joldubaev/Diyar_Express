@@ -1,10 +1,7 @@
 import 'package:diyar_express/app/pages/main_home/home_page.dart';
-import 'package:diyar_express/components/buttons/google_button.dart';
-import 'package:diyar_express/components/buttons/text_check_button.dart';
 import 'package:diyar_express/components/components.dart';
-import 'package:diyar_express/components/loading/line_or_wid.dart';
 import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
-import 'package:diyar_express/features/auth/presentation/presentation.dart';
+import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/snackbar/snackbar_message.dart';
 import 'package:email_validator/email_validator.dart';
@@ -23,7 +20,6 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool isVisible = false;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -40,24 +36,24 @@ class _LoginFormState extends State<LoginForm> {
               isPasswordField: false,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter your E-Mail';
+                  return 'Пожалуйста, введите ваш E-Mail';
                 } else if (!EmailValidator.validate(value)) {
-                  return 'Please enter a valid E-Mail';
+                  return 'Пожалуйста, введите корректный E-Mail';
                 }
                 return null;
               },
             ),
             const SizedBox(height: 20),
             CustomInputWidget(
-              title: 'Password',
-              hintText: "Password",
+              title: 'Пароль',
+              hintText: "******",
               controller: _passwordController,
               isPasswordField: true,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Please enter your password';
+                  return 'Пожалуйста, введите ваш пароль';
                 } else if (value.length < 5) {
-                  return 'The password must contains more than five characters.';
+                  return 'Пароль должен содержать не менее 5 символов';
                 }
                 return null;
               },
@@ -94,7 +90,7 @@ class _LoginFormState extends State<LoginForm> {
                     children: [
                       Center(
                         child: Text(
-                          'Sign In',
+                          'Регистрация не удалась. Пожалуйста, попробуйте еще раз.',
                           style: theme.textTheme.bodyMedium!.copyWith(
                             color: const Color.fromARGB(255, 233, 71, 35),
                             fontWeight: FontWeight.bold,
@@ -107,7 +103,7 @@ class _LoginFormState extends State<LoginForm> {
                           color: Colors.white,
                         ),
                         bgColor: AppColors.primary,
-                        title: 'Sign In',
+                        title: 'Войти',
                         onTap: () {
                           if (_formKey.currentState!.validate()) {
                             context.read<SignInCubit>().signInUser(
@@ -128,7 +124,7 @@ class _LoginFormState extends State<LoginForm> {
                     color: Colors.white,
                   ),
                   bgColor: AppColors.primary,
-                  title: 'Sign In',
+                  title: 'Войти',
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       context.read<SignInCubit>().signInUser(
@@ -147,13 +143,13 @@ class _LoginFormState extends State<LoginForm> {
                 color: AppColors.primary,
                 onPressed: () {
                   SnackBarMessage().showErrorSnackBar(
-                    message: "Google Sign In is not implemented yet.",
+                    message: "Пока не доступно",
                     context: context,
                   );
                 }),
             TextCheckButton(
-              text: "Don't have an account? ",
-              route: "Sign Up",
+              text: "Нет аккаунта?",
+              route: "Зарегистрироваться",
               onPressed: () {
                 Navigator.push(
                   context,

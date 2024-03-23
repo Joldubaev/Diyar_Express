@@ -20,11 +20,11 @@ class ContactCardWidget extends StatelessWidget {
       child: ListTile(
         title: SelectableText(
           title,
-          style: Theme.of(context).textTheme.titleSmall,
+          style: Theme.of(context).textTheme.bodyLarge,
         ),
         subtitle: Text(
           subtitle,
-          style: Theme.of(context).textTheme.bodyLarge,
+          style: Theme.of(context).textTheme.bodyMedium,
         ),
         onTap: onPressed,
         trailing: Icon(

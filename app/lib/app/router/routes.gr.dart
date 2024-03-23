@@ -11,24 +11,15 @@
 import 'package:auto_route/auto_route.dart' as _i12;
 import 'package:diyar_express/app/pages/main_home/home_page.dart' as _i4;
 import 'package:diyar_express/app/pages/main_home/main_page.dart' as _i5;
-import 'package:diyar_express/features/about_us/presentation/pages/about/about_us_page.dart'
-    as _i1;
-import 'package:diyar_express/features/about_us/presentation/pages/contact/contact_page.dart'
-    as _i3;
-import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart'
-    as _i10;
-import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_page.dart'
-    as _i11;
-import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart'
-    as _i2;
-import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart'
-    as _i6;
-import 'package:diyar_express/features/order/presentation/pages/history/order_history_page.dart'
-    as _i7;
-import 'package:diyar_express/features/profile/presentation/pages/profile/profile_page.dart'
-    as _i9;
-import 'package:diyar_express/features/profile/presentation/pages/profile_info/profile_info_page.dart'
-    as _i8;
+import 'package:diyar_express/features/about_us/presentation/pages/about/about_us_page.dart' as _i1;
+import 'package:diyar_express/features/about_us/presentation/pages/contact/contact_page.dart' as _i3;
+import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart' as _i10;
+import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_page.dart' as _i11;
+import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart' as _i2;
+import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart' as _i6;
+import 'package:diyar_express/features/order/presentation/pages/history/order_history_page.dart' as _i7;
+import 'package:diyar_express/features/profile/presentation/pages/profile/profile_page.dart' as _i9;
+import 'package:diyar_express/features/profile/presentation/pages/profile_info/profile_info_page.dart' as _i8;
 
 abstract class $AppRouter extends _i12.RootStackRouter {
   $AppRouter({super.navigatorKey});
