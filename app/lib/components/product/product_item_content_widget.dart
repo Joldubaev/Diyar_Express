@@ -97,8 +97,7 @@ class ProductItemContentWidget extends StatelessWidget {
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize:
-                  isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
+              mainAxisSize: isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
               children: [
                 GestureDetector(
                   onTap: () {},

@@ -1,13 +1,15 @@
-import 'package:diyar_express/app/pages/pages.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/components/components.dart';
 import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
+import 'package:diyar_express/features/auth/presentation/widgets/phone_number.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/snackbar/snackbar_message.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -23,13 +25,6 @@ class _SignUpFormState extends State<SignUpForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
-  PhoneNumber number = PhoneNumber(isoCode: 'KG');
-  void getPhoneNumber(String phoneNumber) async {
-    PhoneNumber number = await PhoneNumber.getRegionInfoFromPhoneNumber(phoneNumber, 'KG');
-    setState(() {
-      this.number = number;
-    });
-  }
 
   @override
   void dispose() {
@@ -63,8 +58,6 @@ class _SignUpFormState extends State<SignUpForm> {
             },
           ),
           const SizedBox(height: 10),
-          PhoneNumberWidget(number: number, phoneController: _phoneController),
-          const SizedBox(height: 10),
           CustomInputWidget(
             title: 'E-Mail',
             hintText: "asanov@example.com",
@@ -75,6 +68,23 @@ class _SignUpFormState extends State<SignUpForm> {
                 return 'Пожалуйста, введите ваш E-Mail';
               } else if (!EmailValidator.validate(value)) {
                 return 'Пожалуйста, введите корректный E-Mail адрес.';
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 10),
+          PhoneNumberMask(
+            title: 'Номер телефона',
+            hintText: '+996 (___) __-__-__',
+            textController: _phoneController,
+            hint: "Номер телефона",
+            formatter: MaskTextInputFormatter(mask: "+996 (###) ##-##-##"),
+            textInputType: TextInputType.phone,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Пожалуйста, введите ваш номер телефона';
+              } else if (value.length < 10) {
+                return 'Номер телефона должен содержать более десяти символов.';
               }
               return null;
             },
@@ -113,13 +123,7 @@ class _SignUpFormState extends State<SignUpForm> {
           BlocConsumer<SignUpCubit, SignUpState>(
             listener: (_, state) {
               if (state is SignUpSuccess) {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                  (route) => false,
-                );
+                context.pushRoute(const MainRoute());
               }
             },
             builder: (context, state) {
@@ -133,9 +137,11 @@ class _SignUpFormState extends State<SignUpForm> {
                     Padding(
                       padding: const EdgeInsets.all(20),
                       child: Center(
-                        child: Text(
-                          'Регистрация не удалась. Пожалуйста, попробуйте еще раз.',
-                          style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
+                        child: FittedBox(
+                          child: Text(
+                            'Регистрация не удалась. Пожалуйста, попробуйте еще раз.',
+                            style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
+                          ),
                         ),
                       ),
                     ),
@@ -146,13 +152,12 @@ class _SignUpFormState extends State<SignUpForm> {
                       title: state.message,
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          getPhoneNumber(_phoneController.text);
                           BlocProvider.of<SignUpCubit>(context).signUpUser(
                             UserModel(
-                                name: _usernameController.text,
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                                phone: number.phoneNumber),
+                              name: _usernameController.text,
+                              email: _emailController.text,
+                              password: _passwordController.text,
+                            ),
                           );
                         }
                       },
@@ -167,13 +172,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 title: 'Зарегистрироваться',
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    getPhoneNumber(_phoneController.text);
                     BlocProvider.of<SignUpCubit>(context).signUpUser(
                       UserModel(
-                          name: _usernameController.text,
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                          phone: number.phoneNumber),
+                        name: _usernameController.text,
+                        email: _emailController.text,
+                        password: _passwordController.text,
+                      ),
                     );
                   }
                 },
@@ -194,12 +198,7 @@ class _SignUpFormState extends State<SignUpForm> {
             text: "Уже есть аккаунт?",
             route: "Войти",
             onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const SignInPage(),
-                ),
-              );
+              context.pushRoute(const SignInRoute());
             },
           ),
         ],

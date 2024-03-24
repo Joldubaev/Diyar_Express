@@ -23,6 +23,7 @@ class _CartPageState extends State<CartPage> {
           centerTitle: true,
           actions: [IconButton(icon: const Icon(Icons.history, size: 30), onPressed: () {})]),
       body: const CartBody(),
+      bottomSheet: const CartBottomSheet(),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
         child: SubmitButtonWidget(
@@ -49,42 +50,53 @@ class _CartBodyState extends State<CartBody> {
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: ScrollableForm(
-        formKey: formKey,
-        listViewChildren: const [
-          CartItemWidgets(
-            title: 'Курица с картошкой',
-            subtitle: '1 кг',
-            price: 150,
-            counter: 1,
-            imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-          ),
-          CartItemWidgets(
-            title: 'Курица с картошкой',
-            subtitle: '1 кг',
-            price: 150,
-            counter: 1,
-            imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-          ),
-          CartItemWidgets(
-            title: 'Курица с картошкой',
-            subtitle: '1 кг',
-            price: 150,
-            counter: 1,
-            imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-          ),
-        ],
-        columnChildren: const [
-          TotalPriceWidget(
-            price: 450,
-            sale: 0,
-            dishesPrice: 0,
-            totalPrice: 450,
-          ),
-        ],
+    return ListView(
+      children: const [
+        CartItemWidgets(
+          title: 'Курица с картошкой',
+          subtitle: '1 кг',
+          price: 150,
+          counter: 1,
+          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+        ),
+        CartItemWidgets(
+          title: 'Курица с картошкой',
+          subtitle: '1 кг',
+          price: 150,
+          counter: 1,
+          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+        ),
+        CartItemWidgets(
+          title: 'Курица с картошкой',
+          subtitle: '1 кг',
+          price: 150,
+          counter: 1,
+          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+        ),
+      ],
+    );
+  }
+}
+
+class CartBottomSheet extends StatelessWidget {
+  const CartBottomSheet({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BottomSheet(
+      constraints: BoxConstraints(
+        maxHeight: MediaQuery.of(context).size.height * 0.23,
+        minHeight: MediaQuery.of(context).size.height * 0.23,
       ),
+      onClosing: () {},
+      builder: (context) {
+        return const TotalPriceWidget(
+          price: 450,
+          sale: 0,
+          dishesPrice: 0,
+          totalPrice: 450,
+        );
+      },
     );
   }
 }

@@ -98,7 +98,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       }
     } catch (e) {
       log("$e");
-      throw ServerException();
     }
   }
 
