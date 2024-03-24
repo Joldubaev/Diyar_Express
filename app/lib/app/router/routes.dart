@@ -5,7 +5,7 @@ import 'package:diyar_express/app/router/routes.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: MainRoute.page, initial: true, children: [
+        AutoRoute(page: MainRoute.page, children: [
           AutoRoute(page: HomeRoute.page),
           AutoRoute(page: MenuRoute.page),
           AutoRoute(page: CartRoute.page),
@@ -15,7 +15,10 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: ContactRoute.page),
         AutoRoute(page: OrderHistoryRoute.page),
         AutoRoute(page: SignInRoute.page),
-        AutoRoute(page: SignUpRoute.page),
+        AutoRoute(
+          page: SignUpRoute.page,
+          initial: true,
+        ),
         AutoRoute(page: ContactRoute.page),
         AutoRoute(page: AboutUsRoute.page),
       ];

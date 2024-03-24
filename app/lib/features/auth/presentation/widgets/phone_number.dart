@@ -1,50 +1,106 @@
-import 'dart:developer';
-
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+import 'package:flutter/services.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
-class PhoneNumberWidget extends StatelessWidget {
-  const PhoneNumberWidget({
-    super.key,
-    required this.number,
-    required TextEditingController phoneController,
-  }) : _phoneController = phoneController;
+class PhoneNumberMask extends StatefulWidget {
+  const PhoneNumberMask({
+    Key? key,
+    required this.hint,
+    required this.textInputType,
+    required this.textController,
+    required this.hintText,
+    required this.formatter,
+    this.validator,
+    this.title,
+  }) : super(key: key);
+  final TextEditingController textController;
+  final MaskTextInputFormatter formatter;
+  final FormFieldValidator<String>? validator;
+  final String hint;
+  final String? title;
+  final String hintText;
+  final TextInputType textInputType;
+  @override
+  PhoneNumberMaskState createState() => PhoneNumberMaskState();
+}
 
-  final PhoneNumber number;
-  final TextEditingController _phoneController;
-
+class PhoneNumberMaskState extends State<PhoneNumberMask> {
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: AppColors.grey.withOpacity(0.1),
-      ),
-      child: InternationalPhoneNumberInput(
-        onInputChanged: (PhoneNumber number) {
-          log("${number.phoneNumber}");
-        },
-        onInputValidated: (bool value) {
-          log("$value");
-        },
-        selectorConfig: const SelectorConfig(
-          selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
-          useBottomSheetSafeArea: true,
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (widget.title != null)
+          Text(
+            widget.title!,
+            style: Theme.of(context).textTheme.bodyMedium,
+          ),
+        if (widget.title != null) const SizedBox(height: 6),
+        TextFormField(
+          controller: widget.textController,
+          inputFormatters: [const UpperCaseTextFormatter(), widget.formatter],
+          autocorrect: false,
+          keyboardType: widget.textInputType,
+          autovalidateMode: AutovalidateMode.disabled,
+          validator: widget.validator,
+          decoration: InputDecoration(
+              contentPadding: const EdgeInsets.fromLTRB(16, 14, 16, 14),
+              border: InputBorder.none,
+              hintText: widget.hintText,
+              hintStyle: const TextStyle(
+                fontWeight: FontWeight.w400,
+                fontSize: 16,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(12),
+                borderSide: const BorderSide(
+                  color: AppColors.grey,
+                  width: 0.1,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(color: AppColors.primary),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              filled: true,
+              errorBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.red),
+              ),
+              errorMaxLines: 1),
         ),
-        maxLength: 11,
-        initialValue: number,
-        textFieldController: _phoneController,
-        formatInput: true,
-        inputDecoration: InputDecoration.collapsed(
-          hintText: "Номер телефона",
-          hintStyle: theme.textTheme.bodyMedium!.copyWith(color: AppColors.grey),
-        ),
-        keyboardType: TextInputType.phone,
-        onSaved: (PhoneNumber number) {
-          log("$number");
-        },
-      ),
+      ],
     );
+  }
+}
+
+class UpperCaseTextFormatter implements TextInputFormatter {
+  const UpperCaseTextFormatter();
+
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    return TextEditingValue(text: newValue.text.toUpperCase(), selection: newValue.selection);
+  }
+}
+
+class SpecialMaskTextInputFormatter extends MaskTextInputFormatter {
+  static String maskA = "S.####";
+  static String maskB = "S.######";
+
+  SpecialMaskTextInputFormatter({String? initialText})
+      : super(mask: maskA, filter: {"#": RegExp('[0-9]'), "S": RegExp('[AB]')}, initialText: initialText);
+
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.startsWith("A")) {
+      if (getMask() != maskA) {
+        updateMask(mask: maskA);
+      }
+    } else {
+      if (getMask() != maskB) {
+        updateMask(mask: maskB);
+      }
+    }
+    return super.formatEditUpdate(oldValue, newValue);
   }
 }
