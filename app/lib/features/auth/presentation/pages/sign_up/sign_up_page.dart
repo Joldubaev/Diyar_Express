@@ -22,7 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Center(
                 child: Text(
               "Регистрация",
-              style: theme.textTheme.titleLarge,
+              style: theme.textTheme.titleMedium,
             )),
             const SizedBox(height: 10),
             const SignUpForm(),
