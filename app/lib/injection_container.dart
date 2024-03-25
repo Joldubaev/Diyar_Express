@@ -40,5 +40,5 @@ Future<void> init() async {
   final sharedPrefences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPrefences);
   // sl.registerLazySingleton(() => FirebaseFirestore.instance);
-  sl.registerLazySingleton(() => Dio());
+  sl.registerLazySingleton(() => Dio(BaseOptions(baseUrl: 'http://20.55.72.226:8080/')));
 }

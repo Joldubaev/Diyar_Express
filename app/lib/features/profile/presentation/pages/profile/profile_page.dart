@@ -3,7 +3,6 @@ import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 @RoutePage()
 class ProfilePage extends StatefulWidget {
