@@ -1,5 +1,4 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/app/pages/main_home/home_page.dart';
 import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/components/components.dart';
 import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
@@ -73,13 +72,7 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   );
                 } else if (state is SignInSuccessWithUser) {
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                    (route) => false,
-                  );
+                  context.router.replace(const MainRoute());
                 }
               },
               builder: (context, state) {

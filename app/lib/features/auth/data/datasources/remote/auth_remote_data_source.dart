@@ -10,7 +10,7 @@ abstract class AuthRemoteDataSource {
   Future<void> login(UserModel user);
   Future<void> register(UserModel user);
   // Future<void> confirmEmail(String email, int code);
-  // Future<void> sendForgotPasswordCodeToEmail(String email);
+  Future<void> sendForgotPasswordCodeToEmail(String email);
   // Future<void> confirmResetPassword({
   //   required String email,
   //   required String otpCode,
@@ -72,13 +72,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       if (res.statusCode == 200) {
         await _localDataSource.setTokenToCache(
-          refresh: res.data['refresh'],
-          access: res.data['access'],
+          refresh: res.data['refreshToken'],
+          access: res.data['accessToken'],
         );
       }
     } catch (e) {
       log("$e");
-      throw ServerException();
     }
   }
 
@@ -92,29 +91,30 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
       if (res.statusCode == 200) {
         await _localDataSource.setTokenToCache(
-          refresh: res.data['refresh'],
-          access: res.data['access'],
+          refresh: res.data['refreshToken'],
+          access: res.data['accessToken'],
         );
       }
     } catch (e) {
       log("$e");
+      throw ServerException();
     }
   }
 
-  // @override
-  // Future<void> sendForgotPasswordCodeToEmail(String email) async {
-  //   try {
-  //     var res = await _dio.post(
-  //       "/api/auth/forgot-password/",
-  //       data: {"email": email},
-  //     );
+  @override
+  Future<void> sendForgotPasswordCodeToEmail(String email) async {
+    try {
+      var res = await _dio.post(
+        "/api/auth/forgot-password/",
+        data: {"email": email},
+      );
 
-  //     if (res.statusCode != 200) {
-  //       throw ServerException();
-  //     }
-  //   } catch (e) {
-  //     log("$e");
-  //     throw ServerException();
-  //   }
-  // }
+      if (res.statusCode != 200) {
+        throw ServerException();
+      }
+    } catch (e) {
+      log("$e");
+      throw ServerException();
+    }
+  }
 }

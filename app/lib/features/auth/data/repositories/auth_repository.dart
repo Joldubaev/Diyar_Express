@@ -10,7 +10,7 @@ abstract class AuthRepository {
   // });
   Future<void> login(UserModel user);
   Future<void> register(UserModel user);
-  // Future<void> sendForgotPasswordCodeToEmail(String email);
+  Future<void> sendForgotPasswordCodeToEmail(String email);
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -46,8 +46,8 @@ class AuthRepositoryImpl implements AuthRepository {
     return _remoteDataSource.register(user);
   }
 
-  // @override
-  // Future<void> sendForgotPasswordCodeToEmail(String email) async {
-  //   return _remoteDataSource.sendForgotPasswordCodeToEmail(email);
-  // }
+  @override
+  Future<void> sendForgotPasswordCodeToEmail(String email) async {
+    return _remoteDataSource.sendForgotPasswordCodeToEmail(email);
+  }
 }
