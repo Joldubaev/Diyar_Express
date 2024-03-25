@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
-import 'package:diyar_express/features/auth/presentation/widgets/auth/sign_up_form.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:diyar_express/features/auth/presentation/presentation.dart';
 
 @RoutePage()
 class SignUpPage extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Center(
                 child: Text(
-              "Sign Up",
+              "Регистрация",
               style: theme.textTheme.titleLarge,
             )),
             const SizedBox(height: 10),

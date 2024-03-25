@@ -1,22 +1,22 @@
 class TokenModel {
   TokenModel({
-    required this.token,
+    required this.role,
     required this.refreshToken,
     required this.accessToken,
   });
-  final String token;
+  final String role;
   final String refreshToken;
   final String accessToken;
 
   factory TokenModel.fromJson(Map<String, dynamic> json) => TokenModel(
-        token: json["token"],
         refreshToken: json["refreshToken"],
         accessToken: json["accessToken"],
+        role: json["role"],
       );
 
   Map<String, dynamic> toJson() => {
-        "token": token,
         "refreshToken": refreshToken,
         "accessToken": accessToken,
+        "role": role,
       };
 }

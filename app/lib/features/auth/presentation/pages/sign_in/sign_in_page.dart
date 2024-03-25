@@ -1,8 +1,7 @@
-import 'package:auto_route/auto_route.dart';
-
-import 'package:diyar_express/features/auth/presentation/widgets/auth/sign_in_form.dart';
-import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/features/auth/presentation/presentation.dart';
 
 @RoutePage()
 class SignInPage extends StatefulWidget {
@@ -15,8 +14,6 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-
-  // final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {

@@ -10,7 +10,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     this.authRepository,
   ) : super(SignUpInitial());
 
-  final AuthRepositoryImpl authRepository;
+  final AuthRepository authRepository;
 
   void signUpUser(UserModel model) async {
     emit(SignUpLoading());

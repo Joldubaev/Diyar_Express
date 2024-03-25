@@ -29,7 +29,7 @@ class _MainPageState extends State<MainPage> {
         return Scaffold(
           body: child,
           bottomNavigationBar: SizedBox(
-            height: 90,
+            height: 100,
             child: BottomNavigationBar(
               currentIndex: tabsRouter.activeIndex,
               elevation: 45,
@@ -57,9 +57,7 @@ class _MainPageState extends State<MainPage> {
                     child: SvgPicture.asset(
                       "assets/icons/home_icon.svg",
                       colorFilter: ColorFilter.mode(
-                        _currentIndex == 0
-                            ? AppColors.primary
-                            : AppColors.black1,
+                        _currentIndex == 0 ? AppColors.primary : AppColors.black1,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -72,9 +70,7 @@ class _MainPageState extends State<MainPage> {
                     child: SvgPicture.asset(
                       "assets/icons/menu_icon.svg",
                       colorFilter: ColorFilter.mode(
-                        _currentIndex == 1
-                            ? AppColors.primary
-                            : AppColors.black1,
+                        _currentIndex == 1 ? AppColors.primary : AppColors.black1,
                         BlendMode.srcIn,
                       ),
                     ),
@@ -90,9 +86,7 @@ class _MainPageState extends State<MainPage> {
                       child: SvgPicture.asset(
                         "assets/icons/cart_icon.svg",
                         colorFilter: ColorFilter.mode(
-                          _currentIndex == 2
-                              ? AppColors.primary
-                              : AppColors.black1,
+                          _currentIndex == 2 ? AppColors.primary : AppColors.black1,
                           BlendMode.srcIn,
                         ),
                       ),
@@ -106,9 +100,7 @@ class _MainPageState extends State<MainPage> {
                     child: SvgPicture.asset(
                       "assets/icons/profile_icon.svg",
                       colorFilter: ColorFilter.mode(
-                        _currentIndex == 3
-                            ? AppColors.primary
-                            : AppColors.black1,
+                        _currentIndex == 3 ? AppColors.primary : AppColors.black1,
                         BlendMode.srcIn,
                       ),
                     ),

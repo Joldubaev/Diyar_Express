@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:diyar_express/app/models/token_model.dart';
-import 'package:diyar_express/app/models/user_model.dart';
 import 'package:diyar_express/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,7 +76,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
     try {
       var jsonUser = prefs.getString(AppConst.userInfo);
       if (jsonUser != null) {
-        return UserModel.fromJson(jsonDecode(jsonUser)).userName;
+        return TokenModel.fromJson(jsonDecode(jsonUser)).role;
       }
       return null;
     } catch (e) {

@@ -16,8 +16,17 @@ class SignInCubit extends Cubit<SignInState> {
     emit(SignInLoading());
     try {
       await authRepository.login(model);
-
       emit(SignInSuccessWithUser());
+    } catch (e) {
+      emit(SignInFailure(e.toString()));
+    }
+  }
+
+  void sendCodeToEmail(String email) async {
+    emit(SignInLoading());
+    try {
+      await authRepository.sendForgotPasswordCodeToEmail(email);
+      emit(FogotPasswordSuccess());
     } catch (e) {
       emit(SignInFailure(e.toString()));
     }

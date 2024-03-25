@@ -21,8 +21,7 @@ class _MenuHeaderWidgetState extends State<MenuHeaderWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (!isSearchVisible) const SizedBox(width: 16),
-          if (!isSearchVisible)
-            Text("Menu", style: Theme.of(context).textTheme.titleSmall),
+          if (!isSearchVisible) Text("Menu", style: Theme.of(context).textTheme.titleSmall),
           if (!isSearchVisible) const SizedBox(width: 20),
           Expanded(
             child: Row(
@@ -45,8 +44,7 @@ class _MenuHeaderWidgetState extends State<MenuHeaderWidget> {
                           prefixIcon: const Icon(Icons.search),
                           fillColor: AppColors.grey1,
                           filled: true,
-                          contentPadding:
-                              const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                          contentPadding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                           constraints: const BoxConstraints(maxHeight: 40),
                         ),
                       ),
@@ -58,8 +56,7 @@ class _MenuHeaderWidgetState extends State<MenuHeaderWidget> {
                         icon: const Icon(Icons.search),
                       )
                     : IconButton(
-                        onPressed: () =>
-                            setState(() => isSearchVisible = false),
+                        onPressed: () => setState(() => isSearchVisible = false),
                         icon: const Icon(Icons.close),
                       ),
               ],
