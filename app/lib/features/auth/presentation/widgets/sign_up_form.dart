@@ -123,7 +123,7 @@ class _SignUpFormState extends State<SignUpForm> {
           BlocConsumer<SignUpCubit, SignUpState>(
             listener: (_, state) {
               if (state is SignUpSuccess) {
-                context.pushRoute(const MainRoute());
+                context.pushRoute(const SignUpSucces());
               }
             },
             builder: (context, state) {

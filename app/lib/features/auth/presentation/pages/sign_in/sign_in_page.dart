@@ -31,8 +31,8 @@ class _SignInPageState extends State<SignInPage> {
             const Padding(
               padding: EdgeInsets.all(20.0),
               child: Image(
-                height: 200,
-                width: 200,
+                height: 100,
+                width: 100,
                 color: AppColors.primary,
                 image: AssetImage("assets/images/auth_images.png"),
               ),

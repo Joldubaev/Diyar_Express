@@ -60,9 +60,7 @@ class _LoginFormState extends State<LoginForm> {
                 return null;
               },
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             BlocConsumer<SignInCubit, SignInState>(
               listener: (context, state) {
                 if (state is SignInFailure) {
@@ -142,7 +140,7 @@ class _LoginFormState extends State<LoginForm> {
             ),
             const LineOrWidget(),
             GoogleButton(
-                color: AppColors.primary,
+                color: const Color.fromRGBO(255, 148, 70, 1),
                 onPressed: () {
                   SnackBarMessage().showErrorSnackBar(
                     message: "Пока не доступно",
@@ -155,7 +153,15 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () {
                 context.pushRoute(const SignUpRoute());
               },
-            )
+            ),
+            TextButton(
+                onPressed: () {
+                  SnackBarMessage().showErrorSnackBar(
+                    message: "Пока не доступно",
+                    context: context,
+                  );
+                },
+                child: const Text("Забыли пароль ?")),
           ],
         ),
       ),
