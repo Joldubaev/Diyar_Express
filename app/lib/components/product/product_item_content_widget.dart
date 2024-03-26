@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:diyar_express/components/product/product_counter_widget.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -85,41 +86,7 @@ class ProductItemContentWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Container(
-            height: 35,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(
-                color: Colors.grey.withOpacity(0.5),
-              ),
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                    child: Icon(Icons.remove),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                  child: Text('1', style: theme.textTheme.bodyMedium),
-                ),
-                GestureDetector(
-                  onTap: () {},
-                  child: const Padding(
-                    padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                    child: Icon(Icons.add),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          ProductCounterWidget(isShadowVisible: isShadowVisible),
           const SizedBox(height: 7),
         ],
       ),

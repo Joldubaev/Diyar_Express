@@ -9,36 +9,26 @@ import 'package:get_it/get_it.dart';
 final sl = GetIt.instance;
 
 Future<void> init() async {
-//! Features - posts
-
 // cubit or bloc
   sl.registerFactory(() => SignUpCubit(sl()));
   sl.registerFactory(() => SignInCubit(sl()));
 
-// Repository
-
+// Repositories
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
   sl.registerLazySingleton<AuthRepositoryImpl>(() => AuthRepositoryImpl(sl()));
+
 // Datasources
+  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(sl(), sl()));
 
-  sl.registerLazySingleton<AuthRemoteDataSource>(
-    () => AuthRemoteDataSourceImpl(sl(), sl()),
-  );
-
-  sl.registerLazySingleton<AuthLocalDataSource>(
-    () => AuthLocalDataSourceImpl(sl()),
-  );
+  sl.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(sl()));
 
 //! Core
-
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
 //! External
-
   sl.registerLazySingleton(() => InternetConnection());
 
   final sharedPrefences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPrefences);
-  // sl.registerLazySingleton(() => FirebaseFirestore.instance);
-  sl.registerLazySingleton(() => Dio());
+  sl.registerLazySingleton(() => Dio(BaseOptions(baseUrl: 'http://20.55.72.226:8080/')));
 }

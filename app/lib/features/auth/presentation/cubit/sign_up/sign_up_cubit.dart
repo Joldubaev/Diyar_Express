@@ -15,9 +15,7 @@ class SignUpCubit extends Cubit<SignUpState> {
   void signUpUser(UserModel model) async {
     emit(SignUpLoading());
     try {
-      final user = await authRepository.register(
-        model,
-      );
+      final user = await authRepository.register(model);
       emit(SignUpSuccess());
       return user;
     } catch (e) {

@@ -38,14 +38,8 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             const SizedBox(height: 10),
-            Center(
-                child: Text(
-              "Вход",
-              style: theme.textTheme.titleLarge,
-            )),
-            const SizedBox(
-              height: 10,
-            ),
+            Center(child: Text("Sign In", style: theme.textTheme.titleLarge)),
+            const SizedBox(height: 10),
             const LoginForm(),
           ],
         ),
