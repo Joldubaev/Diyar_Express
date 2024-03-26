@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
 import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
@@ -84,7 +85,19 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               child: SettingsTile(
                 text: 'Выход',
-                onPressed: () {},
+                onPressed: () {
+                  AppAlert.showConfirmDialog(
+                    context: context,
+                    title: 'Выход',
+                    content: const Text('Вы уверены, что хотите выйти?'),
+                    cancelText: 'Нет',
+                    confirmText: 'Да',
+                    cancelPressed: () => Navigator.pop(context),
+                    confirmPressed: () {
+                      context.router.replace(const SignInRoute());
+                    },
+                  );
+                },
                 icon: Icons.exit_to_app,
                 color: theme.colorScheme.error,
               ),

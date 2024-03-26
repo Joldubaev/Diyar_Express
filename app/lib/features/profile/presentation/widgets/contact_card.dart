@@ -17,7 +17,9 @@ class ContactCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: AppColors.white,
       child: ListTile(
+        tileColor: AppColors.white,
         title: SelectableText(
           title,
           style: Theme.of(context).textTheme.bodyLarge,

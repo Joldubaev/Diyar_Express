@@ -1,15 +1,12 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
 import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CartItemWidgets extends StatelessWidget {
-  final String title;
-  final String subtitle;
-  final int price;
-  final int counter;
-  final String imageUrl;
   const CartItemWidgets({
     super.key,
     required this.title,
@@ -18,6 +15,11 @@ class CartItemWidgets extends StatelessWidget {
     required this.counter,
     required this.imageUrl,
   });
+  final String title;
+  final String subtitle;
+  final int price;
+  final int counter;
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +95,16 @@ class CartItemWidgets extends StatelessWidget {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            AppAlert.showConfirmDialog(
+                              context: context,
+                              title: 'Удалить блюдо',
+                              content: const Text('Вы действительно хотите удалить из корзины?'),
+                              confirmPressed: () {
+                                context.router.maybePop();
+                              },
+                            );
+                          },
                           icon: SvgPicture.asset('assets/icons/delete.svg'),
                         )
                       ],
