@@ -21,6 +21,7 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -35,6 +36,7 @@ class _LoginFormState extends State<LoginForm> {
               hintText: "E-Mail",
               controller: _usernameController,
               isPasswordField: false,
+              inputType: TextInputType.emailAddress,
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'Пожалуйста, введите ваш E-Mail';
@@ -50,6 +52,7 @@ class _LoginFormState extends State<LoginForm> {
               hintText: "******",
               controller: _passwordController,
               isPasswordField: true,
+              inputType: TextInputType.text,
               validator: (value) {
                 if (value!.isEmpty) {
                   return 'Пожалуйста, введите ваш пароль';
@@ -59,9 +62,7 @@ class _LoginFormState extends State<LoginForm> {
                 return null;
               },
             ),
-            const SizedBox(
-              height: 20,
-            ),
+            const SizedBox(height: 20),
             BlocConsumer<SignInCubit, SignInState>(
               listener: (context, state) {
                 if (state is SignInFailure) {
@@ -148,7 +149,15 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () {
                 context.pushRoute(const SignUpRoute());
               },
-            )
+            ),
+            TextButton(
+                onPressed: () {
+                  SnackBarMessage().showErrorSnackBar(
+                    message: "Пока не доступно",
+                    context: context,
+                  );
+                },
+                child: const Text("Забыли пароль ?")),
           ],
         ),
       ),

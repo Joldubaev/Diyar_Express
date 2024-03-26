@@ -10,16 +10,13 @@ class SignInCubit extends Cubit<SignInState> {
     this.authRepository,
   ) : super(SignInInitial());
 
-  final AuthRepositoryImpl authRepository;
+  final AuthRepository authRepository;
 
   void signInUser(UserModel model) async {
     emit(SignInLoading());
     try {
-      final user = await authRepository.login(
-        model,
-      );
+      await authRepository.login(model);
       emit(SignInSuccessWithUser());
-      return user;
     } catch (e) {
       emit(SignInFailure(e.toString()));
     }
