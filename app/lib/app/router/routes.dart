@@ -8,17 +8,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
-
-        AutoRoute(page: MainRoute.page, initial: true, children: [
-          AutoRoute(page: HomeRoute.page),
-          AutoRoute(page: MenuRoute.page),
-          AutoRoute(page: CartRoute.page),
-          AutoRoute(page: ProfileRoute.page)
-        ]),
-
         AutoRoute(
           page: MainRoute.page,
-          initial: true,
           children: [
             AutoRoute(page: HomeRoute.page),
             AutoRoute(page: MenuRoute.page),
@@ -27,19 +18,17 @@ class AppRouter extends $AppRouter {
           ],
           // guards: [AuthGuard()],
         ),
-
         AutoRoute(page: ProfileInfoRoute.page),
         AutoRoute(page: ContactRoute.page),
         AutoRoute(page: OrderHistoryRoute.page),
-        AutoRoute(page: SignInRoute.page),
+        AutoRoute(
+          page: SignInRoute.page,
+          initial: true,
+        ),
         AutoRoute(page: SignUpRoute.page),
-
-
         AutoRoute(page: CreateOrderRoute.page),
         AutoRoute(page: OrderSuccess.page),
         AutoRoute(page: SignUpSucces.page),
-
-
         AutoRoute(page: ContactRoute.page),
         AutoRoute(page: AboutUsRoute.page),
       ];
