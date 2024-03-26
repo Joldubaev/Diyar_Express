@@ -21,7 +21,7 @@ class SignUpForm extends StatefulWidget {
 class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
-  final _phoneController = TextEditingController();
+  final _phoneController = TextEditingController(text: '+996');
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -123,7 +123,7 @@ class _SignUpFormState extends State<SignUpForm> {
           BlocConsumer<SignUpCubit, SignUpState>(
             listener: (_, state) {
               if (state is SignUpSuccess) {
-                context.pushRoute(const MainRoute());
+                context.pushRoute(const SignUpSucces());
               }
             },
             builder: (context, state) {

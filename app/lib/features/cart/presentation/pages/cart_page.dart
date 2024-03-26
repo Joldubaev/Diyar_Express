@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/components/components.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
 import 'package:diyar_express/theme/theme.dart';
@@ -31,8 +32,8 @@ class _CartPageState extends State<CartPage> {
             color: Colors.white,
           ),
           bgColor: AppColors.primary,
-          title: 'Перейти к покупкам',
-          onTap: () {},
+          title: 'Оформить заказ',
+          onTap: () => context.router.replace(const CreateOrderRoute()),
         ),
       ),
     );

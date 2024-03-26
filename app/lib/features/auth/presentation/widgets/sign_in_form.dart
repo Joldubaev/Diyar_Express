@@ -149,7 +149,15 @@ class _LoginFormState extends State<LoginForm> {
               onPressed: () {
                 context.pushRoute(const SignUpRoute());
               },
-            )
+            ),
+            TextButton(
+                onPressed: () {
+                  SnackBarMessage().showErrorSnackBar(
+                    message: "Пока не доступно",
+                    context: context,
+                  );
+                },
+                child: const Text("Забыли пароль ?")),
           ],
         ),
       ),
