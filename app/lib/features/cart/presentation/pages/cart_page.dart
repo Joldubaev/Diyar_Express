@@ -74,6 +74,20 @@ class _CartBodyState extends State<CartBody> {
           counter: 1,
           imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
         ),
+        CartItemWidgets(
+          title: 'Курица с картошкой',
+          subtitle: '1 кг',
+          price: 150,
+          counter: 1,
+          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+        ),
+        CartItemWidgets(
+          title: 'Курица с картошкой',
+          subtitle: '1 кг',
+          price: 150,
+          counter: 1,
+          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+        ),
       ],
     );
   }
