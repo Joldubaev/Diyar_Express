@@ -14,13 +14,9 @@ class _OrderHistoryPageState extends State<OrderHistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('История заказов'),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              context.router.maybePop();
-            },
-          )),
+        title: const Text('История заказов'),
+        leading: IconButton(icon: const Icon(Icons.arrow_back_ios), onPressed: () => context.router.back()),
+      ),
       body: const Center(
         child: Text('Order History Page'),
       ),

@@ -1,4 +1,5 @@
 import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class HallCardWidget extends StatelessWidget {
@@ -57,7 +58,10 @@ class HallCardWidget extends StatelessWidget {
                       ),
                       Expanded(
                         child: ElevatedButton(
-                          onPressed: onPressed,
+                          onPressed: () {
+                            SnackBarMessage().showErrorSnackBar(
+                                message: "Пока не доступно. Пожалуйста, попробуйте позже", context: context);
+                          },
                           child: const FittedBox(
                             child: Text('Смотреть'),
                           ),
