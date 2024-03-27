@@ -64,9 +64,15 @@ class OrderSuccess extends StatelessWidget {
   }
 }
 
-class CreateOrderDialog extends StatelessWidget {
+class CreateOrderDialog extends StatefulWidget {
   const CreateOrderDialog({super.key});
 
+  @override
+  State<CreateOrderDialog> createState() => _CreateOrderDialogState();
+}
+
+class _CreateOrderDialogState extends State<CreateOrderDialog> {
+  final TextEditingController _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -79,9 +85,15 @@ class CreateOrderDialog extends StatelessWidget {
             style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
           ),
           const SizedBox(height: 20),
-          const CustomInputWidget(
-            hintText: '',
-            title: 'Название шаблона',
+          CustomInputWidget(
+            hintText: 'Название шаблона',
+            controller: _controller,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Введите название';
+              }
+              return null;
+            },
           ),
           const SizedBox(height: 20),
           SubmitButtonWidget(
@@ -91,12 +103,21 @@ class CreateOrderDialog extends StatelessWidget {
               color: AppColors.white,
             ),
             onTap: () {
-              context.router.replace(const MainRoute());
+              if (_controller.text.isEmpty) {
+                return;
+              }
+              context.router.push(const MainRoute());
             },
           ),
           TextButton(
-              onPressed: () {},
-              child: Text('Редактироват', style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.blue)))
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text(
+              'Редактироват',
+              style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.blue),
+            ),
+          )
         ],
       ),
     );

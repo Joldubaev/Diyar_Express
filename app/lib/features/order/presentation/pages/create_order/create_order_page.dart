@@ -101,7 +101,7 @@ class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMi
               color: AppColors.white,
             ),
             onTap: () {
-              context.router.replace(const OrderSuccess());
+              context.router.push(const OrderSuccess());
             },
           ),
         ),

@@ -19,11 +19,17 @@ class _CartPageState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Корзина'), centerTitle: true, actions: [
-        IconButton(
+      appBar: AppBar(
+        title: Text('Корзина', style: theme.textTheme.titleSmall),
+        actions: [
+          IconButton(
             icon: const Icon(Icons.history, size: 30),
-            onPressed: () => context.router.replace(const OrderHistoryRoute()))
-      ]),
+            onPressed: () => context.router.replace(
+              const OrderHistoryRoute(),
+            ),
+          )
+        ],
+      ),
       body: const CartBody(),
       bottomSheet: const CartBottomSheet(),
       bottomNavigationBar: Padding(
@@ -53,6 +59,8 @@ class _CartBodyState extends State<CartBody> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      controller: ScrollController(),
+      physics: const BouncingScrollPhysics(),
       itemCount: 12,
       itemBuilder: (context, index) {
         return const CartItemWidgets(
