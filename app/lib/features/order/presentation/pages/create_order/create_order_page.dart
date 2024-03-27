@@ -93,7 +93,7 @@ class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMi
           ),
         ),
         bottomNavigationBar: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: SubmitButtonWidget(
             title: 'Оформить заказ на 220с',
             bgColor: AppColors.primary,
@@ -101,7 +101,7 @@ class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMi
               color: AppColors.white,
             ),
             onTap: () {
-              context.router.replace(const OrderSuccess());
+              context.router.push(const OrderSuccess());
             },
           ),
         ),

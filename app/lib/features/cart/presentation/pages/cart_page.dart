@@ -20,13 +20,20 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: const Text('Корзина'),
-          centerTitle: true,
-          actions: [IconButton(icon: const Icon(Icons.history, size: 30), onPressed: () {})]),
+        title: Text('Корзина', style: theme.textTheme.titleSmall),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.history, size: 30),
+            onPressed: () => context.router.replace(
+              const OrderHistoryRoute(),
+            ),
+          )
+        ],
+      ),
       body: const CartBody(),
       bottomSheet: const CartBottomSheet(),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SubmitButtonWidget(
           textStyle: theme.textTheme.bodyLarge!.copyWith(
             color: Colors.white,
@@ -51,44 +58,19 @@ class _CartBodyState extends State<CartBody> {
   final formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: const [
-        CartItemWidgets(
+    return ListView.builder(
+      controller: ScrollController(),
+      physics: const BouncingScrollPhysics(),
+      itemCount: 12,
+      itemBuilder: (context, index) {
+        return const CartItemWidgets(
           title: 'Курица с картошкой',
           subtitle: '1 кг',
           price: 150,
           counter: 1,
           imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-        ),
-        CartItemWidgets(
-          title: 'Курица с картошкой',
-          subtitle: '1 кг',
-          price: 150,
-          counter: 1,
-          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-        ),
-        CartItemWidgets(
-          title: 'Курица с картошкой',
-          subtitle: '1 кг',
-          price: 150,
-          counter: 1,
-          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-        ),
-        CartItemWidgets(
-          title: 'Курица с картошкой',
-          subtitle: '1 кг',
-          price: 150,
-          counter: 1,
-          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-        ),
-        CartItemWidgets(
-          title: 'Курица с картошкой',
-          subtitle: '1 кг',
-          price: 150,
-          counter: 1,
-          imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-        ),
-      ],
+        );
+      },
     );
   }
 }
@@ -100,8 +82,8 @@ class CartBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomSheet(
       constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.23,
-        minHeight: MediaQuery.of(context).size.height * 0.23,
+        maxHeight: MediaQuery.of(context).size.height * 0.2,
+        minHeight: MediaQuery.of(context).size.height * 0.2,
       ),
       onClosing: () {},
       builder: (context) {

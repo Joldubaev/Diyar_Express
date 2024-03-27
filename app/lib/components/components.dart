@@ -3,6 +3,7 @@ export 'buttons/text_button_login.dart';
 export 'buttons/text_check_button.dart';
 export 'buttons/google_button.dart';
 export 'buttons/confirm_button.dart';
+export 'buttons/history_button.dart';
 export 'loading/line_or_wid.dart';
 export 'loading/loading_widget.dart';
 export 'lang/app_languages_list.dart';
