@@ -14,54 +14,87 @@ class OrderHistoryPage extends StatefulWidget {
 class _OrderHistoryPageState extends State<OrderHistoryPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('История заказов', style: theme.textTheme.titleSmall),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () => context.router.back(),
-        ),
-      ),
-      body: const OrderHistoryBody(),
+    return const Scaffold(
+      body: HistoryTabBarPage(),
     );
   }
 }
 
-class OrderHistoryBody extends StatefulWidget {
-  const OrderHistoryBody({super.key});
+class HistoryTabBarPage extends StatefulWidget {
+  const HistoryTabBarPage({Key? key}) : super(key: key);
 
   @override
-  State<OrderHistoryBody> createState() => _OrderHistoryBodyState();
+  HistoryTabBarPageState createState() => HistoryTabBarPageState();
 }
 
-class _OrderHistoryBodyState extends State<OrderHistoryBody> {
+class HistoryTabBarPageState extends State<HistoryTabBarPage> with SingleTickerProviderStateMixin {
+  late TabController tabController;
+
+  @override
+  void initState() {
+    tabController = TabController(length: 2, vsync: this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    tabController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      itemCount: 1,
-      itemBuilder: (context, index) {
-        return Card(
-          child: ExpansionTile(
-            shape: const Border(
-              bottom: BorderSide(color: Colors.transparent, width: 0),
-            ),
-            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
-            title: const Text('Курица с картошкой'),
-            subtitle: const Text('12.12.2021 12:12'),
-            children: [
-              CartHistoryWidgets(
-                title: 'Курица с картошкой',
-                subtitle: '1 кг',
-                price: 150,
-                counter: 1,
-                imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-                onPressed: () {},
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'История заказов',
+            style: TextStyle(fontSize: 16),
+          ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios_sharp),
+            onPressed: () {
+              context.router.maybePop();
+            },
+          ),
+          centerTitle: true,
+          bottom: PreferredSize(
+            preferredSize: const Size.fromHeight(40),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
+              child: Container(
+                height: 40,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(20)), color: AppColors.grey.withOpacity(0.2)),
+                child: const TabBar(
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  dividerColor: Colors.transparent,
+                  indicator: BoxDecoration(
+                    color: AppColors.primary,
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.black54,
+                  tabs: [
+                    TabItem(title: 'Активные заказы'),
+                    TabItem(title: 'История заказов'),
+                  ],
+                ),
               ),
+            ),
+          ),
+        ),
+        body: const SafeArea(
+          child: TabBarView(
+            children: [
+              ActiveOrder(),
+              OrderHistory(),
             ],
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }
