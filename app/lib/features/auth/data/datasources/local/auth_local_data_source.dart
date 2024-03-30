@@ -14,6 +14,7 @@ abstract class AuthLocalDataSource {
   Future<void> setTokenToCache({
     required String refresh,
     required String access,
+    required String email,
   });
 }
 
@@ -30,10 +31,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> logout() async {
     try {
-      await prefs.remove(AppConst.refreshToken);
-      await prefs.remove(AppConst.accessToken);
-      await prefs.remove(AppConst.langCode);
-      await prefs.remove(AppConst.userInfo);
+      await prefs.clear();
     } catch (e) {
       throw CacheException();
     }
@@ -52,10 +50,12 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<void> setTokenToCache({
     required String refresh,
     required String access,
+    required String email,
   }) async {
     try {
       await prefs.setString(AppConst.refreshToken, refresh);
       await prefs.setString(AppConst.accessToken, access);
+      await prefs.setString(AppConst.email, email);
     } catch (e) {
       throw CacheException();
     }

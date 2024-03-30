@@ -1,10 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:diyar_express/features/auth/data/data.dart';
 import 'package:diyar_express/features/auth/presentation/cubit/cubit.dart';
+import 'package:diyar_express/features/profile/data/data.dart';
+import 'package:diyar_express/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/network/network_info.dart';
 import 'package:get_it/get_it.dart';
+
+import 'features/profile/data/datasources/user_remote_data_source.dart';
 
 final sl = GetIt.instance;
 
@@ -12,15 +16,19 @@ Future<void> init() async {
 // cubit or bloc
   sl.registerFactory(() => SignUpCubit(sl()));
   sl.registerFactory(() => SignInCubit(sl()));
+  sl.registerFactory(() => ProfileCubit(sl()));
 
-// Repositories
-  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl()));
-  sl.registerLazySingleton<AuthRepositoryImpl>(() => AuthRepositoryImpl(sl()));
-
-// Datasources
-  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(sl(), sl()));
-
+// AUTH
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<AuthRemoteDataSource>(
+      () => AuthRemoteDataSourceImpl(sl(), sl()));
   sl.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(sl()));
+
+// Profile
+  sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
+  sl.registerLazySingleton<UserRepositoryImpl>(() => UserRepositoryImpl(sl()));
+  sl.registerLazySingleton<UserRemoteDataSource>(
+      () => UserRemoteDataSourceImpl(sl(), sl()));
 
 //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
@@ -30,5 +38,5 @@ Future<void> init() async {
 
   final sharedPrefences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPrefences);
-  sl.registerLazySingleton(() => Dio(BaseOptions(baseUrl: 'http://20.55.72.226:8080/')));
+  sl.registerLazySingleton(() => Dio());
 }

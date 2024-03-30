@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:diyar_express/features/auth/data/data.dart';
-import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:meta/meta.dart';
 
 part 'sign_up_state.dart';

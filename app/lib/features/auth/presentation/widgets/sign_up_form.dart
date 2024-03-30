@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/components/components.dart';
-import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/auth/presentation/widgets/phone_number.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/theme/theme.dart';
@@ -123,7 +123,10 @@ class _SignUpFormState extends State<SignUpForm> {
           BlocConsumer<SignUpCubit, SignUpState>(
             listener: (_, state) {
               if (state is SignUpSuccess) {
-                context.pushRoute(const SignUpSucces());
+                context.router.pushAndPopUntil(
+                  const SignUpSucces(),
+                  predicate: (_) => false,
+                );
               }
             },
             builder: (context, state) {
@@ -140,14 +143,16 @@ class _SignUpFormState extends State<SignUpForm> {
                         child: FittedBox(
                           child: Text(
                             'Регистрация не удалась. Пожалуйста, попробуйте еще раз.',
-                            style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
+                            style:
+                                theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
                           ),
                         ),
                       ),
                     ),
                     SubmitButtonWidget(
                       isLoading: state is SignUpLoading,
-                      textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
+                      textStyle:
+                          theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
                       bgColor: AppColors.primary,
                       title: state.message,
                       onTap: () {

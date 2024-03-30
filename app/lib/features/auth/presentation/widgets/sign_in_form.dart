@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/components/components.dart';
-import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/snackbar/snackbar_message.dart';
@@ -73,7 +73,10 @@ class _LoginFormState extends State<LoginForm> {
                     ),
                   );
                 } else if (state is SignInSuccessWithUser) {
-                  context.router.replace(const MainRoute());
+                  context.router.pushAndPopUntil(
+                    const MainRoute(),
+                    predicate: (_) => false,
+                  );
                 }
               },
               builder: (context, state) {
