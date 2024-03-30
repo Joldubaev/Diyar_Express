@@ -11,18 +11,33 @@
 import 'package:auto_route/auto_route.dart' as _i15;
 import 'package:diyar_express/app/pages/main_home/home_page.dart' as _i5;
 import 'package:diyar_express/app/pages/main_home/main_page.dart' as _i6;
-import 'package:diyar_express/features/about_us/presentation/pages/about/about_us_page.dart' as _i1;
-import 'package:diyar_express/features/about_us/presentation/pages/contact/contact_page.dart' as _i3;
-import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart' as _i12;
-import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_page.dart' as _i13;
-import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_succes.dart' as _i14;
-import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart' as _i2;
-import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart' as _i7;
-import 'package:diyar_express/features/order/presentation/pages/create_order/create_order_page.dart' as _i4;
-import 'package:diyar_express/features/order/presentation/pages/create_order/order_success.dart' as _i9;
-import 'package:diyar_express/features/order/presentation/pages/history/order_history_page.dart' as _i8;
-import 'package:diyar_express/features/profile/presentation/pages/profile/profile_page.dart' as _i11;
-import 'package:diyar_express/features/profile/presentation/pages/profile_info/profile_info_page.dart' as _i10;
+import 'package:diyar_express/features/about_us/presentation/pages/about/about_us_page.dart'
+    as _i1;
+import 'package:diyar_express/features/about_us/presentation/pages/contact/contact_page.dart'
+    as _i3;
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart'
+    as _i17;
+import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart'
+    as _i12;
+import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_page.dart'
+    as _i13;
+import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_succes.dart'
+    as _i14;
+import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart'
+    as _i2;
+import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart'
+    as _i7;
+import 'package:diyar_express/features/order/presentation/pages/create_order/create_order_page.dart'
+    as _i4;
+import 'package:diyar_express/features/order/presentation/pages/create_order/order_success.dart'
+    as _i9;
+import 'package:diyar_express/features/order/presentation/pages/history/order_history_page.dart'
+    as _i8;
+import 'package:diyar_express/features/profile/presentation/pages/profile/profile_page.dart'
+    as _i11;
+import 'package:diyar_express/features/profile/presentation/pages/profile_info/profile_info_page.dart'
+    as _i10;
+import 'package:flutter/material.dart' as _i16;
 
 abstract class $AppRouter extends _i15.RootStackRouter {
   $AppRouter({super.navigatorKey});
@@ -84,9 +99,13 @@ abstract class $AppRouter extends _i15.RootStackRouter {
       );
     },
     ProfileInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<ProfileInfoRouteArgs>();
       return _i15.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i10.ProfileInfoPage(),
+        child: _i10.ProfileInfoPage(
+          key: args.key,
+          user: args.user,
+        ),
       );
     },
     ProfileRoute.name: (routeData) {
@@ -244,16 +263,40 @@ class OrderSuccess extends _i15.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i10.ProfileInfoPage]
-class ProfileInfoRoute extends _i15.PageRouteInfo<void> {
-  const ProfileInfoRoute({List<_i15.PageRouteInfo>? children})
-      : super(
+class ProfileInfoRoute extends _i15.PageRouteInfo<ProfileInfoRouteArgs> {
+  ProfileInfoRoute({
+    _i16.Key? key,
+    required _i17.UserModel user,
+    List<_i15.PageRouteInfo>? children,
+  }) : super(
           ProfileInfoRoute.name,
+          args: ProfileInfoRouteArgs(
+            key: key,
+            user: user,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ProfileInfoRoute';
 
-  static const _i15.PageInfo<void> page = _i15.PageInfo<void>(name);
+  static const _i15.PageInfo<ProfileInfoRouteArgs> page =
+      _i15.PageInfo<ProfileInfoRouteArgs>(name);
+}
+
+class ProfileInfoRouteArgs {
+  const ProfileInfoRouteArgs({
+    this.key,
+    required this.user,
+  });
+
+  final _i16.Key? key;
+
+  final _i17.UserModel user;
+
+  @override
+  String toString() {
+    return 'ProfileInfoRouteArgs{key: $key, user: $user}';
+  }
 }
 
 /// generated route for

@@ -1,15 +1,18 @@
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ProfileTile extends StatelessWidget {
   const ProfileTile({
-    required this.iconPath,
+    required this.imgPath,
     required this.text,
+    this.isSvg = false,
     super.key,
   });
 
-  final String iconPath;
+  final String imgPath;
   final String text;
+  final bool? isSvg;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +24,19 @@ class ProfileTile extends StatelessWidget {
       ),
       child: Row(
         children: [
-          CircleAvatar(radius: 40, child: Image.asset(iconPath)),
+          CircleAvatar(
+            radius: 30,
+            child: isSvg!
+                ? SvgPicture.asset(
+                    imgPath,
+                    colorFilter: const ColorFilter.mode(
+                      Colors.white,
+                      BlendMode.srcIn,
+                    ),
+                    width: 70,
+                  )
+                : Image.asset(imgPath),
+          ),
           const SizedBox(width: 10),
           Expanded(child: Text(text, style: theme.textTheme.bodyLarge)),
           const SizedBox(width: 10),

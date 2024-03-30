@@ -29,4 +29,5 @@ class AppConst {
   static const userId = 'USER_ID';
   static const userRole = 'USER_ROLE';
   static const prefs = 'PREFS';
+  static const email = 'email';
 }

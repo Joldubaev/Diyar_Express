@@ -8,3 +8,16 @@ abstract class ProfileState extends Equatable {
 }
 
 class ProfileInitial extends ProfileState {}
+
+class ProfileGetLoading extends ProfileState {}
+
+class ProfileGetLoaded extends ProfileState {
+  final UserModel userModel;
+
+  const ProfileGetLoaded(this.userModel);
+
+  @override
+  List<Object> get props => [userModel];
+}
+
+class ProfileGetError extends ProfileState {}

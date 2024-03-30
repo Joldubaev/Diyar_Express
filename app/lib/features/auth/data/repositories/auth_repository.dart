@@ -1,5 +1,5 @@
 import 'package:diyar_express/features/auth/data/datasources/datasources.dart';
-import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 
 abstract class AuthRepository {
   // Future<void> confirmEmail(String email, int code);
@@ -11,12 +11,14 @@ abstract class AuthRepository {
   Future<void> login(UserModel user);
   Future<void> register(UserModel user);
   Future<void> sendForgotPasswordCodeToEmail(String email);
+  Future<void> logout();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
   final AuthRemoteDataSource _remoteDataSource;
+  final AuthLocalDataSource _localDataSource;
 
-  AuthRepositoryImpl(this._remoteDataSource);
+  AuthRepositoryImpl(this._remoteDataSource, this._localDataSource);
 
   // @override
   // Future<void> confirmEmail(String email, int code) async {
@@ -50,4 +52,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<void> sendForgotPasswordCodeToEmail(String email) async {
     return _remoteDataSource.sendForgotPasswordCodeToEmail(email);
   }
+
+  @override
+  Future<void> logout() async => await _localDataSource.logout();
 }

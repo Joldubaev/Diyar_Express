@@ -30,27 +30,18 @@ class SignUpSucces extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_sharp),
-          onPressed: () {
-            context.pushRoute(const SignInRoute());
-          },
-        ),
-        title: Text('Регистрация', style: theme.textTheme.bodyLarge),
-        centerTitle: true,
-        elevation: 0,
-      ),
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: paddingValue),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              buildCheckIcon(),
-              const SizedBox(height: 30),
-              buildSuccessText(),
-            ],
+      body: SafeArea(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: paddingValue),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                buildCheckIcon(),
+                const SizedBox(height: 30),
+                buildSuccessText(),
+              ],
+            ),
           ),
         ),
       ),
@@ -63,7 +54,10 @@ class SignUpSucces extends StatelessWidget {
             color: AppColors.white,
           ),
           onTap: () {
-            context.pushRoute(const MainRoute());
+            context.router.pushAndPopUntil(
+              const MainRoute(),
+              predicate: (_) => false,
+            );
           },
         ),
       ),

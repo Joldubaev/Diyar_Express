@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:diyar_express/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/auth/data/datasources/local/local.dart';
-import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 
 abstract class AuthRemoteDataSource {
   Future<void> login(UserModel user);
@@ -65,12 +65,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> login(UserModel user) async {
     try {
-      var res = await _dio.post(ApiConst.signIn, data: {"email": user.email, "password": user.password});
+      var res = await _dio
+          .post(ApiConst.signIn, data: {"email": user.email, "password": user.password});
 
       if ([200, 201].contains(res.statusCode)) {
         await _localDataSource.setTokenToCache(
           refresh: res.data['refreshToken'],
           access: res.data['accessToken'],
+          email: user.email!,
         );
       }
     } catch (e) {
@@ -81,15 +83,13 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> register(UserModel user) async {
     try {
-      var res = await _dio.post(
-        ApiConst.signUp,
-        data: user.toJson(),
-      );
+      var res = await _dio.post(ApiConst.signUp, data: user.toJson());
 
       if (res.statusCode == 200) {
         await _localDataSource.setTokenToCache(
           refresh: res.data['refreshToken'],
           access: res.data['accessToken'],
+          email: user.email!,
         );
       }
     } catch (e) {

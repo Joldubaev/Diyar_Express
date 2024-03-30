@@ -24,25 +24,23 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: ListView(
-          children: [
-            const Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Image(
-                height: 100,
-                width: 100,
-                color: AppColors.primary,
-                image: AssetImage("assets/images/auth_images.png"),
-              ),
+    return Scaffold(
+      body: ListView(
+        children: [
+          const Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Image(
+              height: 100,
+              width: 100,
+              color: AppColors.primary,
+              image: AssetImage("assets/images/auth_images.png"),
             ),
-            const SizedBox(height: 10),
-            Center(child: Text("Sign In", style: theme.textTheme.titleLarge)),
-            const SizedBox(height: 10),
-            const LoginForm(),
-          ],
-        ),
+          ),
+          const SizedBox(height: 10),
+          Center(child: Text("Sign In", style: theme.textTheme.titleLarge)),
+          const SizedBox(height: 10),
+          const LoginForm(),
+        ],
       ),
     );
   }
