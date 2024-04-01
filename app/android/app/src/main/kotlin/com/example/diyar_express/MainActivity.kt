@@ -1,6 +1,9 @@
 package com.example.diyar_express
 
-import io.flutter.embedding.android.FlutterActivity
+import androidx.annotation.NonNull;
 
-class MainActivity: FlutterActivity() {
+import io.flutter.embedding.android.FlutterActivity;
+import io.flutter.embedding.engine.FlutterEngine;
+
+public class MainActivity extends FlutterActivity {
 }

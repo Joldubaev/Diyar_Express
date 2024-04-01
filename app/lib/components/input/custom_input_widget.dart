@@ -17,8 +17,10 @@ class CustomInputWidget extends StatefulWidget {
     this.maxLines = 1,
     this.leading,
     this.isReadOnly = false,
+    this.trailing,
   });
   final String hintText;
+  final Widget? trailing;
   final TextEditingController? controller;
   final bool? isPasswordField;
   final String? title;
@@ -52,11 +54,18 @@ class _CustomInputWidgetState extends State<CustomInputWidget> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (widget.title != null)
-          Text(
-            widget.title!,
-            style: Theme.of(context).textTheme.bodyMedium,
+          ListTile(
+            dense: true,
+            contentPadding: const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
+            visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+            title: Text(
+              widget.title!,
+              style: theme.textTheme.bodyMedium!.copyWith(
+                color: widget.titleColor,
+              ),
+            ),
+            trailing: widget.trailing,
           ),
-        if (widget.title != null) const SizedBox(height: 6),
         TextFormField(
           controller: widget.controller,
           keyboardType: widget.inputType,
