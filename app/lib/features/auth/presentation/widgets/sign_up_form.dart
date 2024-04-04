@@ -143,16 +143,14 @@ class _SignUpFormState extends State<SignUpForm> {
                         child: FittedBox(
                           child: Text(
                             'Регистрация не удалась. Пожалуйста, попробуйте еще раз.',
-                            style:
-                                theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
+                            style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
                           ),
                         ),
                       ),
                     ),
                     SubmitButtonWidget(
                       isLoading: state is SignUpLoading,
-                      textStyle:
-                          theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
+                      textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
                       bgColor: AppColors.primary,
                       title: state.message,
                       onTap: () {
