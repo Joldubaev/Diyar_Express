@@ -14,7 +14,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (context) => di.sl<SignUpCubit>()),
-      BlocProvider(create: (context) => di.sl<SignInCubit>())
+      BlocProvider(create: (context) => di.sl<SignInCubit>()),
     ], child: const DiyarExpress());
   }
 }

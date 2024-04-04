@@ -87,7 +87,7 @@ class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMi
         body: const SafeArea(
           child: TabBarView(
             children: [
-              DeliveryForm(),
+              DeliveryFormPage(),
               PickupForm(),
             ],
           ),

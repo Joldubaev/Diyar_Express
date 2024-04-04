@@ -19,4 +19,19 @@ class ApiConst {
   // CATEGORIES
   static const getCategories = "categorys/get-all-category-with-foods/";
   static const getCountFoddsByCategory = "categorys/get-quantity-foods-by-category/";
+
+  // Map
+  static String getLocations({
+    required String apiKey,
+    required String lat,
+    required String lang,
+  }) =>
+      "https://geocode-maps.yandex.ru/1.x/?$apiKey&geocode=$lat,$lang&format=json";
+
+  static String getLocationByAdress({
+    required String apiKey,
+    required String lat,
+    required String lang,
+  }) =>
+      "https://geocode-maps.yandex.ru/1.x/?apikey=$apiKey&geocode=$lat,$lang&format=json";
 }

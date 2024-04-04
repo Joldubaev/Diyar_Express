@@ -1,3 +1,5 @@
+import 'package:geolocator/geolocator.dart';
+
 abstract class AppLocation {
   Future<AppLatLong> getCurrentLocation();
   Future<bool> requestPermission();
@@ -9,17 +11,28 @@ class LocationService implements AppLocation {
 
   @override
   Future<AppLatLong> getCurrentLocation() async {
-    return defaultLocation;
+    return Geolocator.getCurrentPosition().then((position) {
+      return AppLatLong(
+        latitude: position.latitude,
+        longitude: position.longitude,
+      );
+    }).catchError((e) {
+      return defaultLocation;
+    });
   }
 
   @override
   Future<bool> requestPermission() async {
-    return true;
+    return Geolocator.requestPermission()
+        .then((value) => value == LocationPermission.always || value == LocationPermission.whileInUse)
+        .catchError((e) => false);
   }
 
   @override
   Future<bool> checkPermission() async {
-    return true;
+    return Geolocator.checkPermission()
+        .then((value) => value == LocationPermission.always || value == LocationPermission.whileInUse)
+        .catchError((e) => false);
   }
 }
 
@@ -35,7 +48,7 @@ class AppLatLong {
 
 class BiskekLocation extends AppLatLong {
   BiskekLocation({
-    super.latitude = 42.870000,
-    super.longitude = 74.590000,
+    super.latitude = 42.882004,
+    super.longitude = 74.582748,
   });
 }

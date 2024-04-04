@@ -30,8 +30,19 @@ class _CartPageState extends State<CartPage> {
           )
         ],
       ),
-      body: const CartBody(),
-      bottomSheet: const CartBottomSheet(),
+      body: const SingleChildScrollView(
+        child: Column(
+          children: [
+            CartBody(),
+            TotalPriceWidget(
+              price: 450,
+              sale: 0,
+              dishesPrice: 0,
+              totalPrice: 450,
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SubmitButtonWidget(
@@ -59,9 +70,9 @@ class _CartBodyState extends State<CartBody> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      controller: ScrollController(),
-      physics: const BouncingScrollPhysics(),
-      itemCount: 12,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: 10,
       itemBuilder: (context, index) {
         return const CartItemWidgets(
           title: 'Курица с картошкой',
@@ -69,29 +80,6 @@ class _CartBodyState extends State<CartBody> {
           price: 150,
           counter: 1,
           imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-        );
-      },
-    );
-  }
-}
-
-class CartBottomSheet extends StatelessWidget {
-  const CartBottomSheet({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomSheet(
-      constraints: BoxConstraints(
-        maxHeight: MediaQuery.of(context).size.height * 0.2,
-        minHeight: MediaQuery.of(context).size.height * 0.2,
-      ),
-      onClosing: () {},
-      builder: (context) {
-        return const TotalPriceWidget(
-          price: 450,
-          sale: 0,
-          dishesPrice: 0,
-          totalPrice: 450,
         );
       },
     );

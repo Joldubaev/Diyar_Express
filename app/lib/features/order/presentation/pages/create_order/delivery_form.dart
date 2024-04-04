@@ -7,14 +7,17 @@ import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 import '../../../../auth/presentation/widgets/phone_number.dart';
 
-class DeliveryForm extends StatefulWidget {
-  const DeliveryForm({super.key});
+@RoutePage()
+class DeliveryFormPage extends StatefulWidget {
+  const DeliveryFormPage({this.address, super.key});
+
+  final String? address;
 
   @override
-  State<DeliveryForm> createState() => _DeliveryFormState();
+  State<DeliveryFormPage> createState() => _DeliveryFormPageState();
 }
 
-class _DeliveryFormState extends State<DeliveryForm> {
+class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final TextEditingController _phoneController = TextEditingController(text: '+996');
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _houseController = TextEditingController();
@@ -69,7 +72,7 @@ class _DeliveryFormState extends State<DeliveryForm> {
           ),
           hintText: '',
           title: 'Адрес',
-          controller: _addressController,
+          controller: widget.address != null ? _addressController : null,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Пожалуйста, введите ваш адрес';

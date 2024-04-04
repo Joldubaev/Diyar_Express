@@ -20,8 +20,18 @@ class ScrollableForm extends StatelessWidget {
       key: formKey,
       child: Column(
         children: [
-          Expanded(flex: 2, child: ListView(key: listViewKey, children: listViewChildren)),
-          Expanded(child: ListView(children: columnChildren)),
+          Expanded(
+            flex: 3,
+            child: ListView(
+              key: listViewKey,
+              children: listViewChildren,
+            ),
+          ),
+          Expanded(
+            child: ListView(
+              children: columnChildren,
+            ),
+          ),
         ],
       ),
     );
