@@ -24,8 +24,9 @@ class _CartPageState extends State<CartPage> {
         actions: [
           IconButton(
             icon: const Icon(Icons.history, size: 30),
-            onPressed: () => context.router.replace(
+            onPressed: () => context.router.pushAndPopUntil(
               const OrderHistoryRoute(),
+              predicate: (_) => false,
             ),
           )
         ],
@@ -51,7 +52,10 @@ class _CartPageState extends State<CartPage> {
           ),
           bgColor: AppColors.primary,
           title: 'Оформить заказ',
-          onTap: () => context.router.replace(const CreateOrderRoute()),
+          onTap: () => context.router.pushAndPopUntil(
+            const CreateOrderRoute(),
+            predicate: (_) => false,
+          ),
         ),
       ),
     );

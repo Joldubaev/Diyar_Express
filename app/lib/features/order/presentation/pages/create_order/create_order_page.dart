@@ -55,7 +55,9 @@ class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMi
             style: TextStyle(fontSize: 16),
           ),
           leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios_sharp), onPressed: () => context.router.replace(const CartRoute())),
+            icon: const Icon(Icons.arrow_back_ios_sharp),
+            onPressed: () => context.pushRoute(const CartRoute()),
+          ),
           centerTitle: true,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(40),
@@ -65,7 +67,8 @@ class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMi
                 height: 40,
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)), color: AppColors.grey.withOpacity(0.2)),
+                    borderRadius: const BorderRadius.all(Radius.circular(20)),
+                    color: AppColors.grey.withOpacity(0.2)),
                 child: const TabBar(
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,

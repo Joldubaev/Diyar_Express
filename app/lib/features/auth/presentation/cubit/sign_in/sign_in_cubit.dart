@@ -1,5 +1,5 @@
 import 'package:bloc/bloc.dart';
-import 'package:diyar_express/features/auth/data/models/sign_up_model.dart';
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/auth/data/repositories/auth_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -31,4 +31,6 @@ class SignInCubit extends Cubit<SignInState> {
       emit(SignInFailure(e.toString()));
     }
   }
+
+  Future logout() async => await authRepository.logout();
 }
