@@ -18,6 +18,23 @@ class ApiConst {
   static const deleteUser = "http://20.55.72.226:8080/user/delete-user";
 
   // CATEGORIES
+  static const getCategories = "categorys/get-all-category-with-foods/";
+  static const getCountFoddsByCategory = "categorys/get-quantity-foods-by-category/";
+
+  // Map
+  static String getLocations({
+    required String apiKey,
+    required String lat,
+    required String lang,
+  }) =>
+      "https://geocode-maps.yandex.ru/1.x/?$apiKey&geocode=$lat,$lang&format=json";
+
+  static String getLocationByAdress({
+    required String apiKey,
+    required String lat,
+    required String lang,
+  }) =>
+      "https://geocode-maps.yandex.ru/1.x/?apikey=$apiKey&geocode=$lat,$lang&format=json";
   static const getCategories =
       "http://20.55.72.226:8080/categorys/get-all-category-with-foods";
   static const getCountFoddsByCategory =
