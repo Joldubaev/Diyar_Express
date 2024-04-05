@@ -1,8 +1,11 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/features/menu/menu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MenuToggleButton extends StatelessWidget {
-  const MenuToggleButton({super.key});
+  final Function(int idx)? onTapItem;
+  const MenuToggleButton({super.key, this.onTapItem});
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +16,7 @@ class MenuToggleButton extends StatelessWidget {
   }
 
   showMenu(BuildContext context) {
+    final menu = context.read<MenuCubit>().menu;
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -39,7 +43,7 @@ class MenuToggleButton extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Menu", style: Theme.of(context).textTheme.titleSmall),
+                        Text("Меню", style: Theme.of(context).textTheme.titleSmall),
                         GestureDetector(
                           onTap: () => context.maybePop(),
                           child: const Icon(Icons.close, size: 35),
@@ -52,13 +56,13 @@ class MenuToggleButton extends StatelessWidget {
                         controller: ctrl,
                         itemBuilder: (context, index) => InkWell(
                           borderRadius: BorderRadius.circular(10),
-                          onTap: () => context.maybePop(),
+                          onTap: () => onTapItem?.call(index),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Row(
                               children: [
                                 Text(
-                                  "Category $index",
+                                  "${menu[index].category?.name}",
                                   style: Theme.of(context).textTheme.bodyLarge,
                                 ),
                                 const Spacer(),
@@ -66,7 +70,7 @@ class MenuToggleButton extends StatelessWidget {
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
                                     Text(
-                                      "${index * index}",
+                                      "${menu[index].foods?.length}",
                                       style: Theme.of(context).textTheme.bodyLarge,
                                     ),
                                     const SizedBox(width: 6),
@@ -83,7 +87,7 @@ class MenuToggleButton extends StatelessWidget {
                         separatorBuilder: (context, index) => const Divider(
                           color: Color(0xffDDDDDD),
                         ),
-                        itemCount: 16,
+                        itemCount: menu.length,
                       ),
                     ),
                   ],

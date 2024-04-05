@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:diyar_express/features/auth/data/data.dart';
 import 'package:diyar_express/features/auth/presentation/cubit/cubit.dart';
+import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/features/menu/data/data.dart';
+import 'package:diyar_express/features/menu/data/repositories/menu_repository.dart';
 import 'package:diyar_express/features/profile/data/data.dart';
 import 'package:diyar_express/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
@@ -17,6 +20,7 @@ Future<void> init() async {
   sl.registerFactory(() => SignUpCubit(sl()));
   sl.registerFactory(() => SignInCubit(sl()));
   sl.registerFactory(() => ProfileCubit(sl()));
+  sl.registerFactory(() => MenuCubit(sl()));
 
 // AUTH
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
@@ -26,9 +30,13 @@ Future<void> init() async {
 
 // Profile
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
-  sl.registerLazySingleton<UserRepositoryImpl>(() => UserRepositoryImpl(sl()));
   sl.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(sl(), sl()));
+
+  // Menu
+  sl.registerLazySingleton<MenuRepository>(() => MenuRepositoryImpl(sl()));
+  sl.registerLazySingleton<MenuRemoteDataSource>(
+      () => MenuRemoteDataSourceImpl(sl(), sl()));
 
 //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));

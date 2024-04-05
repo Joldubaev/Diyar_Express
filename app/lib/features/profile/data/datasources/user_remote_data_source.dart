@@ -9,7 +9,7 @@ abstract class UserRemoteDataSource {
   Future<UserModel> getUser();
   Future<void> updateEmail();
   Future<void> updatePhone();
-  Future<void> updateUserName();
+  Future<void> updateUser(String name, String phone);
   Future<void> deleteUser();
 }
 
@@ -24,9 +24,9 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
     try {
       var res = await _dio.post(ApiConst.getUser,
           data: {"email": _prefs.getString(AppConst.email)},
-          options: Options(headers: {
-            "Authorization": "Bearer ${_prefs.getString(AppConst.accessToken)}",
-          }));
+          options: Options(
+            headers: ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
+          ));
       if (res.statusCode == 200) {
         return UserModel.fromJson(res.data);
       } else {
@@ -50,14 +50,26 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
   }
 
   @override
-  Future<void> updateUserName() {
-    // TODO: implement updateUserName
+  Future<void> deleteUser() {
+    // TODO: implement deleteUser
     throw UnimplementedError();
   }
 
   @override
-  Future<void> deleteUser() {
-    // TODO: implement deleteUser
-    throw UnimplementedError();
+  Future<void> updateUser(String name, String phone) async {
+    try {
+      var res = await _dio.post(
+        ApiConst.updateUser,
+        data: {"newPhoneNumber": phone, "newUserName": name},
+        options: Options(
+          headers: ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
+        ),
+      );
+      if (res.statusCode != 200) {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
   }
 }

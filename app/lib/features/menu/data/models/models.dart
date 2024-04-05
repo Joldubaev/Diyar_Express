@@ -1,1 +1,1 @@
-// TODO Implement this library.
+export 'food_model.dart';

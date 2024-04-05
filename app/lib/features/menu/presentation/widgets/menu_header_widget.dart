@@ -3,7 +3,7 @@ import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class MenuHeaderWidget extends StatefulWidget {
-  final VoidCallback? onTapMenu;
+  final Function(int idx)? onTapMenu;
   const MenuHeaderWidget({super.key, this.onTapMenu});
 
   @override
@@ -21,14 +21,15 @@ class _MenuHeaderWidgetState extends State<MenuHeaderWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (!isSearchVisible) const SizedBox(width: 16),
-          if (!isSearchVisible) Text("Menu", style: Theme.of(context).textTheme.titleSmall),
+          if (!isSearchVisible)
+            Text("Menu", style: Theme.of(context).textTheme.titleSmall),
           if (!isSearchVisible) const SizedBox(width: 20),
           Expanded(
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const MenuToggleButton(),
+                MenuToggleButton(onTapItem: widget.onTapMenu),
                 if (isSearchVisible)
                   Expanded(
                     child: Padding(

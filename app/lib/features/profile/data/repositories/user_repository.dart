@@ -6,7 +6,7 @@ abstract class UserRepository {
   Future<UserModel> getUser();
   Future<void> updateEmail();
   Future<void> updatePhone();
-  Future<void> updateUserName();
+  Future<void> updateUser(String name, String phone);
   Future<void> deleteUser();
 }
 
@@ -31,8 +31,8 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<void> updateUserName() async {
-    return _remoteDataSource.updateUserName();
+  Future<void> updateUser(name, phone) async {
+    return _remoteDataSource.updateUser(name, phone);
   }
 
   @override

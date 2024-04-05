@@ -1,8 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/components/components.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
+import 'package:diyar_express/features/auth/presentation/widgets/phone_number.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 @RoutePage()
 class ProfileInfoPage extends StatefulWidget {
@@ -65,13 +67,18 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
                   },
                 ),
                 const SizedBox(height: 20),
-                CustomInputWidget(
+                PhoneNumberMask(
                   title: 'Номер телефона',
-                  hintText: "Введите ваш номер телефона",
-                  controller: phoneController,
+                  hintText: '+996 (___) __-__-__',
+                  textController: phoneController,
+                  hint: "Номер телефона",
+                  formatter: MaskTextInputFormatter(mask: "+996 (###) ##-##-##"),
+                  textInputType: TextInputType.phone,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter some text';
+                      return 'Пожалуйста, введите ваш номер телефона';
+                    } else if (value.length < 10) {
+                      return 'Номер телефона должен содержать более десяти символов.';
                     }
                     return null;
                   },

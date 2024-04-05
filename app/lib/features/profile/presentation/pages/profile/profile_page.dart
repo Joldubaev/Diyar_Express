@@ -45,7 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
         },
         builder: (context, state) {
           if (state is ProfileGetLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is ProfileGetError) {
             return const Center(child: Text("Ошибка получения данных пользователя"));
           } else if (state is ProfileGetLoaded) {

@@ -1,16 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:diyar_express/components/product/product_counter_widget.dart';
+import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class ProductItemContentWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final bool? isShadowVisible;
+  final FoodModel food;
 
   const ProductItemContentWidget({
     super.key,
     this.onTap,
     this.isShadowVisible = true,
+    required this.food,
   });
 
   @override
@@ -43,8 +46,11 @@ class ProductItemContentWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 6, right: 6, top: 0),
                 child: CachedNetworkImage(
-                  imageUrl: 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-                  errorWidget: (context, url, error) => Image.asset('assets/images/placeholder.png'),
+                  imageUrl: food.urlPhoto ?? 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/images/app_logo.png',
+                    color: Colors.grey,
+                  ),
                   width: double.infinity,
                   height: 120,
                   placeholder: (context, url) => const Center(
@@ -60,29 +66,35 @@ class ProductItemContentWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 6),
-          Text(
-            'Лагман',
-            style: theme.textTheme.bodyLarge,
-            overflow: TextOverflow.ellipsis,
-            maxLines: 1,
+          Padding(
+            padding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
+            child: Text(
+              '${food.name}',
+              style: theme.textTheme.bodyLarge,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
+            ),
           ),
-          RichText(
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            text: TextSpan(
-              text: '550 гр',
-              style: theme.textTheme.bodyMedium?.copyWith(
-                color: Colors.grey,
-              ),
-              children: [
-                TextSpan(
-                  text: ' - 200 сом',
-                  style: theme.textTheme.bodyMedium?.copyWith(
-                    color: Colors.green,
-                    fontWeight: FontWeight.w400,
-                  ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(6, 0, 6, 0),
+            child: RichText(
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              text: TextSpan(
+                text: '${food.weight}',
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: Colors.grey,
                 ),
-              ],
+                children: [
+                  TextSpan(
+                    text: ' - ${food.price} сом',
+                    style: theme.textTheme.bodyMedium?.copyWith(
+                      color: Colors.green,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
           const SizedBox(height: 10),

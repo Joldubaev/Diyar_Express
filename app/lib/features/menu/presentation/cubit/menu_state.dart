@@ -8,3 +8,13 @@ abstract class MenuState extends Equatable {
 }
 
 class MenuInitial extends MenuState {}
+
+class GetMenuLoading extends MenuState {}
+
+class GetMenuLoaded extends MenuState {
+  final List<CategoryModel> categories;
+
+  const GetMenuLoaded(this.categories);
+}
+
+class GetMenuFailure extends MenuState {}

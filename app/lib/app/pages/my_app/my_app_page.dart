@@ -1,6 +1,7 @@
 import 'package:diyar_express/app/app.dart';
 import 'package:diyar_express/features/auth/presentation/cubit/sign_in/sign_in_cubit.dart';
 import 'package:diyar_express/features/auth/presentation/cubit/sign_up/sign_up_cubit.dart';
+import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/theme/theme.dart';
@@ -16,7 +17,8 @@ class App extends StatelessWidget {
     return MultiBlocProvider(providers: [
       BlocProvider(create: (context) => di.sl<SignUpCubit>()),
       BlocProvider(create: (context) => di.sl<ProfileCubit>()),
-      BlocProvider(create: (context) => di.sl<SignInCubit>())
+      BlocProvider(create: (context) => di.sl<SignInCubit>()),
+      BlocProvider(create: (context) => di.sl<MenuCubit>())
     ], child: const DiyarExpress());
   }
 }
