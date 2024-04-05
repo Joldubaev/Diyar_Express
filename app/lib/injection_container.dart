@@ -24,14 +24,18 @@ Future<void> init() async {
 
 // AUTH
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSourceImpl(sl(), sl()));
+  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(sl(), sl()));
   sl.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(sl()));
 
 // Profile
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
+<<<<<<< HEAD
   sl.registerLazySingleton<UserRemoteDataSource>(
       () => UserRemoteDataSourceImpl(sl(), sl()));
+=======
+  sl.registerLazySingleton<UserRepositoryImpl>(() => UserRepositoryImpl(sl()));
+  sl.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSourceImpl(sl(), sl()));
+>>>>>>> adb14d24a71934d60cd5364eb88854339824bdaa
 
   // Menu
   sl.registerLazySingleton<MenuRepository>(() => MenuRepositoryImpl(sl()));
