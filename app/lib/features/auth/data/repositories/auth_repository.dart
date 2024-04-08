@@ -1,5 +1,5 @@
-import 'package:diyar_express/features/auth/data/datasources/datasources.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
+import 'package:diyar_express/features/features.dart';
 
 abstract class AuthRepository {
   // Future<void> confirmEmail(String email, int code);
@@ -11,6 +11,7 @@ abstract class AuthRepository {
   Future<void> login(UserModel user);
   Future<void> register(UserModel user);
   Future<void> sendForgotPasswordCodeToEmail(String email);
+  Future<void> resetPassword({required ResetModel model});
   Future<void> logout();
 }
 
@@ -51,6 +52,11 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<void> sendForgotPasswordCodeToEmail(String email) async {
     return _remoteDataSource.sendForgotPasswordCodeToEmail(email);
+  }
+
+  @override
+  Future<void> resetPassword({required ResetModel model}) async {
+    return _remoteDataSource.confirmResetPassword(model: model);
   }
 
   @override

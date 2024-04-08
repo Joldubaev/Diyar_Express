@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:diyar_express/features/auth/auth.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
-import 'package:diyar_express/features/auth/data/repositories/auth_repository.dart';
+import 'package:diyar_express/features/features.dart';
 import 'package:meta/meta.dart';
 
 part 'sign_in_state.dart';
@@ -27,6 +28,16 @@ class SignInCubit extends Cubit<SignInState> {
     try {
       await authRepository.sendForgotPasswordCodeToEmail(email);
       emit(FogotPasswordSuccess());
+    } catch (e) {
+      emit(SignInFailure(e.toString()));
+    }
+  }
+
+  void resetPassword({required ResetModel model}) async {
+    emit(SignInLoading());
+    try {
+      await authRepository.resetPassword(model: model);
+      emit(ResetPasswordSuccess());
     } catch (e) {
       emit(SignInFailure(e.toString()));
     }

@@ -4,11 +4,8 @@ import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/auth/presentation/widgets/phone_number.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-=======
 import 'package:flutter_svg/svg.dart';
->>>>>>> adb14d24a71934d60cd5364eb88854339824bdaa
 
 @RoutePage()
 class ProfileInfoPage extends StatefulWidget {

@@ -1,6 +1,4 @@
 import 'package:diyar_express/app/app.dart';
-import 'package:diyar_express/features/auth/presentation/cubit/sign_in/sign_in_cubit.dart';
-import 'package:diyar_express/features/auth/presentation/cubit/sign_up/sign_up_cubit.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:diyar_express/l10n/l10n.dart';

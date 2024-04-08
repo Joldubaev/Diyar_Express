@@ -13,11 +13,8 @@ class CategoryModel {
   CategoryModel({this.category, this.foods});
 
   factory CategoryModel.fromJson(Map<String, dynamic> json) => CategoryModel(
-        category:
-            json["Category"] == null ? null : CategoryName.fromJson(json["Category"]),
-        foods: json["Foods"] == null
-            ? []
-            : List<FoodModel>.from(json["Foods"]!.map((x) => FoodModel.fromJson(x))),
+        category: json["Category"] == null ? null : CategoryName.fromJson(json["Category"]),
+        foods: json["Foods"] == null ? [] : List<FoodModel>.from(json["Foods"]!.map((x) => FoodModel.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -31,8 +28,7 @@ class CategoryName {
 
   CategoryName({this.name});
 
-  factory CategoryName.fromJson(Map<String, dynamic> json) =>
-      CategoryName(name: json["name"]);
+  factory CategoryName.fromJson(Map<String, dynamic> json) => CategoryName(name: json["name"]);
 
   Map<String, dynamic> toJson() => {"name": name};
 }

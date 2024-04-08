@@ -21,8 +21,7 @@ class _MenuHeaderWidgetState extends State<MenuHeaderWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           if (!isSearchVisible) const SizedBox(width: 16),
-          if (!isSearchVisible)
-            Text("Menu", style: Theme.of(context).textTheme.titleSmall),
+          if (!isSearchVisible) Text("Menu", style: Theme.of(context).textTheme.titleSmall),
           if (!isSearchVisible) const SizedBox(width: 20),
           Expanded(
             child: Row(

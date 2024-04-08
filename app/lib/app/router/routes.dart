@@ -10,7 +10,6 @@ class AppRouter extends $AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: MainRoute.page,
-          initial: true,
           children: [
             AutoRoute(page: HomeRoute.page),
             AutoRoute(page: MenuRoute.page),
@@ -22,7 +21,10 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: ProfileInfoRoute.page),
         AutoRoute(page: ContactRoute.page),
         AutoRoute(page: OrderHistoryRoute.page),
-        AutoRoute(page: SignInRoute.page),
+        AutoRoute(
+          page: SignInRoute.page,
+          initial: true,
+        ),
         AutoRoute(page: SignUpRoute.page),
         AutoRoute(page: CreateOrderRoute.page),
         AutoRoute(page: OrderSuccess.page),
@@ -32,6 +34,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: OrderMapRoute.page),
         AutoRoute(page: DeliveryFormRoute.page),
         AutoRoute(page: OrderDetailRoute.page),
+        AutoRoute(page: RessetPasswordRoute.page),
       ];
 }
 
