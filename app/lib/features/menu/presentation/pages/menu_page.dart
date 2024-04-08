@@ -63,9 +63,7 @@ class _MenuPageState extends State<MenuPage> {
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                         decoration: BoxDecoration(
-                          color: index == _activeIndex
-                              ? AppColors.primary
-                              : Colors.transparent,
+                          color: index == _activeIndex ? AppColors.primary : Colors.transparent,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: AppColors.primary),
                         ),
@@ -73,9 +71,7 @@ class _MenuPageState extends State<MenuPage> {
                           child: Text(
                             "${menu[index].category?.name}",
                             style: TextStyle(
-                              color: index == _activeIndex
-                                  ? Colors.white
-                                  : AppColors.primary,
+                              color: index == _activeIndex ? Colors.white : AppColors.primary,
                             ),
                           ),
                         ),
@@ -114,16 +110,13 @@ class _MenuPageState extends State<MenuPage> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                               child: Text(
                                 category.category?.name ?? '',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: index == _activeIndex
-                                      ? AppColors.primary
-                                      : Colors.black,
+                                  color: index == _activeIndex ? AppColors.primary : Colors.black,
                                 ),
                               ),
                             ),

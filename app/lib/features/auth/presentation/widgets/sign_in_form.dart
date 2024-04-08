@@ -4,6 +4,7 @@ import 'package:diyar_express/components/components.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/utils/show/bottom_sheet.dart';
 import 'package:diyar_express/utils/snackbar/snackbar_message.dart';
 import 'package:email_validator/email_validator.dart';
 
@@ -21,6 +22,7 @@ class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final resedPasswordCode = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -154,13 +156,15 @@ class _LoginFormState extends State<LoginForm> {
               },
             ),
             TextButton(
-                onPressed: () {
-                  SnackBarMessage().showErrorSnackBar(
-                    message: "Пока не доступно",
-                    context: context,
-                  );
-                },
-                child: const Text("Забыли пароль ?")),
+              onPressed: () {
+                AppBottomSheet.showBottomSheet(
+                  initialChildSize: 0.4,
+                  context,
+                  AuthBottomSheet(resedPasswordCode: resedPasswordCode),
+                );
+              },
+              child: const Text("Забыли пароль ?"),
+            ),
           ],
         ),
       ),

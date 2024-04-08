@@ -11,6 +11,5 @@ class MenuRepositoryImpl implements MenuRepository {
   MenuRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<List<CategoryModel>> getProductsWithMenu() async =>
-      _remoteDataSource.getProductsWithMenu();
+  Future<List<CategoryModel>> getProductsWithMenu() async => _remoteDataSource.getProductsWithMenu();
 }

@@ -13,6 +13,8 @@ final class SignOutSuccess extends SignInState {}
 
 final class FogotPasswordSuccess extends SignInState {}
 
+final class ResetPasswordSuccess extends SignInState {}
+
 final class SignInFailure extends SignInState {
   final String message;
   SignInFailure(this.message);
