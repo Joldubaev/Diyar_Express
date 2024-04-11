@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:diyar_express/app/models/token_model.dart';
 import 'package:diyar_express/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthLocalDataSource {
@@ -56,6 +57,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
       await prefs.setString(AppConst.refreshToken, refresh);
       await prefs.setString(AppConst.accessToken, access);
       await prefs.setString(AppConst.email, email);
+      await prefs.setString(AppConst.userId, JwtDecoder.decode(access)['userID']);
     } catch (e) {
       throw CacheException();
     }

@@ -1,25 +1,16 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
+import 'package:diyar_express/features/menu/data/data.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CartItemWidgets extends StatelessWidget {
-  const CartItemWidgets({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.price,
-    required this.counter,
-    required this.imageUrl,
-  });
-  final String title;
-  final String subtitle;
-  final int price;
+  final FoodModel food;
   final int counter;
-  final String imageUrl;
+  const CartItemWidgets({super.key, required this.food, required this.counter});
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +52,9 @@ class CartItemWidgets extends StatelessWidget {
                     child: CachedNetworkImage(
                       fadeInCurve: Curves.easeIn,
                       fadeOutCurve: Curves.easeOut,
-                      imageUrl: imageUrl,
-                      errorWidget: (context, url, error) => Image.asset('assets/images/placeholder.png'),
+                      imageUrl: food.urlPhoto ?? '',
+                      errorWidget: (context, url, error) =>
+                          Image.asset('assets/images/placeholder.png'),
                       width: 120,
                       height: 120,
                       placeholder: (context, url) => const Center(
@@ -88,7 +80,7 @@ class CartItemWidgets extends StatelessWidget {
                       children: [
                         FittedBox(
                           child: Text(
-                            title,
+                            "${food.name}",
                             style: theme.textTheme.bodyMedium,
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
@@ -99,7 +91,8 @@ class CartItemWidgets extends StatelessWidget {
                             AppAlert.showConfirmDialog(
                               context: context,
                               title: 'Удалить блюдо',
-                              content: const Text('Вы действительно хотите удалить из корзины?'),
+                              content: const Text(
+                                  'Вы действительно хотите удалить из корзины?'),
                               confirmPressed: () {
                                 context.router.maybePop();
                               },
@@ -115,19 +108,21 @@ class CartItemWidgets extends StatelessWidget {
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           text: TextSpan(
-                            text: subtitle,
-                            style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
+                            text: "${food.weight} гр.",
+                            style: theme.textTheme.bodySmall!
+                                .copyWith(color: AppColors.grey),
                           ),
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          '${price * counter} сом',
-                          style: theme.textTheme.bodySmall!.copyWith(color: AppColors.green),
+                          '${(food.price ?? 0) * counter} сом',
+                          style:
+                              theme.textTheme.bodySmall!.copyWith(color: AppColors.green),
                         ),
                       ],
                     ),
                     const SizedBox(height: 10),
-                    CounterWidget(counter: counter),
+                    CounterWidget(counter: counter, id: food.id ?? ''),
                   ],
                 ),
               ),

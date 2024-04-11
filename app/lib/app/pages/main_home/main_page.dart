@@ -1,7 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/app/router/routes.gr.dart';
+import 'package:diyar_express/features/cart/cart.dart';
+import 'package:diyar_express/features/cart/data/models/cart_item_model.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 @RoutePage()
@@ -14,6 +17,15 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
+  List<CartItemModel> cart = [];
+  late Stream<List<CartItemModel>> cartItems;
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<CartCubit>().getCartItems();
+    cartItems = context.read<CartCubit>().cart;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,20 +90,29 @@ class _MainPageState extends State<MainPage> {
                   label: 'Меню',
                 ),
                 BottomNavigationBarItem(
-                  icon: Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: Badge(
-                      label: const Text("9"),
-                      isLabelVisible: true,
-                      child: SvgPicture.asset(
-                        "assets/icons/cart_icon.svg",
-                        colorFilter: ColorFilter.mode(
-                          _currentIndex == 2 ? AppColors.primary : AppColors.black1,
-                          BlendMode.srcIn,
-                        ),
-                      ),
-                    ),
-                  ),
+                  icon: StreamBuilder<List<CartItemModel>>(
+                      stream: cartItems,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          cart = snapshot.data ?? [];
+                        }
+
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0),
+                          child: Badge(
+                            label: Text(
+                                "${cart.map((e) => e.quantity).reduce((vl, el) => (vl ?? 0) + (el ?? 0))}"),
+                            isLabelVisible: true,
+                            child: SvgPicture.asset(
+                              "assets/icons/cart_icon.svg",
+                              colorFilter: ColorFilter.mode(
+                                _currentIndex == 2 ? AppColors.primary : AppColors.black1,
+                                BlendMode.srcIn,
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
                   label: 'Корзина',
                 ),
                 BottomNavigationBarItem(

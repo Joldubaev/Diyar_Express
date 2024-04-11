@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:diyar_express/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
@@ -25,13 +27,17 @@ class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
       );
 
       if (res.statusCode == 200) {
-        List<dynamic> list = res.data;
+        if (res.data != null) {
+          List<dynamic> list = res.data;
 
-        return list.map((e) => CategoryModel.fromJson(e)).toList();
+          return list.map((e) => CategoryModel.fromJson(e)).toList();
+        }
+        return [];
       } else {
         throw ServerException();
       }
     } catch (e) {
+      log("Error: $e");
       throw ServerException();
     }
   }

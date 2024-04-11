@@ -19,7 +19,8 @@ class TotalPriceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DecoratedBox(
+    return Container(
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
@@ -56,6 +57,7 @@ class TotalPriceWidget extends StatelessWidget {
             'Сумма к оплате указана без доставки!',
             style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
           ),
+          const SizedBox(height: 10),
           const DishesWidget(),
         ],
       ),

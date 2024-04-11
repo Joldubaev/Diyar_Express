@@ -8,3 +8,24 @@ abstract class CartState extends Equatable {
 }
 
 class CartInitial extends CartState {}
+
+class GetAllCartLoading extends CartState {}
+
+class GetAllCartLoaded extends CartState {
+  final Stream<List<CartItemModel>> items;
+
+  const GetAllCartLoaded({required this.items});
+
+  @override
+  List<Object> get props => [items];
+}
+
+class GetAllCartError extends CartState {}
+
+class AddToCartSuccess extends CartState {}
+
+class AddToCartError extends CartState {}
+
+class RemoveFromCartSuccess extends CartState {}
+
+class RemoveFromCartError extends CartState {}

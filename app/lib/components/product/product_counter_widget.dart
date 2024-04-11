@@ -1,10 +1,20 @@
+import 'package:diyar_express/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductCounterWidget extends StatelessWidget {
   final bool? isShadowVisible;
   final int? count;
-  const ProductCounterWidget({super.key, this.isShadowVisible = true, this.count = 0});
+  final String id;
+  final VoidCallback? onAddToCart;
+  const ProductCounterWidget({
+    super.key,
+    this.isShadowVisible = true,
+    this.count = 0,
+    required this.id,
+    this.onAddToCart,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +22,7 @@ class ProductCounterWidget extends StatelessWidget {
         ? SizedBox(
             height: 35,
             child: ElevatedButton.icon(
-              onPressed: () {},
+              onPressed: onAddToCart,
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: AppColors.primaryAccent,
@@ -44,7 +54,11 @@ class ProductCounterWidget extends StatelessWidget {
               mainAxisSize: isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    if (count! > 1) {
+                      context.read<CartCubit>().decrementCart(id);
+                    }
+                  },
                   child: const Padding(
                     padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                     child: Icon(Icons.remove),
@@ -52,10 +66,12 @@ class ProductCounterWidget extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                  child: Text('1', style: theme.textTheme.bodyMedium),
+                  child: Text('$count', style: theme.textTheme.bodyMedium),
                 ),
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    context.read<CartCubit>().incrementCart(id);
+                  },
                   child: const Padding(
                     padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
                     child: Icon(Icons.add),

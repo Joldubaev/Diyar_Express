@@ -1,4 +1,5 @@
 import 'package:diyar_express/app/app.dart';
+import 'package:diyar_express/features/cart/cart.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/profile/presentation/cubit/profile_cubit.dart';
 import 'package:diyar_express/l10n/l10n.dart';
@@ -17,6 +18,7 @@ class App extends StatelessWidget {
       BlocProvider(create: (context) => di.sl<SignInCubit>()),
       BlocProvider(create: (context) => di.sl<ProfileCubit>()),
       BlocProvider(create: (context) => di.sl<SignInCubit>()),
+      BlocProvider(create: (context) => di.sl<CartCubit>()),
       BlocProvider(create: (context) => di.sl<MenuCubit>())
     ], child: const DiyarExpress());
   }

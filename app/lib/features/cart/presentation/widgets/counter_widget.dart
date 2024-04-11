@@ -1,13 +1,13 @@
+import 'package:diyar_express/features/cart/cart.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CounterWidget extends StatelessWidget {
-  const CounterWidget({
-    super.key,
-    required this.counter,
-  });
-
   final int counter;
+  final String id;
+
+  const CounterWidget({super.key, required this.counter, required this.id});
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,11 @@ class CounterWidget extends StatelessWidget {
             children: [
               IconButton(
                 icon: const Icon(Icons.remove),
-                onPressed: () {},
+                onPressed: () {
+                  if (counter > 1) {
+                    context.read<CartCubit>().decrementCart(id);
+                  }
+                },
               ),
               Text(
                 counter.toString(),
@@ -36,7 +40,9 @@ class CounterWidget extends StatelessWidget {
               ),
               IconButton(
                 icon: const Icon(Icons.add),
-                onPressed: () {},
+                onPressed: () {
+                  context.read<CartCubit>().incrementCart(id);
+                },
               ),
             ],
           ),
