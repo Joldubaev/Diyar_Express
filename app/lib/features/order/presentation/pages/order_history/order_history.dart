@@ -38,6 +38,8 @@ class _OrderHistoryState extends State<OrderHistory> {
                 title: 'Стоимость блюд:',
                 trailing: '100 сoм',
               ),
+              // user can copy address from here
+
               CustomTextButton(
                 onPressed: () {
                   AppAlert.showConfirmDialog(
@@ -50,6 +52,7 @@ class _OrderHistoryState extends State<OrderHistory> {
                   );
                 },
                 textButton: 'Повторить заказ',
+                description: 'Вы можете отменить заказ только за время до начала приготовления в течении:',
               ),
             ],
           ),

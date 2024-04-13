@@ -7,9 +7,11 @@ class CustomTextButton extends StatelessWidget {
     required this.textButton,
     this.onPressed,
     this.time,
+    this.description,
   });
 
   final String textButton;
+  final String? description;
   final DateTime? time;
   final Function()? onPressed;
 
@@ -21,7 +23,7 @@ class CustomTextButton extends StatelessWidget {
         children: [
           const Divider(color: Colors.grey),
           Text(
-            'Вы можете отменить заказ только за время до начала приготовления в течении: $time',
+            '$description $time',
             style: theme.textTheme.bodySmall,
           ),
           TextButton(onPressed: onPressed, child: Text(textButton)),
