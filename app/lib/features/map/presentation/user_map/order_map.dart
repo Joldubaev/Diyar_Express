@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/app/router/routes.gr.dart';
 import 'package:diyar_express/features/map/data/models/location_model.dart';
 import 'package:diyar_express/features/map/data/repositories/location_repo.dart';
 import 'package:diyar_express/features/map/data/repositories/yandex_service.dart';
@@ -99,11 +98,8 @@ class _OrderMapPageState extends State<OrderMapPage> {
                       confirmText: 'Да',
                       cancelPressed: () => Navigator.pop(context),
                       confirmPressed: () {
-                        context.router.push(
-                          DeliveryFormRoute(
-                            address: address,
-                          ),
-                        );
+                        Navigator.pop(context);
+                        context.router.maybePop(address);
                       },
                     );
                   },

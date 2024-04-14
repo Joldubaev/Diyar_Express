@@ -15,3 +15,5 @@ export 'tile/active_tile.dart';
 export 'dialogs/custom_alert_dialog_widget.dart';
 export 'product/product_item_content_widget.dart';
 export 'product/product_item_widget.dart';
+export 'map/control_button.dart';
+export 'map/map_widget.dart';
