@@ -101,8 +101,8 @@ class _MainPageState extends State<MainPage> {
                           padding: const EdgeInsets.only(bottom: 4.0),
                           child: Badge(
                             label: Text(
-                                "${cart.map((e) => e.quantity).reduce((vl, el) => (vl ?? 0) + (el ?? 0))}"),
-                            isLabelVisible: true,
+                                "${cart.isNotEmpty ? cart.map((e) => e.quantity).reduce((vl, el) => (vl ?? 0) + (el ?? 0)) : 0}"),
+                            isLabelVisible: cart.isNotEmpty,
                             child: SvgPicture.asset(
                               "assets/icons/cart_icon.svg",
                               colorFilter: ColorFilter.mode(

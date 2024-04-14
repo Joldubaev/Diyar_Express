@@ -20,30 +20,32 @@ final class AppBottomSheet {
         ),
       ),
       builder: (_) {
-        return DraggableScrollableSheet(
-          initialChildSize: initialChildSize,
-          maxChildSize: 0.86,
-          minChildSize: 0.4,
-          expand: false,
-          builder: (ctx, ctrl) {
-            return Column(
-              children: [
-                const SizedBox(height: 8),
-                const SizedBox(
-                  height: 30,
-                  child: Icon(Icons.maximize_rounded, size: 50, color: Colors.grey),
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    key: scrollKey,
-                    controller: ctrl,
-                    child: child,
+        return StatefulBuilder(builder: (context, setState) {
+          return DraggableScrollableSheet(
+            initialChildSize: initialChildSize,
+            maxChildSize: 0.86,
+            minChildSize: 0.3,
+            expand: false,
+            builder: (ctx, ctrl) {
+              return Column(
+                children: [
+                  const SizedBox(height: 8),
+                  const SizedBox(
+                    height: 30,
+                    child: Icon(Icons.maximize_rounded, size: 50, color: Colors.grey),
                   ),
-                ),
-              ],
-            );
-          },
-        );
+                  Expanded(
+                    child: SingleChildScrollView(
+                      key: scrollKey,
+                      controller: ctrl,
+                      child: child,
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        });
       },
     );
   }

@@ -5,15 +5,21 @@ import 'package:flutter/material.dart';
 
 class ProductItemWidget extends StatelessWidget {
   final FoodModel food;
-  const ProductItemWidget({super.key, required this.food});
+  final int quantity;
+  const ProductItemWidget({super.key, required this.food, required this.quantity});
 
   @override
   Widget build(BuildContext context) {
     return ProductItemContentWidget(
       food: food,
+      quantity: quantity,
       onTap: () => AppBottomSheet.showBottomSheet(
         context,
-        ProductItemContentWidget(isShadowVisible: false, food: food),
+        ProductItemContentWidget(
+          isShadowVisible: false,
+          food: food,
+          quantity: quantity,
+        ),
         backgroundColor: Colors.white,
       ),
     );

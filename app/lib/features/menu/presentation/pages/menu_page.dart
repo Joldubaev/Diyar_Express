@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/components/product/product_item_widget.dart';
+import 'package:diyar_express/features/cart/cart.dart';
+import 'package:diyar_express/features/cart/data/models/cart_item_model.dart';
 import 'package:diyar_express/features/menu/data/models/category_model.dart';
 import 'package:diyar_express/features/menu/menu.dart';
 import 'package:diyar_express/theme/theme.dart';
@@ -23,6 +25,7 @@ class _MenuPageState extends State<MenuPage> {
   void initState() {
     super.initState();
     context.read<MenuCubit>().getProductsWithMenu();
+    context.read<CartCubit>().getCartItems();
   }
 
   @override
@@ -125,21 +128,39 @@ class _MenuPageState extends State<MenuPage> {
                                 ),
                               ),
                             ),
-                            GridView.count(
-                              crossAxisCount: 2,
-                              mainAxisSpacing: 10,
-                              crossAxisSpacing: 10,
-                              padding: const EdgeInsets.symmetric(horizontal: 16),
-                              childAspectRatio: 0.72,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              children: List.generate(
-                                category.foods?.length ?? 0,
-                                (index) => ProductItemWidget(
-                                  food: category.foods![index],
-                                ),
-                              ),
-                            ),
+                            StreamBuilder<List<CartItemModel>>(
+                                stream: context.read<CartCubit>().cart,
+                                builder: (context, snapshot) {
+                                  List cart = [];
+                                  if (snapshot.hasData) {
+                                    cart = snapshot.data ?? [];
+                                  }
+                                  return GridView.count(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 10,
+                                    crossAxisSpacing: 10,
+                                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                                    childAspectRatio: 0.72,
+                                    shrinkWrap: true,
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    children: List.generate(
+                                      category.foods?.length ?? 0,
+                                      (index) {
+                                        final food = category.foods![index];
+                                        final cartItem = cart.firstWhere(
+                                          (element) => element.food?.id == food.id,
+                                          orElse: () =>
+                                              CartItemModel(food: food, quantity: 0),
+                                        );
+                                        return ProductItemWidget(
+                                          food: food,
+                                          quantity: cartItem.quantity ?? 0,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }),
+                            const SizedBox(height: 15),
                           ],
                         );
                       },

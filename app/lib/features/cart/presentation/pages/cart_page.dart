@@ -18,8 +18,7 @@ class CartPage extends StatelessWidget {
     context.read<CartCubit>().getCartItems();
 
     var cartItems = context.read<CartCubit>().cart;
-    List<CartItemModel> cart = [];
-
+    List<CartItemModel> carts = [];
     return Scaffold(
       appBar: AppBar(
         title: Text('Корзина', style: theme.textTheme.titleSmall),
@@ -38,67 +37,67 @@ class CartPage extends StatelessWidget {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
-            }
-            if (!snapshot.hasData && cart.isEmpty) {
-              return const Center(child: CartEmptyWidget());
-            }
-            if (snapshot.hasData) {
-              cart = snapshot.data ?? [];
+            } else if (snapshot.hasData) {
+              carts = snapshot.data!;
+
+              return carts.isEmpty
+                  ? const CartEmptyWidget()
+                  : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: carts.length,
+                            padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
+                            itemBuilder: (context, index) {
+                              return CartItemWidgets(
+                                counter: carts[index].quantity ?? 0,
+                                food: carts[index].food ?? FoodModel(),
+                              );
+                            },
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
+                            child: TotalPriceWidget(
+                              price: carts.fold(
+                                0,
+                                (previousValue, element) =>
+                                    previousValue +
+                                    element.food!.price! * element.quantity!,
+                              ),
+                              sale: 0,
+                              dishesPrice: 0,
+                              totalPrice: carts.fold(
+                                0,
+                                (previousValue, element) =>
+                                    previousValue +
+                                    element.food!.price! * element.quantity!,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
+                            child: SubmitButtonWidget(
+                              textStyle: theme.textTheme.bodyLarge!.copyWith(
+                                color: Colors.white,
+                              ),
+                              bgColor: AppColors.primary,
+                              title: 'Оформить заказ',
+                              onTap: () => context.router.pushAndPopUntil(
+                                const CreateOrderRoute(),
+                                predicate: (_) => false,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                        ],
+                      ),
+                    );
             }
 
-            List<CartItemModel> carts = snapshot.data!;
-
-            return SingleChildScrollView(
-              child: Column(
-                children: [
-                  ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: carts.length,
-                    padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
-                    itemBuilder: (context, index) {
-                      return CartItemWidgets(
-                        counter: carts[index].quantity ?? 0,
-                        food: carts[index].food ?? FoodModel(),
-                      );
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
-                    child: TotalPriceWidget(
-                      price: carts.fold(
-                        0,
-                        (previousValue, element) =>
-                            previousValue + element.food!.price! * element.quantity!,
-                      ),
-                      sale: 0,
-                      dishesPrice: 0,
-                      totalPrice: carts.fold(
-                        0,
-                        (previousValue, element) =>
-                            previousValue + element.food!.price! * element.quantity!,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(12, 6, 12, 6),
-                    child: SubmitButtonWidget(
-                      textStyle: theme.textTheme.bodyLarge!.copyWith(
-                        color: Colors.white,
-                      ),
-                      bgColor: AppColors.primary,
-                      title: 'Оформить заказ',
-                      onTap: () => context.router.pushAndPopUntil(
-                        const CreateOrderRoute(),
-                        predicate: (_) => false,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
-              ),
-            );
+            return const CartEmptyWidget();
           }),
     );
   }

@@ -5,6 +5,7 @@ import 'package:diyar_express/features/menu/data/data.dart';
 import 'package:diyar_express/theme/theme.dart';
 import 'package:diyar_express/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 
 class CartItemWidgets extends StatelessWidget {
@@ -94,7 +95,8 @@ class CartItemWidgets extends StatelessWidget {
                               content: const Text(
                                   'Вы действительно хотите удалить из корзины?'),
                               confirmPressed: () {
-                                context.router.maybePop();
+                                context.read<CartCubit>().removeFromCart(food.id ?? '');
+                                context.maybePop();
                               },
                             );
                           },
