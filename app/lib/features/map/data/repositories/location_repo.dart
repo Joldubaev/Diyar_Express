@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:diyar_express/constants/constant.dart';
+import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:diyar_express/features/map/data/models/location_model.dart';
 import 'package:diyar_express/features/map/data/repositories/yandex_service.dart';
 

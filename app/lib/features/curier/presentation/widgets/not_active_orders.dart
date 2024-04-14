@@ -1,4 +1,4 @@
-import 'package:diyar_express/theme/app_colors.dart';
+import 'package:diyar_express/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class EmptyActiveOrders extends StatelessWidget {

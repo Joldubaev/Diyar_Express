@@ -1,6 +1,6 @@
-import 'package:diyar_express/components/components.dart';
+import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
-import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class TotalPriceWidget extends StatelessWidget {

@@ -1,8 +1,8 @@
-import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-class HallCardWidget extends StatelessWidget {
-  const HallCardWidget({
+class CustomHallCardWidget extends StatelessWidget {
+  const CustomHallCardWidget({
     required this.imagePath,
     required this.title,
     this.onPressed,

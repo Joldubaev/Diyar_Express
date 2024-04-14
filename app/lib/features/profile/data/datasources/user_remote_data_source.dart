@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:diyar_express/constants/api_const/api_const.dart';
-import 'package:diyar_express/constants/app_const/app_const.dart';
+import 'package:diyar_express/shared/constants/api_const/api_const.dart';
+import 'package:diyar_express/shared/constants/app_const/app_const.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,19 +39,16 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
 
   @override
   Future<void> updateEmail() {
-    // TODO: implement updateEmail
     throw UnimplementedError();
   }
 
   @override
   Future<void> updatePhone() {
-    // TODO: implement updatePhone
     throw UnimplementedError();
   }
 
   @override
   Future<void> deleteUser() {
-    // TODO: implement deleteUser
     throw UnimplementedError();
   }
 

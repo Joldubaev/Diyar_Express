@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
 import 'package:diyar_express/features/menu/data/data.dart';
-import 'package:diyar_express/theme/theme.dart';
-import 'package:diyar_express/utils/fmt/show_alert.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -53,8 +53,7 @@ class CartItemWidgets extends StatelessWidget {
                       fadeInCurve: Curves.easeIn,
                       fadeOutCurve: Curves.easeOut,
                       imageUrl: food.urlPhoto ?? '',
-                      errorWidget: (context, url, error) =>
-                          Image.asset('assets/images/placeholder.png'),
+                      errorWidget: (context, url, error) => Image.asset('assets/images/placeholder.png'),
                       width: 120,
                       height: 120,
                       placeholder: (context, url) => const Center(
@@ -91,8 +90,7 @@ class CartItemWidgets extends StatelessWidget {
                             AppAlert.showConfirmDialog(
                               context: context,
                               title: 'Удалить блюдо',
-                              content: const Text(
-                                  'Вы действительно хотите удалить из корзины?'),
+                              content: const Text('Вы действительно хотите удалить из корзины?'),
                               confirmPressed: () {
                                 context.router.maybePop();
                               },
@@ -109,15 +107,13 @@ class CartItemWidgets extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           text: TextSpan(
                             text: "${food.weight} гр.",
-                            style: theme.textTheme.bodySmall!
-                                .copyWith(color: AppColors.grey),
+                            style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
                           ),
                         ),
                         const SizedBox(width: 10),
                         Text(
                           '${(food.price ?? 0) * counter} сом',
-                          style:
-                              theme.textTheme.bodySmall!.copyWith(color: AppColors.green),
+                          style: theme.textTheme.bodySmall!.copyWith(color: AppColors.green),
                         ),
                       ],
                     ),
