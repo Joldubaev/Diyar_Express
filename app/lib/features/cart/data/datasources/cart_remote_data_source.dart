@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:diyar_express/constants/app_const/app_const.dart';
+import 'package:diyar_express/shared/constants/app_const/app_const.dart';
 import 'package:diyar_express/features/cart/data/models/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -52,8 +52,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         .doc("$userId")
         .collection('cart')
         .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => CartItemModel.fromJson(doc.data())).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => CartItemModel.fromJson(doc.data())).toList());
   }
 
   @override

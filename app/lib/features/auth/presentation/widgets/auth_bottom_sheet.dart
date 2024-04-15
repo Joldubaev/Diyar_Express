@@ -1,9 +1,9 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/app/router/routes.gr.dart';
-import 'package:diyar_express/components/components.dart';
+import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/features.dart';
-import 'package:diyar_express/theme/theme.dart';
-import 'package:diyar_express/utils/utils.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/utils/utils.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

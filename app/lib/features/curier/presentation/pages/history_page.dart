@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/components/tile/custom_tile.dart';
+import 'package:diyar_express/shared/components/tile/custom_tile.dart';
 import 'package:diyar_express/features/curier/presentation/widgets/address_feild.dart';
-import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

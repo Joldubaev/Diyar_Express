@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/components/components.dart';
+import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/features.dart';
-import 'package:diyar_express/theme/theme.dart';
-import 'package:diyar_express/utils/fmt/show_alert.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()

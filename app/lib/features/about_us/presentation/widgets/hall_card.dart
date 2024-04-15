@@ -1,5 +1,5 @@
-import 'package:diyar_express/theme/theme.dart';
-import 'package:diyar_express/utils/utils.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class HallCardWidget extends StatelessWidget {

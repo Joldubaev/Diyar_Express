@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:diyar_express/app/models/token_model.dart';
-import 'package:diyar_express/constants/constant.dart';
+import 'package:diyar_express/shared/models/token_model.dart';
+import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
