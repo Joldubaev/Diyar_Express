@@ -1,10 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/features/auth/auth.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
-import 'package:diyar_express/shared/theme/theme.dart';
-import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
+import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,7 +30,11 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffFAFAFA),
-        title: Text('Личный кабинет', style: theme.textTheme.titleSmall),
+        title: Text(
+          'Личный кабинет',
+          style: theme.textTheme.titleSmall,
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
@@ -97,7 +101,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       SettingsTile(
                         text: 'Пользовательское соглашение',
-                        onPressed: () {},
+                        onPressed: () => AppLaunch.launchURL(AppConst.terms),
                       ),
                     ],
                   ),
