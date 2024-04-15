@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/theme/theme.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:diyar_express/features/auth/presentation/presentation.dart';
 
 @RoutePage()

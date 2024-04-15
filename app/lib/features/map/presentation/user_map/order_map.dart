@@ -5,7 +5,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/features/map/data/models/location_model.dart';
 import 'package:diyar_express/features/map/data/repositories/location_repo.dart';
 import 'package:diyar_express/features/map/data/repositories/yandex_service.dart';
-import 'package:diyar_express/utils/fmt/show_alert.dart';
+import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 

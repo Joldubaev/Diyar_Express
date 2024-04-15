@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:diyar_express/constants/constant.dart';
+import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/menu/data/models/category_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';

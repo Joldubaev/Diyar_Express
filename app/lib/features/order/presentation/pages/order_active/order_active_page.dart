@@ -1,6 +1,6 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/app/router/routes.gr.dart';
-import 'package:diyar_express/components/tile/active_tile.dart';
+import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/shared/components/tile/active_tile.dart';
 import 'package:flutter/material.dart';
 
 class ActiveOrder extends StatelessWidget {

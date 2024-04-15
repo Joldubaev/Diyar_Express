@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/components/components.dart';
+import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/curier/presentation/widgets/address_feild.dart';
-import 'package:diyar_express/theme/theme.dart';
-import 'package:diyar_express/utils/utils.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:yandex_mapkit/yandex_mapkit.dart';
