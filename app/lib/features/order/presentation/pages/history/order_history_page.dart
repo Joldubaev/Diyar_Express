@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +55,10 @@ class HistoryTabBarPageState extends State<HistoryTabBarPage> with SingleTickerP
           ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios_sharp),
-            onPressed: () {
-              context.router.maybePop();
-            },
+            onPressed: () => context.router.pushAndPopUntil(
+              const ProfileRoute(),
+              predicate: (_) => false,
+            ),
           ),
           centerTitle: true,
           bottom: PreferredSize(
