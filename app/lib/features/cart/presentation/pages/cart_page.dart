@@ -62,17 +62,13 @@ class CartPage extends StatelessWidget {
                             child: TotalPriceWidget(
                               price: carts.fold(
                                 0,
-                                (previousValue, element) =>
-                                    previousValue +
-                                    element.food!.price! * element.quantity!,
+                                (previousValue, element) => previousValue + element.food!.price! * element.quantity!,
                               ),
                               sale: 0,
                               dishesPrice: 0,
                               totalPrice: carts.fold(
                                 0,
-                                (previousValue, element) =>
-                                    previousValue +
-                                    element.food!.price! * element.quantity!,
+                                (previousValue, element) => previousValue + element.food!.price! * element.quantity!,
                               ),
                             ),
                           ),

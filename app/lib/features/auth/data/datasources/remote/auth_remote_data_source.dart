@@ -45,11 +45,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       var res = await _dio.post(
         ApiConst.resetPsw,
-        data: {
-          "email": model.email,
-          "code": model.code,
-          "newPassword": model.newPassword
-        },
+        data: {"email": model.email, "code": model.code, "newPassword": model.newPassword},
       );
 
       if (res.statusCode != 200) {
@@ -64,8 +60,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> login(UserModel user) async {
     try {
-      var res = await _dio
-          .post(ApiConst.signIn, data: {"email": user.email, "password": user.password});
+      var res = await _dio.post(ApiConst.signIn, data: {"email": user.email, "password": user.password});
 
       if ([200, 201].contains(res.statusCode)) {
         await _localDataSource.setTokenToCache(

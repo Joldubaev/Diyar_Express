@@ -52,8 +52,7 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         .doc("$userId")
         .collection('cart')
         .snapshots()
-        .map((snapshot) =>
-            snapshot.docs.map((doc) => CartItemModel.fromJson(doc.data())).toList());
+        .map((snapshot) => snapshot.docs.map((doc) => CartItemModel.fromJson(doc.data())).toList());
   }
 
   @override
