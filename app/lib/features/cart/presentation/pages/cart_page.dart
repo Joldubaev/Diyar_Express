@@ -22,6 +22,7 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Корзина', style: theme.textTheme.titleSmall),
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
             icon: const Icon(Icons.history, size: 30),

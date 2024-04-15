@@ -30,7 +30,11 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffFAFAFA),
-        title: Text('Личный кабинет', style: theme.textTheme.titleSmall),
+        title: Text(
+          'Личный кабинет',
+          style: theme.textTheme.titleSmall,
+        ),
+        automaticallyImplyLeading: false,
       ),
       body: BlocConsumer<ProfileCubit, ProfileState>(
         listener: (context, state) {
