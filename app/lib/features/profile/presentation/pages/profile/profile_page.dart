@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/app/router/routes.gr.dart';
+import 'package:diyar_express/constants/constant.dart';
+import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/auth/auth.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
@@ -97,7 +99,9 @@ class _ProfilePageState extends State<ProfilePage> {
                       ),
                       SettingsTile(
                         text: 'Пользовательское соглашение',
-                        onPressed: () {},
+                        onPressed: () {
+                          AppLaunch.launchURL(AppConst.terms);
+                        },
                       ),
                     ],
                   ),
