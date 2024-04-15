@@ -33,4 +33,8 @@ class AppConst {
   // Map
   static const getLocations = "6d9fa3b5-2a2b-46fa-838b-ce4e9fc4e4f8";
   static const email = 'email';
+
+  // terms and conditions
+  static const terms =
+      'https://docs.google.com/document/d/1jww3-H3VeV0l_zYQS7zmlKGzQYwOwFisOb3MaIo5bsQ/edit?usp=sharing';
 }
