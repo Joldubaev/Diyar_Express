@@ -28,8 +28,7 @@ class TabBarPage extends StatefulWidget {
   TabBarPageState createState() => TabBarPageState();
 }
 
-class TabBarPageState extends State<TabBarPage>
-    with SingleTickerProviderStateMixin {
+class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMixin {
   late TabController tabController;
   late bool showFab;
 
@@ -119,8 +118,7 @@ class TabBarPageState extends State<TabBarPage>
               ),
               tabs: [
                 Tab(
-                  icon:
-                      const Icon(Icons.delivery_dining, color: AppColors.white),
+                  icon: const Icon(Icons.delivery_dining, color: AppColors.white),
                   child: Text(
                     'Доставка',
                     style: theme.textTheme.bodyMedium!.copyWith(
@@ -132,8 +130,7 @@ class TabBarPageState extends State<TabBarPage>
                   icon: const Icon(Icons.storefront, color: AppColors.white),
                   child: Text(
                     'Самовывоз',
-                    style: theme.textTheme.bodyMedium!
-                        .copyWith(color: AppColors.white),
+                    style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.white),
                   ),
                 ),
               ],

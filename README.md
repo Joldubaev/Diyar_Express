@@ -1,16 +1,46 @@
-# diyar_express
+# Diyar Express!
+## Join to Diyar Express 
+### Getting Started
 
-A new Flutter project.
+## Requirements
+- Dart sdk: ">=3.2.0 <4.0.0"
+- Flutter: "3.19.5"
+- Android: minSdkVersion 21
+- iOS: --ios-language swift, Xcode version >= 15.0.0
 
-## Getting Started
+## Melos
+[Melos](https://melos.invertase.dev/) splitting up large code bases into separate independently versioned packages is extremely useful for code sharing. However, making changes across many repositories is messy and difficult to track, and testing across repositories gets complicated really fast.
+To solve these (and many other) problems, some projects will organize their code bases into multi-package repositories (sometimes called [monorepos](https://en.wikipedia.org/wiki/Monorepo)).
 
-This project is a starting point for a Flutter application.
+* Install melos
+```shell
+dart pub global activate melos
+```
+Setup
+```shell
+melos bootstrap
+```
 
-A few resources to get you started if this is your first Flutter project:
+## Run App
+* If you have an AVD or real device attached, you can do
+```shell
+melos run-app
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Fmt
+`dartfmt` lacks config file support, which implies that customizations need to be done by users individually. The default 
+limit of 80 characters line length conflicts with the deeply nested structure of flutter's declarative code for designing 
+widgets. This causes many unwanted linebreaks that reduce the readability of flutter code. Hence, we increase the line
+length of the code to 120.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Settings > Dart > Line length 120.
+* Autoformat on save: Settings > Languages and Frameworks > then tick: `Format code on save`, `Organize imports on save`.
+* Format the whole codebase with:
+```shell
+melos format-all
+```
+## Generate
+* Re generate .g files run:
+```shell
+melos run-build-runner
+```

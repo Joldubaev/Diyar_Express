@@ -709,13 +709,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.8.0"
-  mdc_http:
-    dependency: "direct main"
-    description:
-      path: "../packages/mdc_http"
-      relative: true
-    source: path
-    version: "0.1.0+1"
   meta:
     dependency: "direct main"
     description:

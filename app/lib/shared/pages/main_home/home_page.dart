@@ -42,16 +42,14 @@ class _HomaPageBodyState extends State<HomaPageBody> {
                 const Divider(color: AppColors.primary, thickness: 1),
                 const Text(
                   'Акции',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 10),
-                const SaleWidget(
-                  title: 'Скидка 50%',
+                SaleWidget(
+                  title: 'Скидка 10%',
                   description: 'На все блюда',
                   image: 'assets/images/banner.png',
+                  onTap: () => context.router.push(const SaleRoute()),
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -71,7 +69,7 @@ class _HomaPageBodyState extends State<HomaPageBody> {
                     itemBuilder: (context, index) {
                       return Container(
                         width: 200,
-                        margin: const EdgeInsets.only(left: 15),
+                        margin: const EdgeInsets.only(right: 15),
                         padding: const EdgeInsets.symmetric(vertical: 5),
                         decoration: BoxDecoration(
                           color: AppColors.primary,
@@ -101,7 +99,11 @@ class _HomaPageBodyState extends State<HomaPageBody> {
                 const SizedBox(height: 10),
                 const Text('Новости', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 10),
-                CustonClipRectWidget(image: 'assets/images/about.png', onTap: () {}),
+                SaleWidget(
+                    title: 'Новости',
+                    description: 'Последние новости',
+                    image: 'assets/images/news.png',
+                    onTap: () => context.router.push(const NewsRoute())),
                 const SizedBox(height: 20),
                 Container(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
@@ -109,7 +111,10 @@ class _HomaPageBodyState extends State<HomaPageBody> {
                       color: const Color.fromARGB(255, 236, 174, 123),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    child: SettingsTile(icon: Icons.phone, text: 'Контакты', onPressed: () {}))
+                    child: SettingsTile(
+                        icon: Icons.phone,
+                        text: 'Контакты',
+                        onPressed: () => context.router.push(const ContactRoute()))),
               ],
             ),
           ),

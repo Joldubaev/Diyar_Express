@@ -49,7 +49,7 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              context.router.push(const CurierProfileRoute());
+              context.router.push(const CurierRoute());
             },
           ),
           ListTile(
