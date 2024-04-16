@@ -33,11 +33,10 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: DeliveryFormRoute.page),
         AutoRoute(page: OrderDetailRoute.page),
         AutoRoute(page: RessetPasswordRoute.page),
-        AutoRoute(
-          page: CurierRoute.page,
-        ),
-        AutoRoute(page: CurierProfileRoute.page),
+        AutoRoute(page: CurierRoute.page),
         AutoRoute(page: HistoryPage.page),
+        AutoRoute(page: SaleRoute.page),
+        AutoRoute(page: NewsRoute.page),
       ];
 }
 

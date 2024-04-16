@@ -25,8 +25,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
       var res = await _dio.post(ApiConst.getUser,
           data: {"email": _prefs.getString(AppConst.email)},
           options: Options(
-            headers:
-                ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
+            headers: ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
           ));
       if (res.statusCode == 200) {
         return UserModel.fromJson(res.data);
@@ -60,8 +59,7 @@ class UserRemoteDataSourceImpl implements UserRemoteDataSource {
         ApiConst.updateUser,
         data: {"newPhoneNumber": phone, "newUserName": name},
         options: Options(
-          headers:
-              ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
+          headers: ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
         ),
       );
       if (res.statusCode != 200) {
