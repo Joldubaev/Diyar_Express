@@ -23,7 +23,7 @@ class SaleWidget extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(20),
-            child: Image.asset(image, fit: BoxFit.cover, height: 210),
+            child: Image.asset(image, fit: BoxFit.cover, height: 220),
           ),
           Positioned(
             bottom: 0,
