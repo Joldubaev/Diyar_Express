@@ -23,7 +23,7 @@ import 'package:diyar_express/features/curier/presentation/pages/history_page.da
 import 'package:diyar_express/features/map/presentation/user_map/order_map.dart' as _i15;
 import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart' as _i11;
 import 'package:diyar_express/features/order/presentation/pages/create_order/create_order_page.dart' as _i4;
-import 'package:diyar_express/features/order/presentation/pages/create_order/delivery_form.dart' as _i7;
+import 'package:diyar_express/features/order/presentation/pages/create_order/order_address.dart' as _i7;
 import 'package:diyar_express/features/order/presentation/pages/create_order/order_success.dart' as _i16;
 import 'package:diyar_express/features/order/presentation/pages/history/order_history_page.dart' as _i14;
 import 'package:diyar_express/features/order/presentation/pages/order_active/order_detail_page.dart' as _i13;

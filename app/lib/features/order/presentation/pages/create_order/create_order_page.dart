@@ -29,27 +29,6 @@ class TabBarPage extends StatefulWidget {
 }
 
 class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMixin {
-  late TabController tabController;
-  late bool showFab;
-
-  @override
-  void initState() {
-    tabController = TabController(length: 2, vsync: this);
-    showFab = tabController.index == 0;
-    tabController.addListener(() {
-      setState(() {
-        showFab = tabController.index == 0;
-      });
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -99,42 +78,6 @@ class TabBarPageState extends State<TabBarPage> with SingleTickerProviderStateMi
               DeliveryFormPage(),
               PickupForm(),
             ],
-          ),
-          bottomNavigationBar: Container(
-            height: 60,
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(255, 210, 210, 210),
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(24),
-                topRight: Radius.circular(24),
-              ),
-            ),
-            child: TabBar(
-              indicatorSize: TabBarIndicatorSize.tab,
-              indicatorPadding: const EdgeInsets.symmetric(horizontal: 5),
-              indicator: BoxDecoration(
-                color: AppColors.primary,
-                borderRadius: BorderRadius.circular(24),
-              ),
-              tabs: [
-                Tab(
-                  icon: const Icon(Icons.delivery_dining, color: AppColors.white),
-                  child: Text(
-                    'Доставка',
-                    style: theme.textTheme.bodyMedium!.copyWith(
-                      color: AppColors.white,
-                    ),
-                  ),
-                ),
-                Tab(
-                  icon: const Icon(Icons.storefront, color: AppColors.white),
-                  child: Text(
-                    'Самовывоз',
-                    style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.white),
-                  ),
-                ),
-              ],
-            ),
           ),
         ),
       ),
