@@ -38,7 +38,12 @@ class _HomaPageBodyState extends State<HomaPageBody> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const AnimatedTextWidget(),
+                const SizedBox(height: 20),
+                Align(
+                  alignment: Alignment.center,
+                  child:
+                      Image.asset('assets/images/app_logo.png', height: 60, fit: BoxFit.fill, color: AppColors.primary),
+                ),
                 const Divider(color: AppColors.primary, thickness: 1),
                 const Text(
                   'Акции',
@@ -108,7 +113,7 @@ class _HomaPageBodyState extends State<HomaPageBody> {
                 Container(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 236, 174, 123),
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: SettingsTile(

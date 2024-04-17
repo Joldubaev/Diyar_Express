@@ -41,7 +41,6 @@ dependencies:
   yandex_mapkit: ^4.0.0
   easy_stepper: ^0.8.3
   cloud_firestore: ^4.15.9
-  animated_text_kit: ^4.2.2
   
 
 dev_dependencies:

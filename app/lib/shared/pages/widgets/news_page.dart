@@ -18,7 +18,7 @@ class NewsPage extends StatelessWidget {
           return NewsWidget(
             title: 'Новость 1',
             description: 'Описание  новости 1',
-            image: 'assets/images/banner.png',
+            image: 'assets/images/news.png',
             onTap: () => SnackBarMessage().showErrorSnackBar(message: 'Пока не доступно', context: context),
           );
         },
@@ -46,7 +46,7 @@ class NewsWidget extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.5),

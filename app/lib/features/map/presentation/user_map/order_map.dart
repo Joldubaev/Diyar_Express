@@ -87,6 +87,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
                   title: FittedBox(
                     child: Text(address ?? 'Адрес не найден'),
                   ),
+                  leading: const Icon(Icons.location_on, color: Colors.red),
                   onTap: () {
                     AppAlert.showConfirmDialog(
                       context: context,
@@ -167,52 +168,4 @@ class _OrderMapPageState extends State<OrderMapPage> {
     setState(() {});
     log(' address: $address');
   }
-
-  // void addObjects({required AppLatLong appLatLong}) {
-  //   final myLocationMark = PlacemarkMapObject(
-  //     opacity: 1,
-  //     mapId: const MapObjectId('currentLocation'),
-  //     point: Point(
-  //       latitude: appLatLong.latitude,
-  //       longitude: appLatLong.longitude,
-  //     ),
-  //     icon: PlacemarkIcon.single(
-  //       PlacemarkIconStyle(
-  //         image: BitmapDescriptor.fromAssetImage('assets/images/mark.png'),
-  //         rotationType: RotationType.rotate,
-  //       ),
-  //     ),
-  //   );
-
-  //   final myLocationCircle = CircleMapObject(
-  //     mapId: const MapObjectId('myLocationCircle'),
-  //     circle: Circle(
-  //       center: Point(
-  //         latitude: appLatLong.latitude,
-  //         longitude: appLatLong.longitude,
-  //       ),
-  //       radius: 250,
-  //     ),
-  //     strokeWidth: 0,
-  //     fillColor: Colors.yellow.withOpacity(0.2),
-  //   );
-  //   mapObjects.addAll([myLocationMark, myLocationCircle]);
-  //   setState(() {});
-  // }
-
-  // void addMarker({required Point point}) {
-  //   final secondLocation = PlacemarkMapObject(
-  //     opacity: 1,
-  //     mapId: const MapObjectId('secondLocation'),
-  //     point: point,
-  //     icon: PlacemarkIcon.single(
-  //       PlacemarkIconStyle(
-  //           scale: 0.9,
-  //           image: BitmapDescriptor.fromAssetImage('assets/images/mark.png'),
-  //           rotationType: RotationType.rotate),
-  //     ),
-  //   );
-  //   mapObjects.add(secondLocation);
-  //   setState(() {});
-  // }
 }
