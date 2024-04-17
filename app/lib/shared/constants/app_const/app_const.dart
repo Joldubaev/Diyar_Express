@@ -37,4 +37,7 @@ class AppConst {
   // terms and conditions
   static const terms =
       'https://docs.google.com/document/d/1jww3-H3VeV0l_zYQS7zmlKGzQYwOwFisOb3MaIo5bsQ/edit?usp=sharing';
+
+  // instagram
+  static const instagram = 'https://www.instagram.com/diyar.kg/';
 }

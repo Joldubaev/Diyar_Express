@@ -1,7 +1,9 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
-import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @RoutePage()
@@ -11,8 +13,12 @@ class ContactPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primary[200],
       appBar: AppBar(
-        title: Text('Контакты', style: theme.textTheme.titleSmall),
+        title: TextButton.icon(
+            label: Text('Контакты', style: theme.textTheme.bodyLarge!.copyWith(color: AppColors.primary)),
+            icon: const Icon(FontAwesomeIcons.headset, color: AppColors.primary, size: 40),
+            onPressed: () {}),
       ),
       body: const ContactBody(),
     );
@@ -57,6 +63,21 @@ class _ContactBodyState extends State<ContactBody> {
     return ListView(
       padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
       children: [
+        Card(
+          child: Column(
+            children: [
+              ListTile(
+                title: Text('Адрес', style: theme.textTheme.bodyLarge!.copyWith(color: AppColors.primary)),
+                subtitle: Text('г. Бишкек, ул. Логвиненко 1/1',
+                    style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.black1)),
+              ),
+              ListTile(
+                title: Text('Время работы', style: theme.textTheme.bodyLarge!.copyWith(color: AppColors.primary)),
+                subtitle: Text('09:00 - 23:00', style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.black1)),
+              ),
+            ],
+          ),
+        ),
         ContactCardWidget(
             subtitle: delivery,
             imagePath: 'assets/images/phone.png',
@@ -85,6 +106,23 @@ class _ContactBodyState extends State<ContactBody> {
           imagePath: 'assets/images/phone.png',
           title: 'Дияр Банкет Холл',
           onPressed: _hasCallSupport ? () => _makePhoneCall(diyarCafe) : () {},
+        ),
+        const SizedBox(height: 20),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+                onPressed: () {
+                  AppLaunch.launchURL(AppConst.instagram);
+                },
+                icon: const Icon(FontAwesomeIcons.instagram, color: AppColors.black1, size: 40)),
+            const SizedBox(width: 20),
+            IconButton(
+                onPressed: () {
+                  AppLaunch.launchURL(AppConst.email);
+                },
+                icon: const Icon(Icons.mail, color: AppColors.black1, size: 40)),
+          ],
         ),
       ],
     );

@@ -18,6 +18,7 @@ class ContactCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       color: AppColors.white,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: ListTile(
         tileColor: AppColors.white,
         title: SelectableText(

@@ -113,7 +113,7 @@ class _HomaPageBodyState extends State<HomaPageBody> {
                 Container(
                     padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 236, 174, 123),
+                      color: AppColors.primary,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: SettingsTile(
