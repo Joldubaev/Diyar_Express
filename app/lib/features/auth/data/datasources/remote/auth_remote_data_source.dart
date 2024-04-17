@@ -68,6 +68,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           access: res.data['accessToken'],
           email: user.email!,
         );
+        log("Token: ${res.data['accessToken']}");
       }
     } catch (e) {
       if (e is DioException) {

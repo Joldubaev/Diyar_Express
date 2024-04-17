@@ -58,6 +58,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
       await prefs.setString(AppConst.accessToken, access);
       await prefs.setString(AppConst.email, email);
       await prefs.setString(AppConst.userId, JwtDecoder.decode(access)['userID']);
+      await prefs.setString(AppConst.userRole, JwtDecoder.decode(access)['role']);
     } catch (e) {
       throw CacheException();
     }

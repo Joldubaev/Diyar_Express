@@ -46,7 +46,6 @@ class _SignUpFormState extends State<SignUpForm> {
             title: 'Ваше имя',
             hintText: "Асанов Асан",
             controller: _usernameController,
-            isPasswordField: false,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Пожалуйста, введите ваше имя';
@@ -61,7 +60,7 @@ class _SignUpFormState extends State<SignUpForm> {
             title: 'E-Mail',
             hintText: "asanov@example.com",
             controller: _emailController,
-            isPasswordField: false,
+            inputType: TextInputType.emailAddress,
             validator: (value) {
               if (value!.isEmpty) {
                 return 'Пожалуйста, введите ваш E-Mail';
@@ -126,48 +125,14 @@ class _SignUpFormState extends State<SignUpForm> {
                   const SignUpSucces(),
                   predicate: (_) => false,
                 );
+              } else if (state is SignUpFailure) {
+                SnackBarMessage().showErrorSnackBar(
+                  message: state.message,
+                  context: context,
+                );
               }
             },
             builder: (context, state) {
-              if (state is SignUpLoading) {
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              } else if (state is SignUpFailure) {
-                return Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(20),
-                      child: Center(
-                        child: FittedBox(
-                          child: Text(
-                            'Регистрация не удалась. Пожалуйста, попробуйте еще раз.',
-                            style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SubmitButtonWidget(
-                      isLoading: state is SignUpLoading,
-                      textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
-                      bgColor: AppColors.primary,
-                      title: state.message,
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          BlocProvider.of<SignUpCubit>(context).signUpUser(
-                            UserModel(
-                              name: _usernameController.text,
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                              phone: _phoneController.text,
-                            ),
-                          );
-                        }
-                      },
-                    ),
-                  ],
-                );
-              }
               return SubmitButtonWidget(
                 isLoading: state is SignUpLoading,
                 textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),

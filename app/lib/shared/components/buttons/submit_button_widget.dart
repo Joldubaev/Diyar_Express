@@ -13,6 +13,7 @@ class SubmitButtonWidget extends StatelessWidget {
     this.width,
     this.borderColor,
   });
+
   final VoidCallback? onTap;
   final String title;
   final Color bgColor;
@@ -25,7 +26,7 @@ class SubmitButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onTap,
+      onPressed: isLoading==true?null: onTap,
       style: ElevatedButton.styleFrom(
         foregroundColor: borderColor != null ? borderColor!.withAlpha(1) : AppColors.primaryAccent,
         shape: RoundedRectangleBorder(
