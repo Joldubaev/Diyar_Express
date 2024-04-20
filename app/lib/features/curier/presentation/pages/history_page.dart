@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 @RoutePage()
-class Historypage extends StatelessWidget {
-  const Historypage({super.key});
+class HistoryPage extends StatelessWidget {
+  const HistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +51,8 @@ class Historypage extends StatelessWidget {
                           Clipboard.setData(
                             const ClipboardData(text: 'Уметалиева 64/1'),
                           );
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Адрес скопирован')));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Адрес скопирован')));
                         },
                       ),
                     ],

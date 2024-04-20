@@ -19,3 +19,9 @@ final class SignInFailure extends SignInState {
   final String message;
   SignInFailure(this.message);
 }
+
+final class RefreshTokenLoading extends SignInState {}
+
+final class RefreshTokenLoaded extends SignInState {}
+
+final class RefreshTokenFailure extends SignInState {}

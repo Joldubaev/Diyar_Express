@@ -31,18 +31,15 @@ class CounterWidget extends StatelessWidget {
                 onPressed: () {
                   if (counter > 1) {
                     context.read<CartCubit>().decrementCart(id);
+                  } else {
+                    context.read<CartCubit>().removeFromCart(id);
                   }
                 },
               ),
-              Text(
-                counter.toString(),
-                style: theme.textTheme.bodyLarge,
-              ),
+              Text(counter.toString(), style: theme.textTheme.bodyLarge),
               IconButton(
                 icon: const Icon(Icons.add),
-                onPressed: () {
-                  context.read<CartCubit>().incrementCart(id);
-                },
+                onPressed: () => context.read<CartCubit>().incrementCart(id),
               ),
             ],
           ),

@@ -1,11 +1,11 @@
 name: diyar_express
 description: "A new Flutter project."
-publish_to: 'none' 
+publish_to: "none"
 
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.6 <4.0.0'
+  sdk: ">=3.2.6 <4.0.0"
 
 dependencies:
   flutter:
@@ -14,8 +14,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.2
-  # flutter_native_splash: ^2.3.13
-  # flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.13
+  flutter_launcher_icons: ^0.13.1
   flutter_bloc: ^8.1.4
   font_awesome_flutter: ^10.7.0
   flutter_svg: ^2.0.10+1
@@ -41,7 +41,6 @@ dependencies:
   yandex_mapkit: ^4.0.0
   easy_stepper: ^0.8.3
   cloud_firestore: ^4.15.9
-  
 
 dev_dependencies:
   flutter_test:
@@ -52,7 +51,6 @@ dev_dependencies:
   build_runner: ^2.4.8
 
 flutter:
-
   uses-material-design: true
   generate: true
 
@@ -75,5 +73,14 @@ flutter:
 flutter_launcher_icons:
   android: "ic_launcher"
   ios: true
-  image_path: "assets/images/app_icon.png" 
+  image_path: "assets/images/app_icon.png"
 
+flutter_native_splash:
+  color: "#ffa462"
+  image: "assets/images/app_logo.png"
+  android: true
+  ios: true
+
+  android_12:
+    image: assets/images/app_logo.png
+    color: "#ffa462"

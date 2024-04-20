@@ -12,6 +12,7 @@ abstract class AuthRepository {
   Future<void> register(UserModel user);
   Future<void> sendForgotPasswordCodeToEmail(String email);
   Future<void> resetPassword({required ResetModel model});
+  Future<void> refreshToken();
   Future<void> logout();
 }
 
@@ -61,4 +62,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<void> logout() async => await _localDataSource.logout();
+
+  @override
+  Future<void> refreshToken() async => await _remoteDataSource.refreshToken();
 }
