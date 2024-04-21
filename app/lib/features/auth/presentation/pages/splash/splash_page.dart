@@ -18,20 +18,26 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final token = sl<SharedPreferences>().getString(AppConst.accessToken);
+  String? token;
+  String? role;
 
   @override
   void initState() {
     super.initState();
+    Future.delayed(Duration.zero, () {
+      _loadTokenAndRole();
+    });
+  }
+
+  Future<void> _loadTokenAndRole() async {
+    final sharedPreferences = sl<SharedPreferences>();
+    token = sharedPreferences.getString(AppConst.accessToken);
+    role = sharedPreferences.getString(AppConst.userRole);
+
     if (token != null && JwtDecoder.isExpired(token!)) {
       context.read<SignInCubit>().refreshToken();
     } else {
-      Future.delayed(const Duration(seconds: 3), () {
-        context.router.pushAndPopUntil(
-          const MainRoute(),
-          predicate: (route) => false,
-        );
-      });
+      _checkRoleAndPush();
     }
   }
 
@@ -42,10 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
       body: BlocListener<SignInCubit, SignInState>(
         listener: (context, state) {
           if (state is RefreshTokenLoaded) {
-            context.router.pushAndPopUntil(
-              const MainRoute(),
-              predicate: (route) => false,
-            );
+            _checkRoleAndPush();
           } else if (state is RefreshTokenFailure) {
             context.router.pushAndPopUntil(
               const SignInRoute(),
@@ -78,5 +81,24 @@ class _SplashScreenState extends State<SplashScreen> {
         ),
       ),
     );
+  }
+
+  void _checkRoleAndPush() {
+    if (role?.toLowerCase() == "user".toLowerCase()) {
+      context.router.pushAndPopUntil(
+        const MainRoute(),
+        predicate: (_) => false,
+      );
+    } else if (role?.toLowerCase() == "courier".toLowerCase()) {
+      context.router.pushAndPopUntil(
+        const CurierRoute(),
+        predicate: (_) => false,
+      );
+    } else {
+      context.router.pushAndPopUntil(
+        const SignInRoute(),
+        predicate: (_) => false,
+      );
+    }
   }
 }

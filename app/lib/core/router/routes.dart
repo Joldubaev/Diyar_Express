@@ -19,6 +19,7 @@ class AppRouter extends $AppRouter {
           ],
         ),
         AutoRoute(page: SplashRoute.page, initial: true),
+        AutoRoute(page: SearchMenuRoute.page),
         AutoRoute(page: ProfileInfoRoute.page),
         AutoRoute(page: ContactRoute.page),
         AutoRoute(page: OrderHistoryRoute.page),
