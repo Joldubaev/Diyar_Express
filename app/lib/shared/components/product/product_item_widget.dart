@@ -15,10 +15,12 @@ class ProductItemWidget extends StatelessWidget {
       quantity: quantity,
       onTap: () => AppBottomSheet.showBottomSheet(
         context,
+        initialChildSize: 0.4,
         ProductItemContentWidget(
           isShadowVisible: false,
           food: food,
           quantity: quantity,
+          isCounter: false,
         ),
         backgroundColor: Colors.white,
       ),

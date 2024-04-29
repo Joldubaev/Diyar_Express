@@ -5,10 +5,12 @@ import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/features.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthRemoteDataSource {
   Future<void> login(UserModel user);
   Future<void> register(UserModel user);
+  Future<void> refreshToken();
   // Future<void> confirmEmail(String email, int code);
   Future<void> sendForgotPasswordCodeToEmail(String email);
 
@@ -17,9 +19,10 @@ abstract class AuthRemoteDataSource {
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final AuthLocalDataSource _localDataSource;
+  final SharedPreferences _prefs;
   final Dio _dio;
 
-  AuthRemoteDataSourceImpl(this._dio, this._localDataSource);
+  AuthRemoteDataSourceImpl(this._dio, this._localDataSource, this._prefs);
 
   // @override
   // Future<void> confirmEmail(String email, int code) async {
@@ -45,7 +48,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     try {
       var res = await _dio.post(
         ApiConst.resetPsw,
-        data: {"email": model.email, "code": model.code, "newPassword": model.newPassword},
+        data: {
+          "email": model.email,
+          "code": model.code,
+          "newPassword": model.newPassword
+        },
       );
 
       if (res.statusCode != 200) {
@@ -60,7 +67,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<void> login(UserModel user) async {
     try {
-      var res = await _dio.post(ApiConst.signIn, data: {"email": user.email, "password": user.password});
+      var res = await _dio
+          .post(ApiConst.signIn, data: {"email": user.email, "password": user.password});
 
       if ([200, 201].contains(res.statusCode)) {
         await _localDataSource.setTokenToCache(
@@ -110,6 +118,31 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     } catch (e) {
       log("$e");
       throw ServerException();
+    }
+  }
+
+  @override
+  Future<void> refreshToken() async {
+    log("refreshToken started...");
+    try {
+      var res = await _dio.post(
+        ApiConst.refreshToken,
+        data: {"refreshToken": _prefs.getString(AppConst.refreshToken)},
+      );
+
+      if (res.statusCode == 200) {
+        await _localDataSource.setTokenToCache(
+          refresh: res.data['refreshToken'],
+          access: res.data['accessToken'],
+        );
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      log("$e");
+      throw ServerException();
+    } finally {
+      log("refreshToken finished...");
     }
   }
 }

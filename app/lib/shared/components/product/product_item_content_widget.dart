@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProductItemContentWidget extends StatelessWidget {
   final VoidCallback? onTap;
+  final bool? isCounter;
   final bool? isShadowVisible;
   final int quantity;
   final FoodModel food;
@@ -18,6 +19,7 @@ class ProductItemContentWidget extends StatelessWidget {
     this.isShadowVisible = true,
     required this.food,
     required this.quantity,
+    this.isCounter = true,
   });
 
   @override
@@ -50,7 +52,8 @@ class ProductItemContentWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 6, right: 6, top: 0),
                 child: CachedNetworkImage(
-                  imageUrl: food.urlPhoto ?? 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+                  imageUrl: food.urlPhoto ??
+                      'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
                   errorWidget: (context, url, error) => Image.asset(
                     'assets/images/app_logo.png',
                     color: Colors.grey,
@@ -102,54 +105,62 @@ class ProductItemContentWidget extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 10),
-          Container(
-            width: double.infinity,
-            height: 35,
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(
-                color: Colors.grey.withOpacity(0.5),
+          if (isCounter == true)
+            Container(
+              width: double.infinity,
+              height: 35,
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(
+                  color: Colors.grey.withOpacity(0.5),
+                ),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisSize:
+                    isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
+                children: [
+                  IconButton(
+                    splashRadius: 20,
+                    iconSize: 20,
+                    onPressed: () {
+                      if (quantity > 1) {
+                        context.read<CartCubit>().decrementCart(food.id!);
+                      } else {
+                        context.read<CartCubit>().removeFromCart(food.id!);
+                      }
+                    },
+                    icon: const Padding(
+                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                      child: Icon(Icons.remove),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                    child: Text('$quantity', style: theme.textTheme.bodyMedium),
+                  ),
+                  IconButton(
+                    splashRadius: 20,
+                    iconSize: 20,
+                    onPressed: () {
+                      if (quantity == 0) {
+                        context.read<CartCubit>().addToCart(
+                              CartItemModel(food: food, quantity: 1),
+                            );
+                      } else {
+                        context.read<CartCubit>().incrementCart(food.id!);
+                      }
+                    },
+                    icon: const Padding(
+                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                      child: Icon(Icons.add),
+                    ),
+                  ),
+                ],
               ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              mainAxisSize: isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    if (quantity > 1) {
-                      context.read<CartCubit>().decrementCart(food.id!);
-                    }
-                  },
-                  icon: const Padding(
-                    padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                    child: Icon(Icons.remove),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                  child: Text('$quantity', style: theme.textTheme.bodyMedium),
-                ),
-                IconButton(
-                  onPressed: () {
-                    if (quantity == 0) {
-                      context.read<CartCubit>().addToCart(
-                            CartItemModel(food: food, quantity: 1),
-                          );
-                    } else {
-                      context.read<CartCubit>().incrementCart(food.id!);
-                    }
-                  },
-                  icon: const Padding(
-                    padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                    child: Icon(Icons.add),
-                  ),
-                ),
-              ],
-            ),
-          ),
           const SizedBox(height: 7),
         ],
       ),

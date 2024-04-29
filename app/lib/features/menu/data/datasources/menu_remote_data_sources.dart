@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:diyar_express/features/menu/menu.dart';
 import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/menu/data/models/category_model.dart';
@@ -8,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class MenuRemoteDataSource {
   Future<List<CategoryModel>> getProductsWithMenu();
+  Future<List<FoodModel>> searchFoods({String? name});
 }
 
 class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
@@ -31,6 +33,31 @@ class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
           List<dynamic> list = res.data;
 
           return list.map((e) => CategoryModel.fromJson(e)).toList();
+        }
+        return [];
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      log("Error: $e");
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<FoodModel>> searchFoods({String? name}) async {
+    try {
+      var token = _prefs.getString(AppConst.accessToken) ?? '';
+
+      var res = await _dio.post(ApiConst.searchFoodsByName,
+          options: Options(headers: ApiConst.authMap(token)),
+          data: {"foodName": name ?? ""});
+
+      if (res.statusCode == 200) {
+        if (res.data != null) {
+          List<dynamic> list = res.data;
+
+          return list.map((e) => FoodModel.fromJson(e)).toList();
         }
         return [];
       } else {

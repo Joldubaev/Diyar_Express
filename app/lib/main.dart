@@ -17,35 +17,29 @@ void main() async {
   runApp(const App());
 }
 
+var appRoute = AppRouter();
+
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(providers: [
-      BlocProvider(create: (context) => di.sl<SignUpCubit>()),
-      BlocProvider(create: (context) => di.sl<SignInCubit>()),
-      BlocProvider(create: (context) => di.sl<ProfileCubit>()),
-      BlocProvider(create: (context) => di.sl<SignInCubit>()),
-      BlocProvider(create: (context) => di.sl<CartCubit>()),
-      BlocProvider(create: (context) => di.sl<MenuCubit>())
-    ], child: const DiyarExpress());
-  }
-}
-
-var appRoute = AppRouter();
-
-class DiyarExpress extends StatelessWidget {
-  const DiyarExpress({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      routerConfig: appRoute.config(),
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => di.sl<SignUpCubit>()),
+        BlocProvider(create: (context) => di.sl<SignInCubit>()),
+        BlocProvider(create: (context) => di.sl<ProfileCubit>()),
+        BlocProvider(create: (context) => di.sl<SignInCubit>()),
+        BlocProvider(create: (context) => di.sl<CartCubit>()),
+        BlocProvider(create: (context) => di.sl<MenuCubit>())
+      ],
+      child: MaterialApp.router(
+        debugShowCheckedModeBanner: false,
+        theme: theme,
+        routerConfig: appRoute.config(),
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+      ),
     );
   }
 }

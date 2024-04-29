@@ -1,15 +1,19 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:diyar_express/features/auth/auth.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/injection_container.dart';
+import 'package:diyar_express/shared/shared.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:meta/meta.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
-  SignInCubit(
-    this.authRepository,
-  ) : super(SignInInitial());
+  SignInCubit(this.authRepository) : super(SignInInitial());
 
   final AuthRepository authRepository;
 
@@ -44,4 +48,21 @@ class SignInCubit extends Cubit<SignInState> {
   }
 
   Future logout() async => await authRepository.logout();
+
+  Future refreshToken() async {
+    var token = sl<SharedPreferences>().getString(AppConst.accessToken);
+    if (token != null && JwtDecoder.isExpired(token)) {
+      emit(RefreshTokenLoading());
+      try {
+        await authRepository.refreshToken();
+        emit(RefreshTokenLoaded());
+      } catch (e) {
+        emit(RefreshTokenFailure());
+      } finally {
+        log('${JwtDecoder.isExpired(token)} hell');
+      }
+    } else {
+      emit(RefreshTokenLoaded());
+    }
+  }
 }

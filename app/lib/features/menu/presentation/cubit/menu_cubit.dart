@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:diyar_express/features/menu/data/models/category_model.dart';
 import 'package:diyar_express/features/menu/data/repositories/menu_repository.dart';
+import 'package:diyar_express/features/menu/menu.dart';
 import 'package:equatable/equatable.dart';
 
 part 'menu_state.dart';
@@ -20,6 +21,16 @@ class MenuCubit extends Cubit<MenuState> {
       emit(GetMenuLoaded(products));
     } catch (e) {
       emit(GetMenuFailure());
+    }
+  }
+
+  void searchMenu({String? query}) async {
+    emit(SearchMenuLoading());
+    try {
+      final foods = await _menuRepository.searchFoods(name: query);
+      emit(SearchMenuLoaded(foods));
+    } catch (e) {
+      emit(SearchMenuFailure());
     }
   }
 }

@@ -9,16 +9,17 @@ class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
         AutoRoute(
-          initial: true,
           page: MainRoute.page,
+          guards: [AuthGuard()],
           children: [
             AutoRoute(page: HomeRoute.page),
             AutoRoute(page: MenuRoute.page),
             AutoRoute(page: CartRoute.page),
             AutoRoute(page: ProfileRoute.page)
           ],
-          guards: [AuthGuard()],
         ),
+        AutoRoute(page: SplashRoute.page, initial: true),
+        AutoRoute(page: SearchMenuRoute.page),
         AutoRoute(page: ProfileInfoRoute.page),
         AutoRoute(page: ContactRoute.page),
         AutoRoute(page: OrderHistoryRoute.page),
@@ -34,7 +35,7 @@ class AppRouter extends $AppRouter {
         AutoRoute(page: OrderDetailRoute.page),
         AutoRoute(page: RessetPasswordRoute.page),
         AutoRoute(page: CurierRoute.page),
-        AutoRoute(page: HistoryPage.page),
+        AutoRoute(page: HistoryRoute.page),
         AutoRoute(page: SaleRoute.page),
         AutoRoute(page: NewsRoute.page),
       ];

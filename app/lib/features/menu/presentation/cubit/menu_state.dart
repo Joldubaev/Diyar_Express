@@ -18,3 +18,13 @@ class GetMenuLoaded extends MenuState {
 }
 
 class GetMenuFailure extends MenuState {}
+
+class SearchMenuLoading extends MenuState {}
+
+class SearchMenuLoaded extends MenuState {
+  final List<FoodModel> foods;
+
+  const SearchMenuLoaded(this.foods);
+}
+
+class SearchMenuFailure extends MenuState {}

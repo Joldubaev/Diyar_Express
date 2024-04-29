@@ -22,7 +22,9 @@ class CustomDrawer extends StatelessWidget {
                 CircleAvatar(
                     radius: 30,
                     child: SvgPicture.asset('assets/icons/profile_icon.svg',
-                        height: 80, colorFilter: const ColorFilter.mode(AppColors.white, BlendMode.srcIn))),
+                        height: 80,
+                        colorFilter:
+                            const ColorFilter.mode(AppColors.white, BlendMode.srcIn))),
                 const SizedBox(height: 10),
                 const Text(
                   'John Doe',
@@ -73,7 +75,7 @@ class CustomDrawer extends StatelessWidget {
               ),
             ),
             onTap: () {
-              context.router.push(const HistoryPage());
+              context.router.push(const HistoryRoute());
             },
           ),
           const Divider(),
