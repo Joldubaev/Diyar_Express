@@ -15,6 +15,14 @@ class ContactPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.primary[200],
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+          ),
+          onPressed: () {
+            context.router.maybePop();
+          },
+        ),
         title: TextButton.icon(
             label: Text('Контакты', style: theme.textTheme.bodyLarge!.copyWith(color: AppColors.primary)),
             icon: const Icon(FontAwesomeIcons.headset, color: AppColors.primary, size: 40),
@@ -113,13 +121,13 @@ class _ContactBodyState extends State<ContactBody> {
           children: [
             IconButton(
                 onPressed: () {
-                  AppLaunch.launchURL(AppConst.instagram);
+                  AppLaunch.launchURL(AppConst.instagram, context: context, snackBarText: 'Instagram не открыт');
                 },
                 icon: const Icon(FontAwesomeIcons.instagram, color: AppColors.black1, size: 40)),
             const SizedBox(width: 20),
             IconButton(
                 onPressed: () {
-                  AppLaunch.launchURL(AppConst.email);
+                  AppLaunch.sendEmail(AppConst.email, context: context, snackBarText: 'Email не отправлен');
                 },
                 icon: const Icon(Icons.mail, color: AppColors.black1, size: 40)),
           ],

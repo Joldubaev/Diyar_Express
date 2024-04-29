@@ -10,16 +10,25 @@ class NewsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            context.router.maybePop();
+          },
+        ),
         title: const Text('Новости'),
       ),
       body: ListView.builder(
         itemCount: 2,
         itemBuilder: (context, index) {
-          return NewsWidget(
-            title: 'Новость 1',
-            description: 'Описание  новости 1',
-            image: 'assets/images/news.png',
-            onTap: () => SnackBarMessage().showErrorSnackBar(message: 'Пока не доступно', context: context),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+            child: NewsWidget(
+              title: 'Новость 1',
+              description: 'Описание  новости 1',
+              image: 'assets/images/news.png',
+              onTap: () => SnackBarMessage().showErrorSnackBar(message: 'Пока не доступно', context: context),
+            ),
           );
         },
       ),

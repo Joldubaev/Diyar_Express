@@ -10,16 +10,25 @@ class SalePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            context.router.maybePop();
+          },
+        ),
         title: const Text('Акции'),
       ),
       body: ListView.builder(
         itemCount: 2,
         itemBuilder: (context, index) {
-          return SaleWidget(
-            title: 'Скидка 50%',
-            description: 'На все блюда',
-            image: 'assets/images/banner.png',
-            onTap: () => SnackBarMessage().showErrorSnackBar(message: 'Пока не доступно', context: context),
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8.0),
+            child: SaleWidget(
+              title: 'Скидка 50%',
+              description: 'На все блюда',
+              image: 'assets/images/banner.png',
+              onTap: () => SnackBarMessage().showErrorSnackBar(message: 'Пока не доступно', context: context),
+            ),
           );
         },
       ),

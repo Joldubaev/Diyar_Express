@@ -9,50 +9,28 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i26;
-import 'package:diyar_express/features/about_us/presentation/pages/about/about_us_page.dart'
-    as _i1;
-import 'package:diyar_express/features/about_us/presentation/pages/contact/contact_page.dart'
-    as _i3;
-import 'package:diyar_express/features/auth/data/models/user_mpdel.dart'
-    as _i28;
-import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart'
-    as _i22;
-import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_page.dart'
-    as _i23;
-import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_succes.dart'
-    as _i24;
-import 'package:diyar_express/features/auth/presentation/pages/splash/splash_page.dart'
-    as _i25;
-import 'package:diyar_express/features/auth/presentation/widgets/reset_password.dart'
-    as _i19;
-import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart'
-    as _i2;
-import 'package:diyar_express/features/curier/presentation/pages/curier_page.dart'
-    as _i5;
-import 'package:diyar_express/features/curier/presentation/pages/curier_profile_page.dart'
-    as _i6;
-import 'package:diyar_express/features/curier/presentation/pages/history_page.dart'
-    as _i8;
-import 'package:diyar_express/features/map/presentation/user_map/order_map.dart'
-    as _i15;
-import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart'
-    as _i11;
-import 'package:diyar_express/features/menu/presentation/pages/search_menu_page.dart'
-    as _i21;
-import 'package:diyar_express/features/order/presentation/pages/create_order/create_order_page.dart'
-    as _i4;
-import 'package:diyar_express/features/order/presentation/pages/create_order/order_address.dart'
-    as _i7;
-import 'package:diyar_express/features/order/presentation/pages/create_order/order_success.dart'
-    as _i16;
-import 'package:diyar_express/features/order/presentation/pages/history/order_history_page.dart'
-    as _i14;
-import 'package:diyar_express/features/order/presentation/pages/order_active/order_detail_page.dart'
-    as _i13;
-import 'package:diyar_express/features/profile/presentation/pages/profile/profile_page.dart'
-    as _i18;
-import 'package:diyar_express/features/profile/presentation/pages/profile_info/profile_info_page.dart'
-    as _i17;
+import 'package:diyar_express/features/about_us/presentation/pages/about/about_us_page.dart' as _i1;
+import 'package:diyar_express/features/about_us/presentation/pages/contact/contact_page.dart' as _i3;
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart' as _i28;
+import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart' as _i22;
+import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_page.dart' as _i23;
+import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_succes.dart' as _i24;
+import 'package:diyar_express/features/auth/presentation/pages/splash/splash_page.dart' as _i25;
+import 'package:diyar_express/features/auth/presentation/widgets/reset_password.dart' as _i19;
+import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart' as _i2;
+import 'package:diyar_express/features/curier/presentation/pages/curier_page.dart' as _i5;
+import 'package:diyar_express/features/curier/presentation/pages/curier_profile_page.dart' as _i6;
+import 'package:diyar_express/features/curier/presentation/pages/history_page.dart' as _i8;
+import 'package:diyar_express/features/map/presentation/user_map/order_map.dart' as _i15;
+import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart' as _i11;
+import 'package:diyar_express/features/menu/presentation/pages/search_menu_page.dart' as _i21;
+import 'package:diyar_express/features/order/presentation/pages/create_order/create_order_page.dart' as _i4;
+import 'package:diyar_express/features/order/presentation/pages/create_order/order_address.dart' as _i7;
+import 'package:diyar_express/features/order/presentation/pages/create_order/order_success.dart' as _i16;
+import 'package:diyar_express/features/order/presentation/pages/history/order_history_page.dart' as _i14;
+import 'package:diyar_express/features/order/presentation/pages/order_active/order_detail_page.dart' as _i13;
+import 'package:diyar_express/features/profile/presentation/pages/profile/profile_page.dart' as _i18;
+import 'package:diyar_express/features/profile/presentation/pages/profile_info/profile_info_page.dart' as _i17;
 import 'package:diyar_express/shared/pages/main_home/home_page.dart' as _i9;
 import 'package:diyar_express/shared/pages/main_home/main_page.dart' as _i10;
 import 'package:diyar_express/shared/pages/widgets/news_page.dart' as _i12;
@@ -101,8 +79,7 @@ abstract class $AppRouter extends _i26.RootStackRouter {
       );
     },
     DeliveryFormRoute.name: (routeData) {
-      final args = routeData.argsAs<DeliveryFormRouteArgs>(
-          orElse: () => const DeliveryFormRouteArgs());
+      final args = routeData.argsAs<DeliveryFormRouteArgs>(orElse: () => const DeliveryFormRouteArgs());
       return _i26.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i7.DeliveryFormPage(
@@ -328,8 +305,7 @@ class DeliveryFormRoute extends _i26.PageRouteInfo<DeliveryFormRouteArgs> {
 
   static const String name = 'DeliveryFormRoute';
 
-  static const _i26.PageInfo<DeliveryFormRouteArgs> page =
-      _i26.PageInfo<DeliveryFormRouteArgs>(name);
+  static const _i26.PageInfo<DeliveryFormRouteArgs> page = _i26.PageInfo<DeliveryFormRouteArgs>(name);
 }
 
 class DeliveryFormRouteArgs {
@@ -492,8 +468,7 @@ class ProfileInfoRoute extends _i26.PageRouteInfo<ProfileInfoRouteArgs> {
 
   static const String name = 'ProfileInfoRoute';
 
-  static const _i26.PageInfo<ProfileInfoRouteArgs> page =
-      _i26.PageInfo<ProfileInfoRouteArgs>(name);
+  static const _i26.PageInfo<ProfileInfoRouteArgs> page = _i26.PageInfo<ProfileInfoRouteArgs>(name);
 }
 
 class ProfileInfoRouteArgs {

@@ -97,6 +97,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
             bool containsCoordinate = Polygons.getPolygons()[i].coordinates.contains(
                   Coordinate(latitude: lat, longitude: long),
                 );
+            // ignore: avoid_print
             print(containsCoordinate);
           }
           return Column(
@@ -137,6 +138,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          _fetchCurrentLocation();
           if (userLocation != null) {
             double distance = calculateDistance(
                 userLocation!.latitude, userLocation!.longitude, 42.887931419030515, 74.66039095429396);
@@ -169,6 +171,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
                           polygon.coordinates.map((e) => Point(latitude: e.latitude, longitude: e.longitude)).toList()))
                   .toList(),
         ),
+        strokeColor: Colors.transparent,
       );
     }).toList();
   }
