@@ -26,7 +26,7 @@ class SubmitButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: isLoading==true?null: onTap,
+      onPressed: isLoading == true ? null : onTap,
       style: ElevatedButton.styleFrom(
         foregroundColor: borderColor != null ? borderColor!.withAlpha(1) : AppColors.primaryAccent,
         shape: RoundedRectangleBorder(
