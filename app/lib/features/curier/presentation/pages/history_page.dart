@@ -51,8 +51,7 @@ class HistoryPage extends StatelessWidget {
                           Clipboard.setData(
                             const ClipboardData(text: 'Уметалиева 64/1'),
                           );
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Адрес скопирован')));
+                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Адрес скопирован')));
                         },
                       ),
                     ],

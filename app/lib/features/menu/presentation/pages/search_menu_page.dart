@@ -65,8 +65,7 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
                 if (state.foods.isEmpty) {
                   return const Expanded(
                     child: Center(
-                      child: Text('Ничего не найдено',
-                          style: TextStyle(fontSize: 16)),
+                      child: Text('Ничего не найдено', style: TextStyle(fontSize: 16)),
                     ),
                   );
                 }
@@ -108,8 +107,7 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
                                     crossAxisCount: 2,
                                     mainAxisSpacing: 10,
                                     crossAxisSpacing: 10,
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(horizontal: 16),
                                     childAspectRatio: 0.72,
                                     shrinkWrap: true,
                                     children: List.generate(
@@ -117,10 +115,8 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
                                       (index) {
                                         final food = foods[index];
                                         final cartItem = cart.firstWhere(
-                                          (element) =>
-                                              element.food?.id == food.id,
-                                          orElse: () => CartItemModel(
-                                              food: food, quantity: 0),
+                                          (element) => element.food?.id == food.id,
+                                          orElse: () => CartItemModel(food: food, quantity: 0),
                                         );
                                         return ProductItemWidget(
                                           food: food,

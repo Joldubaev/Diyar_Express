@@ -16,6 +16,12 @@ class _AboutUsPageState extends State<AboutUsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            context.router.maybePop();
+          },
+        ),
         title: Text('О нас', style: theme.textTheme.titleSmall!),
       ),
       body: const SafeArea(

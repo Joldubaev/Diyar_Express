@@ -38,7 +38,14 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Профиль', style: theme.textTheme.titleSmall)),
+      appBar: AppBar(
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              context.router.maybePop();
+            },
+          ),
+          title: Text('Профиль', style: theme.textTheme.titleSmall)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(

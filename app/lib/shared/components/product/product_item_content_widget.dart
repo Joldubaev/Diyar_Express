@@ -52,8 +52,7 @@ class ProductItemContentWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(left: 6, right: 6, top: 0),
                 child: CachedNetworkImage(
-                  imageUrl: food.urlPhoto ??
-                      'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+                  imageUrl: food.urlPhoto ?? 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
                   errorWidget: (context, url, error) => Image.asset(
                     'assets/images/app_logo.png',
                     color: Colors.grey,
@@ -119,8 +118,7 @@ class ProductItemContentWidget extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize:
-                    isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
+                mainAxisSize: isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
                 children: [
                   IconButton(
                     splashRadius: 20,
