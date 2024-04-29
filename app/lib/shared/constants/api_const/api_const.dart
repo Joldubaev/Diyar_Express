@@ -18,7 +18,8 @@ class ApiConst {
   // CATEGORIES
   static const getCategories = "http://20.55.72.226:8080/categorys/get-all-category-with-foods/";
   static const getCountFoddsByCategory = "http://20.55.72.226:8080/categorys/get-quantity-foods-by-category/";
-  static const searchFoodsByName = 'http://20.55.72.226:8080/foods/get-food-by-name/';
+  static const searchFoodsByName = 'http://20.55.72.226:8080/foods/get-food-by-name';
+  static const getPopularFoods = "http://20.55.72.226:8080/foods/get-popular-foods";
 
   // Map
   static String getLocations({

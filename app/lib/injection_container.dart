@@ -4,6 +4,7 @@ import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/menu/data/repositories/menu_repository.dart';
 import 'package:diyar_express/features/profile/data/data.dart';
 import 'package:diyar_express/features/profile/presentation/cubit/profile_cubit.dart';
+import 'package:diyar_express/shared/cubit/popular_cubit.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'core/network/network_info.dart';
@@ -22,6 +23,7 @@ Future<void> init() async {
   sl.registerFactory(() => ProfileCubit(sl()));
   sl.registerFactory(() => MenuCubit(sl()));
   sl.registerFactory(() => CartCubit(sl()));
+  sl.registerFactory(() => PopularCubit(sl()));
 
 // AUTH
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));

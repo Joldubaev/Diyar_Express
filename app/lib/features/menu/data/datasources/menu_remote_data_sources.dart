@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class MenuRemoteDataSource {
   Future<List<CategoryModel>> getProductsWithMenu();
+  Future<List<FoodModel>> getPopulartFoods();
   Future<List<FoodModel>> searchFoods({String? name});
 }
 
@@ -55,6 +56,35 @@ class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
       if (res.statusCode == 200) {
         if (res.data != null) {
           List<dynamic> list = res.data;
+
+          return list.map((e) => FoodModel.fromJson(e)).toList();
+        }
+        return [];
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      log("Error: $e");
+      throw ServerException();
+    }
+  }
+
+  @override
+  Future<List<FoodModel>> getPopulartFoods() async {
+    try {
+      var token = _prefs.getString(AppConst.accessToken) ?? '';
+
+      var res = await _dio.get(
+        ApiConst.getPopularFoods,
+        options: Options(
+          headers: ApiConst.authMap(token),
+        ),
+      );
+
+      if (res.statusCode == 200) {
+        if (res.data != null) {
+          List<dynamic> list = res.data;
+          log("List: $list");
 
           return list.map((e) => FoodModel.fromJson(e)).toList();
         }

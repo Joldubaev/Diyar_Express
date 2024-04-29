@@ -1,5 +1,6 @@
 import 'package:diyar_express/core/router/routes.dart';
 import 'package:diyar_express/firebase_options.dart';
+import 'package:diyar_express/shared/cubit/popular_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:diyar_express/injection_container.dart' as di;
@@ -31,7 +32,8 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<ProfileCubit>()),
         BlocProvider(create: (context) => di.sl<SignInCubit>()),
         BlocProvider(create: (context) => di.sl<CartCubit>()),
-        BlocProvider(create: (context) => di.sl<MenuCubit>())
+        BlocProvider(create: (context) => di.sl<MenuCubit>()),
+        BlocProvider(create: (context) => di.sl<PopularCubit>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
