@@ -13,10 +13,10 @@ class MenuCubit extends Cubit<MenuState> {
 
   List<CategoryModel> menu = [];
 
-  void getProductsWithMenu() async {
+  void getProductsWithMenu({String? query}) async {
     emit(GetMenuLoading());
     try {
-      final products = await _menuRepository.getProductsWithMenu();
+      final products = await _menuRepository.getProductsWithMenu(query: query);
       menu = products;
       emit(GetMenuLoaded(products));
     } catch (e) {

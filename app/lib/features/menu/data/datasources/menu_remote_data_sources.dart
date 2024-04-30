@@ -8,7 +8,7 @@ import 'package:diyar_express/features/menu/data/models/category_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class MenuRemoteDataSource {
-  Future<List<CategoryModel>> getProductsWithMenu();
+  Future<List<CategoryModel>> getProductsWithMenu({String? query});
   Future<List<FoodModel>> getPopulartFoods();
   Future<List<FoodModel>> searchFoods({String? name});
 }
@@ -20,13 +20,14 @@ class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
   MenuRemoteDataSourceImpl(this._dio, this._prefs);
 
   @override
-  Future<List<CategoryModel>> getProductsWithMenu() async {
+  Future<List<CategoryModel>> getProductsWithMenu({String? query}) async {
     try {
       var token = _prefs.getString(AppConst.accessToken) ?? '';
 
       var res = await _dio.get(
         ApiConst.getCategories,
         options: Options(headers: ApiConst.authMap(token)),
+        queryParameters: {if (query != null) 'foodName': query},
       );
 
       if (res.statusCode == 200) {
@@ -51,7 +52,8 @@ class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
       var token = _prefs.getString(AppConst.accessToken) ?? '';
 
       var res = await _dio.post(ApiConst.searchFoodsByName,
-          options: Options(headers: ApiConst.authMap(token)), data: {"foodName": name ?? ""});
+          options: Options(headers: ApiConst.authMap(token)),
+          data: {"foodName": name ?? ""});
 
       if (res.statusCode == 200) {
         if (res.data != null) {

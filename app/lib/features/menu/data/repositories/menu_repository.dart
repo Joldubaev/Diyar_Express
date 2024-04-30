@@ -2,7 +2,7 @@ import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/menu/data/models/category_model.dart';
 
 abstract class MenuRepository {
-  Future<List<CategoryModel>> getProductsWithMenu();
+  Future<List<CategoryModel>> getProductsWithMenu({String? query});
   Future<List<FoodModel>> searchFoods({String? name});
   Future<List<FoodModel>> getPopularFoods();
 }
@@ -13,11 +13,14 @@ class MenuRepositoryImpl implements MenuRepository {
   MenuRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<List<CategoryModel>> getProductsWithMenu() async => _remoteDataSource.getProductsWithMenu();
+  Future<List<CategoryModel>> getProductsWithMenu({String? query}) async =>
+      _remoteDataSource.getProductsWithMenu();
 
   @override
-  Future<List<FoodModel>> searchFoods({String? name}) async => await _remoteDataSource.searchFoods(name: name);
+  Future<List<FoodModel>> searchFoods({String? name}) async =>
+      await _remoteDataSource.searchFoods(name: name);
 
   @override
-  Future<List<FoodModel>> getPopularFoods() async => await _remoteDataSource.getPopulartFoods();
+  Future<List<FoodModel>> getPopularFoods() async =>
+      await _remoteDataSource.getPopulartFoods();
 }
