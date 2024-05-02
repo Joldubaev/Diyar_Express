@@ -39,4 +39,7 @@ class ApiConst {
   static Map<String, String> authMap(String token) => {'Authorization': 'Bearer $token'};
   static const updateUserName = "http://20.55.72.226:8080/user/update-username";
   static const updateUserPhone = "http://20.55.72.226:8080/user/update-user-phone";
+
+  // about us
+  static String getAboutUs({required String type}) => "http://20.55.72.226:8080/about-us/information?about=$type";
 }

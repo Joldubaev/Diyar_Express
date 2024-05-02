@@ -1,23 +1,23 @@
-class RestaurantModel {
-  String? name;
-  String? address;
-  String? rating;
+class AboutUsModel {
+  AboutUsModel({
+    this.name,
+    this.description,
+    this.photoLinks,
+  });
 
-  RestaurantModel({this.name, this.address, this.rating});
+  final String? name;
+  final String? description;
+  final List? photoLinks;
 
-  factory RestaurantModel.fromJson(Map<String, dynamic> json) {
-    return RestaurantModel(
-      name: json['name'],
-      address: json['address'],
-      rating: json['rating'].toDouble(),
-    );
-  }
+  factory AboutUsModel.fromJson(Map<String, dynamic> json) => AboutUsModel(
+        name: json['name'],
+        description: json['description'],
+        photoLinks: json['photoLinks'] == null ? null : List.from(json['photoLinks']).map((x) => x).toList(),
+      );
 
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'address': address,
-      'rating': rating,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'description': description,
+        'photoLinks': photoLinks == null ? null : List<dynamic>.from(photoLinks!.map((x) => x.toJson())),
+      };
 }
