@@ -24,11 +24,16 @@ Future<void> init() async {
   sl.registerFactory(() => MenuCubit(sl()));
   sl.registerFactory(() => CartCubit(sl()));
   sl.registerFactory(() => PopularCubit(sl()));
+  sl.registerFactory(() => AboutUsCubit(sl()));
 
 // AUTH
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
   sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(sl(), sl(), sl()));
   sl.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(sl()));
+
+  // about us
+  sl.registerLazySingleton<AboutUsRepository>(() => AboutUsRepositoryImpl(sl()));
+  sl.registerLazySingleton<AboutUsRemoteDataSource>(() => AboutUsRemoteDataSourceImpl(sl(), sl()));
 
 // Profile
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));

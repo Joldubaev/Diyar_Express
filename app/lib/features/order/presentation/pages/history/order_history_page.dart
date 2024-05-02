@@ -1,34 +1,17 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
 class OrderHistoryPage extends StatefulWidget {
-  const OrderHistoryPage({super.key});
+  const OrderHistoryPage({Key? key}) : super(key: key);
 
   @override
-  State<OrderHistoryPage> createState() => _OrderHistoryPageState();
+  OrderHistoryPageState createState() => OrderHistoryPageState();
 }
 
-class _OrderHistoryPageState extends State<OrderHistoryPage> {
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(
-      body: HistoryTabBarPage(),
-    );
-  }
-}
-
-class HistoryTabBarPage extends StatefulWidget {
-  const HistoryTabBarPage({Key? key}) : super(key: key);
-
-  @override
-  HistoryTabBarPageState createState() => HistoryTabBarPageState();
-}
-
-class HistoryTabBarPageState extends State<HistoryTabBarPage> with SingleTickerProviderStateMixin {
+class OrderHistoryPageState extends State<OrderHistoryPage> with SingleTickerProviderStateMixin {
   late TabController tabController;
 
   @override
@@ -53,13 +36,13 @@ class HistoryTabBarPageState extends State<HistoryTabBarPage> with SingleTickerP
             'История заказов',
             style: TextStyle(fontSize: 16),
           ),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios_sharp),
-            onPressed: () => context.router.pushAndPopUntil(
-              const ProfileRoute(),
-              predicate: (_) => false,
-            ),
-          ),
+          // leading: IconButton(
+          //   icon: const Icon(Icons.arrow_back_ios_sharp),
+          //   onPressed: () => context.router.pushAndPopUntil(
+          //     const ProfileRoute(),
+          //     predicate: (_) => false,
+          //   ),
+          // ),
           centerTitle: true,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(40),

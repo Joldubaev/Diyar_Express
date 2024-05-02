@@ -84,8 +84,6 @@ class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
       if (res.statusCode == 200) {
         if (res.data != null) {
           List<dynamic> list = res.data;
-          log("List: $list");
-
           return list.map((e) => FoodModel.fromJson(e)).toList();
         }
         return [];

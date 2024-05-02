@@ -1,7 +1,12 @@
+import 'dart:developer';
+
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/features/about_us/presentation/widgets/about_us_type.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class AboutUsPage extends StatefulWidget {
@@ -39,36 +44,55 @@ class AboutUsBody extends StatefulWidget {
 }
 
 class _AboutUsBodyState extends State<AboutUsBody> {
+  final type = AboutUsType.values;
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.only(left: 20, right: 20),
-      children: [
-        HallCardWidget(
-          hallName: 'Чайхана',
-          imagePath: 'assets/images/vip_hall.png',
-          title: 'Изящное переплетение востока и запада',
-          onPressed: () {},
-        ),
-        HallCardWidget(
-          hallName: 'Ресторан',
-          imagePath: 'assets/images/rest_hall.png',
-          title: 'Европейский стиль зала создаст для вас незабываемый отдых',
-          onPressed: () {},
-        ),
-        HallCardWidget(
-          hallName: 'Банкетный зал',
-          imagePath: 'assets/images/vip_hall.png',
-          title: '8 закрытых зала с живой музыкой',
-          onPressed: () {},
-        ),
-        HallCardWidget(
-          hallName: 'VIP зал',
-          imagePath: 'assets/images/vip_hall.png',
-          title: 'Мы проводим торжества, той,',
-          onPressed: () {},
-        )
-      ],
+    return BlocConsumer<AboutUsCubit, AboutUsState>(
+      listener: (context, state) {
+        if (state is AboutUsError) {
+          log('Error: ${state.message}');
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.message),
+              backgroundColor: Colors.red,
+            ),
+          );
+        } else if (state is AboutUsLoaded) {
+          log('Loaded ${state.aboutUsModel}');
+        }
+      },
+      builder: (context, state) {
+        log('State: $state');
+        if (state is AboutUsLoading) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        }
+        return ListView.builder(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          itemCount: type.length,
+          itemBuilder: (context, index) {
+            final type = AboutUsType.values[index];
+            return HallCardWidget(
+              hallName: type.getUIName(context),
+              imagePath: type.getAsset,
+              title: type.getTitle(context),
+              onPressed: () {
+                if (type == AboutUsType.cafe) {
+                  context.router.push(const CofeRoute());
+                } else if (type == AboutUsType.hall) {
+                  context.router.push(const HallRoute());
+                } else if (type == AboutUsType.restoran) {
+                  context.router.push(const RestorantRoute());
+                } else if (type == AboutUsType.vip) {
+                  context.router.push(const VipRoute());
+                }
+              },
+            );
+          },
+        );
+      },
     );
   }
 }
