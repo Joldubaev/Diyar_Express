@@ -13,14 +13,11 @@ class MenuRepositoryImpl implements MenuRepository {
   MenuRepositoryImpl(this._remoteDataSource);
 
   @override
-  Future<List<CategoryModel>> getProductsWithMenu({String? query}) async =>
-      _remoteDataSource.getProductsWithMenu();
+  Future<List<CategoryModel>> getProductsWithMenu({String? query}) async => _remoteDataSource.getProductsWithMenu();
 
   @override
-  Future<List<FoodModel>> searchFoods({String? name}) async =>
-      await _remoteDataSource.searchFoods(name: name);
+  Future<List<FoodModel>> searchFoods({String? name}) async => await _remoteDataSource.searchFoods(name: name);
 
   @override
-  Future<List<FoodModel>> getPopularFoods() async =>
-      await _remoteDataSource.getPopulartFoods();
+  Future<List<FoodModel>> getPopularFoods() async => await _remoteDataSource.getPopulartFoods();
 }
