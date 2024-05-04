@@ -70,14 +70,7 @@ class _LoginFormState extends State<LoginForm> {
             const SizedBox(height: 20),
             BlocConsumer<SignInCubit, SignInState>(
               listener: (context, state) {
-                if (state is SignInFailure) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text("Логин или пароль неверный"),
-                      backgroundColor: Color.fromARGB(255, 150, 33, 49),
-                    ),
-                  );
-                } else if (state is SignInSuccessWithUser) {
+                if (state is SignInSuccessWithUser) {
                   var role = sl<SharedPreferences>().getString(AppConst.userRole);
                   if (role?.toLowerCase() == "user".toLowerCase()) {
                     context.router.pushAndPopUntil(

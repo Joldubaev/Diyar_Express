@@ -30,7 +30,7 @@ class _MenuHeaderWidgetState extends State<MenuHeaderWidget> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                const MenuToggleButton(),
+                MenuToggleButton(onTapItem: widget.onTapMenu),
                 if (isSearchVisible)
                   Expanded(
                     child: Padding(

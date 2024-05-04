@@ -24,6 +24,7 @@ Future<void> init() async {
   sl.registerFactory(() => MenuCubit(sl()));
   sl.registerFactory(() => CartCubit(sl()));
   sl.registerFactory(() => PopularCubit(sl()));
+  sl.registerFactory(() => OrderCubit());
   sl.registerFactory(() => AboutUsCubit(sl()));
 
 // AUTH

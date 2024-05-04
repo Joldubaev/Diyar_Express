@@ -7,9 +7,11 @@ import 'package:diyar_express/features/map/data/models/location_model.dart';
 import 'package:diyar_express/features/map/data/repositories/location_repo.dart';
 import 'package:diyar_express/features/map/data/repositories/yandex_service.dart';
 import 'package:diyar_express/features/map/presentation/widgets/coordinats.dart';
+import 'package:diyar_express/features/order/order.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:yandex_mapkit/yandex_mapkit.dart';
 import 'package:geolocator/geolocator.dart';
@@ -124,7 +126,9 @@ class _OrderMapPageState extends State<OrderMapPage> {
                       cancelPressed: () => Navigator.pop(context),
                       confirmPressed: () {
                         Navigator.pop(context);
-                        context.router.maybePop(address);
+                        context.router.maybePop().then((value) {
+                          context.read<OrderCubit>().changeAddress(address ?? '');
+                        });
                       },
                     );
                   },

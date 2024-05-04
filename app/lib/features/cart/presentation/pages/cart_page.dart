@@ -26,10 +26,7 @@ class CartPage extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.history, size: 30),
-            onPressed: () => context.router.pushAndPopUntil(
-              const OrderHistoryRoute(),
-              predicate: (_) => false,
-            ),
+            onPressed: () => context.pushRoute(const OrderHistoryRoute()),
           )
         ],
       ),
@@ -63,13 +60,17 @@ class CartPage extends StatelessWidget {
                             child: TotalPriceWidget(
                               price: carts.fold(
                                 0,
-                                (previousValue, element) => previousValue + element.food!.price! * element.quantity!,
+                                (previousValue, element) =>
+                                    previousValue +
+                                    element.food!.price! * element.quantity!,
                               ),
                               sale: 0,
                               dishesPrice: 0,
                               totalPrice: carts.fold(
                                 0,
-                                (previousValue, element) => previousValue + element.food!.price! * element.quantity!,
+                                (previousValue, element) =>
+                                    previousValue +
+                                    element.food!.price! * element.quantity!,
                               ),
                             ),
                           ),
@@ -82,10 +83,8 @@ class CartPage extends StatelessWidget {
                               ),
                               bgColor: AppColors.primary,
                               title: 'Оформить заказ',
-                              onTap: () => context.router.pushAndPopUntil(
-                                const CreateOrderRoute(),
-                                predicate: (_) => false,
-                              ),
+                              onTap: () =>
+                                  context.pushRoute(const CreateOrderRoute()),
                             ),
                           ),
                           const SizedBox(height: 20),

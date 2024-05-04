@@ -18,20 +18,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const SafeArea(child: Scaffold(body: HomaPageBody()));
-  }
-}
-
-class HomaPageBody extends StatefulWidget {
-  const HomaPageBody({super.key});
-
-  @override
-  State<HomaPageBody> createState() => _HomaPageBodyState();
-}
-
-class _HomaPageBodyState extends State<HomaPageBody> {
   List<FoodModel> menu = [];
 
   @override
@@ -42,48 +28,43 @@ class _HomaPageBodyState extends State<HomaPageBody> {
   }
 
   @override
-  void dispose() {
-    context.read<PopularCubit>().close();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<PopularCubit, PopularState>(
-        listener: (context, state) {
-          if (state is PopularError) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: AppColors.primary,
-              ),
-            );
-          } else if (state is PopularLoaded) {
-            menu = state.products;
-          }
-        },
-        builder: (context, state) {
-          return SingleChildScrollView(
-            child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
+      body: SafeArea(
+        child: BlocConsumer<PopularCubit, PopularState>(
+          listener: (context, state) {
+            if (state is PopularError) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(state.message),
+                  backgroundColor: AppColors.primary,
+                ),
+              );
+            } else if (state is PopularLoaded) {
+              menu = state.products;
+            }
+          },
+          builder: (context, state) {
+            return SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                children: [
+                  const SizedBox(height: 20),
+                  Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 20),
                       Align(
                         alignment: Alignment.center,
                         child: Image.asset('assets/images/app_logo.png',
-                            height: 60, fit: BoxFit.fill, color: AppColors.primary),
+                            height: 60,
+                            fit: BoxFit.fill,
+                            color: AppColors.primary),
                       ),
                       const Divider(color: AppColors.primary, thickness: 1),
-                      const Text(
-                        'Акции',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
+                      const Text('Акции',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       SaleWidget(
                         title: 'Скидка 10%',
@@ -109,16 +90,20 @@ class _HomaPageBodyState extends State<HomaPageBody> {
                             List cart = [];
                             if (snapshot.hasData) {
                               cart = snapshot.data ?? [];
+                            }else if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const Center(child: CircularProgressIndicator());
                             }
                             return ListView.separated(
-                              separatorBuilder: (context, index) => const SizedBox(width: 10),
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(width: 10),
                               scrollDirection: Axis.horizontal,
                               itemCount: menu.length,
                               itemBuilder: (context, index) {
                                 final food = menu[index];
                                 final cartItem = cart.firstWhere(
                                   (element) => element.food?.id == food.id,
-                                  orElse: () => CartItemModel(food: food, quantity: 0),
+                                  orElse: () =>
+                                      CartItemModel(food: food, quantity: 0),
                                 );
                                 return SizedBox(
                                   width: 160,
@@ -133,36 +118,47 @@ class _HomaPageBodyState extends State<HomaPageBody> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Text('О нас', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text('О нас',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       CustonClipRectWidget(
-                          image: 'assets/images/about.png', onTap: () => context.router.push(const AboutUsRoute())),
+                        image: 'assets/images/about.png',
+                        onTap: () => context.router.push(const AboutUsRoute()),
+                      ),
                       const SizedBox(height: 10),
-                      const Text('Новости', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text('Новости',
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       SaleWidget(
-                          title: 'Новости',
-                          description: 'Последние новости',
-                          image: 'assets/images/news.png',
-                          onTap: () => context.router.push(const NewsRoute())),
+                        title: 'Новости',
+                        description: 'Последние новости',
+                        image: 'assets/images/news.png',
+                        onTap: () => context.router.push(const NewsRoute()),
+                      ),
                       const SizedBox(height: 20),
                       Container(
-                          padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                          decoration: BoxDecoration(
-                            color: AppColors.primary,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: SettingsTile(
-                              icon: Icons.phone,
-                              text: 'Контакты',
-                              onPressed: () => context.router.push(const ContactRoute()))),
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        decoration: BoxDecoration(
+                          color: AppColors.primary,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: SettingsTile(
+                          icon: Icons.phone,
+                          text: 'Контакты',
+                          onPressed: () =>
+                              context.router.push(const ContactRoute()),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ],
-            ),
-          );
-        },
+                  const SizedBox(height: 20),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }
