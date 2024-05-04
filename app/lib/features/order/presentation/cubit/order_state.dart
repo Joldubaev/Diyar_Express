@@ -8,3 +8,16 @@ abstract class OrderState extends Equatable {
 }
 
 class OrderInitial extends OrderState {}
+
+class OrderAddressLoading extends OrderState {}
+
+class OrderAddressChanged extends OrderState {
+  final String address;
+
+  const OrderAddressChanged({required this.address});
+
+  @override
+  List<Object> get props => [address];
+}
+
+

@@ -1015,6 +1015,9 @@ PODS:
   - Flutter (1.0.0)
   - flutter_native_splash (0.0.1):
     - Flutter
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
   - geolocator_apple (1.2.0):
     - Flutter
   - GoogleUtilities/AppDelegateSwizzler (7.13.2):
@@ -1138,6 +1141,7 @@ PODS:
   - sqflite (0.0.3):
     - Flutter
     - FlutterMacOS
+  - Toast (4.1.1)
   - url_launcher_ios (0.0.1):
     - Flutter
   - yandex_mapkit (0.0.1):
@@ -1152,6 +1156,7 @@ DEPENDENCIES:
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - Flutter (from `Flutter`)
   - flutter_native_splash (from `.symlinks/plugins/flutter_native_splash/ios`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - geolocator_apple (from `.symlinks/plugins/geolocator_apple/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - permission_handler_apple (from `.symlinks/plugins/permission_handler_apple/ios`)
@@ -1161,7 +1166,7 @@ DEPENDENCIES:
   - yandex_mapkit (from `.symlinks/plugins/yandex_mapkit/ios`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - abseil
     - BoringSSL-GRPC
     - Firebase
@@ -1182,6 +1187,7 @@ SPEC REPOS:
     - PromisesObjC
     - ReachabilitySwift
     - RecaptchaInterop
+    - Toast
     - YandexMapsMobile
 
 EXTERNAL SOURCES:
@@ -1197,6 +1203,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   flutter_native_splash:
     :path: ".symlinks/plugins/flutter_native_splash/ios"
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   geolocator_apple:
     :path: ".symlinks/plugins/geolocator_apple/ios"
   path_provider_foundation:
@@ -1230,6 +1238,7 @@ SPEC CHECKSUMS:
   FirebaseSharedSwift: 0274086954b1b2d5fd7e829eccc587044d72a4ba
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_native_splash: edf599c81f74d093a4daf8e17bd7a018854bc778
+  fluttertoast: 9f2f8e81bb5ce18facb9748d7855bf5a756fe3db
   geolocator_apple: 6cbaf322953988e009e5ecb481f07efece75c450
   GoogleUtilities: c56430aef51a1aa57b25da78c3f8397e522c67b7
   "gRPC-C++": e725ef63c4475d7cdb7e2cf16eb0fde84bd9ee51
@@ -1244,10 +1253,11 @@ SPEC CHECKSUMS:
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   shared_preferences_foundation: b4c3b4cddf1c21f02770737f147a3f5da9d39695
   sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
+  Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
   url_launcher_ios: 6116280ddcfe98ab8820085d8d76ae7449447586
   yandex_mapkit: 412fd14410dbfdc2da0bddfc478a81d3ab480b35
   YandexMapsMobile: 2390e02fa0bc10fa2a26dc7c22c7687bc7128e33
 
-PODFILE CHECKSUM: 00844ca26ed53273bb766dd573b2a13f0d548f6e
+PODFILE CHECKSUM: 8205b2ee731b211e06d9b1d070b6b6489f1c9257
 
-COCOAPODS: 1.14.3
+COCOAPODS: 1.15.2

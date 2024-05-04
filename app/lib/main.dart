@@ -34,6 +34,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<CartCubit>()),
         BlocProvider(create: (context) => di.sl<MenuCubit>()),
         BlocProvider(create: (context) => di.sl<PopularCubit>()),
+        BlocProvider(create: (context) => di.sl<OrderCubit>()),
         BlocProvider(create: (context) => di.sl<AboutUsCubit>()),
       ],
       child: MaterialApp.router(

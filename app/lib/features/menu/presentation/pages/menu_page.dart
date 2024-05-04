@@ -37,146 +37,158 @@ class _MenuPageState extends State<MenuPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocConsumer<MenuCubit, MenuState>(
-        listener: (context, state) {
-          if (state is GetMenuLoaded) {
-            menu = state.categories;
-          }
-        },
-        builder: (context, state) {
-          if (state is GetMenuLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is GetMenuFailure) {
-            return const Center(child: Text('Ошибка загрузки данных'));
-          }
-          return SafeArea(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                MenuHeaderWidget(
-                  onTapMenu: (int idx) {
-                    _scrollToCategory(idx);
-                    context.maybePop();
-                  },
-                ),
-                SizedBox(
-                  height: 35,
-                  child: ListView.separated(
-                    padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                    itemBuilder: (context, index) => GestureDetector(
-                      onTap: () => _scrollToCategory(index),
-                      child: Container(
-                        padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
-                        decoration: BoxDecoration(
-                          color: index == _activeIndex
-                              ? AppColors.primary
-                              : Colors.transparent,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: AppColors.primary),
-                        ),
-                        child: Center(
-                          child: Text(
-                            "${menu[index].category?.name}",
-                            style: TextStyle(
-                              color: index == _activeIndex
-                                  ? Colors.white
-                                  : AppColors.primary,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(width: 10),
-                    itemCount: menu.length,
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-                const SizedBox(height: 10),
-                Expanded(
-                  child: NotificationListener<ScrollNotification>(
-                    onNotification: (scrollNotification) {
-                      if (scrollNotification is ScrollUpdateNotification) {
-                        double position = scrollNotification.metrics.pixels;
-                        double totalHeight = 0.0;
-                        for (int i = 0; i < menu.length; i++) {
-                          totalHeight += _calculateCategoryHeight(i);
-                          if (position < totalHeight) {
-                            setState(() => _activeIndex = i);
-                            break;
-                          }
-                        }
-                      }
-                      return false;
-                    },
-                    child: ListView.builder(
-                      controller: _scrollController,
-                      itemCount: menu.length,
-                      itemBuilder: (context, index) {
-                        final category = menu[index];
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 8),
-                              child: Text(
-                                category.category?.name ?? '',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: index == _activeIndex
-                                      ? AppColors.primary
-                                      : Colors.black,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            MenuHeaderWidget(
+              onTapMenu: (int idx) {
+                _scrollToCategory(idx);
+                context.maybePop();
+              },
+            ),
+            BlocConsumer<MenuCubit, MenuState>(
+              listener: (context, state) {
+                if (state is GetMenuLoaded) {
+                  setState(() => menu = state.categories);
+                }
+              },
+              builder: (context, state) {
+                if (state is GetMenuLoading) {
+                  return const Expanded(child: Center(child: CircularProgressIndicator()));
+                } else if (state is GetMenuFailure) {
+                  return const Center(
+                    child: Text("Что то пошло не так! Попробуйте позже!"),
+                  );
+                }
+                return Expanded(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 35,
+                        child: ListView.separated(
+                          padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                          itemBuilder: (context, index) => GestureDetector(
+                            onTap: () => _scrollToCategory(index),
+                            child: Container(
+                              padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                              decoration: BoxDecoration(
+                                color: index == _activeIndex
+                                    ? AppColors.primary
+                                    : Colors.transparent,
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: AppColors.primary),
+                              ),
+                              child: Center(
+                                child: Text(
+                                  "${menu[index].category?.name}",
+                                  style: TextStyle(
+                                    color: index == _activeIndex
+                                        ? Colors.white
+                                        : AppColors.primary,
+                                  ),
                                 ),
                               ),
                             ),
-                            StreamBuilder<List<CartItemModel>>(
-                                stream: context.read<CartCubit>().cart,
-                                builder: (context, snapshot) {
-                                  List cart = [];
-                                  if (snapshot.hasData) {
-                                    cart = snapshot.data ?? [];
-                                  }
-                                  return GridView.count(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10,
+                          ),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 10),
+                          itemCount: menu.length,
+                          scrollDirection: Axis.horizontal,
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      Expanded(
+                        child: NotificationListener<ScrollNotification>(
+                          onNotification: (scrollNotification) {
+                            if (scrollNotification
+                                is ScrollUpdateNotification) {
+                              double position =
+                                  scrollNotification.metrics.pixels;
+                              double totalHeight = 0.0;
+                              for (int i = 0; i < menu.length; i++) {
+                                totalHeight += _calculateCategoryHeight(i);
+                                if (position < totalHeight) {
+                                  setState(() => _activeIndex = i);
+                                  break;
+                                }
+                              }
+                            }
+                            return false;
+                          },
+                          child: ListView.builder(
+                            controller: _scrollController,
+                            itemCount: menu.length,
+                            itemBuilder: (context, index) {
+                              final category = menu[index];
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Padding(
                                     padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    childAspectRatio: 0.72,
-                                    shrinkWrap: true,
-                                    physics:
-                                        const NeverScrollableScrollPhysics(),
-                                    children: List.generate(
-                                      category.foods?.length ?? 0,
-                                      (index) {
-                                        final food = category.foods![index];
-                                        final cartItem = cart.firstWhere(
-                                          (element) =>
-                                              element.food?.id == food.id,
-                                          orElse: () => CartItemModel(
-                                              food: food, quantity: 0),
-                                        );
-                                        return ProductItemWidget(
-                                          food: food,
-                                          quantity: cartItem.quantity ?? 0,
-                                        );
-                                      },
+                                        horizontal: 16, vertical: 8),
+                                    child: Text(
+                                      category.category?.name ?? '',
+                                      style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: index == _activeIndex
+                                            ? AppColors.primary
+                                            : Colors.black,
+                                      ),
                                     ),
-                                  );
-                                }),
-                            const SizedBox(height: 15),
-                          ],
-                        );
-                      },
-                    ),
+                                  ),
+                                  StreamBuilder<List<CartItemModel>>(
+                                      stream: context.read<CartCubit>().cart,
+                                      builder: (context, snapshot) {
+                                        List cart = [];
+                                        if (snapshot.hasData) {
+                                          cart = snapshot.data ?? [];
+                                        }
+                                        return GridView.count(
+                                          crossAxisCount: 2,
+                                          mainAxisSpacing: 10,
+                                          crossAxisSpacing: 10,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16),
+                                          childAspectRatio: 0.72,
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          children: List.generate(
+                                            category.foods?.length ?? 0,
+                                            (index) {
+                                              final food =
+                                                  category.foods![index];
+                                              final cartItem = cart.firstWhere(
+                                                (element) =>
+                                                    element.food?.id == food.id,
+                                                orElse: () => CartItemModel(
+                                                    food: food, quantity: 0),
+                                              );
+                                              return ProductItemWidget(
+                                                food: food,
+                                                quantity:
+                                                    cartItem.quantity ?? 0,
+                                              );
+                                            },
+                                          ),
+                                        );
+                                      }),
+                                  const SizedBox(height: 15),
+                                ],
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-              ],
+                );
+              },
             ),
-          );
-        },
+          ],
+        ),
       ),
     );
   }

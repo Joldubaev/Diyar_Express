@@ -5,6 +5,7 @@ import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/shared/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class AuthRemoteDataSource {
@@ -74,10 +75,9 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         log("Token: ${res.data['accessToken']}");
       }
     } catch (e) {
-      if (e is DioException) {
-        throw WrongPasswordException();
-      }
       log("$e");
+      showToast('Неверный логин или пароль', isError: true);
+      throw ServerException();
     }
   }
 
@@ -92,6 +92,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           access: res.data['accessToken'],
           email: user.email!,
         );
+      } else {
+        if (res.statusCode == 418) {
+          showToast('Такой аккаунт уже существует', isError: true);
+        }
+        throw ServerException();
       }
     } catch (e) {
       log("$e");
