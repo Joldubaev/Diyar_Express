@@ -63,12 +63,18 @@ class _MenuPageState extends State<MenuPage> {
                   height: 35,
                   child: ListView.separated(
                     padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(width: 10),
+                    itemCount: menu.length,
+                    scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) => GestureDetector(
                       onTap: () => _scrollToCategory(index),
                       child: Container(
                         padding: const EdgeInsets.fromLTRB(12, 0, 12, 0),
                         decoration: BoxDecoration(
-                          color: index == _activeIndex ? AppColors.primary : Colors.transparent,
+                          color: index == _activeIndex
+                              ? AppColors.primary
+                              : Colors.transparent,
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: AppColors.primary),
                         ),
@@ -76,20 +82,14 @@ class _MenuPageState extends State<MenuPage> {
                           child: Text(
                             "${menu[index].category?.name}",
                             style: TextStyle(
-                              color: index == _activeIndex ? Colors.white : AppColors.primary,
-
+                              color: index == _activeIndex
+                                  ? Colors.white
+                                  : AppColors.primary,
                             ),
                           ),
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(width: 10),
-                          itemCount: menu.length,
-                          scrollDirection: Axis.horizontal,
                         ),
                       ),
                     ),
-                    separatorBuilder: (context, index) => const SizedBox(width: 10),
-                    itemCount: menu.length,
-                    scrollDirection: Axis.horizontal,
                   ),
                 ),
                 const SizedBox(height: 10),
@@ -118,13 +118,16 @@ class _MenuPageState extends State<MenuPage> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 8),
                               child: Text(
                                 category.category?.name ?? '',
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: index == _activeIndex ? AppColors.primary : Colors.black,
+                                  color: index == _activeIndex
+                                      ? AppColors.primary
+                                      : Colors.black,
                                 ),
                               ),
                             ),
@@ -139,77 +142,76 @@ class _MenuPageState extends State<MenuPage> {
                                     crossAxisCount: 2,
                                     mainAxisSpacing: 10,
                                     crossAxisSpacing: 10,
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
                                     childAspectRatio: 0.72,
                                     shrinkWrap: true,
-                                    physics: const NeverScrollableScrollPhysics(),
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
                                     children: List.generate(
                                       category.foods?.length ?? 0,
                                       (index) {
                                         final food = category.foods![index];
                                         final cartItem = cart.firstWhere(
-                                          (element) => element.food?.id == food.id,
-                                          orElse: () => CartItemModel(food: food, quantity: 0),
+                                          (element) =>
+                                              element.food?.id == food.id,
+                                          orElse: () => CartItemModel(
+                                              food: food, quantity: 0),
                                         );
                                         return ProductItemWidget(
                                           food: food,
                                           quantity: cartItem.quantity ?? 0,
                                         );
                                       },
-
                                     ),
-                                  ),
-                                  StreamBuilder<List<CartItemModel>>(
-                                      stream: context.read<CartCubit>().cart,
-                                      builder: (context, snapshot) {
-                                        List cart = [];
-                                        if (snapshot.hasData) {
-                                          cart = snapshot.data ?? [];
-                                        }
-                                        return GridView.count(
-                                          crossAxisCount: 2,
-                                          mainAxisSpacing: 10,
-                                          crossAxisSpacing: 10,
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 16),
-                                          childAspectRatio: 0.72,
-                                          shrinkWrap: true,
-                                          physics:
-                                              const NeverScrollableScrollPhysics(),
-                                          children: List.generate(
-                                            category.foods?.length ?? 0,
-                                            (index) {
-                                              final food =
-                                                  category.foods![index];
-                                              final cartItem = cart.firstWhere(
-                                                (element) =>
-                                                    element.food?.id == food.id,
-                                                orElse: () => CartItemModel(
-                                                    food: food, quantity: 0),
-                                              );
-                                              return ProductItemWidget(
-                                                food: food,
-                                                quantity:
-                                                    cartItem.quantity ?? 0,
-                                              );
-                                            },
-                                          ),
+                                  );
+                                }),
+                            StreamBuilder<List<CartItemModel>>(
+                                stream: context.read<CartCubit>().cart,
+                                builder: (context, snapshot) {
+                                  List cart = [];
+                                  if (snapshot.hasData) {
+                                    cart = snapshot.data ?? [];
+                                  }
+                                  return GridView.count(
+                                    crossAxisCount: 2,
+                                    mainAxisSpacing: 10,
+                                    crossAxisSpacing: 10,
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16),
+                                    childAspectRatio: 0.72,
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    children: List.generate(
+                                      category.foods?.length ?? 0,
+                                      (index) {
+                                        final food = category.foods![index];
+                                        final cartItem = cart.firstWhere(
+                                          (element) =>
+                                              element.food?.id == food.id,
+                                          orElse: () => CartItemModel(
+                                              food: food, quantity: 0),
                                         );
-                                      }),
-                                  const SizedBox(height: 15),
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
+                                        return ProductItemWidget(
+                                          food: food,
+                                          quantity: cartItem.quantity ?? 0,
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }),
+                            const SizedBox(height: 15),
+                          ],
+                        );
+                      },
+                    ),
                   ),
-                );
-              },
+                ),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -228,7 +230,8 @@ class _MenuPageState extends State<MenuPage> {
 
   double _calculateCategoryHeight(int index) {
     double categoryHeight = 40.0; // Высота категории
-    double productsHeight = (menu[index].foods?.length ?? 0) * 120.0; // Высота продуктов
+    double productsHeight =
+        (menu[index].foods?.length ?? 0) * 120.0; // Высота продуктов
     return categoryHeight + productsHeight;
   }
 }
