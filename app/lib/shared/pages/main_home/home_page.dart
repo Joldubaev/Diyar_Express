@@ -5,6 +5,7 @@ import 'package:diyar_express/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
 import 'package:diyar_express/shared/cubit/popular_cubit.dart';
+import 'package:diyar_express/shared/pages/widgets/custom_widget.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -57,16 +58,13 @@ class _HomePageState extends State<HomePage> {
                       Align(
                         alignment: Alignment.center,
                         child: Image.asset('assets/images/app_logo.png',
-                            height: 60,
-                            fit: BoxFit.fill,
-                            color: AppColors.primary),
+                            height: 60, fit: BoxFit.fill, color: AppColors.primary),
                       ),
                       const Divider(color: AppColors.primary, thickness: 1),
-                      const Text('Акции',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text('Акции', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
-                      SaleWidget(
+                      CustomWidget(
+                        discount: int.parse('10'),
                         title: 'Скидка 10%',
                         description: 'На все блюда',
                         image: 'assets/images/banner.png',
@@ -90,20 +88,18 @@ class _HomePageState extends State<HomePage> {
                             List cart = [];
                             if (snapshot.hasData) {
                               cart = snapshot.data ?? [];
-                            }else if (snapshot.connectionState == ConnectionState.waiting) {
+                            } else if (snapshot.connectionState == ConnectionState.waiting) {
                               return const Center(child: CircularProgressIndicator());
                             }
                             return ListView.separated(
-                              separatorBuilder: (context, index) =>
-                                  const SizedBox(width: 10),
+                              separatorBuilder: (context, index) => const SizedBox(width: 10),
                               scrollDirection: Axis.horizontal,
                               itemCount: menu.length,
                               itemBuilder: (context, index) {
                                 final food = menu[index];
                                 final cartItem = cart.firstWhere(
                                   (element) => element.food?.id == food.id,
-                                  orElse: () =>
-                                      CartItemModel(food: food, quantity: 0),
+                                  orElse: () => CartItemModel(food: food, quantity: 0),
                                 );
                                 return SizedBox(
                                   width: 160,
@@ -118,20 +114,17 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Text('О нас',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text('О нас', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       CustonClipRectWidget(
                         image: 'assets/images/about.png',
                         onTap: () => context.router.push(const AboutUsRoute()),
                       ),
                       const SizedBox(height: 10),
-                      const Text('Новости',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold)),
+                      const Text('Новости', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
-                      SaleWidget(
+                      CustomWidget(
+                        discount: 0,
                         title: 'Новости',
                         description: 'Последние новости',
                         image: 'assets/images/news.png',
@@ -147,8 +140,7 @@ class _HomePageState extends State<HomePage> {
                         child: SettingsTile(
                           icon: Icons.phone,
                           text: 'Контакты',
-                          onPressed: () =>
-                              context.router.push(const ContactRoute()),
+                          onPressed: () => context.router.push(const ContactRoute()),
                         ),
                       ),
                     ],

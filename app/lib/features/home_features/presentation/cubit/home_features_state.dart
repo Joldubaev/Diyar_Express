@@ -7,12 +7,12 @@ final class HomeFeaturesInitial extends HomeFeaturesState {}
 final class HomeFeaturesLoading extends HomeFeaturesState {}
 
 final class HomeFeaturesLoaded extends HomeFeaturesState {
-  final List<NewsModel> news;
-  final List<SaleModel> sales;
+  final List<NewsModel>? news;
+  final List<SaleModel>? sales;
 
   HomeFeaturesLoaded({
-    required this.news,
-    required this.sales,
+    this.news,
+    this.sales,
   });
 }
 

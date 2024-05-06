@@ -10,12 +10,21 @@ class HomeFeaturesCubit extends Cubit<HomeFeaturesState> {
 
   final HomeFeaturesRepo homeFeaturesRepo;
 
-  Future<void> getHomeFeatures() async {
+  void getNews() async {
     emit(HomeFeaturesLoading());
     try {
       final news = await homeFeaturesRepo.getNews();
+      emit(HomeFeaturesLoaded(news: news));
+    } catch (e) {
+      emit(HomeFeaturesError(message: e.toString()));
+    }
+  }
+
+  void getSales() async {
+    emit(HomeFeaturesLoading());
+    try {
       final sales = await homeFeaturesRepo.getSales();
-      emit(HomeFeaturesLoaded(news: news, sales: sales));
+      emit(HomeFeaturesLoaded(sales: sales));
     } catch (e) {
       emit(HomeFeaturesError(message: e.toString()));
     }

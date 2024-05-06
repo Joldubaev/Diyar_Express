@@ -19,5 +19,3 @@ class OrderAddressChanged extends OrderState {
   @override
   List<Object> get props => [address];
 }
-
-

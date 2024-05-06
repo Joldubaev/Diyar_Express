@@ -11,6 +11,8 @@ import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/home_features/presentation/cubit/home_features_cubit.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await di.init();
@@ -36,6 +38,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<PopularCubit>()),
         BlocProvider(create: (context) => di.sl<OrderCubit>()),
         BlocProvider(create: (context) => di.sl<AboutUsCubit>()),
+        BlocProvider(create: (context) => di.sl<HomeFeaturesCubit>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

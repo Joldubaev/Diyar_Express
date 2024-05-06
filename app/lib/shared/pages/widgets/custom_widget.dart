@@ -1,16 +1,18 @@
-import 'package:diyar_express/shared/shared.dart';
+import 'package:diyar_express/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class SaleWidget extends StatelessWidget {
-  const SaleWidget({
+class CustomWidget extends StatelessWidget {
+  const CustomWidget({
     super.key,
     required this.title,
     required this.description,
     required this.image,
     required this.onTap,
+    required this.discount,
   });
 
   final String title;
+  final int discount;
   final String description;
   final String image;
   final void Function() onTap;

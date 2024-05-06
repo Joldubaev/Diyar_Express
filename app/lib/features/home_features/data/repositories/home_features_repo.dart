@@ -10,7 +10,7 @@ abstract class HomeFeaturesRepo {
 class HomeFeaturesRepoImpl implements HomeFeaturesRepo {
   final HomeRemoteDataSource remoteDataSource;
 
-  HomeFeaturesRepoImpl({required this.remoteDataSource});
+  HomeFeaturesRepoImpl(this.remoteDataSource);
 
   @override
   Future<List<NewsModel>> getNews() async {

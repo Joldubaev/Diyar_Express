@@ -43,7 +43,7 @@ class ApiConst {
   // about us
   static String getAboutUs({required String type}) => "http://20.55.72.226:8080/about-us/information?about=$type";
   // sale
-  static const getSales = "http://20.55.72.226:8080/sale/get-all-sale";
+  static const getSales = "http://20.55.72.226:8080/sale/get-all-sales";
   //news
-  static const getNews = "http://20.55.72.226:8080/admin/get-all-news";
+  static const getNews = "http://20.55.72.226:8080/news/get-all-news";
 }
