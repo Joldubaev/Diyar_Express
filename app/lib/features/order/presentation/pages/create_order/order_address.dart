@@ -17,8 +17,7 @@ class DeliveryFormPage extends StatefulWidget {
 
 class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _phoneController =
-      TextEditingController(text: '+996');
+  final TextEditingController _phoneController = TextEditingController(text: '+996');
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _houseController = TextEditingController();
   final TextEditingController _apartmentController = TextEditingController();
@@ -227,8 +226,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
               SubmitButtonWidget(
                 title: 'Оформить заказ',
                 bgColor: theme.primaryColor,
-                textStyle:
-                    theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                textStyle: theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     context.router.push(const OrderSuccess());

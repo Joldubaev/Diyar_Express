@@ -12,6 +12,9 @@ import 'package:get_it/get_it.dart';
 
 import 'features/cart/data/datasources/cart_remote_data_source.dart';
 import 'features/cart/data/repository/cart_repository.dart';
+import 'features/home_features/data/data_source/remote_data_source.dart';
+import 'features/home_features/data/repositories/home_features_repo.dart';
+import 'features/home_features/presentation/cubit/home_features_cubit.dart';
 import 'features/profile/data/datasources/user_remote_data_source.dart';
 
 final sl = GetIt.instance;
@@ -26,6 +29,7 @@ Future<void> init() async {
   sl.registerFactory(() => PopularCubit(sl()));
   sl.registerFactory(() => OrderCubit());
   sl.registerFactory(() => AboutUsCubit(sl()));
+  sl.registerFactory(() => HomeFeaturesCubit(sl()));
 
 // AUTH
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
@@ -45,6 +49,10 @@ Future<void> init() async {
   // Menu
   sl.registerLazySingleton<MenuRepository>(() => MenuRepositoryImpl(sl()));
   sl.registerLazySingleton<MenuRemoteDataSource>(() => MenuRemoteDataSourceImpl(sl(), sl()));
+
+  // HomeFeatures
+  sl.registerLazySingleton<HomeRemoteDataSource>(() => HomeFeaturesRepositoryImpl(sl()));
+  sl.registerLazySingleton<HomeFeaturesRepo>(() => HomeFeaturesRepoImpl(sl()));
 
   // Cart
   sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(sl()));

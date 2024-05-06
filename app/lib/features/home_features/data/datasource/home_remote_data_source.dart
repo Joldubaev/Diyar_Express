@@ -9,10 +9,10 @@ abstract class HomeRemoteDataSource {
   Future<List<SaleModel>> getSales();
 }
 
-class RemoteDataSourceImpl implements HomeRemoteDataSource {
+class HomeFeaturesRepositoryImpl implements HomeRemoteDataSource {
   final Dio client;
 
-  RemoteDataSourceImpl({required this.client});
+  HomeFeaturesRepositoryImpl(this.client);
 
   @override
   Future<List<NewsModel>> getNews() async {
