@@ -27,7 +27,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _userName = TextEditingController();
 
-  PaymentTypeDelivery? _paymentType;
+  PaymentTypeDelivery _paymentType = PaymentTypeDelivery.cash;
 
   @override
   void dispose() {
@@ -176,11 +176,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                     value: PaymentTypeDelivery.cash,
                     groupValue: _paymentType,
                     onChanged: (value) {
-                      setState(
-                        () {
-                          _paymentType = value;
-                        },
-                      );
+                      setState(() => _paymentType = value!);
                     },
                   ),
                   const Text('Наличными курьеру')
@@ -193,7 +189,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                     value: PaymentTypeDelivery.card,
                     groupValue: _paymentType,
                     onChanged: (value) {
-                      setState(() => _paymentType = value);
+                      setState(() => _paymentType = value!);
                     },
                   ),
                   const Text('Картой курьеру (Post terminal)')
@@ -206,9 +202,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                     value: PaymentTypeDelivery.online,
                     groupValue: _paymentType,
                     onChanged: (value) {
-                      setState(() {
-                        _paymentType = value;
-                      });
+                      setState(() => _paymentType = value!);
                     },
                   ),
                   const Text('Онлайн оплата')
