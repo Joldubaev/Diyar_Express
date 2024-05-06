@@ -1,13 +1,13 @@
-import 'package:diyar_express/features/home_features/data/data_source/remote_data_source.dart';
+import 'package:diyar_express/features/home_features/data/datasource/home_remote_data_source.dart';
 import 'package:diyar_express/features/home_features/data/model/news_model.dart';
 import 'package:diyar_express/features/home_features/data/model/sale_model.dart';
 
-abstract class HomeFeaturesRepo {
+abstract class HomeRepository {
   Future<List<NewsModel>> getNews();
   Future<List<SaleModel>> getSales();
 }
 
-class HomeFeaturesRepoImpl implements HomeFeaturesRepo {
+class HomeFeaturesRepoImpl implements HomeRepository {
   final HomeRemoteDataSource remoteDataSource;
 
   HomeFeaturesRepoImpl({required this.remoteDataSource});
