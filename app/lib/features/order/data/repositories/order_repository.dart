@@ -4,6 +4,7 @@ import 'package:diyar_express/features/order/order.dart';
 abstract class OrderRepository {
   Future<List<String>> getOrderHistory();
   Future<void> createOrder(CreateOrderModel order);
+  Future<void> getPickupOrder(PickupOrderModel order);
 }
 
 class OrderRepositoryImpl extends OrderRepository {
@@ -19,5 +20,10 @@ class OrderRepositoryImpl extends OrderRepository {
   @override
   Future<void> createOrder(CreateOrderModel order) async {
     return _orderDataSource.createOrder(order);
+  }
+
+  @override
+  Future<void> getPickupOrder(PickupOrderModel order) async {
+    return _orderDataSource.getPickupOrder(order);
   }
 }

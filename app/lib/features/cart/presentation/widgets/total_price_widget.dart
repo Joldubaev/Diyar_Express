@@ -38,8 +38,7 @@ class _TotalPriceWidgetState extends State<TotalPriceWidget> {
       ),
       child: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
-          context.read<CartCubit>().changeTotalPrice(
-              widget.totalPrice + (context.read<CartCubit>().dishCount * 15));
+          context.read<CartCubit>().changeTotalPrice(widget.totalPrice + (context.read<CartCubit>().dishCount * 15));
 
           return Column(
             children: [
@@ -58,13 +57,11 @@ class _TotalPriceWidgetState extends State<TotalPriceWidget> {
               const Divider(color: Colors.grey),
               CustomTile(
                 title: 'Итого:',
-                trailing:
-                    '${widget.totalPrice + (context.read<CartCubit>().dishCount * 15)} сoм',
+                trailing: '${widget.totalPrice + (context.read<CartCubit>().dishCount * 15)} сoм',
               ),
               Text(
                 'Сумма к оплате указана без доставки!',
-                style:
-                    theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
+                style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
               ),
               const SizedBox(height: 10),
               const DishesWidget(),

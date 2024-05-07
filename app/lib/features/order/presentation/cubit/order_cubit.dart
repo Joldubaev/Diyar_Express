@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:equatable/equatable.dart';
@@ -27,6 +29,17 @@ class OrderCubit extends Cubit<OrderState> {
     emit(CreateOrderLoading());
     try {
       await _orderRepository.createOrder(order);
+      emit(CreateOrderLoaded());
+    } catch (e) {
+      emit(CreateOrderError());
+    }
+  }
+
+  getPickupOrder(PickupOrderModel order) async {
+    emit(CreateOrderLoading());
+    try {
+      await _orderRepository.getPickupOrder(order);
+      log('getPickupOrder success $_orderRepository');
       emit(CreateOrderLoaded());
     } catch (e) {
       emit(CreateOrderError());

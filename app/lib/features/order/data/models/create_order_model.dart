@@ -9,45 +9,48 @@ CreateOrderModel createOrderModelFromJson(String str) => CreateOrderModel.fromJs
 String createOrderModelToJson(CreateOrderModel data) => json.encode(data.toJson());
 
 class CreateOrderModel {
-    String? address;
-    String? comment;
-    int? dishesCount;
-    String? entrance;
-    String? floor;
-    List<OrderFoodItem>? foods;
-    String? houseNumber;
-    String? intercom;
-    String? kvOffice;
-    String? paymentMethod;
-    int? price;
-    String? userName;
-    String? userPhone;
-    int? deliveryCost;
+  String? address;
+  String? comment;
+  int? dishesCount;
+  String? entrance;
+  String? floor;
+  List<OrderFoodItem>? foods;
+  String? houseNumber;
+  String? intercom;
+  String? kvOffice;
+  String? paymentMethod;
+  int? price;
+  String? userName;
+  String? userPhone;
+  int? deliveryPrice;
+  int? sdacha;
 
-    CreateOrderModel({
-        this.address,
-        this.comment,
-        this.dishesCount,
-        this.entrance,
-        this.floor,
-        this.foods,
-        this.houseNumber,
-        this.intercom,
-        this.kvOffice,
-        this.paymentMethod,
-        this.price,
-        this.userName,
-        this.userPhone,
-        this.deliveryCost,
-    });
+  CreateOrderModel({
+    this.address,
+    this.comment,
+    this.dishesCount,
+    this.entrance,
+    this.floor,
+    this.foods,
+    this.houseNumber,
+    this.intercom,
+    this.kvOffice,
+    this.paymentMethod,
+    this.price,
+    this.userName,
+    this.userPhone,
+    this.deliveryPrice,
+    this.sdacha,
+  });
 
-    factory CreateOrderModel.fromJson(Map<String, dynamic> json) => CreateOrderModel(
+  factory CreateOrderModel.fromJson(Map<String, dynamic> json) => CreateOrderModel(
         address: json["address"],
         comment: json["comment"],
         dishesCount: json["dishesCount"],
         entrance: json["entrance"],
         floor: json["floor"],
-        foods: json["foods"] == null ? [] : List<OrderFoodItem>.from(json["foods"]!.map((x) => OrderFoodItem.fromJson(x))),
+        foods:
+            json["foods"] == null ? [] : List<OrderFoodItem>.from(json["foods"]!.map((x) => OrderFoodItem.fromJson(x))),
         houseNumber: json["houseNumber"],
         intercom: json["intercom"],
         kvOffice: json["kvOffice"],
@@ -55,10 +58,11 @@ class CreateOrderModel {
         price: json["price"],
         userName: json["userName"],
         userPhone: json["userPhone"],
-        deliveryCost: json["deliveryCost"],
-    );
+        deliveryPrice: json["deliveryPrice"],
+        sdacha: json["sdacha"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "address": address,
         "comment": comment,
         "dishesCount": dishesCount,
@@ -72,30 +76,31 @@ class CreateOrderModel {
         "price": price,
         "userName": userName,
         "userPhone": userPhone,
-        "deliveryCost": deliveryCost,
-    };
+        "deliveryPrice": deliveryPrice,
+        "sdacha": sdacha,
+      };
 }
 
 class OrderFoodItem {
-    String? name;
-    int? price;
-    int? quantity;
+  String? name;
+  int? price;
+  int? quantity;
 
-    OrderFoodItem({
-        this.name,
-        this.price,
-        this.quantity,
-    });
+  OrderFoodItem({
+    this.name,
+    this.price,
+    this.quantity,
+  });
 
-    factory OrderFoodItem.fromJson(Map<String, dynamic> json) => OrderFoodItem(
+  factory OrderFoodItem.fromJson(Map<String, dynamic> json) => OrderFoodItem(
         name: json["name"],
         price: json["price"],
         quantity: json["quantity"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "name": name,
         "price": price,
         "quantity": quantity,
-    };
+      };
 }

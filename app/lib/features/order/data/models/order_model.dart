@@ -11,9 +11,7 @@ class OrderModel {
   factory OrderModel.fromJson(Map<String, dynamic> json) {
     return OrderModel(
       id: json['id'],
-      foods: json['foods'] != null
-          ? (json['foods'] as List).map((i) => FoodModel.fromJson(i)).toList()
-          : null,
+      foods: json['foods'] != null ? (json['foods'] as List).map((i) => FoodModel.fromJson(i)).toList() : null,
       address: json['address'],
       status: json['status'],
     );
