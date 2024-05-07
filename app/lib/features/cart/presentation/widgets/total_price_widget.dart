@@ -2,19 +2,18 @@ import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TotalPriceWidget extends StatefulWidget {
   const TotalPriceWidget({
     super.key,
     required this.price,
     required this.sale,
-    required this.dishesPrice,
     required this.totalPrice,
   });
 
   final int price;
   final int sale;
-  final int dishesPrice;
   final int totalPrice;
 
   @override
@@ -22,8 +21,6 @@ class TotalPriceWidget extends StatefulWidget {
 }
 
 class _TotalPriceWidgetState extends State<TotalPriceWidget> {
-  int dishesCount = 0;
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -39,34 +36,41 @@ class _TotalPriceWidgetState extends State<TotalPriceWidget> {
           ),
         ],
       ),
-      child: Column(
-        children: [
-          CustomTile(
-            title: 'Стоимость блюд:',
-            trailing: '${widget.price} сoм',
-          ),
-          CustomTile(
-            title: 'Посуда:',
-            trailing: '${widget.dishesPrice} сoм',
-          ),
-          CustomTile(
-            title: 'Скидка:',
-            trailing: '${widget.sale} сoм',
-          ),
-          const Divider(color: Colors.grey),
-          CustomTile(
-            title: 'Итого:',
-            trailing: '${widget.totalPrice + (dishesCount * 15)} сoм',
-          ),
-          Text(
-            'Сумма к оплате указана без доставки!',
-            style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
-          ),
-          const SizedBox(height: 10),
-          DishesWidget(onTap: (count) {
-            setState(() => dishesCount = count);
-          }),
-        ],
+      child: BlocBuilder<CartCubit, CartState>(
+        builder: (context, state) {
+          context.read<CartCubit>().changeTotalPrice(
+              widget.totalPrice + (context.read<CartCubit>().dishCount * 15));
+
+          return Column(
+            children: [
+              CustomTile(
+                title: 'Стоимость блюд:',
+                trailing: '${widget.price} сoм',
+              ),
+              CustomTile(
+                title: 'Посуда:',
+                trailing: '${context.read<CartCubit>().dishCount} сoм',
+              ),
+              CustomTile(
+                title: 'Скидка:',
+                trailing: '${widget.sale} сoм',
+              ),
+              const Divider(color: Colors.grey),
+              CustomTile(
+                title: 'Итого:',
+                trailing:
+                    '${widget.totalPrice + (context.read<CartCubit>().dishCount * 15)} сoм',
+              ),
+              Text(
+                'Сумма к оплате указана без доставки!',
+                style:
+                    theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
+              ),
+              const SizedBox(height: 10),
+              const DishesWidget(),
+            ],
+          );
+        },
       ),
     );
   }

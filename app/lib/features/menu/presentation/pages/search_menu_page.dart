@@ -65,15 +65,16 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
                 if (state.foods.isEmpty) {
                   return const Expanded(
                     child: Center(
-                      child: Text('Ничего не найдено', style: TextStyle(fontSize: 16)),
+                      child: Text(
+                        'Ничего не найдено',
+                        style: TextStyle(fontSize: 16),
+                      ),
                     ),
                   );
                 }
               } else if (state is SearchMenuLoading) {
                 return const Expanded(
-                  child: Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  child: Center(child: CircularProgressIndicator()),
                 );
               } else if (state is SearchMenuFailure) {
                 return const Expanded(
@@ -90,47 +91,37 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
                         ),
                       ),
                     )
-                  : ListView.builder(
-                      itemCount: foods.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: [
-                            StreamBuilder<List<CartItemModel>>(
-                                stream: context.read<CartCubit>().cart,
-                                builder: (context, snapshot) {
-                                  List cart = [];
-                                  if (snapshot.hasData) {
-                                    cart = snapshot.data ?? [];
-                                  }
-                                  return GridView.count(
-                                    crossAxisCount: 2,
-                                    mainAxisSpacing: 10,
-                                    crossAxisSpacing: 10,
-                                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                                    childAspectRatio: 0.72,
-                                    shrinkWrap: true,
-                                    children: List.generate(
-                                      foods.length,
-                                      (index) {
-                                        final food = foods[index];
-                                        final cartItem = cart.firstWhere(
-                                          (element) => element.food?.id == food.id,
-                                          orElse: () => CartItemModel(food: food, quantity: 0),
-                                        );
-                                        return ProductItemWidget(
-                                          food: food,
-                                          quantity: cartItem.quantity ?? 0,
-                                        );
-                                      },
-                                    ),
-                                  );
-                                }),
-                            const SizedBox(height: 15),
-                          ],
+                  : StreamBuilder<List<CartItemModel>>(
+                      stream: context.read<CartCubit>().cart,
+                      builder: (context, snapshot) {
+                        List cart = [];
+                        if (snapshot.hasData) {
+                          cart = snapshot.data ?? [];
+                        }
+                        return GridView.count(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 10,
+                          crossAxisSpacing: 10,
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          childAspectRatio: 0.72,
+                          shrinkWrap: true,
+                          children: List.generate(
+                            foods.length,
+                            (index) {
+                              final food = foods[index];
+                              final cartItem = cart.firstWhere(
+                                (element) => element.food?.id == food.id,
+                                orElse: () =>
+                                    CartItemModel(food: food, quantity: 0),
+                              );
+                              return ProductItemWidget(
+                                food: food,
+                                quantity: cartItem.quantity ?? 0,
+                              );
+                            },
+                          ),
                         );
-                      },
-                    );
+                      });
             },
           )
         ],

@@ -1,11 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/features/cart/data/models/models.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
 class CreateOrderPage extends StatefulWidget {
-  const CreateOrderPage({super.key});
+  final List<CartItemModel> cart;
+  final int dishCount;
+  const CreateOrderPage(
+      {super.key, required this.cart, required this.dishCount});
 
   @override
   State<CreateOrderPage> createState() => _CreateOrderPageState();
@@ -46,10 +50,10 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
             ),
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
-            DeliveryFormPage(),
-            PickupForm(),
+            DeliveryFormPage(cart: widget.cart),
+            const PickupForm(),
           ],
         ),
       ),

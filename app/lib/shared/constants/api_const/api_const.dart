@@ -46,4 +46,8 @@ class ApiConst {
   static const getSales = "http://20.55.72.226:8080/sale/get-all-sales";
   //news
   static const getNews = "http://20.55.72.226:8080/news/get-all-news";
+
+  // ORDER
+  static const createOrder = "http://20.55.72.226:8080/orders/create-order";
+  static const getOrderHistory = "http://20.55.72.226:8080/orders/get-all-actual-orders-by-user";
 }

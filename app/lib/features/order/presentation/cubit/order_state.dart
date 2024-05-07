@@ -19,3 +19,22 @@ class OrderAddressChanged extends OrderState {
   @override
   List<Object> get props => [address];
 }
+
+class SelectDeliveryPriceLoading extends OrderState {}
+
+class SelectDeliveryPriceLoaded extends OrderState {
+  final double deliveryPrice;
+
+  const SelectDeliveryPriceLoaded({required this.deliveryPrice});
+
+  @override
+  List<Object> get props => [deliveryPrice];
+}
+
+class SelectDeliveryPriceError extends OrderState {}
+
+class CreateOrderLoading extends OrderState {}
+
+class CreateOrderLoaded extends OrderState {}
+
+class CreateOrderError extends OrderState {}

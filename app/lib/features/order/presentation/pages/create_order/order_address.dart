@@ -1,15 +1,19 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/features/cart/cart.dart';
+import 'package:diyar_express/features/cart/data/models/models.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 @RoutePage()
 class DeliveryFormPage extends StatefulWidget {
-  const DeliveryFormPage({super.key});
+  final List<CartItemModel> cart;
+  const DeliveryFormPage({super.key, required this.cart});
 
   @override
   State<DeliveryFormPage> createState() => _DeliveryFormPageState();
@@ -17,7 +21,8 @@ class DeliveryFormPage extends StatefulWidget {
 
 class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _phoneController = TextEditingController(text: '+996');
+  final TextEditingController _phoneController =
+      TextEditingController(text: '+996');
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _houseController = TextEditingController();
   final TextEditingController _apartmentController = TextEditingController();
@@ -45,11 +50,21 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<OrderCubit, OrderState>(
-      builder: (context, state) {
-        if (state is OrderAddressChanged) {
-          _addressController.text = state.address;
+    return BlocConsumer<OrderCubit, OrderState>(
+      listener: (context, state) {
+        if (state is CreateOrderLoaded) {
+          context.router.pushAndPopUntil(
+            const MainRoute(),
+            predicate: (_) => false,
+          );
+          showToast("Заказ успешно создан");
+        } else if (state is CreateOrderError) {
+          showToast("Ошибка при создании заказа", isError: true);
         }
+      },
+      builder: (context, state) {
+        _addressController.text = context.read<OrderCubit>().address;
+
         return Form(
           key: _formKey,
           child: ListView(
@@ -226,10 +241,39 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
               SubmitButtonWidget(
                 title: 'Оформить заказ',
                 bgColor: theme.primaryColor,
-                textStyle: theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                isLoading: state is CreateOrderLoading,
+                textStyle:
+                    theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
-                    context.router.push(const OrderSuccess());
+                    context.read<OrderCubit>().createOrder(
+                          CreateOrderModel(
+                            address: _addressController.text,
+                            kvOffice: _apartmentController.text,
+                            comment: _commentController.text,
+                            entrance: _entranceController.text,
+                            floor: _floorController.text,
+                            houseNumber: _houseController.text,
+                            intercom: _intercomController.text,
+                            paymentMethod:
+                                _paymentType.toString().split('.').last,
+                            userPhone: _phoneController.text,
+                            userName: _userName.text,
+                            deliveryCost: context
+                                .read<OrderCubit>()
+                                .deliveryPrice
+                                .toInt(),
+                            price: context.read<CartCubit>().totalPrice,
+                            dishesCount: context.read<CartCubit>().dishCount,
+                            foods: widget.cart
+                                .map((e) => OrderFoodItem(
+                                      name: e.food?.name ?? '',
+                                      price: e.food?.price ?? 0,
+                                      quantity: e.quantity ?? 1,
+                                    ))
+                                .toList(),
+                          ),
+                        );
                   }
                 },
               ),

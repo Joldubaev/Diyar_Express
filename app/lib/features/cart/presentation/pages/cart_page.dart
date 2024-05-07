@@ -63,7 +63,6 @@ class CartPage extends StatelessWidget {
                                 (previousValue, element) => previousValue + element.food!.price! * element.quantity!,
                               ),
                               sale: 0,
-                              dishesPrice: 0,
                               totalPrice: carts.fold(
                                 0,
                                 (previousValue, element) => previousValue + element.food!.price! * element.quantity!,
@@ -79,7 +78,10 @@ class CartPage extends StatelessWidget {
                               ),
                               bgColor: AppColors.primary,
                               title: 'Оформить заказ',
-                              onTap: () => context.pushRoute(const CreateOrderRoute()),
+                              onTap: () => context.pushRoute( CreateOrderRoute(
+                                cart: carts,
+                                dishCount: context.read<CartCubit>().dishCount,
+                              )),
                             ),
                           ),
                           const SizedBox(height: 20),

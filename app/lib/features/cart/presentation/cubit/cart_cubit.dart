@@ -11,6 +11,9 @@ class CartCubit extends Cubit<CartState> {
 
   Stream<List<CartItemModel>> cart = const Stream.empty();
 
+  int dishCount = 0;
+  int totalPrice = 0;
+
   getCartItems() async {
     emit(GetAllCartLoading());
     try {
@@ -45,5 +48,23 @@ class CartCubit extends Cubit<CartState> {
 
   decrementCart(String id) async {
     await _cartReposiory.decrementCart(id);
+  }
+
+  incrementDishCount() {
+    emit(ChangeStateLoading());
+    dishCount++;
+    emit(ChangeStateLoaded());
+  }
+
+  decrementDishCount() {
+    emit(ChangeStateLoading());
+    dishCount--;
+    emit(ChangeStateLoaded());
+  }
+
+  changeTotalPrice(int price) {
+    emit(ChangeStateLoading());
+    totalPrice = price;
+    emit(ChangeStateLoaded());
   }
 }
