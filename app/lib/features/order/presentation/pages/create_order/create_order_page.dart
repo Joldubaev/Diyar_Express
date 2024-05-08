@@ -7,9 +7,9 @@ import 'package:flutter/material.dart';
 @RoutePage()
 class CreateOrderPage extends StatefulWidget {
   final List<CartItemModel> cart;
+  final List<PickupOrderModel> pickupCart;
   final int dishCount;
-  const CreateOrderPage(
-      {super.key, required this.cart, required this.dishCount});
+  const CreateOrderPage({super.key, required this.cart, required this.dishCount, required this.pickupCart});
 
   @override
   State<CreateOrderPage> createState() => _CreateOrderPageState();
@@ -53,7 +53,9 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
         body: TabBarView(
           children: [
             DeliveryFormPage(cart: widget.cart),
-            const PickupForm(),
+            PickupForm(
+              cart: widget.pickupCart,
+            ),
           ],
         ),
       ),

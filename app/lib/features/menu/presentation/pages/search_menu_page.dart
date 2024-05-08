@@ -111,8 +111,7 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
                               final food = foods[index];
                               final cartItem = cart.firstWhere(
                                 (element) => element.food?.id == food.id,
-                                orElse: () =>
-                                    CartItemModel(food: food, quantity: 0),
+                                orElse: () => CartItemModel(food: food, quantity: 0),
                               );
                               return ProductItemWidget(
                                 food: food,

@@ -21,8 +21,7 @@ class DeliveryFormPage extends StatefulWidget {
 
 class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _phoneController =
-      TextEditingController(text: '+996');
+  final TextEditingController _phoneController = TextEditingController(text: '+996');
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _houseController = TextEditingController();
   final TextEditingController _apartmentController = TextEditingController();
@@ -31,6 +30,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final TextEditingController _entranceController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _userName = TextEditingController();
+  final TextEditingController _sdachaController = TextEditingController();
 
   PaymentTypeDelivery _paymentType = PaymentTypeDelivery.cash;
 
@@ -45,6 +45,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
     _entranceController.dispose();
     _commentController.dispose();
     _userName.dispose();
+    _sdachaController.dispose();
     super.dispose();
   }
 
@@ -225,6 +226,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
               ),
               const SizedBox(height: 10),
               CustomInputWidget(
+                controller: _sdachaController,
                 hintText: '',
                 title: 'Сдача с',
                 inputType: TextInputType.number,
@@ -242,8 +244,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                 title: 'Оформить заказ',
                 bgColor: theme.primaryColor,
                 isLoading: state is CreateOrderLoading,
-                textStyle:
-                    theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                textStyle: theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<OrderCubit>().createOrder(
@@ -255,14 +256,11 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                             floor: _floorController.text,
                             houseNumber: _houseController.text,
                             intercom: _intercomController.text,
-                            paymentMethod:
-                                _paymentType.toString().split('.').last,
+                            paymentMethod: _paymentType.toString().split('.').last,
                             userPhone: _phoneController.text,
                             userName: _userName.text,
-                            deliveryCost: context
-                                .read<OrderCubit>()
-                                .deliveryPrice
-                                .toInt(),
+                            sdacha: int.tryParse(_sdachaController.text) ?? 0,
+                            deliveryPrice: context.read<OrderCubit>().deliveryPrice.toInt(),
                             price: context.read<CartCubit>().totalPrice,
                             dishesCount: context.read<CartCubit>().dishCount,
                             foods: widget.cart

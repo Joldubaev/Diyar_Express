@@ -19,6 +19,7 @@ class CartPage extends StatelessWidget {
 
     var cartItems = context.read<CartCubit>().cart;
     List<CartItemModel> carts = [];
+    List<PickupOrderModel> pickupCart = [];
     return Scaffold(
       appBar: AppBar(
         title: Text('Корзина', style: theme.textTheme.titleSmall),
@@ -78,7 +79,8 @@ class CartPage extends StatelessWidget {
                               ),
                               bgColor: AppColors.primary,
                               title: 'Оформить заказ',
-                              onTap: () => context.pushRoute( CreateOrderRoute(
+                              onTap: () => context.pushRoute(CreateOrderRoute(
+                                pickupCart: pickupCart,
                                 cart: carts,
                                 dishCount: context.read<CartCubit>().dishCount,
                               )),
