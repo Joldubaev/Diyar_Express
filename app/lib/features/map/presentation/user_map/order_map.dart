@@ -8,8 +8,8 @@ import 'package:diyar_express/features/map/data/repositories/location_repo.dart'
 import 'package:diyar_express/features/map/data/repositories/yandex_service.dart';
 import 'package:diyar_express/features/map/presentation/widgets/coordinats.dart';
 import 'package:diyar_express/features/order/order.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/shared.dart';
-import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -50,9 +50,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Выберите адрес'),
-      ),
+      appBar: AppBar(title: Text(context.l10n.chooseAddress, style: theme.textTheme.titleSmall)),
       body: Stack(
         children: [
           YandexMap(
@@ -80,7 +78,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
             child: Icon(
               Icons.location_on,
               size: 30,
-              color: Colors.red,
+              color: AppColors.red,
             ),
           ),
         ],
@@ -88,7 +86,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
       bottomSheet: BottomSheet(
         enableDrag: false,
         showDragHandle: true,
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.white,
         constraints: BoxConstraints(
           maxHeight: MediaQuery.of(context).size.height * 0.3,
           minHeight: MediaQuery.of(context).size.height * 0.3,
@@ -106,23 +104,23 @@ class _OrderMapPageState extends State<OrderMapPage> {
             children: [
               ListTile(
                 title: Text(
-                    'Стоимость доставки: ${isCoordinateInsidePolygons(lat, long, polygons: Polygons.getPolygons())} сом'),
+                    '${context.l10n.deliveryPrice}: ${isCoordinateInsidePolygons(lat, long, polygons: Polygons.getPolygons())} сом'),
               ),
               Card(
                 child: ListTile(
                   title: FittedBox(
-                    child: Text(address ?? 'Адрес не найден'),
+                    child: Text(address ?? context.l10n.addressIsNotFounded),
                   ),
-                  leading: const Icon(Icons.location_on, color: Colors.red),
+                  leading: const Icon(Icons.location_on, color: AppColors.red),
                   onTap: () {
                     AppAlert.showConfirmDialog(
                       context: context,
-                      title: 'Ваш адрес',
+                      title: context.l10n.yourAddress,
                       content: Text(
-                        'Вы уверены, что хотите использовать этот адрес?: $address',
+                        '${context.l10n.areYouSureAddress}: $address',
                       ),
-                      cancelText: 'Нет',
-                      confirmText: 'Да',
+                      cancelText: context.l10n.no,
+                      confirmText: context.l10n.yes,
                       cancelPressed: () => Navigator.pop(context),
                       confirmPressed: () {
                         Navigator.pop(context);

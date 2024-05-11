@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/features/home_features/presentation/home_ropsitories.dart';
+import 'package:diyar_express/l10n/l10n.dart';
+import 'package:diyar_express/shared/theme/app_colors.dart';
 import 'package:diyar_express/shared/utils/snackbar/snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,20 +26,19 @@ class _SalePageState extends State<SalePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            context.router.maybePop();
-          },
-        ),
-        title: const Text('Акции'),
-      ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              context.router.maybePop();
+            },
+          ),
+          title: Text(context.l10n.sales, style: const TextStyle(color: AppColors.primary))),
       body: BlocConsumer<HomeFeaturesCubit, HomeFeaturesState>(
         listener: (context, state) {
           if (state is HomeFeaturesError) {
             SnackBarMessage().showErrorSnackBar(message: state.message, context: context);
           } else if (state is HomeFeaturesLoaded) {
-            SnackBarMessage().showSuccessSnackBar(message: 'Данные загружены', context: context);
+            SnackBarMessage().showSuccessSnackBar(message: context.l10n.dataIsLoaded, context: context);
           }
         },
         builder: (context, state) {

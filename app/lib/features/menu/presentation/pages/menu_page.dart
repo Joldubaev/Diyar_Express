@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/product/product_item_widget.dart';
 import 'package:diyar_express/features/cart/cart.dart';
 import 'package:diyar_express/features/cart/data/models/cart_item_model.dart';
@@ -47,7 +48,7 @@ class _MenuPageState extends State<MenuPage> {
           if (state is GetMenuLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is GetMenuFailure) {
-            return const Center(child: Text('Ошибка загрузки данных'));
+            return Center(child: Text(context.l10n.loadedWrong));
           }
           return SafeArea(
             child: Column(
@@ -79,7 +80,7 @@ class _MenuPageState extends State<MenuPage> {
                           child: Text(
                             "${menu[index].category?.name}",
                             style: TextStyle(
-                              color: index == _activeIndex ? Colors.white : AppColors.primary,
+                              color: index == _activeIndex ? AppColors.white : AppColors.primary,
                             ),
                           ),
                         ),
@@ -119,7 +120,7 @@ class _MenuPageState extends State<MenuPage> {
                                 style: TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
-                                  color: index == _activeIndex ? AppColors.primary : Colors.black,
+                                  color: index == _activeIndex ? AppColors.primary : AppColors.black1,
                                 ),
                               ),
                             ),

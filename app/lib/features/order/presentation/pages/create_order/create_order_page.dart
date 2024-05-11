@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/features/cart/data/models/models.dart';
 import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
 class CreateOrderPage extends StatefulWidget {
   final List<CartItemModel> cart;
-  final List<PickupOrderModel> pickupCart;
   final int dishCount;
-  const CreateOrderPage({super.key, required this.cart, required this.dishCount, required this.pickupCart});
+  const CreateOrderPage({super.key, required this.cart, required this.dishCount});
 
   @override
   State<CreateOrderPage> createState() => _CreateOrderPageState();
@@ -22,7 +22,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Детали заказа', style: TextStyle(fontSize: 16)),
+          title: Text(context.l10n.orderDetails, style: const TextStyle(fontSize: 16)),
           centerTitle: true,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(40),
@@ -33,18 +33,18 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 color: AppColors.grey.withOpacity(0.2),
               ),
-              child: const TabBar(
+              child: TabBar(
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerColor: Colors.transparent,
-                indicator: BoxDecoration(
+                indicator: const BoxDecoration(
                   color: AppColors.primary,
                   borderRadius: BorderRadius.all(Radius.circular(20)),
                 ),
-                labelColor: Colors.white,
+                labelColor: AppColors.white,
                 unselectedLabelColor: Colors.black54,
                 tabs: [
-                  TabItem(title: 'Доставка'),
-                  TabItem(title: 'Самовывоз'),
+                  TabItem(title: context.l10n.delivery),
+                  TabItem(title: context.l10n.pickup),
                 ],
               ),
             ),
@@ -53,9 +53,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
         body: TabBarView(
           children: [
             DeliveryFormPage(cart: widget.cart),
-            PickupForm(
-              cart: widget.pickupCart,
-            ),
+            const PickupForm(),
           ],
         ),
       ),

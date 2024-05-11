@@ -1,3 +1,4 @@
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
@@ -24,7 +25,7 @@ class _OrderHistoryState extends State<OrderHistory> {
             ),
             childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
             title: Text(
-              'Детали заказа',
+              context.l10n.orderDetails,
               style: theme.textTheme.bodyLarge!.copyWith(
                 color: AppColors.primary,
               ),
@@ -34,25 +35,23 @@ class _OrderHistoryState extends State<OrderHistory> {
               style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
             ),
             children: [
-              const CustomTile(
-                title: 'Стоимость блюд:',
+              CustomTile(
+                title: '${context.l10n.costOfMeal}:',
                 trailing: '100 сoм',
               ),
-              // user can copy address from here
-
               CustomTextButton(
                 onPressed: () {
                   AppAlert.showConfirmDialog(
                     context: context,
-                    title: 'Повторить заказ',
-                    content: const Text('Вы уверены, что хотите повторить заказ?'),
+                    title: context.l10n.orderRepeat,
+                    content: Text(context.l10n.orderRepeatText),
                     confirmPressed: () {
                       Navigator.pop(context);
                     },
                   );
                 },
-                textButton: 'Повторить заказ',
-                description: 'Вы можете отменить заказ только за время до начала приготовления в течении:',
+                textButton: context.l10n.orderRepeat,
+                description: context.l10n.orderCancelText2,
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +30,7 @@ class _RestorantPageState extends State<RestorantPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ресторан', style: theme.textTheme.bodyLarge),
+        title: Text(context.l10n.restourant, style: theme.textTheme.bodyLarge),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios),
           onPressed: () {

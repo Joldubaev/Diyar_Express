@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/injection_container.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/features.dart';
@@ -37,32 +38,32 @@ class _LoginFormState extends State<LoginForm> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             CustomInputWidget(
-              title: 'E-Mail',
-              hintText: "E-Mail",
+              title: context.l10n.email,
+              hintText: context.l10n.email,
               controller: _usernameController,
               isPasswordField: false,
               inputType: TextInputType.emailAddress,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Пожалуйста, введите ваш E-Mail';
+                  return context.l10n.pleaseEnterEmail;
                 } else if (!EmailValidator.validate(value)) {
-                  return 'Пожалуйста, введите корректный E-Mail';
+                  return context.l10n.pleaseEnterCorrectEmail;
                 }
                 return null;
               },
             ),
             const SizedBox(height: 20),
             CustomInputWidget(
-              title: 'Пароль',
+              title: context.l10n.password,
               hintText: "******",
               controller: _passwordController,
               isPasswordField: true,
               inputType: TextInputType.text,
               validator: (value) {
                 if (value!.isEmpty) {
-                  return 'Пожалуйста, введите ваш пароль';
+                  return context.l10n.pleaseEnterPassword;
                 } else if (value.length < 5) {
-                  return 'Пароль должен содержать не менее 5 символов';
+                  return context.l10n.pleaseEnterCorrectPassword;
                 }
                 return null;
               },
@@ -73,32 +74,23 @@ class _LoginFormState extends State<LoginForm> {
                 if (state is SignInSuccessWithUser) {
                   var role = sl<SharedPreferences>().getString(AppConst.userRole);
                   if (role?.toLowerCase() == "user".toLowerCase()) {
-                    context.router.pushAndPopUntil(
-                      const MainRoute(),
-                      predicate: (_) => false,
-                    );
+                    context.router.pushAndPopUntil(const MainRoute(), predicate: (_) => false);
                   } else {
-                    context.router.pushAndPopUntil(
-                      const CurierRoute(),
-                      predicate: (_) => false,
-                    );
+                    context.router.pushAndPopUntil(const CurierRoute(), predicate: (_) => false);
                   }
                 }
               },
               builder: (context, state) {
                 return SubmitButtonWidget(
-                  textStyle: theme.textTheme.bodyLarge!.copyWith(color: Colors.white),
+                  textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
                   bgColor: AppColors.primary,
                   isLoading: state is SignInLoading,
-                  title: 'Войти',
+                  title: context.l10n.entrance,
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<SignInCubit>().signInUser(
-                            UserModel(
-                              email: _usernameController.text,
-                              password: _passwordController.text,
-                            ),
-                          );
+                      context
+                          .read<SignInCubit>()
+                          .signInUser(UserModel(email: _usernameController.text, password: _passwordController.text));
                     }
                   },
                 );
@@ -108,28 +100,21 @@ class _LoginFormState extends State<LoginForm> {
             GoogleButton(
                 color: AppColors.primary,
                 onPressed: () {
-                  SnackBarMessage().showErrorSnackBar(
-                    message: "Пока не доступно",
-                    context: context,
-                  );
+                  SnackBarMessage().showErrorSnackBar(message: context.l10n.notAvailable, context: context);
                 }),
             TextCheckButton(
-              text: "Нет аккаунта?",
-              route: "Зарегистрироваться",
+              text: context.l10n.notHaveAccount,
+              route: context.l10n.register,
               onPressed: () {
                 context.pushRoute(const SignUpRoute());
               },
             ),
             TextButton(
-              onPressed: () {
-                AppBottomSheet.showBottomSheet(
-                  initialChildSize: 0.4,
-                  context,
-                  AuthBottomSheet(resedPasswordCode: resedPasswordCode),
-                );
-              },
-              child: const Text("Забыли пароль ?"),
-            ),
+                onPressed: () {
+                  AppBottomSheet.showBottomSheet(
+                      initialChildSize: 0.4, context, AuthBottomSheet(resedPasswordCode: resedPasswordCode));
+                },
+                child: Text(context.l10n.forgotPassword)),
           ],
         ),
       ),

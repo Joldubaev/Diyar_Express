@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/auth/presentation/presentation.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
@@ -29,7 +30,7 @@ class _CurierPrpfilePageState extends State<CurierPrpfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Профиль', style: theme.textTheme.titleSmall)),
+      appBar: AppBar(title: Text(context.l10n.profile, style: theme.textTheme.titleSmall)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(
@@ -48,32 +49,32 @@ class _CurierPrpfilePageState extends State<CurierPrpfilePage> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text('Name ', style: theme.textTheme.titleMedium),
+                Text(context.l10n.name, style: theme.textTheme.titleMedium),
                 const SizedBox(height: 40),
                 CustomInputWidget(
-                  title: 'Ваше имя',
-                  hintText: "Введите ваше имя",
+                  title: context.l10n.yourName,
+                  hintText: context.l10n.enterYourName,
                   controller: fullNameController,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Please enter some text';
+                      return context.l10n.pleaseEnterCorrectName;
                     }
                     return null;
                   },
                 ),
                 const SizedBox(height: 20),
                 PhoneNumberMask(
-                  title: 'Номер телефона',
+                  title: context.l10n.phone,
                   hintText: '+996 (___) __-__-__',
                   textController: phoneController,
-                  hint: "Номер телефона",
+                  hint: context.l10n.phone,
                   formatter: MaskTextInputFormatter(mask: "+996 (###) ##-##-##"),
                   textInputType: TextInputType.phone,
                   validator: (value) {
                     if (value!.isEmpty) {
-                      return 'Пожалуйста, введите ваш номер телефона';
+                      return context.l10n.pleaseEnterPhone;
                     } else if (value.length < 10) {
-                      return 'Номер телефона должен содержать более десяти символов.';
+                      return context.l10n.pleaseEnterCorrectPhone;
                     }
                     return null;
                   },

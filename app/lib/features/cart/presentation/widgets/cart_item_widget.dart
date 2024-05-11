@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
 import 'package:diyar_express/features/menu/data/data.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
@@ -90,8 +91,8 @@ class CartItemWidgets extends StatelessWidget {
                           onPressed: () {
                             AppAlert.showConfirmDialog(
                               context: context,
-                              title: 'Удалить блюдо',
-                              content: const Text('Вы действительно хотите удалить из корзины?'),
+                              title: context.l10n.deleteOrder,
+                              content: Text(context.l10n.deleteOrderText),
                               confirmPressed: () {
                                 context.read<CartCubit>().removeFromCart(food.id ?? '');
                                 context.maybePop();

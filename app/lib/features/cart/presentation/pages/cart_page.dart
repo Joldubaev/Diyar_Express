@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/cart/data/models/models.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
@@ -19,10 +20,9 @@ class CartPage extends StatelessWidget {
 
     var cartItems = context.read<CartCubit>().cart;
     List<CartItemModel> carts = [];
-    List<PickupOrderModel> pickupCart = [];
     return Scaffold(
       appBar: AppBar(
-        title: Text('Корзина', style: theme.textTheme.titleSmall),
+        title: Text(context.l10n.cart, style: theme.textTheme.titleSmall),
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
@@ -78,9 +78,8 @@ class CartPage extends StatelessWidget {
                                 color: Colors.white,
                               ),
                               bgColor: AppColors.primary,
-                              title: 'Оформить заказ',
+                              title: context.l10n.confirmOrder,
                               onTap: () => context.pushRoute(CreateOrderRoute(
-                                pickupCart: pickupCart,
                                 cart: carts,
                                 dishCount: context.read<CartCubit>().dishCount,
                               )),
