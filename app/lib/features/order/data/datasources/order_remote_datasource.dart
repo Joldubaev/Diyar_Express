@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class OrderRemoteDataSource {
   Future<List<String>> getOrderHistory();
   Future<void> createOrder(CreateOrderModel order);
+  Future<void> getPickupOrder(PickupOrderModel order);
 }
 
 class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
@@ -13,6 +14,24 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
   final SharedPreferences _prefs;
 
   OrderRemoteDataSourceImpl(this._dio, this._prefs);
+
+  @override
+  Future<void> getPickupOrder(PickupOrderModel order) async {
+    try {
+      var res = await _dio.post(
+        ApiConst.getPickupOrder,
+        data: order.toJson(),
+        options: Options(
+          headers: ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
+        ),
+      );
+      if (![200, 201].contains(res.statusCode)) {
+        throw Exception('Failed to create order');
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
 
   @override
   Future<void> createOrder(CreateOrderModel order) async {
