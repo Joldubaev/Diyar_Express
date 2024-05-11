@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/features/cart/cart.dart';
 import 'package:diyar_express/features/cart/data/models/models.dart';
 import 'package:diyar_express/features/menu/menu.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Поиск блюд'),
+        title: Text(context.l10n.searchMeal, style: Theme.of(context).textTheme.titleSmall),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,7 +33,7 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
             child: TextField(
               style: Theme.of(context).textTheme.bodyMedium,
               decoration: InputDecoration(
-                hintText: "Поиск...",
+                hintText: context.l10n.search,
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30),
                   borderSide: BorderSide.none,
@@ -63,11 +64,11 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
             builder: (context, state) {
               if (state is SearchMenuLoaded) {
                 if (state.foods.isEmpty) {
-                  return const Expanded(
+                  return Expanded(
                     child: Center(
                       child: Text(
-                        'Ничего не найдено',
-                        style: TextStyle(fontSize: 16),
+                        context.l10n.notFound,
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                   );
@@ -77,17 +78,17 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
                   child: Center(child: CircularProgressIndicator()),
                 );
               } else if (state is SearchMenuFailure) {
-                return const Expanded(
-                  child: Center(child: Text('Ошибка загрузки данных')),
+                return Expanded(
+                  child: Center(child: Text(context.l10n.loadedWrong)),
                 );
               }
 
               return foods.isEmpty
-                  ? const Expanded(
+                  ? Expanded(
                       child: Center(
                         child: Text(
-                          'Ищите блюда по названию',
-                          style: TextStyle(fontSize: 16),
+                          context.l10n.searchByNames,
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ),
                     )
@@ -111,8 +112,7 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
                               final food = foods[index];
                               final cartItem = cart.firstWhere(
                                 (element) => element.food?.id == food.id,
-                                orElse: () =>
-                                    CartItemModel(food: food, quantity: 0),
+                                orElse: () => CartItemModel(food: food, quantity: 0),
                               );
                               return ProductItemWidget(
                                 food: food,

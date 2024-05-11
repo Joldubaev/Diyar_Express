@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -32,17 +33,10 @@ class OrderHistoryPageState extends State<OrderHistoryPage> with SingleTickerPro
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text(
-            'История заказов',
-            style: TextStyle(fontSize: 16),
+          title: Text(
+            context.l10n.orderHistory,
+            style: const TextStyle(fontSize: 16),
           ),
-          // leading: IconButton(
-          //   icon: const Icon(Icons.arrow_back_ios_sharp),
-          //   onPressed: () => context.router.pushAndPopUntil(
-          //     const ProfileRoute(),
-          //     predicate: (_) => false,
-          //   ),
-          // ),
           centerTitle: true,
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(40),
@@ -53,18 +47,18 @@ class OrderHistoryPageState extends State<OrderHistoryPage> with SingleTickerPro
                 margin: const EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(Radius.circular(20)), color: AppColors.grey.withOpacity(0.2)),
-                child: const TabBar(
+                child: TabBar(
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
-                  indicator: BoxDecoration(
+                  indicator: const BoxDecoration(
                     color: AppColors.primary,
                     borderRadius: BorderRadius.all(Radius.circular(20)),
                   ),
-                  labelColor: Colors.white,
+                  labelColor: AppColors.white,
                   unselectedLabelColor: Colors.black54,
                   tabs: [
-                    TabItem(title: 'Активные заказы'),
-                    TabItem(title: 'История заказов'),
+                    TabItem(title: context.l10n.activeOrders),
+                    TabItem(title: context.l10n.orderHistory),
                   ],
                 ),
               ),

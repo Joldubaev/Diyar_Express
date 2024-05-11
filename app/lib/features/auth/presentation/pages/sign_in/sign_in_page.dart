@@ -1,3 +1,4 @@
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
@@ -38,7 +39,7 @@ class _SignInPageState extends State<SignInPage> {
               ),
             ),
             const SizedBox(height: 10),
-            Center(child: Text("Вход", style: theme.textTheme.titleLarge)),
+            Center(child: Text(context.l10n.entrance, style: theme.textTheme.titleLarge)),
             const SizedBox(height: 10),
             const LoginForm(),
           ],

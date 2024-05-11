@@ -1,5 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/features/menu/menu.dart';
+import 'package:diyar_express/l10n/l10n.dart';
+import 'package:diyar_express/shared/theme/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,7 +23,7 @@ class MenuToggleButton extends StatelessWidget {
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
-      backgroundColor: Colors.white,
+      backgroundColor: AppColors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(20),
@@ -43,7 +45,7 @@ class MenuToggleButton extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Меню", style: Theme.of(context).textTheme.titleSmall),
+                        Text(context.l10n.menu, style: Theme.of(context).textTheme.titleSmall),
                         GestureDetector(
                           onTap: () => context.maybePop(),
                           child: const Icon(Icons.close, size: 35),

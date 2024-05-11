@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
@@ -18,7 +19,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Заказы'),
+        title: Text(context.l10n.orderDetails, style: const TextStyle(fontSize: 16)),
       ),
       body: const OrderActiveCard(),
     );
@@ -46,7 +47,7 @@ class _OrderActiveCardState extends State<OrderActiveCard> {
             ),
             childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
             title: Text(
-              'Номер заказа: 123',
+              '${context.l10n.orderNumber}: 123',
               style: theme.textTheme.bodyLarge!.copyWith(
                 color: AppColors.primary,
               ),
@@ -60,22 +61,22 @@ class _OrderActiveCardState extends State<OrderActiveCard> {
               Divider(
                 color: Colors.grey.withOpacity(0.7),
               ),
-              const CustomTile(
-                title: 'Стоимость блюд:',
+              CustomTile(
+                title: '${context.l10n.costOfMeal}:',
                 trailing: '100 сoм',
               ),
               CustomTextButton(
                 onPressed: () {
                   AppAlert.showConfirmDialog(
                     context: context,
-                    title: 'Отменить заказ',
-                    content: const Text('Вы уверены, что хотите отменить заказ?'),
+                    title: context.l10n.orderCancel,
+                    content: Text(context.l10n.orderCancelText),
                     confirmPressed: () {
                       Navigator.pop(context);
                     },
                   );
                 },
-                textButton: 'Отменить заказ',
+                textButton: context.l10n.orderCancel,
               ),
             ],
           ),

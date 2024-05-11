@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/tile/custom_tile.dart';
 import 'package:diyar_express/features/curier/presentation/widgets/address_feild.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
@@ -13,7 +14,7 @@ class HistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('История заказов'),
+        title: Text(context.l10n.orderHistory, style: theme.textTheme.titleSmall),
       ),
       body: ListView.builder(
         padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -26,7 +27,7 @@ class HistoryPage extends StatelessWidget {
               ),
               childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
               title: Text(
-                'Номер заказа: 123',
+                '${context.l10n.orderNumber}: 123',
                 style: theme.textTheme.bodyLarge!.copyWith(
                   color: AppColors.primary,
                 ),
@@ -36,8 +37,8 @@ class HistoryPage extends StatelessWidget {
                 style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
               ),
               children: [
-                const CustomTile(
-                  title: 'Стоимость блюд:',
+                CustomTile(
+                  title: '${context.l10n.costOfMeal}:',
                   trailing: '100 сoм',
                 ),
                 AddressField(
@@ -51,7 +52,8 @@ class HistoryPage extends StatelessWidget {
                           Clipboard.setData(
                             const ClipboardData(text: 'Уметалиева 64/1'),
                           );
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Адрес скопирован')));
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(SnackBar(content: Text(context.l10n.addressIsCopied)));
                         },
                       ),
                     ],

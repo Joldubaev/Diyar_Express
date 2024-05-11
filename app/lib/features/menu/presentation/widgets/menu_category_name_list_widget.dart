@@ -1,3 +1,4 @@
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +20,7 @@ class MenuCategoryNameListWidget extends StatelessWidget {
           ),
           child: Center(
             child: Text(
-              "Category $index",
+              "${context.l10n.category} $index",
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.white),
             ),
           ),

@@ -1,3 +1,4 @@
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class EmptyAboutUsWidget extends StatelessWidget {
@@ -5,12 +6,12 @@ class EmptyAboutUsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
       child: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Text(
-          'Нет данных для отображения',
-          style: TextStyle(fontSize: 18, color: Colors.grey),
+          context.l10n.emptyText,
+          style: const TextStyle(fontSize: 18, color: Colors.grey),
         ),
       ),
     );

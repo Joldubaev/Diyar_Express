@@ -33,45 +33,35 @@ Future<void> init() async {
   sl.registerFactory(() => HomeFeaturesCubit(sl()));
 
 // AUTH
-  sl.registerLazySingleton<AuthRepository>(
-      () => AuthRepositoryImpl(sl(), sl()));
-  sl.registerLazySingleton<AuthRemoteDataSource>(
-      () => AuthRemoteDataSourceImpl(sl(), sl(), sl()));
-  sl.registerLazySingleton<AuthLocalDataSource>(
-      () => AuthLocalDataSourceImpl(sl()));
+  sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
+  sl.registerLazySingleton<AuthRemoteDataSource>(() => AuthRemoteDataSourceImpl(sl(), sl(), sl()));
+  sl.registerLazySingleton<AuthLocalDataSource>(() => AuthLocalDataSourceImpl(sl()));
 
   // about us
-  sl.registerLazySingleton<AboutUsRepository>(
-      () => AboutUsRepositoryImpl(sl()));
-  sl.registerLazySingleton<AboutUsRemoteDataSource>(
-      () => AboutUsRemoteDataSourceImpl(sl(), sl()));
+  sl.registerLazySingleton<AboutUsRepository>(() => AboutUsRepositoryImpl(sl()));
+  sl.registerLazySingleton<AboutUsRemoteDataSource>(() => AboutUsRemoteDataSourceImpl(sl(), sl()));
 
 // Profile
   sl.registerLazySingleton<UserRepository>(() => UserRepositoryImpl(sl()));
-  sl.registerLazySingleton<UserRemoteDataSource>(
-      () => UserRemoteDataSourceImpl(sl(), sl()));
+  sl.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSourceImpl(sl(), sl()));
   // sl.registerLazySingleton<UserRepositoryImpl>(() => UserRepositoryImpl(sl()));
   // sl.registerLazySingleton<UserRemoteDataSource>(() => UserRemoteDataSourceImpl(sl(), sl()));
 
   // Menu
   sl.registerLazySingleton<MenuRepository>(() => MenuRepositoryImpl(sl()));
-  sl.registerLazySingleton<MenuRemoteDataSource>(
-      () => MenuRemoteDataSourceImpl(sl(), sl()));
+  sl.registerLazySingleton<MenuRemoteDataSource>(() => MenuRemoteDataSourceImpl(sl(), sl()));
 
   // HomeFeatures
-  sl.registerLazySingleton<HomeRemoteDataSource>(
-      () => HomeFeaturesRepositoryImpl(sl()));
+  sl.registerLazySingleton<HomeRemoteDataSource>(() => HomeFeaturesRepositoryImpl(sl()));
   sl.registerLazySingleton<HomeRepository>(() => HomeFeaturesRepoImpl(sl()));
 
   // Cart
   sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(sl()));
-  sl.registerLazySingleton<CartRemoteDataSource>(
-      () => CartRemoteDataSourceImpl(sl()));
+  sl.registerLazySingleton<CartRemoteDataSource>(() => CartRemoteDataSourceImpl(sl()));
 
   // Order
   sl.registerLazySingleton<OrderRepository>(() => OrderRepositoryImpl(sl()));
-  sl.registerLazySingleton<OrderRemoteDataSource>(
-      () => OrderRemoteDataSourceImpl(sl(), sl()));
+  sl.registerLazySingleton<OrderRemoteDataSource>(() => OrderRemoteDataSourceImpl(sl(), sl()));
 //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 

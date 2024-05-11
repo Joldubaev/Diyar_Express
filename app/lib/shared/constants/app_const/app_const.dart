@@ -4,8 +4,8 @@ class AppConst {
   const AppConst._();
 
   static const locales = <Locale>[
-    Locale('en'),
     Locale('ru'),
+    Locale('en'),
     Locale('ky'),
   ];
 
@@ -14,7 +14,7 @@ class AppConst {
       'en' => 'English',
       'ru' => 'Русский',
       'ky' => 'Кыргыз',
-      _ => 'English',
+      _ => 'Russian',
     };
   }
 

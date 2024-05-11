@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/core/core.dart';
 import 'package:diyar_express/features/curier/presentation/widgets/address_feild.dart';
@@ -27,17 +28,17 @@ class _CurierPageState extends State<CurierPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Активные заказы', style: TextStyle(fontSize: 16)),
+        title: Text(context.l10n.activeOrders, style: const TextStyle(fontSize: 16)),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () {
               AppAlert.showConfirmDialog(
                 context: context,
-                title: 'Выход',
-                content: const Text('Вы уверены, что хотите выйти?'),
-                cancelText: 'Нет',
-                confirmText: 'Да',
+                title: context.l10n.exit,
+                content: Text(context.l10n.areYouSure),
+                cancelText: context.l10n.no,
+                confirmText: context.l10n.yes,
                 cancelPressed: () => Navigator.pop(context),
                 confirmPressed: () {},
               );
@@ -61,7 +62,7 @@ class _CurierPageState extends State<CurierPage> {
                     ),
                     childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
                     title: Text(
-                      'Номер заказа: 123',
+                      '${context.l10n.orderNumber}: 123',
                       style: theme.textTheme.bodyLarge!.copyWith(
                         color: AppColors.primary,
                       ),
@@ -71,9 +72,9 @@ class _CurierPageState extends State<CurierPage> {
                       style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
                     ),
                     children: [
-                      const CustomTile(
-                        title: 'Стоимость блюд:',
-                        trailing: '100 сoм',
+                      CustomTile(
+                        title: context.l10n.costOfMeal,
+                        trailing: '100 ${context.l10n.som}',
                       ),
                       AddressField(
                         child: Row(
@@ -87,7 +88,7 @@ class _CurierPageState extends State<CurierPage> {
                                   const ClipboardData(text: 'Уметалиева 64/1'),
                                 );
                                 ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(content: Text('Адрес скопирован')));
+                                    .showSnackBar(SnackBar(content: Text(context.l10n.addressIsCopied)));
                               },
                             ),
                           ],
@@ -95,8 +96,8 @@ class _CurierPageState extends State<CurierPage> {
                       ),
                       CustomTextButton(
                         onPressed: () {},
-                        textButton: 'Завершит заказ',
-                        description: 'Время доставки: 30 минут',
+                        textButton: context.l10n.finishOrder,
+                        description: '${context.l10n.deliveryTime}: 30 минут',
                       ),
                     ],
                   ),

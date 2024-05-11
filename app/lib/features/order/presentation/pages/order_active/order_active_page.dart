@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/tile/active_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class ActiveOrder extends StatelessWidget {
       itemCount: 1,
       itemBuilder: (context, index) {
         return ActiveTile(
-          text: 'Детали заказа',
+          text: context.l10n.orderDetails,
           hasNotification: true,
           onPressed: () {
             context.pushRoute(const OrderDetailRoute());

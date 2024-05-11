@@ -1,4 +1,5 @@
 import 'package:auto_route/annotations.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:diyar_express/features/auth/presentation/presentation.dart';
@@ -21,7 +22,7 @@ class _SignUpPageState extends State<SignUpPage> {
           children: [
             Center(
                 child: Text(
-              "Регистрация",
+              context.l10n.registration,
               style: theme.textTheme.titleMedium,
             )),
             const SizedBox(height: 10),

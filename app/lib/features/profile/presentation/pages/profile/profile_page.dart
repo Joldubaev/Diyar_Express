@@ -4,6 +4,7 @@ import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/features/auth/auth.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +32,7 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         backgroundColor: const Color(0xffFAFAFA),
         title: Text(
-          'Личный кабинет',
+          context.l10n.cabinet,
           style: theme.textTheme.titleSmall,
         ),
         automaticallyImplyLeading: false,
@@ -51,7 +52,7 @@ class _ProfilePageState extends State<ProfilePage> {
           if (state is ProfileGetLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ProfileGetError) {
-            return const Center(child: Text("Ошибка получения данных пользователя"));
+            return Center(child: Text(context.l10n.loadedWrongData));
           } else if (state is ProfileGetLoaded) {
             user = state.userModel;
           }
@@ -72,11 +73,11 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: SettingsTile(
-                    text: 'История заказов',
+                    text: context.l10n.orderHistory,
                     onPressed: () {
                       context.pushRoute(const OrderHistoryRoute());
                     },
@@ -86,21 +87,21 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
                     children: [
                       SettingsTile(
-                        text: 'О нас',
+                        text: context.l10n.aboutUs,
                         onPressed: () => context.pushRoute(const AboutUsRoute()),
                       ),
                       SettingsTile(
-                        text: 'Контакты',
+                        text: context.l10n.contact,
                         onPressed: () => context.pushRoute(const ContactRoute()),
                       ),
                       SettingsTile(
-                        text: 'Пользовательское соглашение',
+                        text: context.l10n.policy,
                         onPressed: () => AppLaunch.launchURL(AppConst.terms),
                       ),
                     ],
@@ -110,18 +111,18 @@ class _ProfilePageState extends State<ProfilePage> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                   decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: AppColors.white,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: SettingsTile(
-                    text: 'Выход',
+                    text: context.l10n.exit,
                     onPressed: () {
                       AppAlert.showConfirmDialog(
                         context: context,
-                        title: 'Выход',
-                        content: const Text('Вы уверены, что хотите выйти?'),
-                        cancelText: 'Нет',
-                        confirmText: 'Да',
+                        title: context.l10n.exit,
+                        content: Text(context.l10n.areYouSure),
+                        cancelText: context.l10n.no,
+                        confirmText: context.l10n.yes,
                         cancelPressed: () => Navigator.pop(context),
                         confirmPressed: () {
                           context.read<SignInCubit>().logout().then((value) {

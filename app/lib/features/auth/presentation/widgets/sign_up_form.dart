@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/features.dart';
@@ -43,76 +44,76 @@ class _SignUpFormState extends State<SignUpForm> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           CustomInputWidget(
-            title: 'Ваше имя',
-            hintText: "Асанов Асан",
+            title: context.l10n.yourName,
+            hintText: context.l10n.nameExample,
             controller: _usernameController,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Пожалуйста, введите ваше имя';
+                return context.l10n.pleaseEnterName;
               } else if (value.length < 3) {
-                return 'Имя должно содержать более трех символов.';
+                return context.l10n.pleaseEnterCorrectName;
               }
               return null;
             },
           ),
           const SizedBox(height: 10),
           CustomInputWidget(
-            title: 'E-Mail',
-            hintText: "asanov@example.com",
+            title: context.l10n.email,
+            hintText: context.l10n.emailExample,
             controller: _emailController,
             inputType: TextInputType.emailAddress,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Пожалуйста, введите ваш E-Mail';
+                return context.l10n.pleaseEnterEmail;
               } else if (!EmailValidator.validate(value)) {
-                return 'Пожалуйста, введите корректный E-Mail адрес.';
+                return context.l10n.pleaseEnterCorrectEmail;
               }
               return null;
             },
           ),
           const SizedBox(height: 10),
           PhoneNumberMask(
-            title: 'Номер телефона',
+            title: context.l10n.phone,
             hintText: '+996 (___) __-__-__',
             textController: _phoneController,
-            hint: "Номер телефона",
+            hint: context.l10n.phone,
             formatter: MaskTextInputFormatter(mask: "+996 (###) ##-##-##"),
             textInputType: TextInputType.phone,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Пожалуйста, введите ваш номер телефона';
+                return context.l10n.pleaseEnterPhone;
               } else if (value.length < 10) {
-                return 'Номер телефона должен содержать более десяти символов.';
+                return context.l10n.pleaseEnterCorrectPhone;
               }
               return null;
             },
           ),
           const SizedBox(height: 10),
           CustomInputWidget(
-            title: 'Пароль',
+            title: context.l10n.password,
             hintText: "********",
             controller: _passwordController,
             isPasswordField: true,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Пожалуйста, введите ваш пароль';
+                return context.l10n.pleaseEnterPassword;
               } else if (value.length < 5) {
-                return 'Пароль должен содержать более пяти символов.';
+                return context.l10n.pleaseEnterCorrectPassword;
               }
               return null;
             },
           ),
           const SizedBox(height: 10),
           CustomInputWidget(
-            title: 'Подтвердите пароль',
+            title: context.l10n.confirmPassword,
             hintText: "********",
             controller: _confirmPasswordController,
             isPasswordField: true,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Пожалуйста, подтвердите ваш пароль';
+                return context.l10n.confirmPassword;
               } else if (value != _passwordController.text) {
-                return "Пароли не совпадают";
+                return context.l10n.passwordsDoNotMatch;
               }
               return null;
             },
@@ -137,7 +138,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 isLoading: state is SignUpLoading,
                 textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
                 bgColor: AppColors.primary,
-                title: 'Зарегистрироваться',
+                title: context.l10n.register,
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     BlocProvider.of<SignUpCubit>(context).signUpUser(
@@ -158,14 +159,14 @@ class _SignUpFormState extends State<SignUpForm> {
             color: AppColors.primary,
             onPressed: () {
               SnackBarMessage().showErrorSnackBar(
-                message: "Пока не доступно. Пожалуйста, попробуйте позже",
+                message: context.l10n.notAvailableTry,
                 context: context,
               );
             },
           ),
           TextCheckButton(
-            text: "Уже есть аккаунт?",
-            route: "Войти",
+            text: context.l10n.alreadyHaveAccount,
+            route: context.l10n.entrance,
             onPressed: () {
               context.pushRoute(const SignInRoute());
             },

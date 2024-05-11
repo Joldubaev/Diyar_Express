@@ -1,3 +1,4 @@
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/cart/presentation/presentation.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
@@ -26,46 +27,26 @@ class _TotalPriceWidgetState extends State<TotalPriceWidget> {
     return Container(
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: AppColors.white,
         borderRadius: BorderRadius.circular(10),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            blurRadius: 5,
-            offset: const Offset(0, 0),
-          ),
-        ],
+        boxShadow: [BoxShadow(color: Colors.grey.withOpacity(0.2), blurRadius: 5, offset: const Offset(0, 0))],
       ),
       child: BlocBuilder<CartCubit, CartState>(
         builder: (context, state) {
-          context.read<CartCubit>().changeTotalPrice(
-              widget.totalPrice + (context.read<CartCubit>().dishCount * 15));
+          context.read<CartCubit>().changeTotalPrice(widget.totalPrice + (context.read<CartCubit>().dishCount * 15));
 
           return Column(
             children: [
+              CustomTile(title: context.l10n.costOfMeal, trailing: '${widget.price} ${context.l10n.som}'),
               CustomTile(
-                title: 'Стоимость блюд:',
-                trailing: '${widget.price} сoм',
-              ),
-              CustomTile(
-                title: 'Посуда:',
-                trailing: '${context.read<CartCubit>().dishCount} сoм',
-              ),
-              CustomTile(
-                title: 'Скидка:',
-                trailing: '${widget.sale} сoм',
-              ),
+                  title: context.l10n.dishes, trailing: '${context.read<CartCubit>().dishCount}${context.l10n.som}'),
+              CustomTile(title: context.l10n.sale, trailing: '${widget.sale} ${context.l10n.som}'),
               const Divider(color: Colors.grey),
               CustomTile(
-                title: 'Итого:',
-                trailing:
-                    '${widget.totalPrice + (context.read<CartCubit>().dishCount * 15)} сoм',
+                title: context.l10n.total,
+                trailing: '${widget.totalPrice + (context.read<CartCubit>().dishCount * 15)}${context.l10n.som}',
               ),
-              Text(
-                'Сумма к оплате указана без доставки!',
-                style:
-                    theme.textTheme.bodySmall!.copyWith(color: AppColors.red),
-              ),
+              Text(context.l10n.totalToPay, style: theme.textTheme.bodySmall!.copyWith(color: AppColors.red)),
               const SizedBox(height: 10),
               const DishesWidget(),
             ],

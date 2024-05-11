@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,10 @@ class OrderSuccess extends StatelessWidget {
                 width: 150,
               ),
               const SizedBox(height: 30),
-              Text(
-                "Ваш заказ принят!",
-                style: theme.textTheme.titleSmall,
-                textAlign: TextAlign.center,
-              ),
+              Text(context.l10n.yourOrdersConfirm, style: theme.textTheme.titleSmall, textAlign: TextAlign.center),
               FittedBox(
                 child: Text(
-                  "Примерно через 30 мин ваш заказ будет готов",
+                  context.l10n.orderTime,
                   style: theme.textTheme.bodyMedium,
                   textAlign: TextAlign.center,
                 ),
@@ -45,7 +42,7 @@ class OrderSuccess extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
         child: SubmitButtonWidget(
-          title: 'Создать шаблон заказа',
+          title: context.l10n.createTemplate,
           bgColor: AppColors.primary,
           textStyle: theme.textTheme.bodyMedium!.copyWith(
             color: AppColors.white,
@@ -76,28 +73,28 @@ class _CreateOrderDialogState extends State<CreateOrderDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text('Создать шаблон заказа', style: theme.textTheme.titleSmall),
+      title: Text(context.l10n.createTemplate, style: theme.textTheme.titleSmall),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            'Создав шаблон, вы можете выбрать его, чтобы автоматически все поле для заказа заполнялись так, как вы указывали',
+            context.l10n.templateDescription,
             style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
           ),
           const SizedBox(height: 20),
           CustomInputWidget(
-            hintText: 'Название шаблона',
+            hintText: context.l10n.templateName,
             controller: _controller,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Введите название';
+                return context.l10n.pleaseEnterTemplateName;
               }
               return null;
             },
           ),
           const SizedBox(height: 20),
           SubmitButtonWidget(
-            title: 'Создать',
+            title: context.l10n.create,
             bgColor: AppColors.primary,
             textStyle: theme.textTheme.bodyMedium!.copyWith(
               color: AppColors.white,
@@ -114,7 +111,7 @@ class _CreateOrderDialogState extends State<CreateOrderDialog> {
               Navigator.pop(context);
             },
             child: Text(
-              'Редактироват',
+              context.l10n.edit,
               style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.blue),
             ),
           )

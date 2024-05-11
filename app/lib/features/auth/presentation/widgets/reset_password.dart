@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
@@ -31,7 +32,7 @@ class _RessetPasswordPageState extends State<RessetPasswordPage> {
           },
         ),
         title: Text(
-          'Восстановление пароля',
+          context.l10n.passwordRecovery,
           style: theme.textTheme.titleSmall,
         ),
       ),
@@ -48,54 +49,52 @@ class _RessetPasswordPageState extends State<RessetPasswordPage> {
                 image: AssetImage("assets/images/auth_images.png"),
               ),
               const SizedBox(height: 10),
-              Text(
-                'Введите ваш E-Mail и код восстановления и новый пароль, который мы отправили вам на почту.',
-                style: theme.textTheme.bodyLarge!.copyWith(color: AppColors.primary, fontWeight: FontWeight.w600),
-                textAlign: TextAlign.center,
-              ),
+              Text(context.l10n.passwordRecoveryText,
+                  style: theme.textTheme.bodyLarge!.copyWith(color: AppColors.primary, fontWeight: FontWeight.w600),
+                  textAlign: TextAlign.center),
               const SizedBox(height: 20),
               CustomInputWidget(
-                title: 'E-Mail',
-                hintText: "E-Mail",
+                title: context.l10n.email,
+                hintText: context.l10n.email,
                 controller: _emailController,
                 isPasswordField: false,
                 inputType: TextInputType.emailAddress,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Пожалуйста, введите ваш E-Mail';
+                    return context.l10n.pleaseEnterEmail;
                   } else if (!EmailValidator.validate(value)) {
-                    return 'Пожалуйста, введите корректный E-Mail';
+                    return context.l10n.pleaseEnterCorrectEmail;
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
               CustomInputWidget(
-                title: 'Новый пароль',
+                title: context.l10n.newPassword,
                 hintText: "******",
                 controller: _passwordController,
                 isPasswordField: true,
                 inputType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Пожалуйста, введите ваш пароль';
+                    return context.l10n.pleaseEnterCode;
                   } else if (value.length < 5) {
-                    return 'Пароль должен содержать не менее 5 символов';
+                    return context.l10n.pleaseEnterCorrectCode;
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 20),
               CustomInputWidget(
-                title: 'Код восстановления',
+                title: context.l10n.codeUpdate,
                 hintText: "******",
                 controller: resedPasswordCode,
                 inputType: TextInputType.text,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Пожалуйста, введите ваш код восстановления';
+                    return context.l10n.pleaseEnterCode;
                   } else if (value.length < 5) {
-                    return 'Код восстановления должен содержать не менее 5 символов';
+                    return context.l10n.pleaseEnterCorrectCode;
                   }
                   return null;
                 },
@@ -104,17 +103,10 @@ class _RessetPasswordPageState extends State<RessetPasswordPage> {
               BlocConsumer<SignInCubit, SignInState>(
                 listener: (context, state) {
                   if (state is SignInFailure) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(state.message),
-                        backgroundColor: const Color.fromARGB(255, 150, 33, 49),
-                      ),
-                    );
+                    ScaffoldMessenger.of(context)
+                        .showSnackBar(SnackBar(content: Text(state.message), backgroundColor: AppColors.red));
                   } else if (state is ResetPasswordSuccess) {
-                    context.router.pushAndPopUntil(
-                      const MainRoute(),
-                      predicate: (_) => false,
-                    );
+                    context.router.pushAndPopUntil(const MainRoute(), predicate: (_) => false);
                   }
                 },
                 builder: (context, state) {
@@ -127,18 +119,16 @@ class _RessetPasswordPageState extends State<RessetPasswordPage> {
                       children: [
                         Center(
                           child: Text(
-                            'Регистрация не удалась. Пожалуйста, попробуйте еще раз.',
+                            context.l10n.resgisterIsFailed,
                             style: theme.textTheme.bodyMedium!
                                 .copyWith(color: const Color.fromARGB(255, 233, 71, 35), fontWeight: FontWeight.bold),
                           ),
                         ),
                         const SizedBox(height: 10),
                         SubmitButtonWidget(
-                          textStyle: theme.textTheme.bodyLarge!.copyWith(
-                            color: Colors.white,
-                          ),
+                          textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
                           bgColor: AppColors.primary,
-                          title: 'Войти',
+                          title: context.l10n.entrance,
                           onTap: () {
                             if (_formKey.currentState!.validate()) {
                               context.read<SignInCubit>().resetPassword(
@@ -155,11 +145,9 @@ class _RessetPasswordPageState extends State<RessetPasswordPage> {
                   }
 
                   return SubmitButtonWidget(
-                    textStyle: theme.textTheme.bodyLarge!.copyWith(
-                      color: Colors.white,
-                    ),
+                    textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
                     bgColor: AppColors.primary,
-                    title: 'Войти',
+                    title: context.l10n.entrance,
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         context.read<SignInCubit>().resetPassword(

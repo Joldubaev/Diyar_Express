@@ -4,6 +4,7 @@ import 'package:diyar_express/features/cart/data/models/cart_item_model.dart';
 import 'package:diyar_express/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/cubit/popular_cubit.dart';
 import 'package:diyar_express/shared/pages/widgets/custom_widget.dart';
 import 'package:diyar_express/shared/shared.dart';
@@ -61,19 +62,19 @@ class _HomePageState extends State<HomePage> {
                             height: 60, fit: BoxFit.fill, color: AppColors.primary),
                       ),
                       const Divider(color: AppColors.primary, thickness: 1),
-                      const Text('Акции', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(context.l10n.sales, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       CustomWidget(
                         discount: int.parse('10'),
-                        title: 'Скидка 10%',
-                        description: 'На все блюда',
+                        title: '${context.l10n.sale} 10%',
+                        description: context.l10n.forAllFood,
                         image: 'assets/images/banner.png',
                         onTap: () => context.router.push(const SaleRoute()),
                       ),
                       const SizedBox(height: 10),
-                      const Text(
-                        'Популярные блюда',
-                        style: TextStyle(
+                      Text(
+                        context.l10n.popularFood,
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
@@ -114,19 +115,19 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      const Text('О нас', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(context.l10n.aboutUs, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       CustonClipRectWidget(
                         image: 'assets/images/about.png',
                         onTap: () => context.router.push(const AboutUsRoute()),
                       ),
                       const SizedBox(height: 10),
-                      const Text('Новости', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Text(context.l10n.news, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       CustomWidget(
                         discount: 0,
-                        title: 'Новости',
-                        description: 'Последние новости',
+                        title: context.l10n.news,
+                        description: context.l10n.lastNews,
                         image: 'assets/images/news.png',
                         onTap: () => context.router.push(const NewsRoute()),
                       ),
@@ -139,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         child: SettingsTile(
                           icon: Icons.phone,
-                          text: 'Контакты',
+                          text: context.l10n.contact,
                           onPressed: () => context.router.push(const ContactRoute()),
                         ),
                       ),

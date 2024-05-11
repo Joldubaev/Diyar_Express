@@ -13,7 +13,7 @@ class DishesWidget extends StatelessWidget {
       builder: (context, state) {
         return DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppColors.white,
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
               BoxShadow(

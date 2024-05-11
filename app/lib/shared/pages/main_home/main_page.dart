@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/features/cart/cart.dart';
 import 'package:diyar_express/features/cart/data/models/cart_item_model.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,7 +75,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                   ),
-                  label: 'Главная ',
+                  label: context.l10n.main,
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -87,7 +88,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                   ),
-                  label: 'Меню',
+                  label: context.l10n.menu,
                 ),
                 BottomNavigationBarItem(
                   icon: StreamBuilder<List<CartItemModel>>(
@@ -113,7 +114,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                         );
                       }),
-                  label: 'Корзина',
+                  label: context.l10n.cart,
                 ),
                 BottomNavigationBarItem(
                   icon: Padding(
@@ -126,7 +127,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                     ),
                   ),
-                  label: 'Профиль',
+                  label: context.l10n.profile,
                 ),
               ],
             ),

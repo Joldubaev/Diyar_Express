@@ -21,8 +21,7 @@ class OrderRemoteDataSourceImpl extends OrderRemoteDataSource {
         ApiConst.createOrder,
         data: order.toJson(),
         options: Options(
-          headers:
-              ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
+          headers: ApiConst.authMap(_prefs.getString(AppConst.accessToken) ?? ''),
         ),
       );
       if (![200, 201].contains(res.statusCode)) {

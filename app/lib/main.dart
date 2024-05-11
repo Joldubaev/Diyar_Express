@@ -46,6 +46,7 @@ class App extends StatelessWidget {
         routerConfig: appRoute.config(),
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
+        locale: const Locale('ru'),
       ),
     );
   }

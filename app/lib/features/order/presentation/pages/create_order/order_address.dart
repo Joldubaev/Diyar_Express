@@ -3,6 +3,7 @@ import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/features/cart/cart.dart';
 import 'package:diyar_express/features/cart/data/models/models.dart';
 import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:diyar_express/shared/utils/utils.dart';
@@ -21,8 +22,7 @@ class DeliveryFormPage extends StatefulWidget {
 
 class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _phoneController =
-      TextEditingController(text: '+996');
+  final TextEditingController _phoneController = TextEditingController(text: '+996');
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _houseController = TextEditingController();
   final TextEditingController _apartmentController = TextEditingController();
@@ -57,9 +57,9 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
             const MainRoute(),
             predicate: (_) => false,
           );
-          showToast("Заказ успешно создан");
+          showToast(context.l10n.orderIsSuccess);
         } else if (state is CreateOrderError) {
-          showToast("Ошибка при создании заказа", isError: true);
+          showToast(context.l10n.orderIsFailed, isError: true);
         }
       },
       builder: (context, state) {
@@ -71,31 +71,31 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             children: [
               CustomInputWidget(
-                hintText: 'Имя',
-                title: 'Ваше имя',
+                hintText: context.l10n.name,
+                title: context.l10n.yourName,
                 controller: _userName,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Пожалуйста, введите ваше имя';
+                    return context.l10n.pleaseEnterName;
                   } else if (value.length < 3) {
-                    return 'Имя должно содержать более трех символов.';
+                    return context.l10n.pleaseEnterCorrectName;
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 10),
               PhoneNumberMask(
-                title: 'Номер телефона',
+                title: context.l10n.phone,
                 hintText: '+996 (___) __-__-__',
                 textController: _phoneController,
-                hint: "Номер телефона",
+                hint: context.l10n.phone,
                 formatter: MaskTextInputFormatter(mask: "+996 (###) ##-##-##"),
                 textInputType: TextInputType.phone,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Пожалуйста, введите ваш номер телефона';
+                    return context.l10n.pleaseEnterPhone;
                   } else if (value.length < 10) {
-                    return 'Номер телефона должен содержать более десяти символов.';
+                    return context.l10n.pleaseEnterCorrectPhone;
                   }
                   return null;
                 },
@@ -103,30 +103,30 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
               CustomInputWidget(
                 trailing: TextButton(
                   onPressed: () => context.router.push(const OrderMapRoute()),
-                  child: const Text('Выбрать на карте'),
+                  child: Text(context.l10n.chooseOnMap, style: theme.textTheme.bodyMedium!),
                 ),
                 hintText: '',
-                title: 'Адрес',
+                title: context.l10n.adress,
                 controller: _addressController,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Пожалуйста, введите ваш адрес';
+                    return context.l10n.pleaseEnterAddress;
                   } else if (value.length < 3) {
-                    return 'Адрес должен содержать более трех символов.';
+                    return context.l10n.pleaseEnterCorrectAddress;
                   }
                   return null;
                 },
               ),
               CustomInputWidget(
                 hintText: '',
-                title: 'Номер дома',
+                title: context.l10n.houseNumber,
                 controller: _houseController,
                 inputType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Пожалуйста, введите номер дома';
+                    return context.l10n.pleaseEnterHouseNumber;
                   } else if (value.isEmpty) {
-                    return 'Номер дома должен содержать более одного символа.';
+                    return context.l10n.pleaseEnterCorrectHouseNumber;
                   }
                   return null;
                 },
@@ -137,7 +137,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                   Expanded(
                     child: CustomInputWidget(
                       hintText: '',
-                      title: 'Кв/Офис',
+                      title: context.l10n.ofice,
                       controller: _apartmentController,
                       inputType: TextInputType.number,
                     ),
@@ -146,7 +146,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                   Expanded(
                     child: CustomInputWidget(
                       hintText: '',
-                      title: 'Код домофона',
+                      title: context.l10n.codeIntercom,
                       controller: _intercomController,
                       inputType: TextInputType.number,
                     ),
@@ -159,7 +159,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                   Expanded(
                     child: CustomInputWidget(
                       hintText: '',
-                      title: 'Этаж',
+                      title: context.l10n.floor,
                       controller: _floorController,
                       inputType: TextInputType.number,
                     ),
@@ -168,7 +168,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                   Expanded(
                     child: CustomInputWidget(
                       hintText: '',
-                      title: 'Код домофона',
+                      title: context.l10n.entranceNumber,
                       controller: _entranceController,
                       inputType: TextInputType.number,
                     ),
@@ -177,11 +177,11 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
               ),
               CustomInputWidget(
                 hintText: '',
-                title: 'Комментарий к заказу',
+                title: context.l10n.comment,
                 controller: _commentController,
               ),
               const SizedBox(height: 10),
-              Text('Способ оплаты', style: theme.textTheme.bodyMedium!),
+              Text(context.l10n.paymentMethod, style: theme.textTheme.bodyMedium!),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -194,7 +194,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                       setState(() => _paymentType = value!);
                     },
                   ),
-                  const Text('Наличными курьеру')
+                  Text(context.l10n.cash),
                 ],
               ),
               Row(
@@ -207,7 +207,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                       setState(() => _paymentType = value!);
                     },
                   ),
-                  const Text('Картой курьеру (Post terminal)')
+                  Text(context.l10n.postTerminal)
                 ],
               ),
               Row(
@@ -220,30 +220,29 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                       setState(() => _paymentType = value!);
                     },
                   ),
-                  const Text('Онлайн оплата')
+                  Text(context.l10n.onlinePayment)
                 ],
               ),
               const SizedBox(height: 10),
               CustomInputWidget(
                 hintText: '',
-                title: 'Сдача с',
+                title: context.l10n.change,
                 inputType: TextInputType.number,
                 validator: (value) {
                   if (value!.isEmpty) {
-                    return 'Пожалуйста, введите сумму для сдачи';
+                    return context.l10n.pleaseEnterChange;
                   } else if (value.isEmpty) {
-                    return 'Сумма для сдачи должна содержать более одного символа.';
+                    return context.l10n.pleaseEnterCorrectChange;
                   }
                   return null;
                 },
               ),
               const SizedBox(height: 10),
               SubmitButtonWidget(
-                title: 'Оформить заказ',
+                title: context.l10n.confirmOrder,
                 bgColor: theme.primaryColor,
                 isLoading: state is CreateOrderLoading,
-                textStyle:
-                    theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                textStyle: theme.textTheme.bodyMedium!.copyWith(color: AppColors.white),
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<OrderCubit>().createOrder(
@@ -255,14 +254,10 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                             floor: _floorController.text,
                             houseNumber: _houseController.text,
                             intercom: _intercomController.text,
-                            paymentMethod:
-                                _paymentType.toString().split('.').last,
+                            paymentMethod: _paymentType.toString().split('.').last,
                             userPhone: _phoneController.text,
                             userName: _userName.text,
-                            deliveryCost: context
-                                .read<OrderCubit>()
-                                .deliveryPrice
-                                .toInt(),
+                            deliveryCost: context.read<OrderCubit>().deliveryPrice.toInt(),
                             price: context.read<CartCubit>().totalPrice,
                             dishesCount: context.read<CartCubit>().dishCount,
                             foods: widget.cart

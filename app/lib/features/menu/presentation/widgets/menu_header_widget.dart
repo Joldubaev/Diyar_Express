@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/features/menu/menu.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 
 class MenuHeaderWidget extends StatefulWidget {
@@ -20,7 +21,7 @@ class _MenuHeaderWidgetState extends State<MenuHeaderWidget> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const SizedBox(width: 16),
-          Text("Menu", style: Theme.of(context).textTheme.titleSmall),
+          Text(context.l10n.menu, style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(width: 20),
           Expanded(
             child: Row(

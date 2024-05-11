@@ -1,3 +1,4 @@
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,7 +40,7 @@ class _OrderStepperState extends State<OrderStepper> {
               activeStep: activeStep2,
               maxReachedStep: reachedStep,
               lineStyle: LineStyle(
-                lineLength: 58,
+                lineLength: 61,
                 lineType: LineType.normal,
                 unreachedLineColor: Colors.grey.withOpacity(0.5),
                 finishedLineColor: AppColors.primary,
@@ -62,20 +63,20 @@ class _OrderStepperState extends State<OrderStepper> {
               steps: [
                 EasyStep(
                   icon: const Icon(Icons.restaurant_menu),
-                  title: 'Кухня',
-                  lineText: 'Готовка еды',
+                  title: context.l10n.kitchen,
+                  lineText: context.l10n.foodIsPrepared,
                   enabled: _allowTabStepping(0, StepEnabling.sequential),
                 ),
                 EasyStep(
                   icon: const Icon(CupertinoIcons.car),
-                  title: 'Доставка',
-                  lineText: 'Курьер везет еду',
+                  title: context.l10n.delivery,
+                  lineText: context.l10n.deliveredText2,
                   enabled: _allowTabStepping(1, StepEnabling.sequential),
                 ),
                 EasyStep(
                   icon: const Icon(Icons.check_circle_outline),
-                  title: 'Доставлено',
-                  lineText: 'Курьер доставил еду',
+                  title: context.l10n.delivered,
+                  lineText: context.l10n.deliveredText,
                   enabled: _allowTabStepping(2, StepEnabling.sequential),
                 ),
               ],

@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
@@ -19,19 +20,19 @@ class AuthBottomSheet extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          const Text("Введите ваш E-Mail"),
+          Text(context.l10n.enterEmail),
           const SizedBox(height: 10),
           CustomInputWidget(
-            title: 'E-Mail',
-            hintText: "E-Mail",
+            title: context.l10n.email,
+            hintText: context.l10n.email,
             controller: resedPasswordCode,
             isPasswordField: false,
             inputType: TextInputType.emailAddress,
             validator: (value) {
               if (value!.isEmpty) {
-                return 'Пожалуйста, введите ваш E-Mail';
+                return context.l10n.pleaseEnterEmail;
               } else if (!EmailValidator.validate(value)) {
-                return 'Пожалуйста, введите корректный E-Mail';
+                return context.l10n.pleaseEnterCorrectEmail;
               }
               return null;
             },
@@ -39,17 +40,17 @@ class AuthBottomSheet extends StatelessWidget {
           const SizedBox(height: 20),
           SubmitButtonWidget(
             textStyle: theme.textTheme.bodyLarge!.copyWith(
-              color: Colors.white,
+              color: AppColors.white,
             ),
             bgColor: AppColors.primary,
-            title: 'Отправить',
+            title: context.l10n.send,
             onTap: () {
               context.read<SignInCubit>().sendCodeToEmail(resedPasswordCode.text);
               if (resedPasswordCode.text.isNotEmpty) {
                 context.router.replace(const RessetPasswordRoute());
               } else {
                 SnackBarMessage().showErrorSnackBar(
-                  message: "Пожалуйста, введите ваш E-Mail",
+                  message: context.l10n.pleaseEnterEmail,
                   context: context,
                 );
               }
