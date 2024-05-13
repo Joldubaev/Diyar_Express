@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/features/order/data/models/pickup_order_model.dart';
 import 'package:equatable/equatable.dart';
 
 part 'order_state.dart';

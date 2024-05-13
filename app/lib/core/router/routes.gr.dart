@@ -32,7 +32,7 @@ import 'package:diyar_express/features/map/presentation/user_map/order_map.dart'
 import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart' as _i13;
 import 'package:diyar_express/features/menu/presentation/pages/search_menu_page.dart' as _i24;
 import 'package:diyar_express/features/order/presentation/pages/create_order/create_order_page.dart' as _i5;
-import 'package:diyar_express/features/order/presentation/pages/create_order/order_address.dart' as _i8;
+import 'package:diyar_express/features/order/presentation/pages/create_order/delivery_order.dart' as _i8;
 import 'package:diyar_express/features/order/presentation/pages/create_order/order_success.dart' as _i18;
 import 'package:diyar_express/features/order/presentation/pages/history/order_history_page.dart' as _i16;
 import 'package:diyar_express/features/order/presentation/pages/order_active/order_detail_page.dart' as _i15;

@@ -53,7 +53,7 @@ class _CreateOrderPageState extends State<CreateOrderPage> {
         body: TabBarView(
           children: [
             DeliveryFormPage(cart: widget.cart),
-            const PickupForm(),
+            PickupForm(cart: widget.cart),
           ],
         ),
       ),

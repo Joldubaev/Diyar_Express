@@ -22,7 +22,8 @@ class CreateOrderModel {
   int? price;
   String? userName;
   String? userPhone;
-  int? deliveryCost;
+  int? deliveryPrice;
+  int? sdacha;
 
   CreateOrderModel({
     this.address,
@@ -38,7 +39,8 @@ class CreateOrderModel {
     this.price,
     this.userName,
     this.userPhone,
-    this.deliveryCost,
+    this.deliveryPrice,
+    this.sdacha,
   });
 
   factory CreateOrderModel.fromJson(Map<String, dynamic> json) => CreateOrderModel(
@@ -56,7 +58,8 @@ class CreateOrderModel {
         price: json["price"],
         userName: json["userName"],
         userPhone: json["userPhone"],
-        deliveryCost: json["deliveryCost"],
+        deliveryPrice: json["deliveryPrice"],
+        sdacha: json["sdacha"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -73,7 +76,8 @@ class CreateOrderModel {
         "price": price,
         "userName": userName,
         "userPhone": userPhone,
-        "deliveryCost": deliveryCost,
+        "deliveryPrice": deliveryPrice,
+        "sdacha": sdacha,
       };
 }
 
