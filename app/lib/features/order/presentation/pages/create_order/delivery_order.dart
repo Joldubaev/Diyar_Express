@@ -31,6 +31,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final TextEditingController _entranceController = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _userName = TextEditingController();
+  final TextEditingController _sdachaController = TextEditingController();
 
   PaymentTypeDelivery _paymentType = PaymentTypeDelivery.cash;
 
@@ -225,6 +226,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
               ),
               const SizedBox(height: 10),
               CustomInputWidget(
+                controller: _sdachaController,
                 hintText: '',
                 title: context.l10n.change,
                 inputType: TextInputType.number,
@@ -257,9 +259,10 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                             paymentMethod: _paymentType.toString().split('.').last,
                             userPhone: _phoneController.text,
                             userName: _userName.text,
-                            deliveryCost: context.read<OrderCubit>().deliveryPrice.toInt(),
+                            deliveryPrice: context.read<OrderCubit>().deliveryPrice.toInt(),
                             price: context.read<CartCubit>().totalPrice,
                             dishesCount: context.read<CartCubit>().dishCount,
+                            sdacha: int.parse(_sdachaController.text),
                             foods: widget.cart
                                 .map((e) => OrderFoodItem(
                                       name: e.food?.name ?? '',
