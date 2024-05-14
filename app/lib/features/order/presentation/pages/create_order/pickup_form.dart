@@ -43,6 +43,16 @@ class _PickupFormState extends State<PickupForm> {
         }
       },
       builder: (context, state) {
+        if (state is CreateOrderLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is CreateOrderError) {
+          return Center(
+            child: Text(
+              context.l10n.someThingIsWrong,
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.red),
+            ),
+          );
+        }
         return Form(
           key: _formKey,
           child: ListView(

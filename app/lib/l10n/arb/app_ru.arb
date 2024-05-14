@@ -147,5 +147,7 @@
     "forAllFood":"На все блюда",
     "popularFood":"Популярные блюда",
     "lastNews":"Последние новости",
-    "main":"Главная"
+    "main":"Главная",
+    "noOrders":"Нет заказов",
+    "noOrderDescription":"Вы еще не сделали заказ"
 }

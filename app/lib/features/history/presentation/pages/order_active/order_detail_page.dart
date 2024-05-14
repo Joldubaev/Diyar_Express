@@ -1,87 +1,66 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/l10n/l10n.dart';
-import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/features/features.dart';
-import 'package:diyar_express/shared/theme/theme.dart';
-import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
+import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
 class OrderDetailPage extends StatefulWidget {
-  const OrderDetailPage({super.key});
+  final String orderNumber;
+  const OrderDetailPage({super.key, required this.orderNumber});
 
   @override
   State<OrderDetailPage> createState() => _OrderDetailPageState();
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
+  ActiveOrderModel activeOrderModel = ActiveOrderModel();
+
+  @override
+  void initState() {
+    context.read<HistoryCubit>().getOrderItem(orderNumber: widget.orderNumber);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.orderDetails, style: const TextStyle(fontSize: 16)),
+      appBar: AppBar(title: Text(context.l10n.orderDetails)),
+      body: BlocConsumer<HistoryCubit, HistoryState>(
+        listener: (context, state) {
+          if (state is HistoryError) {
+            SnackBarMessage().showErrorSnackBar(
+              message: state.message,
+              context: context,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is HistoryLoaded) {
+            activeOrderModel = state.activeOrders[0];
+          } else if (state is HistoryLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is HistoryError) {
+            return const Center(child: Text('Error'));
+          }
+
+          return ListView.builder(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            itemCount: 1,
+            itemBuilder: (context, index) {
+              return _buildOrderDetailItem(context, context.l10n.orderNumber, "${activeOrderModel.order?.orderNumber}");
+            },
+          );
+        },
       ),
-      body: const OrderActiveCard(),
     );
   }
-}
 
-class OrderActiveCard extends StatefulWidget {
-  const OrderActiveCard({super.key});
-
-  @override
-  State<OrderActiveCard> createState() => _OrderActiveCardState();
-}
-
-class _OrderActiveCardState extends State<OrderActiveCard> {
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      itemCount: 1,
-      itemBuilder: (context, index) {
-        return Card(
-          child: ExpansionTile(
-            shape: const Border(
-              bottom: BorderSide(color: Colors.transparent, width: 0),
-            ),
-            childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
-            title: Text(
-              '${context.l10n.orderNumber}: 123',
-              style: theme.textTheme.bodyLarge!.copyWith(
-                color: AppColors.primary,
-              ),
-            ),
-            subtitle: Text(
-              '12.12.2021 12:12',
-              style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
-            ),
-            children: [
-              const OrderStepper(),
-              Divider(
-                color: Colors.grey.withOpacity(0.7),
-              ),
-              CustomTile(
-                title: '${context.l10n.costOfMeal}:',
-                trailing: '100 сoм',
-              ),
-              CustomTextButton(
-                onPressed: () {
-                  AppAlert.showConfirmDialog(
-                    context: context,
-                    title: context.l10n.orderCancel,
-                    content: Text(context.l10n.orderCancelText),
-                    confirmPressed: () {
-                      Navigator.pop(context);
-                    },
-                  );
-                },
-                textButton: context.l10n.orderCancel,
-              ),
-            ],
-          ),
-        );
-      },
+  Widget _buildOrderDetailItem(BuildContext context, String label, String value) {
+    return ListTile(
+      title: Text(label),
+      subtitle: Text(value),
     );
   }
 }

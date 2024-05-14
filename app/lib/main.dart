@@ -39,6 +39,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<OrderCubit>()),
         BlocProvider(create: (context) => di.sl<AboutUsCubit>()),
         BlocProvider(create: (context) => di.sl<HomeFeaturesCubit>()),
+        BlocProvider(create: (context) => di.sl<HistoryCubit>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

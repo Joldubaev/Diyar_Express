@@ -147,5 +147,7 @@
     "forAllFood":"For all dishes",
     "popularFood":"Popular dishes",
     "lastNews":"Latest news",
-    "main":"Main"
+    "main":"Main",
+    "noOrders":"No orders",
+     "noOrderDescription":"You have not placed an order yet"
 }

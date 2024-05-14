@@ -40,7 +40,7 @@ class _OrderStepperState extends State<OrderStepper> {
               activeStep: activeStep2,
               maxReachedStep: reachedStep,
               lineStyle: LineStyle(
-                lineLength: 61,
+                lineLength: 67,
                 lineType: LineType.normal,
                 unreachedLineColor: Colors.grey.withOpacity(0.5),
                 finishedLineColor: AppColors.primary,
@@ -61,6 +61,12 @@ class _OrderStepperState extends State<OrderStepper> {
               borderThickness: 10,
               showLoadingAnimation: false,
               steps: [
+                EasyStep(
+                  icon: const Icon(Icons.timer),
+                  title: 'В ожидании',
+                  lineText: 'Заказ оформлен',
+                  enabled: _allowTabStepping(0, StepEnabling.sequential),
+                ),
                 EasyStep(
                   icon: const Icon(Icons.restaurant_menu),
                   title: context.l10n.kitchen,

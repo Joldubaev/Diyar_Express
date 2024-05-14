@@ -1,4 +1,3 @@
-import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextButton extends StatelessWidget {
@@ -19,16 +18,7 @@ class CustomTextButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(5),
-      child: Column(
-        children: [
-          const Divider(color: Colors.grey),
-          Text(
-            '$description $time',
-            style: theme.textTheme.bodySmall,
-          ),
-          TextButton(onPressed: onPressed, child: Text(textButton)),
-        ],
-      ),
+      child: TextButton(onPressed: onPressed, child: Text(textButton)),
     );
   }
 }

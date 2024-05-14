@@ -141,9 +141,13 @@ abstract class $AppRouter extends _i30.RootStackRouter {
       );
     },
     OrderDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<OrderDetailRouteArgs>();
       return _i30.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i15.OrderDetailPage(),
+        child: _i15.OrderDetailPage(
+          key: args.key,
+          orderNumber: args.orderNumber,
+        ),
       );
     },
     OrderHistoryRoute.name: (routeData) {
@@ -486,16 +490,39 @@ class NewsRoute extends _i30.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i15.OrderDetailPage]
-class OrderDetailRoute extends _i30.PageRouteInfo<void> {
-  const OrderDetailRoute({List<_i30.PageRouteInfo>? children})
-      : super(
+class OrderDetailRoute extends _i30.PageRouteInfo<OrderDetailRouteArgs> {
+  OrderDetailRoute({
+    _i31.Key? key,
+    required String orderNumber,
+    List<_i30.PageRouteInfo>? children,
+  }) : super(
           OrderDetailRoute.name,
+          args: OrderDetailRouteArgs(
+            key: key,
+            orderNumber: orderNumber,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'OrderDetailRoute';
 
-  static const _i30.PageInfo<void> page = _i30.PageInfo<void>(name);
+  static const _i30.PageInfo<OrderDetailRouteArgs> page = _i30.PageInfo<OrderDetailRouteArgs>(name);
+}
+
+class OrderDetailRouteArgs {
+  const OrderDetailRouteArgs({
+    this.key,
+    required this.orderNumber,
+  });
+
+  final _i31.Key? key;
+
+  final String orderNumber;
+
+  @override
+  String toString() {
+    return 'OrderDetailRouteArgs{key: $key, orderNumber: $orderNumber}';
+  }
 }
 
 /// generated route for
