@@ -1,4 +1,5 @@
 import 'package:diyar_express/core/router/routes.dart';
+import 'package:diyar_express/features/curier/curier.dart';
 import 'package:diyar_express/firebase_options.dart';
 import 'package:diyar_express/shared/cubit/popular_cubit.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -40,6 +41,7 @@ class App extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<AboutUsCubit>()),
         BlocProvider(create: (context) => di.sl<HomeFeaturesCubit>()),
         BlocProvider(create: (context) => di.sl<HistoryCubit>()),
+        BlocProvider(create: (context) => di.sl<CurierCubit>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
