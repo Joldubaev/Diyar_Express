@@ -31,6 +31,7 @@ Future<void> init() async {
   sl.registerFactory(() => OrderCubit(sl()));
   sl.registerFactory(() => AboutUsCubit(sl()));
   sl.registerFactory(() => HomeFeaturesCubit(sl()));
+  sl.registerFactory(() => HistoryCubit(sl()));
 
 // AUTH
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
@@ -62,6 +63,10 @@ Future<void> init() async {
   // Order
   sl.registerLazySingleton<OrderRepository>(() => OrderRepositoryImpl(sl()));
   sl.registerLazySingleton<OrderRemoteDataSource>(() => OrderRemoteDataSourceImpl(sl(), sl()));
+
+  // history
+  sl.registerLazySingleton<HistoryRepository>(() => HistoryRepositoryImpl(sl()));
+  sl.registerLazySingleton<HistoryReDatasource>(() => HistoryReDatasourceImpl(sl(), sl()));
 //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
