@@ -5,27 +5,8 @@ import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 @RoutePage()
-class OrderHistoryPage extends StatefulWidget {
-  const OrderHistoryPage({Key? key}) : super(key: key);
-
-  @override
-  OrderHistoryPageState createState() => OrderHistoryPageState();
-}
-
-class OrderHistoryPageState extends State<OrderHistoryPage> with SingleTickerProviderStateMixin {
-  late TabController tabController;
-
-  @override
-  void initState() {
-    tabController = TabController(length: 2, vsync: this);
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    tabController.dispose();
-    super.dispose();
-  }
+class OrderHistoryPage extends StatelessWidget {
+  const OrderHistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +25,11 @@ class OrderHistoryPageState extends State<OrderHistoryPage> with SingleTickerPro
               borderRadius: const BorderRadius.all(Radius.circular(10)),
               child: Container(
                 height: 40,
-                margin: const EdgeInsets.symmetric(horizontal: 20),
+                margin: const EdgeInsets.fromLTRB(20, 10, 20, 5),
                 decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(20)), color: AppColors.grey.withOpacity(0.2)),
+                  borderRadius: const BorderRadius.all(Radius.circular(20)),
+                  color: AppColors.grey.withOpacity(0.2),
+                ),
                 child: TabBar(
                   indicatorSize: TabBarIndicatorSize.tab,
                   dividerColor: Colors.transparent,
@@ -65,12 +48,10 @@ class OrderHistoryPageState extends State<OrderHistoryPage> with SingleTickerPro
             ),
           ),
         ),
-        body: const SafeArea(
-          child: TabBarView(
-            children: [
-              ActiveOrder(),
-              OrderHistory(),
-            ],
+        body: PageStorage(
+          bucket: PageStorageBucket(),
+          child: const TabBarView(
+            children: [ActiveOrderPage(), OrderHistory()],
           ),
         ),
       ),

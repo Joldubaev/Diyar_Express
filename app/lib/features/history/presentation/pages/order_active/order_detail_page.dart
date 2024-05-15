@@ -15,11 +15,11 @@ class OrderDetailPage extends StatefulWidget {
 }
 
 class _OrderDetailPageState extends State<OrderDetailPage> {
-  ActiveOrderModel activeOrderModel = ActiveOrderModel();
+  late OrderActiveItemModel order;
 
   @override
   void initState() {
-    context.read<HistoryCubit>().getOrderItem(orderNumber: widget.orderNumber);
+    context.read<HistoryCubit>().getOrderItem(widget.orderNumber);
     super.initState();
   }
 
@@ -29,38 +29,28 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
       appBar: AppBar(title: Text(context.l10n.orderDetails)),
       body: BlocConsumer<HistoryCubit, HistoryState>(
         listener: (context, state) {
-          if (state is HistoryError) {
+          if (state is GetOrderItemError) {
             SnackBarMessage().showErrorSnackBar(
-              message: state.message,
+              message: "Ошибка при загрузке данных",
               context: context,
             );
           }
         },
         builder: (context, state) {
-          if (state is HistoryLoaded) {
-            activeOrderModel = state.activeOrders[0];
-          } else if (state is HistoryLoading) {
+          if (state is GetOrderItemLoaded) {
+            order = state.order;
+          } else if (state is GetOrderItemLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is HistoryError) {
+          } else if (state is GetOrderItemError) {
             return const Center(child: Text('Error'));
           }
 
-          return ListView.builder(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            itemCount: 1,
-            itemBuilder: (context, index) {
-              return _buildOrderDetailItem(context, context.l10n.orderNumber, "${activeOrderModel.order?.orderNumber}");
-            },
+          return ListTile(
+            title: Text(context.l10n.orderNumber),
+            subtitle: Text(order.orderNumber.toString()),
           );
         },
       ),
-    );
-  }
-
-  Widget _buildOrderDetailItem(BuildContext context, String label, String value) {
-    return ListTile(
-      title: Text(label),
-      subtitle: Text(value),
     );
   }
 }

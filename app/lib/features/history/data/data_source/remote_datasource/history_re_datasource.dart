@@ -4,7 +4,8 @@ import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class HistoryReDatasource {
-  Future<List<ActiveOrderModel>> getOrderItem({required int num});
+  Future<OrderActiveItemModel> getOrderItem({required int num});
+  Future<List<ActiveOrderModel>> getActiveOrders();
   // Future<List<OrderOrder>> getHistoryOrders();
 }
 
@@ -14,22 +15,40 @@ class HistoryReDatasourceImpl implements HistoryReDatasource {
   HistoryReDatasourceImpl(this.dio, this.prefs);
 
   @override
-  Future<List<ActiveOrderModel>> getOrderItem({required int num}) async {
+  Future<OrderActiveItemModel> getOrderItem({required int num}) async {
     try {
-      final response = dio.post(ApiConst.getActiveOrder,
-          options: Options(
-            headers: ApiConst.authMap(prefs.getString(AppConst.accessToken) ?? ''),
-          ),
-          data: {
-            "orderNumber": num,
-          });
-      return response.then((value) {
-        final List<ActiveOrderModel> activeOrders = [];
-        for (final item in value.data) {
-          activeOrders.add(ActiveOrderModel.fromJson(item));
-        }
-        return activeOrders;
-      });
+      var token = prefs.getString(AppConst.accessToken) ?? '';
+      final res = await dio.post(
+        ApiConst.getOrderItem,
+        data: {"orderNumber": num},
+        options: Options(headers: ApiConst.authMap(token)),
+      );
+
+      if ([200, 201].contains(res.statusCode)) {
+        return OrderActiveItemModel.fromJson(res.data['order']);
+      } else {
+        throw Exception('Error getting order item');
+      }
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<List<ActiveOrderModel>> getActiveOrders() async {
+    try {
+      var token = prefs.getString(AppConst.accessToken) ?? '';
+      final res = await dio.get(
+        ApiConst.getActualOrders,
+        options: Options(headers: ApiConst.authMap(token)),
+      );
+
+      if ([200, 201].contains(res.statusCode)) {
+        return List<ActiveOrderModel>.from(
+            res.data['orders'].map((x) => ActiveOrderModel.fromJson(x)));
+      } else {
+        throw Exception('Error getting active orders');
+      }
     } catch (e) {
       throw Exception();
     }

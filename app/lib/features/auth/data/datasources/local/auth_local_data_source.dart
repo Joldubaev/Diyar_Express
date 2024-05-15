@@ -13,7 +13,7 @@ abstract class AuthLocalDataSource {
   Future<void> setUserToCache(TokenModel user);
   String? getUserFromCache();
   Future<void> setTokenToCache({
-    required String refresh,
+    String? refresh,
     required String access,
     String email,
   });
@@ -49,16 +49,20 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
 
   @override
   Future<void> setTokenToCache({
-    required String refresh,
+    String? refresh,
     required String access,
     String? email,
   }) async {
     try {
-      await prefs.setString(AppConst.refreshToken, refresh);
+      if (refresh != null) {
+        await prefs.setString(AppConst.refreshToken, refresh);
+      }
       await prefs.setString(AppConst.accessToken, access);
       if (email != null) await prefs.setString(AppConst.email, email);
-      await prefs.setString(AppConst.userId, JwtDecoder.decode(access)['userID']);
-      await prefs.setString(AppConst.userRole, JwtDecoder.decode(access)['role']);
+      await prefs.setString(
+          AppConst.userId, JwtDecoder.decode(access)['userID']);
+      await prefs.setString(
+          AppConst.userRole, JwtDecoder.decode(access)['role']);
     } catch (e) {
       throw CacheException();
     }

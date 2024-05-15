@@ -9,16 +9,25 @@ class HistoryCubit extends Cubit<HistoryState> {
 
   final HistoryRepository historyRepository;
 
-  void getOrderItem({required String orderNumber}) async {
-    emit(HistoryLoading());
+  void getOrderItem(String orderNumber) async {
+    emit(GetOrderItemLoading());
     try {
-      final activeOrdersMap = await historyRepository.getOrderItem(orderNumber: int.parse(orderNumber));
-
-      final activeOrders = activeOrdersMap.map((e) => e).toList();
-
-      emit(HistoryLoaded(activeOrders: activeOrders, orderNumber: orderNumber));
+      final model = await historyRepository.getOrderItem(
+        orderNumber: int.parse(orderNumber),
+      );
+      emit(GetOrderItemLoaded(model));
     } catch (e) {
-      emit(HistoryError(message: 'Error'));
+      emit(GetOrderItemError());
+    }
+  }
+
+  getActiveOrders() async {
+    emit(GetActiveOrdersLoading());
+    try {
+      final orders = await historyRepository.getActiveOrders();
+      emit(GetActiveOrdersLoaded(orders));
+    } catch (e) {
+      emit(GetActiveOrdersError());
     }
   }
 }

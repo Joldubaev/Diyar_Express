@@ -1,3 +1,4 @@
+import 'package:diyar_express/features/history/data/model/order_status_model.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:easy_stepper/easy_stepper.dart';
@@ -5,7 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OrderStepper extends StatefulWidget {
-  const OrderStepper({super.key});
+  final OrderStatusModel orderStatus;
+  const OrderStepper({super.key, required this.orderStatus});
 
   @override
   State<OrderStepper> createState() => _OrderStepperState();

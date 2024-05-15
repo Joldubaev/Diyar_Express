@@ -59,7 +59,7 @@ class SignInCubit extends Cubit<SignInState> {
       } catch (e) {
         emit(RefreshTokenFailure());
       } finally {
-        log('${JwtDecoder.isExpired(token)} hell');
+        log('Token isExpired: ${JwtDecoder.isExpired(token)}');
       }
     } else {
       emit(RefreshTokenLoaded());

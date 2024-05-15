@@ -1,8 +1,8 @@
 import 'package:diyar_express/features/history/history.dart';
 
 abstract class HistoryRepository {
-  Future<List<ActiveOrderModel>> getOrderItem({required int orderNumber});
-  // Future<List<OrderOrder>> getHistoryOrders();
+  Future<OrderActiveItemModel> getOrderItem({required int orderNumber});
+  Future<List<ActiveOrderModel>> getActiveOrders();
 }
 
 class HistoryRepositoryImpl implements HistoryRepository {
@@ -10,7 +10,12 @@ class HistoryRepositoryImpl implements HistoryRepository {
   HistoryRepositoryImpl(this.historyReDatasource);
 
   @override
-  Future<List<ActiveOrderModel>> getOrderItem({required int orderNumber}) {
+  Future<OrderActiveItemModel> getOrderItem({required int orderNumber}) {
     return historyReDatasource.getOrderItem(num: orderNumber);
+  }
+
+  @override
+  Future<List<ActiveOrderModel>> getActiveOrders() {
+    return historyReDatasource.getActiveOrders();
   }
 }

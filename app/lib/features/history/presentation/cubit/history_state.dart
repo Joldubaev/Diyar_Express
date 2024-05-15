@@ -5,17 +5,22 @@ sealed class HistoryState {}
 
 final class HistoryInitial extends HistoryState {}
 
-final class HistoryLoading extends HistoryState {}
+final class GetOrderItemLoading extends HistoryState {}
 
-final class HistoryLoaded extends HistoryState {
-  final List<ActiveOrderModel> activeOrders;
-  final String orderNumber;
+final class GetOrderItemLoaded extends HistoryState {
+  final OrderActiveItemModel order;
 
-  HistoryLoaded({required this.activeOrders, required this.orderNumber});
+  GetOrderItemLoaded(this.order);
 }
 
-final class HistoryError extends HistoryState {
-  final String message;
+final class GetOrderItemError extends HistoryState {}
 
-  HistoryError({required this.message});
+final class GetActiveOrdersLoading extends HistoryState {}
+
+final class GetActiveOrdersLoaded extends HistoryState {
+  final List<ActiveOrderModel> orders;
+
+  GetActiveOrdersLoaded(this.orders);
 }
+
+final class GetActiveOrdersError extends HistoryState {}
