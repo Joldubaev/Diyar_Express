@@ -105,10 +105,7 @@ class OrderActiveItemModel {
       userPhone: map['userPhone'],
       orderNumber: map['orderNumber']?.toInt(),
       dishesCount: map['dishesCount']?.toInt(),
-      foods: map['foods'] != null
-          ? List<FoodModel>.from(
-              map['foods']?.map((x) => FoodModel.fromJson(x)))
-          : null,
+      foods: map['foods'] != null ? List<FoodModel>.from(map['foods']?.map((x) => FoodModel.fromJson(x))) : null,
       address: map['address'],
       houseNumber: map['houseNumber'],
       kvOffice: map['kvOffice'],
@@ -118,7 +115,7 @@ class OrderActiveItemModel {
       comment: map['comment'],
       paymentMethod: map['paymentMethod'],
       price: map['price']?.toInt(),
-      timeRequest:  map['timeRequest'],
+      timeRequest: map['timeRequest'],
       courierId: map['courierId'],
       status: map['status'],
       deliveryPrice: map['deliveryPrice']?.toInt(),

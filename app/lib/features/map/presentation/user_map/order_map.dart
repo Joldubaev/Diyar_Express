@@ -53,22 +53,26 @@ class _OrderMapPageState extends State<OrderMapPage> {
       appBar: AppBar(title: Text(context.l10n.chooseAddress, style: theme.textTheme.titleSmall)),
       body: Stack(
         children: [
-          YandexMap(
-            mapObjects: mapObjects,
-            onMapTap: (point) {},
-            onCameraPositionChanged: (cameraPosition, reason, finished) {
-              if (finished) {
-                updateAddressDetails(AppLatLong(
-                  latitude: cameraPosition.target.latitude,
-                  longitude: cameraPosition.target.longitude,
-                ));
-                lat = cameraPosition.target.latitude;
-                long = cameraPosition.target.longitude;
-              }
-            },
-            onMapCreated: (controller) {
-              mapControllerCompleter.complete(controller);
-            },
+          SizedBox(
+            height: MediaQuery.of(context).size.height / 1.5,
+            width: MediaQuery.of(context).size.width,
+            child: YandexMap(
+              mapObjects: mapObjects,
+              onMapTap: (point) {},
+              onCameraPositionChanged: (cameraPosition, reason, finished) {
+                if (finished) {
+                  updateAddressDetails(AppLatLong(
+                    latitude: cameraPosition.target.latitude,
+                    longitude: cameraPosition.target.longitude,
+                  ));
+                  lat = cameraPosition.target.latitude;
+                  long = cameraPosition.target.longitude;
+                }
+              },
+              onMapCreated: (controller) {
+                mapControllerCompleter.complete(controller);
+              },
+            ),
           ),
           const Positioned(
             top: 0,
@@ -88,8 +92,8 @@ class _OrderMapPageState extends State<OrderMapPage> {
         showDragHandle: true,
         backgroundColor: AppColors.white,
         constraints: BoxConstraints(
-          maxHeight: MediaQuery.of(context).size.height * 0.3,
-          minHeight: MediaQuery.of(context).size.height * 0.3,
+          maxHeight: MediaQuery.of(context).size.height * 0.25,
+          minHeight: MediaQuery.of(context).size.height * 0.25,
         ),
         onClosing: () {},
         builder: (context) {
@@ -100,7 +104,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
             // ignore: avoid_print
             print(containsCoordinate);
           }
-          return Column(
+          return ListView(
             children: [
               ListTile(
                 title: Text(
@@ -108,8 +112,12 @@ class _OrderMapPageState extends State<OrderMapPage> {
               ),
               Card(
                 child: ListTile(
-                  title: FittedBox(
-                    child: Text(address ?? context.l10n.addressIsNotFounded),
+                  title: Container(
+                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width - 72),
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: Text(address ?? context.l10n.addressIsNotFounded),
+                    ),
                   ),
                   leading: const Icon(Icons.location_on, color: AppColors.red),
                   onTap: () {
@@ -231,7 +239,7 @@ class _OrderMapPageState extends State<OrderMapPage> {
   }
 
   Future<void> updateAddressDetails(AppLatLong latLong) async {
-    address = const Text('Поиск адреса...', style: TextStyle(fontSize: 10)).data;
+    address = const Text('Пойск Вашего Адресса').data;
     setState(() {});
     LocationModel? data = await locationRepo.getLocationByAdress(latLong: latLong);
     address = data.response!.geoObjectCollection!.featureMember!.isEmpty
