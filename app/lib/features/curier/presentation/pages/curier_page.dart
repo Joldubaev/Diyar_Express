@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/features/auth/auth.dart';
 import 'package:diyar_express/features/curier/curier.dart';
+import 'package:diyar_express/features/curier/presentation/widgets/empty_curier.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/core/core.dart';
@@ -32,6 +34,12 @@ class _CurierPageState extends State<CurierPage> {
   }
 
   @override
+  void dispose() {
+    context.read<CurierCubit>().close();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -47,7 +55,14 @@ class _CurierPageState extends State<CurierPage> {
                 cancelText: context.l10n.no,
                 confirmText: context.l10n.yes,
                 cancelPressed: () => Navigator.pop(context),
-                confirmPressed: () {},
+                confirmPressed: () {
+                  context.read<SignInCubit>().logout().then((value) {
+                    context.router.pushAndPopUntil(
+                      const SignInRoute(),
+                      predicate: (_) => false,
+                    );
+                  });
+                },
               );
             },
           ),
@@ -57,7 +72,7 @@ class _CurierPageState extends State<CurierPage> {
       body: BlocBuilder<CurierCubit, CurierState>(
         builder: (context, state) {
           if (state is CurierError) {
-            return const Center(child: Text('Ошибка при загрузке данных'));
+            return const Center(child: EmptyCurierOrder());
           } else if (state is CurierLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is CurierLoaded) {
