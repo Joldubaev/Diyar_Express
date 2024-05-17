@@ -1,66 +1,107 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/features/curier/curier.dart';
 import 'package:diyar_express/l10n/l10n.dart';
-import 'package:diyar_express/shared/components/tile/custom_tile.dart';
-import 'package:diyar_express/features/curier/presentation/widgets/address_feild.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 @RoutePage()
-class HistoryPage extends StatelessWidget {
+class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
+
+  @override
+  State<HistoryPage> createState() => _HistoryPageState();
+}
+
+class _HistoryPageState extends State<HistoryPage> {
+  late List<CurierOrderModel> orders;
+
+  late CurierCubit curierCubit;
+
+  @override
+  void initState() {
+    curierCubit = context.read<CurierCubit>();
+    curierCubit.getCurierHistory();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.l10n.orderHistory, style: theme.textTheme.titleSmall),
+        actions: [
+          IconButton(
+            onPressed: () {
+              AppAlert.showConfirmDialog(
+                context: context,
+                title: context.l10n.orderHistory,
+                content: const Text('Вы уверены что хотите удалить все заказы?'),
+                cancelText: context.l10n.no,
+                confirmText: context.l10n.yes,
+                cancelPressed: () => Navigator.pop(context),
+                confirmPressed: () {},
+              );
+            },
+            icon: const Icon(Icons.delete),
+          )
+        ],
       ),
-      body: ListView.builder(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        itemCount: 2,
-        itemBuilder: (context, index) {
-          return Card(
-            child: ExpansionTile(
-              shape: const Border(
-                bottom: BorderSide(color: Colors.transparent, width: 0),
+      body: BlocConsumer<CurierCubit, CurierState>(
+        listener: (context, state) {
+          if (state is CurierError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Ошибка при загрузке данных'),
               ),
-              childrenPadding: const EdgeInsets.fromLTRB(10, 0, 10, 8),
-              title: Text(
-                '${context.l10n.orderNumber}: 123',
-                style: theme.textTheme.bodyLarge!.copyWith(
-                  color: AppColors.primary,
-                ),
-              ),
-              subtitle: Text(
-                '12.12.2021 12:12',
-                style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
-              ),
-              children: [
-                CustomTile(
-                  title: '${context.l10n.costOfMeal}:',
-                  trailing: '100 сoм',
-                ),
-                AddressField(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+            );
+          }
+        },
+        builder: (context, state) {
+          if (state is CurierError) {
+            return const Center(child: Text('Ошибка при загрузке данных'));
+          } else if (state is CurierLoading) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (state is CurierLoaded) {
+            orders = state.curiers;
+            if (state.curiers.isEmpty) {
+              return const Center(child: Text('No orders'));
+            }
+          }
+          return ListView.separated(
+            padding: const EdgeInsets.all(10),
+            separatorBuilder: (context, index) => const SizedBox(height: 5),
+            itemCount: orders.length,
+            itemBuilder: (context, index) {
+              final order = orders[index];
+              return Card(
+                color: AppColors.primary[50],
+                child: ListTile(
+                  title: Text(
+                    '${context.l10n.orderNumber} ${order.orderNumber ?? ""}',
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const SelectableText('Уметалиева 64/1'),
-                      IconButton(
-                        icon: const Icon(Icons.copy_rounded),
-                        onPressed: () {
-                          Clipboard.setData(
-                            const ClipboardData(text: 'Уметалиева 64/1'),
-                          );
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text(context.l10n.addressIsCopied)));
-                        },
+                      Text(
+                        '${context.l10n.name}: ${order.userName ?? ""}',
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                      Text(
+                        'Адреc: ${order.address ?? ""}',
+                        style: theme.textTheme.bodyMedium,
+                      ),
+                      Text(
+                        '${context.l10n.som}: ${order.price ?? ""}',
+                        style: theme.textTheme.bodyMedium,
                       ),
                     ],
                   ),
                 ),
-              ],
-            ),
+              );
+            },
           );
         },
       ),

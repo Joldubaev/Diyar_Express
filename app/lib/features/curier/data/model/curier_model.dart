@@ -1,37 +1,11 @@
-import 'package:diyar_express/features/menu/menu.dart';
-
-class ActiveOrderModel {
-  final OrderActiveItemModel? order;
-  final String? courierName;
-  final String? courierNumber;
-
-  ActiveOrderModel({this.order, this.courierName, this.courierNumber});
-
-  Map<String, dynamic> toJson() {
-    return {
-      'order': order?.toJson(),
-      'courierName': courierName,
-      'courierNumber': courierNumber,
-    };
-  }
-
-  factory ActiveOrderModel.fromJson(Map<String, dynamic> map) {
-    return ActiveOrderModel(
-      order: map['order'] != null ? OrderActiveItemModel.fromJson(map['order']) : null,
-      courierName: map['courierName'],
-      courierNumber: map['courierNumber'],
-    );
-  }
-}
-
-class OrderActiveItemModel {
+class CurierOrderModel {
   final String? id;
   final String? userId;
   final String? userName;
   final String? userPhone;
   final int? orderNumber;
   final int? dishesCount;
-  final List<FoodModel>? foods;
+  final List<Food>? foods;
   final String? address;
   final String? houseNumber;
   final String? kvOffice;
@@ -47,7 +21,7 @@ class OrderActiveItemModel {
   final int? deliveryPrice;
   final int? sdacha;
 
-  OrderActiveItemModel({
+  CurierOrderModel({
     this.id,
     this.userId,
     this.userName,
@@ -97,15 +71,15 @@ class OrderActiveItemModel {
     };
   }
 
-  factory OrderActiveItemModel.fromJson(Map<String, dynamic> map) {
-    return OrderActiveItemModel(
+  factory CurierOrderModel.fromJson(Map<String, dynamic> map) {
+    return CurierOrderModel(
       id: map['id'],
       userId: map['userId'],
       userName: map['userName'],
       userPhone: map['userPhone'],
-      orderNumber: map['orderNumber']?.toInt(),
-      dishesCount: map['dishesCount']?.toInt(),
-      foods: map['foods'] != null ? List<FoodModel>.from(map['foods']?.map((x) => FoodModel.fromJson(x))) : null,
+      orderNumber: map['orderNumber'],
+      dishesCount: map['dishesCount'],
+      foods: map['foods'] != null ? List<Food>.from(map['foods']?.map((x) => Food.fromJson(x))) : null,
       address: map['address'],
       houseNumber: map['houseNumber'],
       kvOffice: map['kvOffice'],
@@ -114,12 +88,40 @@ class OrderActiveItemModel {
       entrance: map['entrance'],
       comment: map['comment'],
       paymentMethod: map['paymentMethod'],
-      price: map['price']?.toInt(),
+      price: map['price'],
       timeRequest: map['timeRequest'],
       courierId: map['courierId'],
       status: map['status'],
-      deliveryPrice: map['deliveryPrice']?.toInt(),
-      sdacha: map['sdacha']?.toInt(),
+      deliveryPrice: map['deliveryPrice'],
+      sdacha: map['sdacha'],
+    );
+  }
+}
+
+class Food {
+  final int? quantity;
+  final String? name;
+  final int? price;
+
+  Food({
+    this.quantity,
+    this.name,
+    this.price,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      'quantity': quantity,
+      'name': name,
+      'price': price,
+    };
+  }
+
+  factory Food.fromJson(Map<String, dynamic> map) {
+    return Food(
+      quantity: map['quantity']?.toInt(),
+      name: map['name'],
+      price: map['price']?.toInt(),
     );
   }
 }

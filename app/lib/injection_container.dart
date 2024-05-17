@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:diyar_express/features/cart/cart.dart';
+import 'package:diyar_express/features/curier/curier.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/menu/data/repositories/menu_repository.dart';
 import 'package:diyar_express/features/profile/data/data.dart';
@@ -32,6 +33,7 @@ Future<void> init() async {
   sl.registerFactory(() => AboutUsCubit(sl()));
   sl.registerFactory(() => HomeFeaturesCubit(sl()));
   sl.registerFactory(() => HistoryCubit(sl()));
+  sl.registerFactory(() => CurierCubit(sl()));
 
 // AUTH
   sl.registerLazySingleton<AuthRepository>(() => AuthRepositoryImpl(sl(), sl()));
@@ -60,6 +62,9 @@ Future<void> init() async {
   sl.registerLazySingleton<CartRepository>(() => CartRepositoryImpl(sl()));
   sl.registerLazySingleton<CartRemoteDataSource>(() => CartRemoteDataSourceImpl(sl()));
 
+// Curier
+  sl.registerLazySingleton<CurierRepository>(() => CurierRepositoryImpl(sl()));
+  sl.registerLazySingleton<CurierDataSource>(() => CurierDataSourceImpl(sl(), sl()));
   // Order
   sl.registerLazySingleton<OrderRepository>(() => OrderRepositoryImpl(sl()));
   sl.registerLazySingleton<OrderRemoteDataSource>(() => OrderRemoteDataSourceImpl(sl(), sl()));
@@ -67,6 +72,7 @@ Future<void> init() async {
   // history
   sl.registerLazySingleton<HistoryRepository>(() => HistoryRepositoryImpl(sl()));
   sl.registerLazySingleton<HistoryReDatasource>(() => HistoryReDatasourceImpl(sl(), sl()));
+
 //! Core
   sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
