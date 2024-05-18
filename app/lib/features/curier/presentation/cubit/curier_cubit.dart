@@ -10,30 +10,30 @@ class CurierCubit extends Cubit<CurierState> {
   final CurierRepository curierRepository;
 
   void getCuriers() async {
-    emit(CurierLoading());
+    emit(GetCourierActualOrdersLoading());
     try {
       final curiers = await curierRepository.getCuriers();
-      emit(CurierLoaded(curiers));
+      emit(GetCourierActualOrdersLoaded(curiers));
     } catch (e) {
-      emit(CurierError('Error'));
+      emit(GetCourierActualOrdersError('Error'));
     }
   }
 
-  void getFinishOrder(int orderId) async {
+  Future getFinishOrder(int orderId) async {
     try {
       await curierRepository.getFinishOrder(orderId);
     } catch (e) {
-      emit(CurierError('Error'));
+      emit(GetCourierActualOrdersError('Error'));
     }
   }
 
   void getCurierHistory() async {
-    emit(CurierLoading());
+    emit(GetCurierHistoryLoading());
     try {
       final curiers = await curierRepository.getCurierHistory();
-      emit(CurierLoaded(curiers));
+      emit(GetCurierHistoryLoaded(curiers));
     } catch (e) {
-      emit(CurierError('Error'));
+      emit(GetCurierHistoryError('Error'));
     }
   }
 }

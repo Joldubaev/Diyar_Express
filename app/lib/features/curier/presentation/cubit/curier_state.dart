@@ -5,16 +5,30 @@ sealed class CurierState {}
 
 final class CurierInitial extends CurierState {}
 
-final class CurierLoading extends CurierState {}
+final class GetCourierActualOrdersLoading extends CurierState {}
 
-final class CurierLoaded extends CurierState {
+final class GetCourierActualOrdersLoaded extends CurierState {
   final List<CurierOrderModel> curiers;
 
-  CurierLoaded(this.curiers);
+  GetCourierActualOrdersLoaded(this.curiers);
 }
 
-final class CurierError extends CurierState {
+final class GetCourierActualOrdersError extends CurierState {
   final String message;
 
-  CurierError(this.message);
+  GetCourierActualOrdersError(this.message);
+}
+
+class GetCurierHistoryLoading extends CurierState {}
+
+class GetCurierHistoryLoaded extends CurierState {
+  final List<CurierOrderModel> curiers;
+
+  GetCurierHistoryLoaded(this.curiers);
+}
+
+class GetCurierHistoryError extends CurierState {
+  final String message;
+
+  GetCurierHistoryError(this.message);
 }

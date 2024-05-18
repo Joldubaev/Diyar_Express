@@ -15,14 +15,11 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
-  late List<CurierOrderModel> orders;
-
-  late CurierCubit curierCubit;
+  List<CurierOrderModel> orders = [];
 
   @override
   void initState() {
-    curierCubit = context.read<CurierCubit>();
-    curierCubit.getCurierHistory();
+    context.read<CurierCubit>().getCurierHistory();
     super.initState();
   }
 
@@ -50,7 +47,7 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
       body: BlocConsumer<CurierCubit, CurierState>(
         listener: (context, state) {
-          if (state is CurierError) {
+          if (state is GetCurierHistoryError) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Ошибка при загрузке данных'),
@@ -59,11 +56,11 @@ class _HistoryPageState extends State<HistoryPage> {
           }
         },
         builder: (context, state) {
-          if (state is CurierError) {
+          if (state is GetCurierHistoryError) {
             return const Center(child: Text('Ошибка при загрузке данных'));
-          } else if (state is CurierLoading) {
+          } else if (state is GetCurierHistoryLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is CurierLoaded) {
+          } else if (state is GetCurierHistoryLoaded) {
             orders = state.curiers;
             if (state.curiers.isEmpty) {
               return const Center(child: Text('No orders'));

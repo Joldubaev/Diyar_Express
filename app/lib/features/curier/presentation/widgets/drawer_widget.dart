@@ -36,6 +36,7 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.person),
             title: Text(context.l10n.profile, style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.black1)),
             onTap: () {
+              context.maybePop();
               context.router.push(const CurierRoute());
             },
           ),
@@ -52,6 +53,7 @@ class CustomDrawer extends StatelessWidget {
             title:
                 Text(context.l10n.orderHistory, style: theme.textTheme.bodyMedium!.copyWith(color: AppColors.black1)),
             onTap: () {
+              context.maybePop();
               context.router.push(const HistoryRoute());
             },
           ),

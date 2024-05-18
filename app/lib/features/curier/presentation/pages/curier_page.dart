@@ -25,18 +25,12 @@ class CurierPage extends StatefulWidget {
 
 class _CurierPageState extends State<CurierPage> {
   final mapControllerCompleter = Completer<YandexMapController>();
-  late List<CurierOrderModel> orders;
+  List<CurierOrderModel> orders = [];
 
   @override
   void initState() {
     context.read<CurierCubit>().getCuriers();
     super.initState();
-  }
-
-  @override
-  void dispose() {
-    context.read<CurierCubit>().close();
-    super.dispose();
   }
 
   @override
@@ -71,15 +65,14 @@ class _CurierPageState extends State<CurierPage> {
       drawer: const CustomDrawer(),
       body: BlocBuilder<CurierCubit, CurierState>(
         builder: (context, state) {
-          if (state is CurierError) {
+          if (state is GetCourierActualOrdersError) {
             return const Center(child: EmptyCurierOrder());
-          } else if (state is CurierLoading) {
+          } else if (state is GetCourierActualOrdersLoading) {
             return const Center(child: CircularProgressIndicator());
-          } else if (state is CurierLoaded) {
+          } else if (state is GetCourierActualOrdersLoaded) {
             orders = state.curiers;
-            if (state.curiers.isEmpty) {
-              return const Center(child: Text('No orders'));
-            }
+          } else if (orders.isEmpty) {
+            return const EmptyCurierOrder();
           }
           return ListView.separated(
             separatorBuilder: (context, index) => const SizedBox(height: 10),
@@ -128,7 +121,9 @@ class _CurierPageState extends State<CurierPage> {
                         ),
                         CustomTextButton(
                           onPressed: () {
-                            _finishOrder(orders[index].orderNumber ?? 0);
+                            _finishOrder(orders[index].orderNumber ?? 0).then((value) {
+                              context.read<CurierCubit>().getCuriers();
+                            });
                           },
                           textButton: context.l10n.finishOrder,
                         ),
@@ -150,15 +145,15 @@ class _CurierPageState extends State<CurierPage> {
     );
   }
 
-  void _finishOrder(int orderNumber) {
-    context.read<CurierCubit>().getFinishOrder(orderNumber);
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Заказ завершен'),
-      ),
-    );
-    setState(() {
-      orders.removeWhere((order) => order.orderNumber == orderNumber);
+  Future _finishOrder(int orderNumber) async {
+    context.read<CurierCubit>().getFinishOrder(orderNumber).then((value) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Order completed')),
+      );
+    }).catchError((error) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Error completing order')),
+      );
     });
   }
 }
