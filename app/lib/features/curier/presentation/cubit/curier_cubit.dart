@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:diyar_express/features/curier/curier.dart';
+import 'package:diyar_express/features/curier/data/model/get_user_moderl.dart';
 import 'package:meta/meta.dart';
 
 part 'curier_state.dart';
@@ -8,6 +9,16 @@ class CurierCubit extends Cubit<CurierState> {
   CurierCubit(this.curierRepository) : super(CurierInitial());
 
   final CurierRepository curierRepository;
+
+  void getUser() async {
+    emit(GetUserLoading());
+    try {
+      final user = await curierRepository.getUser();
+      emit(GetUserLoaded(user));
+    } catch (e) {
+      emit(GetUserError('Error'));
+    }
+  }
 
   void getCuriers() async {
     emit(GetCourierActualOrdersLoading());
