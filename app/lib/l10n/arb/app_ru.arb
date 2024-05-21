@@ -149,5 +149,9 @@
     "lastNews":"Последние новости",
     "main":"Главная",
     "noOrders":"Нет заказов",
-    "noOrderDescription":"Вы еще не сделали заказ"
+    "noOrderDescription":"Вы еще не сделали заказ",
+    "ecpessCoffee":"Экспресс Кофе",
+    "notImage":"Нет изображения",
+    "restaurant":"Ресторан",
+    "awaiting":"В ожидании"
 }

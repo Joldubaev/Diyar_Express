@@ -21,8 +21,7 @@ class ActiveOrderPage extends StatefulWidget {
   State<ActiveOrderPage> createState() => _ActiveOrderPageState();
 }
 
-class _ActiveOrderPageState extends State<ActiveOrderPage>
-    with AutomaticKeepAliveClientMixin {
+class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAliveClientMixin {
   List<ActiveOrderModel> orders = [];
   List<OrderStatusModel> orderStatuses = [];
 
@@ -38,15 +37,12 @@ class _ActiveOrderPageState extends State<ActiveOrderPage>
       var token = sl<SharedPreferences>().getString(AppConst.accessToken);
       if (token == null) return;
 
-      _channel = IOWebSocketChannel.connect(
-          'ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
+      _channel = IOWebSocketChannel.connect('ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
       _channel.stream.listen((message) {
         log('Received message: $message');
         final List<dynamic> data = jsonDecode(message);
 
-        final List<OrderStatusModel> statuses = data
-            .map((dynamic json) => OrderStatusModel.fromJson(json))
-            .toList();
+        final List<OrderStatusModel> statuses = data.map((dynamic json) => OrderStatusModel.fromJson(json)).toList();
 
         setState(() => orderStatuses = statuses);
       });
@@ -70,13 +66,13 @@ class _ActiveOrderPageState extends State<ActiveOrderPage>
     return BlocBuilder<HistoryCubit, HistoryState>(
       builder: (context, state) {
         if (state is GetActiveOrdersError) {
-          return const Center(child: Text('Ошибка при загрузке данных'));
+          return Center(child: Text(context.l10n.loadedWrongData));
         } else if (state is GetActiveOrdersLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is GetActiveOrdersLoaded) {
           orders = state.orders;
           if (state.orders.isEmpty) {
-            return const Center(child: Text('No orders'));
+            return Center(child: Text(context.l10n.noOrders));
           }
         }
 
@@ -87,8 +83,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage>
           itemBuilder: (context, index) {
             return Card(
               child: ExpansionTile(
-                shape: const Border(
-                    bottom: BorderSide(color: Colors.transparent, width: 0)),
+                shape: const Border(bottom: BorderSide(color: Colors.transparent, width: 0)),
                 childrenPadding: const EdgeInsets.fromLTRB(10, 10, 10, 8),
                 title: Text(
                   '${context.l10n.orderNumber} ${orders[index].order?.orderNumber}',
@@ -98,9 +93,8 @@ class _ActiveOrderPageState extends State<ActiveOrderPage>
                 ),
                 children: [
                   OrderStepper(
-                    orderStatus: orderStatuses.firstWhere((element) =>
-                        element.orderNumber ==
-                        orders[index].order?.orderNumber),
+                    orderStatus:
+                        orderStatuses.firstWhere((element) => element.orderNumber == orders[index].order?.orderNumber),
                   ),
                   CustomTextButton(
                     onPressed: () => context.pushRoute(

@@ -149,5 +149,9 @@
     "lastNews":"Latest news",
     "main":"Main",
     "noOrders":"No orders",
-     "noOrderDescription":"You have not placed an order yet"
+     "noOrderDescription":"You have not placed an order yet",
+     "ecpessCoffee":"Express Coffee",
+     "notImage": "No image",
+     "restaurant": "Restaurant",
+     "awaiting": "Waiting"
 }

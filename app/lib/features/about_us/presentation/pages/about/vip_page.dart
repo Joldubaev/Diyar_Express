@@ -30,9 +30,10 @@ class _VipPageState extends State<VipPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.vip, style: theme.textTheme.bodyLarge),
+        backgroundColor: AppColors.primary,
+        title: Text(context.l10n.vip, style: theme.textTheme.titleLarge!.copyWith(color: AppColors.white)),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
           onPressed: () {
             context.router.maybePop();
           },
@@ -57,7 +58,7 @@ class _VipPageState extends State<VipPage> {
             );
           }
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               children: [
                 Align(
@@ -73,21 +74,22 @@ class _VipPageState extends State<VipPage> {
                   style: const TextStyle(fontSize: 16),
                 ),
                 const SizedBox(height: 20),
-                // GridView.builder(
-                //   shrinkWrap: true,
-                //   itemCount: model!.photoLinks!.length,
-                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 2,
-                //     crossAxisSpacing: 10,
-                //     mainAxisSpacing: 10,
-                //   ),
-                //   itemBuilder: (context, index) {
-                //     return Image.network(
-                //       '${model!.photoLinks?[index]}',
-                //       fit: BoxFit.cover,
-                //     );
-                //   },
-                // ),
+                if (model!.photoLinks!.isEmpty) const Text('Картинок нет'),
+                GridView.builder(
+                  shrinkWrap: true,
+                  itemCount: model!.photoLinks!.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 10,
+                    mainAxisSpacing: 10,
+                  ),
+                  itemBuilder: (context, index) {
+                    return Image.network(
+                      '${model!.photoLinks?[index]}',
+                      fit: BoxFit.cover,
+                    );
+                  },
+                ),
               ],
             ),
           );

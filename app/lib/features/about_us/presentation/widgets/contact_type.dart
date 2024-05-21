@@ -30,11 +30,11 @@ enum ContactType {
 
   String get getAsset {
     return switch (this) {
-      delivery => 'assets/images/phone.png',
-      diyarExpress => 'assets/images/phone.png',
-      diyarRestaurant => 'assets/images/phone.png',
-      diyarBanketHall => 'assets/images/phone.png',
-      versal => 'assets/images/phone.png',
+      delivery => 'assets/images/delivery.png',
+      diyarExpress => 'assets/images/clock.png',
+      diyarRestaurant => 'assets/images/table.png',
+      diyarBanketHall => 'assets/images/booking.png',
+      versal => 'assets/images/hall.png',
     };
   }
 }

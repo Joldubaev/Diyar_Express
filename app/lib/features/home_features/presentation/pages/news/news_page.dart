@@ -26,13 +26,14 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: AppColors.primary,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
             onPressed: () {
               context.router.maybePop();
             },
           ),
-          title: Text(context.l10n.news, style: const TextStyle(color: AppColors.primary))),
+          title: Text(context.l10n.news, style: theme.textTheme.titleLarge!.copyWith(color: AppColors.white))),
       body: BlocConsumer<HomeFeaturesCubit, HomeFeaturesState>(
         listener: (context, state) {
           if (state is HomeFeaturesError) {
