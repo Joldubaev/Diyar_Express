@@ -40,4 +40,12 @@ class AppConst {
 
   // instagram
   static const instagram = 'https://www.instagram.com/diyar.kg/';
+
+  // order statuses
+
+  static const awaits = "awaiting confirmation from the operator";
+  static const cooked = "the order is being prepared";
+  static const delivered = "order is being delivered";
+  static const finished = "Finished";
+  static const cancel = "canceled order";
 }

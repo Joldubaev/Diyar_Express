@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/cart/data/models/cart_item_model.dart';
 import 'package:diyar_express/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:diyar_express/features/order/data/models/create_order_model.dart';
@@ -15,8 +16,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class PickupForm extends StatefulWidget {
-  const PickupForm({super.key, required this.cart});
   final List<CartItemModel> cart;
+  final UserModel? user;
+  const PickupForm({super.key, required this.cart, this.user});
 
   @override
   State<PickupForm> createState() => _PickupFormState();
@@ -24,10 +26,28 @@ class PickupForm extends StatefulWidget {
 
 class _PickupFormState extends State<PickupForm> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _phoneController = TextEditingController(text: '+996');
+  final TextEditingController _phoneController =
+      TextEditingController(text: '+996');
   final TextEditingController _userName = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
+
+  @override
+  void initState() {
+    _userName.text = widget.user?.name ?? '';
+    _phoneController.text = widget.user?.phone ?? '+996';
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _phoneController.dispose();
+    _userName.dispose();
+    _commentController.dispose();
+    _timeController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<OrderCubit, OrderState>(
@@ -49,7 +69,10 @@ class _PickupFormState extends State<PickupForm> {
           return Center(
             child: Text(
               context.l10n.someThingIsWrong,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.red),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(color: Colors.red),
             ),
           );
         }
@@ -89,7 +112,9 @@ class _PickupFormState extends State<PickupForm> {
               ),
               const SizedBox(height: 10),
               CustomInputWidget(
-                  controller: _commentController, hintText: 'Ваша еда очень вкусная ...', title: context.l10n.comment),
+                  controller: _commentController,
+                  hintText: 'Ваша еда очень вкусная ...',
+                  title: context.l10n.comment),
               const SizedBox(height: 10),
               CustomInputWidget(
                 controller: _timeController,
@@ -98,7 +123,8 @@ class _PickupFormState extends State<PickupForm> {
                 inputType: TextInputType.number,
               ),
               const SizedBox(height: 10),
-              Text(context.l10n.orderPickupAd, style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16)),
+              Text(context.l10n.orderPickupAd,
+                  style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16)),
               Text(
                 context.l10n.address,
                 style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16),
@@ -107,10 +133,13 @@ class _PickupFormState extends State<PickupForm> {
               SubmitButtonWidget(
                   title: context.l10n.orderHistory,
                   bgColor: theme.primaryColor,
-                  textStyle: theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                  textStyle:
+                      theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
-                      context.read<OrderCubit>().getPickupOrder(
+                      context
+                          .read<OrderCubit>()
+                          .getPickupOrder(
                             PickupOrderModel(
                               userPhone: _phoneController.text,
                               userName: _userName.text,
@@ -126,6 +155,9 @@ class _PickupFormState extends State<PickupForm> {
                                       ))
                                   .toList(),
                             ),
+                          )
+                          .then(
+                            (value) => context.read<CartCubit>().clearCart(),
                           );
                     }
                   }),

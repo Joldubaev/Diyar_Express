@@ -26,7 +26,7 @@ class OrderCubit extends Cubit<OrderState> {
     emit(SelectDeliveryPriceLoaded(deliveryPrice: price));
   }
 
-  createOrder(CreateOrderModel order) async {
+  Future createOrder(CreateOrderModel order) async {
     emit(CreateOrderLoading());
     try {
       await _orderRepository.createOrder(order);
@@ -36,7 +36,7 @@ class OrderCubit extends Cubit<OrderState> {
     }
   }
 
-  getPickupOrder(PickupOrderModel order) async {
+  Future getPickupOrder(PickupOrderModel order) async {
     emit(CreateOrderLoading());
     try {
       await _orderRepository.getPickupOrder(order);

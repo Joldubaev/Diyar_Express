@@ -25,7 +25,6 @@ bool isNameValid(String name) {
   return usernameRegExp.hasMatch(name) && name.isNotEmpty;
 }
 
-bool isPhoneNumberValid(String phoneNumber) {
-  final phoneNumberRegExp = RegExp(r'^\d{11}$');
-  return phoneNumberRegExp.hasMatch(phoneNumber);
+bool isPhoneNumberValid(String val) {
+  return RegExp(r'^\+996 \(\d{3}\) \d{2}-\d{2}-\d{2}$').hasMatch(val);
 }

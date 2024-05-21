@@ -21,7 +21,8 @@ class ActiveOrderPage extends StatefulWidget {
   State<ActiveOrderPage> createState() => _ActiveOrderPageState();
 }
 
-class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAliveClientMixin {
+class _ActiveOrderPageState extends State<ActiveOrderPage>
+    with AutomaticKeepAliveClientMixin {
   List<ActiveOrderModel> orders = [];
   List<OrderStatusModel> orderStatuses = [];
 
@@ -37,12 +38,15 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAli
       var token = sl<SharedPreferences>().getString(AppConst.accessToken);
       if (token == null) return;
 
-      _channel = IOWebSocketChannel.connect('ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
+      _channel = IOWebSocketChannel.connect(
+          'ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
       _channel.stream.listen((message) {
         log('Received message: $message');
         final List<dynamic> data = jsonDecode(message);
 
-        final List<OrderStatusModel> statuses = data.map((dynamic json) => OrderStatusModel.fromJson(json)).toList();
+        final List<OrderStatusModel> statuses = data
+            .map((dynamic json) => OrderStatusModel.fromJson(json))
+            .toList();
 
         setState(() => orderStatuses = statuses);
       });
@@ -83,7 +87,8 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAli
           itemBuilder: (context, index) {
             return Card(
               child: ExpansionTile(
-                shape: const Border(bottom: BorderSide(color: Colors.transparent, width: 0)),
+                shape: const Border(
+                    bottom: BorderSide(color: Colors.transparent, width: 0)),
                 childrenPadding: const EdgeInsets.fromLTRB(10, 10, 10, 8),
                 title: Text(
                   '${context.l10n.orderNumber} ${orders[index].order?.orderNumber}',
@@ -93,8 +98,10 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAli
                 ),
                 children: [
                   OrderStepper(
-                      orderStatus: orderStatuses
-                          .firstWhere((element) => element.orderNumber == orders[index].order?.orderNumber)),
+                    orderStatus: orderStatuses.firstWhere((element) =>
+                        element.orderNumber ==
+                        orders[index].order?.orderNumber),
+                  ),
                   CustomTextButton(
                     onPressed: () => context.pushRoute(
                       OrderDetailRoute(
