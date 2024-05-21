@@ -32,3 +32,17 @@ class GetCurierHistoryError extends CurierState {
 
   GetCurierHistoryError(this.message);
 }
+
+class GetUserLoading extends CurierState {}
+
+class GetUserLoaded extends CurierState {
+  final GetUserModel user;
+
+  GetUserLoaded(this.user);
+}
+
+class GetUserError extends CurierState {
+  final String message;
+
+  GetUserError(this.message);
+}

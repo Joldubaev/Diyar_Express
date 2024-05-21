@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
+import 'package:diyar_express/core/error/exception.dart';
 import 'package:diyar_express/features/curier/data/model/curier_model.dart';
+import 'package:diyar_express/features/curier/data/model/get_user_moderl.dart';
 import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -7,6 +9,7 @@ abstract class CurierDataSource {
   Future<List<CurierOrderModel>> getCuriers();
   Future<void> getFinishOrder(int orderId);
   Future<List<CurierOrderModel>> getCurierHistory();
+  Future<GetUserModel> getUser();
 }
 
 class CurierDataSourceImpl extends CurierDataSource {
@@ -14,6 +17,24 @@ class CurierDataSourceImpl extends CurierDataSource {
   final SharedPreferences prefs;
 
   CurierDataSourceImpl(this.dio, this.prefs);
+
+  @override
+  Future<GetUserModel> getUser() async {
+    try {
+      var res = await dio.post(ApiConst.getUser,
+          data: {"email": prefs.getString(AppConst.email)},
+          options: Options(
+            headers: ApiConst.authMap(prefs.getString(AppConst.accessToken) ?? ''),
+          ));
+      if (res.statusCode == 200) {
+        return GetUserModel.fromJson(res.data);
+      } else {
+        throw ServerException();
+      }
+    } catch (e) {
+      throw ServerException();
+    }
+  }
 
   @override
   Future<List<CurierOrderModel>> getCuriers() async {
