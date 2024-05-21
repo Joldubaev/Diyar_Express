@@ -9,11 +9,13 @@ class ProfileCubit extends Cubit<ProfileState> {
   final UserRepository _userRepository;
   ProfileCubit(this._userRepository) : super(ProfileInitial());
 
-  getUser() async {
+  UserModel? user;
+
+  Future getUser() async {
     emit(ProfileGetLoading());
     try {
-      var user = await _userRepository.getUser();
-      emit(ProfileGetLoaded(user));
+      user = await _userRepository.getUser();
+      emit(ProfileGetLoaded(user!));
     } catch (e) {
       emit(ProfileGetError());
     }

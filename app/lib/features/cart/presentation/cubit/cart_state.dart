@@ -33,3 +33,9 @@ class RemoveFromCartError extends CartState {}
 class ChangeStateLoading extends CartState {}
 
 class ChangeStateLoaded extends CartState {}
+
+class ClearCartLoading extends CartState {}
+
+class ClearCartLoaded extends CartState {}
+
+class ClearCartError extends CartState {}

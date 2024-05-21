@@ -67,4 +67,14 @@ class CartCubit extends Cubit<CartState> {
     totalPrice = price;
     emit(ChangeStateLoaded());
   }
+
+  clearCart() async {
+    emit(ClearCartLoading());
+    try {
+      await _cartReposiory.clearCart();
+      emit(ClearCartLoaded());
+    } catch (e) {
+      emit(ClearCartError());
+    }
+  }
 }
