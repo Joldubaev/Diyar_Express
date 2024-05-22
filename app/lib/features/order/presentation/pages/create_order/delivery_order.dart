@@ -24,8 +24,7 @@ class DeliveryFormPage extends StatefulWidget {
 
 class _DeliveryFormPageState extends State<DeliveryFormPage> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _phoneController =
-      TextEditingController(text: '+996');
+  final TextEditingController _phoneController = TextEditingController(text: '+996');
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _houseController = TextEditingController();
   final TextEditingController _apartmentController = TextEditingController();
@@ -114,8 +113,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
               CustomInputWidget(
                 trailing: TextButton(
                   onPressed: () => context.router.push(const OrderMapRoute()),
-                  child: Text(context.l10n.chooseOnMap,
-                      style: theme.textTheme.bodyMedium!),
+                  child: Text(context.l10n.chooseOnMap, style: theme.textTheme.bodyMedium!),
                 ),
                 hintText: '',
                 title: context.l10n.adress,
@@ -193,8 +191,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                 controller: _commentController,
               ),
               const SizedBox(height: 10),
-              Text(context.l10n.paymentMethod,
-                  style: theme.textTheme.bodyMedium!),
+              Text(context.l10n.paymentMethod, style: theme.textTheme.bodyMedium!),
               const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -256,8 +253,7 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                 title: context.l10n.confirmOrder,
                 bgColor: theme.primaryColor,
                 isLoading: state is CreateOrderLoading,
-                textStyle: theme.textTheme.bodyMedium!
-                    .copyWith(color: AppColors.white),
+                textStyle: theme.textTheme.bodyMedium!.copyWith(color: AppColors.white),
                 onTap: () {
                   if (_formKey.currentState!.validate()) {
                     context
@@ -271,14 +267,10 @@ class _DeliveryFormPageState extends State<DeliveryFormPage> {
                             floor: _floorController.text,
                             houseNumber: _houseController.text,
                             intercom: _intercomController.text,
-                            paymentMethod:
-                                _paymentType.toString().split('.').last,
+                            paymentMethod: _paymentType.toString().split('.').last,
                             userPhone: _phoneController.text,
                             userName: _userName.text,
-                            deliveryPrice: context
-                                .read<OrderCubit>()
-                                .deliveryPrice
-                                .toInt(),
+                            deliveryPrice: context.read<OrderCubit>().deliveryPrice.toInt(),
                             price: context.read<CartCubit>().totalPrice,
                             dishesCount: context.read<CartCubit>().dishCount,
                             sdacha: int.parse(_sdachaController.text),

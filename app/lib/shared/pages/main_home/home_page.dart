@@ -26,12 +26,25 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     context.read<PopularCubit>().getPopularProducts();
     context.read<CartCubit>().getCartItems();
+    context.read<ProfileCubit>().getUser();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColors.primary,
+        title: Align(
+          alignment: Alignment.centerLeft,
+          child: FittedBox(
+            child: Text(
+              '${context.l10n.welcome}, ${context.read<ProfileCubit>().user?.name ?? ''} !',
+              style: const TextStyle(color: AppColors.white, fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+          ),
+        ),
+      ),
       body: SafeArea(
         child: BlocConsumer<PopularCubit, PopularState>(
           listener: (context, state) {
@@ -51,17 +64,10 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const SizedBox(height: 20),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Image.asset('assets/images/app_logo.png',
-                            height: 60, fit: BoxFit.fill, color: AppColors.primary),
-                      ),
-                      const Divider(color: AppColors.primary, thickness: 1),
                       Text(context.l10n.sales, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       const SizedBox(height: 10),
                       CustomWidget(

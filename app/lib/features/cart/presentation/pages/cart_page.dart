@@ -22,11 +22,12 @@ class CartPage extends StatelessWidget {
     List<CartItemModel> carts = [];
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.cart, style: theme.textTheme.titleSmall),
+        backgroundColor: AppColors.primary,
+        title: Text(context.l10n.cart, style: theme.textTheme.titleSmall!.copyWith(color: AppColors.white)),
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-            icon: const Icon(Icons.history, size: 30),
+            icon: const Icon(Icons.history, size: 25, color: AppColors.white),
             onPressed: () => context.pushRoute(const OrderHistoryRoute()),
           )
         ],

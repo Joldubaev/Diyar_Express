@@ -149,5 +149,9 @@
     "popularFood":"Популярдуу тамактар",
     "lastNews":"Акыркы кабарлар", 
     "main":"Башкы","noOrders":"Буйрутмалар жок",
-    "noOrderDescription":"Сиз азырынча заказ бере элексиз"
+    "noOrderDescription":"Сиз азырынча заказ бере элексиз",
+     "ecpessCoffee":"Экспресс кофе",
+     "notImage": "Сүрөт жок",
+     "restaurant": "Restaurant",
+     "waiting": "Күтүү"
 }

@@ -26,8 +26,7 @@ class PickupForm extends StatefulWidget {
 
 class _PickupFormState extends State<PickupForm> {
   final _formKey = GlobalKey<FormState>();
-  final TextEditingController _phoneController =
-      TextEditingController(text: '+996');
+  final TextEditingController _phoneController = TextEditingController(text: '+996');
   final TextEditingController _userName = TextEditingController();
   final TextEditingController _commentController = TextEditingController();
   final TextEditingController _timeController = TextEditingController();
@@ -69,10 +68,7 @@ class _PickupFormState extends State<PickupForm> {
           return Center(
             child: Text(
               context.l10n.someThingIsWrong,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(color: Colors.red),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.red),
             ),
           );
         }
@@ -112,9 +108,7 @@ class _PickupFormState extends State<PickupForm> {
               ),
               const SizedBox(height: 10),
               CustomInputWidget(
-                  controller: _commentController,
-                  hintText: 'Ваша еда очень вкусная ...',
-                  title: context.l10n.comment),
+                  controller: _commentController, hintText: 'Ваша еда очень вкусная ...', title: context.l10n.comment),
               const SizedBox(height: 10),
               CustomInputWidget(
                 controller: _timeController,
@@ -123,8 +117,7 @@ class _PickupFormState extends State<PickupForm> {
                 inputType: TextInputType.number,
               ),
               const SizedBox(height: 10),
-              Text(context.l10n.orderPickupAd,
-                  style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16)),
+              Text(context.l10n.orderPickupAd, style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16)),
               Text(
                 context.l10n.address,
                 style: theme.textTheme.bodyMedium!.copyWith(fontSize: 16),
@@ -133,8 +126,7 @@ class _PickupFormState extends State<PickupForm> {
               SubmitButtonWidget(
                   title: context.l10n.orderHistory,
                   bgColor: theme.primaryColor,
-                  textStyle:
-                      theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
+                  textStyle: theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
                   onTap: () {
                     if (_formKey.currentState!.validate()) {
                       context

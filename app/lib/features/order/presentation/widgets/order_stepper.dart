@@ -66,8 +66,8 @@ class _OrderStepperState extends State<OrderStepper> {
                 steps: [
                   EasyStep(
                     icon: const Icon(Icons.timer),
-                    title: 'В ожидании',
-                    lineText: 'Заказ оформлен',
+                    title: context.l10n.awaiting,
+                    lineText: context.l10n.confirmOrder,
                     enabled: _allowTabStepping(0, StepEnabling.sequential),
                   ),
                   EasyStep(
@@ -97,9 +97,7 @@ class _OrderStepperState extends State<OrderStepper> {
   }
 
   bool _allowTabStepping(int index, StepEnabling enabling) {
-    return enabling == StepEnabling.sequential
-        ? index <= reachedStep
-        : reachedSteps.contains(index);
+    return enabling == StepEnabling.sequential ? index <= reachedStep : reachedSteps.contains(index);
   }
 
   checkStep() {

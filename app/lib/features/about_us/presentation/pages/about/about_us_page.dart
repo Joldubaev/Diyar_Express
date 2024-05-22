@@ -22,13 +22,14 @@ class _AboutUsPageState extends State<AboutUsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
           onPressed: () {
             context.router.maybePop();
           },
         ),
-        title: Text(context.l10n.aboutUs, style: theme.textTheme.titleSmall!),
+        title: Text(context.l10n.aboutUs, style: theme.textTheme.titleSmall!.copyWith(color: AppColors.white)),
       ),
       body: const SafeArea(
         child: AboutUsBody(),
@@ -71,7 +72,7 @@ class _AboutUsBodyState extends State<AboutUsBody> {
           );
         }
         return ListView.builder(
-          padding: const EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
           itemCount: type.length,
           itemBuilder: (context, index) {
             final type = AboutUsType.values[index];

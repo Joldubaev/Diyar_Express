@@ -30,11 +30,11 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color(0xffFAFAFA),
-        title: Text(
-          context.l10n.cabinet,
-          style: theme.textTheme.titleSmall,
-        ),
+        backgroundColor: AppColors.primary,
+        title: Text(context.l10n.cabinet,
+            style: theme.textTheme.titleSmall!.copyWith(
+              color: AppColors.white,
+            )),
         automaticallyImplyLeading: false,
       ),
       body: BlocConsumer<ProfileCubit, ProfileState>(
