@@ -24,3 +24,13 @@ final class GetActiveOrdersLoaded extends HistoryState {
 }
 
 final class GetActiveOrdersError extends HistoryState {}
+
+final class GetHistoryOrdersLoading extends HistoryState {}
+
+final class GetHistoryOrdersLoaded extends HistoryState {
+  final List<OrderActiveItemModel> orders;
+
+  GetHistoryOrdersLoaded(this.orders);
+}
+
+final class GetHistoryOrdersError extends HistoryState {}

@@ -30,4 +30,14 @@ class HistoryCubit extends Cubit<HistoryState> {
       emit(GetActiveOrdersError());
     }
   }
+
+  getHistoryOrders() async {
+    emit(GetHistoryOrdersLoading());
+    try {
+      final orders = await historyRepository.getHistoryOrders();
+      emit(GetHistoryOrdersLoaded(orders));
+    } catch (e) {
+      emit(GetHistoryOrdersError());
+    }
+  }
 }
