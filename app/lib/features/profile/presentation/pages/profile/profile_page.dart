@@ -8,6 +8,7 @@ import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class ProfilePage extends StatefulWidget {
@@ -32,8 +33,10 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: AppBar(
         backgroundColor: AppColors.primary,
         title: Text(context.l10n.cabinet,
-            style: theme.textTheme.titleSmall!.copyWith(
+            style: GoogleFonts.aBeeZee(
               color: AppColors.white,
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
             )),
         automaticallyImplyLeading: false,
       ),

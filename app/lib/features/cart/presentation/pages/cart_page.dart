@@ -9,6 +9,7 @@ import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class CartPage extends StatelessWidget {
@@ -23,7 +24,14 @@ class CartPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        title: Text(context.l10n.cart, style: theme.textTheme.titleSmall!.copyWith(color: AppColors.white)),
+        title: Text(
+          context.l10n.cart,
+          style: GoogleFonts.aBeeZee(
+            color: AppColors.white,
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         automaticallyImplyLeading: false,
         actions: [
           IconButton(

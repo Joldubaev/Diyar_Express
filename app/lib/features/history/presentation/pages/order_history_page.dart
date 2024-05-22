@@ -3,6 +3,7 @@ import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class OrderHistoryPage extends StatelessWidget {
@@ -16,7 +17,11 @@ class OrderHistoryPage extends StatelessWidget {
         appBar: AppBar(
           title: Text(
             context.l10n.orderHistory,
-            style: const TextStyle(fontSize: 16),
+            style: GoogleFonts.aBeeZee(
+              color: AppColors.black1,
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           centerTitle: true,
           bottom: PreferredSize(

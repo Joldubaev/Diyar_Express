@@ -35,12 +35,12 @@ class ContactCardWidget extends StatelessWidget {
                   const SizedBox(height: 10),
                   Row(
                     children: [
-                      const Icon(Icons.phone_sharp, color: AppColors.blue),
+                      const Icon(Icons.phone_sharp, color: AppColors.primary),
                       const SizedBox(width: 10),
                       Text(
                         subtitle,
                         style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                              color: AppColors.blue,
+                              color: AppColors.primary,
                               fontWeight: FontWeight.w500,
                             ),
                       ),

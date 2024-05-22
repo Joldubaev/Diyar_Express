@@ -11,7 +11,11 @@ class EmptyActiveOrders extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Icon(Icons.local_shipping, size: 100, color: AppColors.primary),
+          Image.asset(
+            'assets/images/active.png',
+            height: 200,
+            fit: BoxFit.cover,
+          ),
           const SizedBox(height: 20),
           Text(
             context.l10n.notActiveOrders,
