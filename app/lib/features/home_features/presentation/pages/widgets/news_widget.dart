@@ -18,7 +18,12 @@ class NewsWidget extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: Column(
         children: [
-          Image.network(image),
+          Image.asset(
+            image,
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: 200,
+          ),
           const SizedBox(height: 8),
           Text(
             title,

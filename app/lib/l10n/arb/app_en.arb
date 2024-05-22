@@ -149,9 +149,13 @@
     "lastNews":"Latest news",
     "main":"Main",
     "noOrders":"No orders",
-     "noOrderDescription":"You have not placed an order yet",
-     "ecpessCoffee":"Express Coffee",
-     "notImage": "No image",
-     "restaurant": "Restaurant",
-     "awaiting": "Waiting"
+    "noOrderDescription":"You have not placed an order yet",
+    "ecpessCoffee":"Express Coffee",
+    "notImage": "No image",
+    "restaurant": "Restaurant",
+    "awaiting": "Waiting",
+    "diyar":"Diyar",
+    "diyar_sale":"Promotion \n on all dishes", 
+    "allAbout":"Express cafe, Restaurant, VIP rooms", 
+    "banket":"Banquet Hall"
 }

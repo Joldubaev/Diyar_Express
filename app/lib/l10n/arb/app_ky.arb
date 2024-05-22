@@ -150,8 +150,12 @@
     "lastNews":"Акыркы кабарлар", 
     "main":"Башкы","noOrders":"Буйрутмалар жок",
     "noOrderDescription":"Сиз азырынча заказ бере элексиз",
-     "ecpessCoffee":"Экспресс кофе",
-     "notImage": "Сүрөт жок",
-     "restaurant": "Restaurant",
-     "waiting": "Күтүү"
+    "ecpessCoffee":"Экспресс кофе",
+    "notImage": "Сүрөт жок",
+    "restaurant": "Restaurant",
+    "waiting": "Күтүү",
+    "diyar":"Дияр",
+    "diyar_sale":"Акция \n бардык тамактарга",
+    "allAbout":"Экспресс кафе, Ресторан, VIP бөлмөлөр",
+    "banket":"Банкет залы"
 }

@@ -40,13 +40,14 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+          backgroundColor: AppColors.primary,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
             onPressed: () {
               context.router.maybePop();
             },
           ),
-          title: Text(context.l10n.profile, style: theme.textTheme.titleSmall)),
+          title: Text(context.l10n.profile, style: theme.textTheme.titleSmall!.copyWith(color: AppColors.white))),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: SingleChildScrollView(

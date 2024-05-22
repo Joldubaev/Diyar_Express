@@ -6,7 +6,8 @@ import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/features/profile/presentation/presentation.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/cubit/popular_cubit.dart';
-import 'package:diyar_express/shared/pages/widgets/custom_widget.dart';
+import 'package:diyar_express/shared/pages/widgets/news_widget.dart';
+import 'package:diyar_express/shared/pages/widgets/sale_widget.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -24,14 +25,17 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
+    super.initState();
     context.read<PopularCubit>().getPopularProducts();
     context.read<CartCubit>().getCartItems();
     context.read<ProfileCubit>().getUser();
-    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final l10n = context.l10n;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.primary,
@@ -39,8 +43,12 @@ class _HomePageState extends State<HomePage> {
           alignment: Alignment.centerLeft,
           child: FittedBox(
             child: Text(
-              '${context.l10n.welcome}, ${context.read<ProfileCubit>().user?.name ?? ''} !',
-              style: const TextStyle(color: AppColors.white, fontSize: 20, fontWeight: FontWeight.bold),
+              '${l10n.welcome}, ${context.read<ProfileCubit>().user?.name ?? ''}!',
+              style: const TextStyle(
+                color: AppColors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -56,103 +64,89 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             } else if (state is PopularLoaded) {
-              menu = state.products;
+              setState(() {
+                menu = state.products;
+              });
             }
           },
           builder: (context, state) {
             return SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      Text(context.l10n.sales, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 10),
-                      CustomWidget(
-                        discount: int.parse('10'),
-                        title: '${context.l10n.sale} 10%',
-                        description: context.l10n.forAllFood,
-                        image: 'assets/images/banner.png',
-                        onTap: () => context.router.push(const SaleRoute()),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        context.l10n.popularFood,
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        width: double.infinity,
-                        height: 220,
-                        child: StreamBuilder<List<CartItemModel>>(
-                          stream: context.read<CartCubit>().cart,
-                          builder: (context, snapshot) {
-                            List cart = [];
-                            if (snapshot.hasData) {
-                              cart = snapshot.data ?? [];
-                            } else if (snapshot.connectionState == ConnectionState.waiting) {
-                              return const Center(child: CircularProgressIndicator());
-                            }
-                            return ListView.separated(
-                              separatorBuilder: (context, index) => const SizedBox(width: 10),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: menu.length,
-                              itemBuilder: (context, index) {
-                                final food = menu[index];
-                                final cartItem = cart.firstWhere(
-                                  (element) => element.food?.id == food.id,
-                                  orElse: () => CartItemModel(food: food, quantity: 0),
-                                );
-                                return SizedBox(
-                                  width: 160,
-                                  child: ProductItemWidget(
-                                    food: food,
-                                    quantity: cartItem.quantity ?? 0,
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Text(context.l10n.aboutUs, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 10),
-                      CustonClipRectWidget(
-                        image: 'assets/images/about.png',
-                        onTap: () => context.router.push(const AboutUsRoute()),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(context.l10n.news, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 10),
-                      CustomWidget(
-                        discount: 0,
-                        title: context.l10n.news,
-                        description: context.l10n.lastNews,
-                        image: 'assets/images/news.png',
-                        onTap: () => context.router.push(const NewsRoute()),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        decoration: BoxDecoration(
-                          color: AppColors.primary,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: SettingsTile(
-                          icon: Icons.phone,
-                          text: context.l10n.contact,
-                          onPressed: () => context.router.push(const ContactRoute()),
-                        ),
-                      ),
-                    ],
+                  SaleWidget(
+                    discount: 10,
+                    title: context.l10n.diyar_sale,
+                    image: 'assets/images/banner.png',
+                    onTap: () => context.router.push(const SaleRoute()),
                   ),
                   const SizedBox(height: 20),
+                  Text(
+                    l10n.popularFood,
+                    style: theme.textTheme.titleSmall?.copyWith(
+                      color: AppColors.black1,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 220,
+                    child: StreamBuilder<List<CartItemModel>>(
+                      stream: context.read<CartCubit>().cart,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
+                        }
+                        final cart = snapshot.data ?? [];
+                        return PageView.builder(
+                          itemCount: menu.length,
+                          controller: PageController(viewportFraction: 0.6),
+                          itemBuilder: (context, index) {
+                            final food = menu[index];
+                            final cartItem = cart.firstWhere(
+                              (element) => element.food?.id == food.id,
+                              orElse: () => CartItemModel(food: food, quantity: 0),
+                            );
+
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 10),
+                              child: ProductItemWidget(
+                                food: food,
+                                quantity: cartItem.quantity ?? 0,
+                              ),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  AboutUsWidget(
+                    image: 'assets/images/about.png',
+                    onTap: () => context.router.push(const AboutUsRoute()),
+                  ),
+                  const SizedBox(height: 20),
+                  NewsWidgets(
+                    subtitle: l10n.news,
+                    title: 'Дияр',
+                    image: 'assets/images/news_da.png',
+                    onTap: () => context.router.push(const NewsRoute()),
+                  ),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    decoration: BoxDecoration(
+                      color: AppColors.primary,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: SettingsTile(
+                      icon: Icons.phone,
+                      text: l10n.contact,
+                      onPressed: () => context.router.push(const ContactRoute()),
+                    ),
+                  ),
                 ],
               ),
             );

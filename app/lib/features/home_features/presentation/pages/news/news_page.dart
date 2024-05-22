@@ -45,20 +45,41 @@ class _NewsPageState extends State<NewsPage> {
         builder: (context, state) {
           if (state is HomeFeaturesLoading) {
             return const Center(child: CircularProgressIndicator());
+          } else if (state is HomeFeaturesLoaded) {
+            if (state.news!.isEmpty || state.news == null) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/empty.png',
+                      width: 200,
+                      height: 200,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      context.l10n.emptyText,
+                      style: theme.textTheme.bodyLarge!.copyWith(color: AppColors.black1),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return ListView.builder(
+                itemCount: state.news!.length,
+                itemBuilder: (context, index) {
+                  final news = state.news![index];
+                  return NewsWidget(
+                    title: news.name!,
+                    description: news.description!,
+                    image: news.photoLink!,
+                  );
+                },
+              );
+            }
+          } else {
+            return const SizedBox();
           }
-          return state is HomeFeaturesLoaded
-              ? ListView.builder(
-                  itemCount: state.news!.length,
-                  itemBuilder: (context, index) {
-                    final news = state.news![index];
-                    return NewsWidget(
-                      title: news.name!,
-                      description: news.description!,
-                      image: news.photoLink!,
-                    );
-                  },
-                )
-              : const SizedBox();
         },
       ),
     );

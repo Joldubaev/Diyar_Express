@@ -46,6 +46,7 @@ dependencies:
   easy_debounce: ^2.0.3
   fluttertoast: ^8.2.5
   web_socket_channel: ^2.4.5
+  google_fonts: ^6.2.1
   
 dev_dependencies:
   flutter_test:
