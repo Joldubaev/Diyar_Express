@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 abstract class HistoryReDatasource {
   Future<OrderActiveItemModel> getOrderItem({required int num});
   Future<List<ActiveOrderModel>> getActiveOrders();
-  // Future<List<OrderOrder>> getHistoryOrders();
+  Future<List<OrderActiveItemModel>> getHistoryOrders();
 }
 
 class HistoryReDatasourceImpl implements HistoryReDatasource {
@@ -44,9 +44,31 @@ class HistoryReDatasourceImpl implements HistoryReDatasource {
       );
 
       if ([200, 201].contains(res.statusCode)) {
-        return List<ActiveOrderModel>.from(res.data['orders'].map((x) => ActiveOrderModel.fromJson(x)));
+        return List<ActiveOrderModel>.from(
+            res.data['orders'].map((x) => ActiveOrderModel.fromJson(x)));
       } else {
         throw Exception('Error getting active orders');
+      }
+    } catch (e) {
+      throw Exception();
+    }
+  }
+
+  @override
+  Future<List<OrderActiveItemModel>> getHistoryOrders() async {
+    try {
+      var token = prefs.getString(AppConst.accessToken) ?? '';
+      final res = await dio.get(
+        ApiConst.getOrderHistory,
+        options: Options(headers: ApiConst.authMap(token)),
+      );
+
+      if ([200, 201].contains(res.statusCode)) {
+        return List<OrderActiveItemModel>.from(
+          res.data['orders'].map((x) => OrderActiveItemModel.fromJson(x)),
+        );
+      } else {
+        throw Exception('Error getting history orders');
       }
     } catch (e) {
       throw Exception();
