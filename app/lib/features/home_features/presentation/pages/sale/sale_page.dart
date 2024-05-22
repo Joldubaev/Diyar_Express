@@ -1,5 +1,5 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/features/home_features/presentation/home_ropsitories.dart';
+import 'package:diyar_express/features/home_features/presentation/pages/widgets/sale_widget.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:diyar_express/shared/utils/snackbar/snackbar_message.dart';
@@ -26,14 +26,18 @@ class _SalePageState extends State<SalePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: AppColors.primary,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
-            onPressed: () {
-              context.router.maybePop();
-            },
-          ),
-          title: Text(context.l10n.sales, style: theme.textTheme.titleLarge!.copyWith(color: AppColors.white))),
+        backgroundColor: AppColors.primary,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
+          onPressed: () {
+            context.router.maybePop();
+          },
+        ),
+        title: Text(
+          context.l10n.sales,
+          style: theme.textTheme.titleLarge!.copyWith(color: AppColors.white),
+        ),
+      ),
       body: BlocConsumer<HomeFeaturesCubit, HomeFeaturesState>(
         listener: (context, state) {
           if (state is HomeFeaturesError) {
@@ -46,20 +50,40 @@ class _SalePageState extends State<SalePage> {
           if (state is HomeFeaturesLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          return state is HomeFeaturesLoaded
-              ? ListView.builder(
-                  itemCount: state.sales!.length,
-                  itemBuilder: (context, index) {
-                    final sale = state.sales![index];
-                    return SaleWidget(
-                      discount: sale.discount!,
-                      title: sale.name!,
-                      description: sale.description!,
-                      image: sale.photoLink!,
-                    );
-                  },
-                )
-              : const SizedBox();
+          if (state is HomeFeaturesLoaded) {
+            if (state.sales == null || state.sales!.isEmpty) {
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.asset(
+                      'assets/images/empty.png',
+                      width: 200,
+                      height: 200,
+                    ),
+                    const SizedBox(height: 20),
+                    Text(
+                      context.l10n.emptyText,
+                      style: theme.textTheme.bodyLarge!.copyWith(color: AppColors.black1),
+                    ),
+                  ],
+                ),
+              );
+            }
+            return ListView.builder(
+              itemCount: state.sales!.length,
+              itemBuilder: (context, index) {
+                final sale = state.sales![index];
+                return SaleWidget(
+                  discount: sale.discount!,
+                  title: sale.name!,
+                  description: sale.description!,
+                  image: sale.photoLink!,
+                );
+              },
+            );
+          }
+          return const SizedBox();
         },
       ),
     );

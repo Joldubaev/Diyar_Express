@@ -57,42 +57,7 @@ class _RestorantPageState extends State<RestorantPage> {
               child: CircularProgressIndicator(),
             );
           }
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-            child: Column(
-              children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: Text(
-                    '${model?.name}',
-                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Text(
-                  '${model?.description}',
-                  style: const TextStyle(fontSize: 16),
-                ),
-                const SizedBox(height: 20),
-                if (model!.photoLinks!.isEmpty) Text(context.l10n.notImage),
-                GridView.builder(
-                  shrinkWrap: true,
-                  itemCount: model!.photoLinks!.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                  ),
-                  itemBuilder: (context, index) {
-                    return Image.network(
-                      '${model!.photoLinks?[index]}',
-                      fit: BoxFit.cover,
-                    );
-                  },
-                ),
-              ],
-            ),
-          );
+          return CustomAboutWidget(model: model!);
         },
       ),
     );
