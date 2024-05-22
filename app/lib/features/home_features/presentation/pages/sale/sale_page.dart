@@ -1,10 +1,11 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/features/home_features/presentation/pages/widgets/sale_widget.dart';
+import 'package:diyar_express/features/home_features/presentation/pages/widgets/custom_widget.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:diyar_express/shared/utils/snackbar/snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../cubit/home_features_cubit.dart';
 
 @RoutePage()
@@ -35,7 +36,11 @@ class _SalePageState extends State<SalePage> {
         ),
         title: Text(
           context.l10n.sales,
-          style: theme.textTheme.titleLarge!.copyWith(color: AppColors.white),
+          style: GoogleFonts.aBeeZee(
+            color: AppColors.white,
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: BlocConsumer<HomeFeaturesCubit, HomeFeaturesState>(
@@ -51,13 +56,13 @@ class _SalePageState extends State<SalePage> {
             return const Center(child: CircularProgressIndicator());
           }
           if (state is HomeFeaturesLoaded) {
-            if (state.sales == null || state.sales!.isEmpty) {
+            if (state.sales == null || state.sales!.isNotEmpty) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/images/empty.png',
+                      'assets/images/amico.png',
                       width: 200,
                       height: 200,
                     ),
@@ -74,8 +79,8 @@ class _SalePageState extends State<SalePage> {
               itemCount: state.sales!.length,
               itemBuilder: (context, index) {
                 final sale = state.sales![index];
-                return SaleWidget(
-                  discount: sale.discount!,
+                return CardWidget(
+                  discount: sale.discount,
                   title: sale.name!,
                   description: sale.description!,
                   image: sale.photoLink!,

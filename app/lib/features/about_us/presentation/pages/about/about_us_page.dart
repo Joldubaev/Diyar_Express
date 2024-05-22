@@ -8,6 +8,7 @@ import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class AboutUsPage extends StatefulWidget {
@@ -22,15 +23,21 @@ class _AboutUsPageState extends State<AboutUsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
-          onPressed: () {
-            context.router.maybePop();
-          },
-        ),
-        title: Text(context.l10n.aboutUs, style: theme.textTheme.titleSmall!.copyWith(color: AppColors.white)),
-      ),
+          backgroundColor: AppColors.primary,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
+            onPressed: () {
+              context.router.maybePop();
+            },
+          ),
+          title: Text(
+            context.l10n.aboutUs,
+            style: GoogleFonts.aBeeZee(
+              color: AppColors.white,
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+            ),
+          )),
       body: const SafeArea(
         child: AboutUsBody(),
       ),

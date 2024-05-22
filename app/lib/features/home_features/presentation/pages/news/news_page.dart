@@ -1,9 +1,10 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/features/home_features/presentation/pages/widgets/custom_widget.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:diyar_express/features/home_features/presentation/home_ropsitories.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../cubit/home_features_cubit.dart';
 
@@ -26,14 +27,20 @@ class _NewsPageState extends State<NewsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: AppColors.primary,
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
-            onPressed: () {
-              context.router.maybePop();
-            },
-          ),
-          title: Text(context.l10n.news, style: theme.textTheme.titleLarge!.copyWith(color: AppColors.white))),
+        backgroundColor: AppColors.primary,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: AppColors.white),
+          onPressed: () {
+            context.router.maybePop();
+          },
+        ),
+        title: Text(context.l10n.news,
+            style: GoogleFonts.aBeeZee(
+              color: AppColors.white,
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+            )),
+      ),
       body: BlocConsumer<HomeFeaturesCubit, HomeFeaturesState>(
         listener: (context, state) {
           if (state is HomeFeaturesError) {
@@ -52,7 +59,7 @@ class _NewsPageState extends State<NewsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      'assets/images/empty.png',
+                      'assets/images/cuate.png',
                       width: 200,
                       height: 200,
                     ),
@@ -69,7 +76,7 @@ class _NewsPageState extends State<NewsPage> {
                 itemCount: state.news!.length,
                 itemBuilder: (context, index) {
                   final news = state.news![index];
-                  return NewsWidget(
+                  return CardWidget(
                     title: news.name!,
                     description: news.description!,
                     image: news.photoLink!,

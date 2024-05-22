@@ -3,10 +3,10 @@ import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class AboutUsWidget extends StatelessWidget {
-  const AboutUsWidget({super.key, required this.image, required this.onTap});
+  const AboutUsWidget({super.key, required this.image, this.onTap});
 
   final String image;
-  final void Function() onTap;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {

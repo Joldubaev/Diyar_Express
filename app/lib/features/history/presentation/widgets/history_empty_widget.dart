@@ -10,7 +10,7 @@ class HistoryEmptyWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Image.asset(
-          'assets/images/empty.png',
+          'assets/images/active.png',
           width: 150,
           height: 150,
         ),
