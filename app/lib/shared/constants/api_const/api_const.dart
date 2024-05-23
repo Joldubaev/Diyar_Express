@@ -52,7 +52,7 @@ class ApiConst {
   static const getActualOrders = "http://20.55.72.226:8080/orders/get-all-actual-orders-by-user";
   static const getPickupOrder = "http://20.55.72.226:8080/pickup-orders/create-pickup-order";
   static const getOrderItem = "http://20.55.72.226:8080/orders/get-order";
-  static const getOrderHistory = "http://20.55.72.226:8080/orders/get-all-orders";
+  static const getOrderHistory = "http://20.55.72.226:8080/orders/get-history";
 
   // COURIER
   static const getCuriersFinis = "http://20.55.72.226:8080/courier/finished-order";

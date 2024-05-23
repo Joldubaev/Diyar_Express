@@ -21,12 +21,9 @@ class ActiveOrderPage extends StatefulWidget {
   State<ActiveOrderPage> createState() => _ActiveOrderPageState();
 }
 
-class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAliveClientMixin {
+class _ActiveOrderPageState extends State<ActiveOrderPage> {
   List<ActiveOrderModel> orders = [];
   late final IOWebSocketChannel _channel;
-
-  @override
-  bool get wantKeepAlive => true;
 
   @override
   void initState() {
@@ -39,7 +36,8 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAli
     var token = sl<SharedPreferences>().getString(AppConst.accessToken);
     if (token == null) return;
 
-    _channel = IOWebSocketChannel.connect('ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
+    _channel = IOWebSocketChannel.connect(
+        'ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
   }
 
   @override
@@ -50,8 +48,6 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAli
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     return BlocBuilder<HistoryCubit, HistoryState>(
       builder: (context, state) {
         if (state is GetActiveOrdersError) {
@@ -75,8 +71,9 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAli
             }
 
             final List<dynamic> data = jsonDecode(snapshot.data as String);
-            final List<OrderStatusModel> orderStatuses =
-                data.map((dynamic json) => OrderStatusModel.fromJson(json)).toList();
+            final List<OrderStatusModel> orderStatuses = data
+                .map((dynamic json) => OrderStatusModel.fromJson(json))
+                .toList();
 
             return ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -85,8 +82,11 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> with AutomaticKeepAli
               itemBuilder: (context, index) {
                 final order = orders[index];
                 final orderNumber = order.order?.orderNumber;
-                final orderStatus = orderStatuses.firstWhere((element) => element.orderNumber == orderNumber,
-                    orElse: () => OrderStatusModel(orderNumber: orderNumber!, status: 'Unknown'));
+                final orderStatus = orderStatuses.firstWhere(
+                  (element) => element.orderNumber == orderNumber,
+                  orElse: () => OrderStatusModel(
+                      orderNumber: orderNumber!, status: 'Unknown'),
+                );
 
                 return Card(
                   child: ExpansionTile(
