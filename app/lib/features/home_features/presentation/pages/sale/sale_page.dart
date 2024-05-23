@@ -5,6 +5,7 @@ import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:diyar_express/shared/utils/snackbar/snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../cubit/home_features_cubit.dart';
 
@@ -56,16 +57,12 @@ class _SalePageState extends State<SalePage> {
             return const Center(child: CircularProgressIndicator());
           }
           if (state is HomeFeaturesLoaded) {
-            if (state.sales == null || state.sales!.isNotEmpty) {
+            if (state.sales == null || state.sales!.isEmpty) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/images/amico.png',
-                      width: 200,
-                      height: 200,
-                    ),
+                    SvgPicture.asset('assets/icons/amico.svg', width: 200, height: 200),
                     const SizedBox(height: 20),
                     Text(
                       context.l10n.emptyText,

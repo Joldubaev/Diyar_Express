@@ -1,5 +1,6 @@
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ContactCardWidget extends StatelessWidget {
   const ContactCardWidget({
@@ -49,7 +50,7 @@ class ContactCardWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Expanded(child: Image.asset(imagePath, width: 60)),
+            Expanded(child: SvgPicture.asset(imagePath, width: 50, height: 50)),
           ],
         ));
   }

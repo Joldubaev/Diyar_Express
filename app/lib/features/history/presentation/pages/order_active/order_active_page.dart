@@ -36,8 +36,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
     var token = sl<SharedPreferences>().getString(AppConst.accessToken);
     if (token == null) return;
 
-    _channel = IOWebSocketChannel.connect(
-        'ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
+    _channel = IOWebSocketChannel.connect('ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
   }
 
   @override
@@ -71,9 +70,8 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
             }
 
             final List<dynamic> data = jsonDecode(snapshot.data as String);
-            final List<OrderStatusModel> orderStatuses = data
-                .map((dynamic json) => OrderStatusModel.fromJson(json))
-                .toList();
+            final List<OrderStatusModel> orderStatuses =
+                data.map((dynamic json) => OrderStatusModel.fromJson(json)).toList();
 
             return ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -84,8 +82,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                 final orderNumber = order.order?.orderNumber;
                 final orderStatus = orderStatuses.firstWhere(
                   (element) => element.orderNumber == orderNumber,
-                  orElse: () => OrderStatusModel(
-                      orderNumber: orderNumber!, status: 'Unknown'),
+                  orElse: () => OrderStatusModel(orderNumber: orderNumber!, status: 'Unknown'),
                 );
 
                 return Card(

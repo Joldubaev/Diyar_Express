@@ -1,6 +1,7 @@
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CartEmptyWidget extends StatelessWidget {
   const CartEmptyWidget({
@@ -13,11 +14,9 @@ class CartEmptyWidget extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/cart.png', width: 200, height: 200),
+          SvgPicture.asset('assets/icons/cart.svg', width: 200, height: 200),
           const SizedBox(height: 16),
-          Text(context.l10n.cartIsEmpty,
-              style:
-                  theme.textTheme.titleMedium!.copyWith(color: AppColors.grey)),
+          Text(context.l10n.cartIsEmpty, style: theme.textTheme.titleMedium!.copyWith(color: AppColors.grey)),
         ],
       ),
     );
