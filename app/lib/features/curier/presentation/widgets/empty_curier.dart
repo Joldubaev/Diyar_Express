@@ -1,6 +1,7 @@
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class EmptyCurierOrder extends StatelessWidget {
   const EmptyCurierOrder({super.key});
@@ -11,7 +12,11 @@ class EmptyCurierOrder extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Image.asset('assets/images/empty_curier.png', height: 200),
+          SvgPicture.asset(
+            'assets/icons/man_empty.svg',
+            width: 200,
+            height: 200,
+          ),
           const SizedBox(height: 10),
           Text(context.l10n.noOrders, style: theme.textTheme.titleSmall),
         ],
