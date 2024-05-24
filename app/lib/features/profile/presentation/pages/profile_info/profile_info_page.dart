@@ -5,7 +5,6 @@ import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
 import 'package:diyar_express/features/auth/presentation/widgets/phone_number.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -50,10 +49,9 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
           ),
           title: Text(
             context.l10n.profile,
-            style: GoogleFonts.aBeeZee(
+            style: theme.textTheme.titleSmall?.copyWith(
               color: AppColors.white,
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
+              fontFamily: 'Caveat',
             ),
           )),
       body: Padding(

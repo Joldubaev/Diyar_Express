@@ -44,7 +44,6 @@ dependencies:
   easy_debounce: ^2.0.3
   fluttertoast: ^8.2.5
   web_socket_channel: ^2.4.5
-  google_fonts: ^6.2.1
   transparent_image: ^2.0.1
   
 dev_dependencies:
@@ -64,6 +63,10 @@ flutter:
     - assets/icons/
     - assets/images/
 
+  fonts:
+    - family: Caveat
+      fonts:
+        - asset: fonts/Caveat/static/Caveat-Regular.ttf
 
 flutter_launcher_icons:
   android: "ic_launcher"

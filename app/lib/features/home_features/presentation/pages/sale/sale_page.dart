@@ -6,7 +6,6 @@ import 'package:diyar_express/shared/utils/snackbar/snackbar_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../cubit/home_features_cubit.dart';
 
 @RoutePage()
@@ -37,10 +36,9 @@ class _SalePageState extends State<SalePage> {
         ),
         title: Text(
           context.l10n.sales,
-          style: GoogleFonts.aBeeZee(
+          style: theme.textTheme.titleSmall?.copyWith(
             color: AppColors.white,
-            fontSize: 26,
-            fontWeight: FontWeight.bold,
+            fontFamily: 'Caveat',
           ),
         ),
       ),
