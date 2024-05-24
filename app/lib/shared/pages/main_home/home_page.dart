@@ -83,46 +83,52 @@ class _HomePageState extends State<HomePage> {
                     onTap: () => context.router.push(const SaleRoute()),
                   ),
                   const SizedBox(height: 20),
-                  Text(
-                    l10n.popularFood,
-                    style: theme.textTheme.titleSmall?.copyWith(
-                      color: AppColors.black1,
-                      fontWeight: FontWeight.bold,
+                  if (menu.isNotEmpty)
+                    Text(
+                      l10n.popularFood,
+                      style: theme.textTheme.titleSmall?.copyWith(
+                        color: AppColors.black1,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 220,
-                    child: StreamBuilder<List<CartItemModel>>(
-                      stream: context.read<CartCubit>().cart,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
-                        }
-                        final cart = snapshot.data ?? [];
-                        return PageView.builder(
-                          itemCount: menu.length,
-                          controller: PageController(viewportFraction: 0.6),
-                          itemBuilder: (context, index) {
-                            final food = menu[index];
-                            final cartItem = cart.firstWhere(
-                              (element) => element.food?.id == food.id,
-                              orElse: () => CartItemModel(food: food, quantity: 0),
-                            );
+                  if (menu.isNotEmpty) const SizedBox(height: 10),
+                  if (menu.isNotEmpty)
+                    SizedBox(
+                      width: double.infinity,
+                      height: 220,
+                      child: StreamBuilder<List<CartItemModel>>(
+                        stream: context.read<CartCubit>().cart,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          }
+                          final cart = snapshot.data ?? [];
+                          return PageView.builder(
+                            itemCount: menu.length,
+                            controller: PageController(viewportFraction: 0.6),
+                            itemBuilder: (context, index) {
+                              final food = menu[index];
+                              final cartItem = cart.firstWhere(
+                                (element) => element.food?.id == food.id,
+                                orElse: () =>
+                                    CartItemModel(food: food, quantity: 0),
+                              );
 
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10),
-                              child: ProductItemWidget(
-                                food: food,
-                                quantity: cartItem.quantity ?? 0,
-                              ),
-                            );
-                          },
-                        );
-                      },
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 10),
+                                child: ProductItemWidget(
+                                  food: food,
+                                  quantity: cartItem.quantity ?? 0,
+                                ),
+                              );
+                            },
+                          );
+                        },
+                      ),
                     ),
-                  ),
                   const SizedBox(height: 20),
                   AboutUsWidget(
                     image: 'assets/images/about.png',
@@ -145,7 +151,8 @@ class _HomePageState extends State<HomePage> {
                     child: SettingsTile(
                       icon: Icons.phone,
                       text: l10n.contact,
-                      onPressed: () => context.router.push(const ContactRoute()),
+                      onPressed: () =>
+                          context.router.push(const ContactRoute()),
                     ),
                   ),
                 ],
