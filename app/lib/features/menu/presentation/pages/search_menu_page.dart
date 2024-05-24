@@ -25,8 +25,7 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
       appBar: AppBar(
         title: Text(context.l10n.searchMeal, style: Theme.of(context).textTheme.titleSmall),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),

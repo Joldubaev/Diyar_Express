@@ -33,6 +33,10 @@ class _CurierPageState extends State<CurierPage> {
     super.initState();
   }
 
+  Future<void> _refresh() async {
+    context.read<CurierCubit>().getCuriers();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,65 +80,69 @@ class _CurierPageState extends State<CurierPage> {
           } else if (orders.isEmpty) {
             return const EmptyCurierOrder();
           }
-          return ListView.separated(
-            separatorBuilder: (context, index) => const SizedBox(height: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            itemCount: orders.length,
-            itemBuilder: (context, index) {
-              return Card(
-                margin: const EdgeInsets.all(0),
-                child: ExpansionTile(
-                  shape: const Border(bottom: BorderSide(color: Colors.transparent, width: 0)),
-                  childrenPadding: const EdgeInsets.fromLTRB(10, 10, 10, 8),
-                  title: Text(
-                    '${context.l10n.orderNumber} ${orders[index].orderNumber}',
-                    style: theme.textTheme.bodyLarge!.copyWith(
-                      color: AppColors.black1,
-                    ),
-                  ),
-                  children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        icon: const Icon(Icons.copy_rounded),
-                        onPressed: () {
-                          Clipboard.setData(ClipboardData(text: '${orders[index].address}'));
-                          ScaffoldMessenger.of(context)
-                              .showSnackBar(SnackBar(content: Text(context.l10n.addressIsCopied)));
-                        },
+          return RefreshIndicator(
+            onRefresh: _refresh,
+            child: ListView.separated(
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              itemCount: orders.length,
+              itemBuilder: (context, index) {
+                return Card(
+                  margin: const EdgeInsets.all(0),
+                  child: ExpansionTile(
+                    shape: const Border(bottom: BorderSide(color: Colors.transparent, width: 0)),
+                    childrenPadding: const EdgeInsets.fromLTRB(10, 10, 10, 8),
+                    title: Text(
+                      '${context.l10n.orderNumber} ${orders[index].orderNumber}',
+                      style: theme.textTheme.bodyLarge!.copyWith(
+                        color: AppColors.black1,
                       ),
                     ),
-                    FittedBox(
+                    children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          icon: const Icon(Icons.copy_rounded),
+                          onPressed: () {
+                            Clipboard.setData(ClipboardData(text: '${orders[index].address}'));
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(SnackBar(content: Text(context.l10n.addressIsCopied)));
+                          },
+                        ),
+                      ),
+                      FittedBox(
                         fit: BoxFit.none,
                         child: Text('${orders[index].address}',
-                            maxLines: 3, style: const TextStyle(color: AppColors.black1, fontSize: 13))),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomTextButton(
-                          onPressed: () {
-                            context.router.push(
-                              OrderDetailRoute(
-                                orderNumber: "${orders[index].orderNumber}",
-                              ),
-                            );
-                          },
-                          textButton: context.l10n.orderDetails,
-                        ),
-                        CustomTextButton(
-                          onPressed: () {
-                            _finishOrder(orders[index].orderNumber ?? 0).then((value) {
-                              context.read<CurierCubit>().getCuriers();
-                            });
-                          },
-                          textButton: context.l10n.finishOrder,
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              );
-            },
+                            maxLines: 3, style: const TextStyle(color: AppColors.black1, fontSize: 13)),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CustomTextButton(
+                            onPressed: () {
+                              context.router.push(
+                                OrderDetailRoute(
+                                  orderNumber: "${orders[index].orderNumber}",
+                                ),
+                              );
+                            },
+                            textButton: context.l10n.orderDetails,
+                          ),
+                          CustomTextButton(
+                            onPressed: () {
+                              _finishOrder(orders[index].orderNumber ?? 0).then((value) {
+                                context.read<CurierCubit>().getCuriers();
+                              });
+                            },
+                            textButton: context.l10n.finishOrder,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
           );
         },
       ),
