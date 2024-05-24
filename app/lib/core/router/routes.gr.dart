@@ -9,35 +9,63 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i30;
-import 'package:diyar_express/features/about_us/presentation/pages/about/about_us_page.dart' as _i1;
-import 'package:diyar_express/features/about_us/presentation/pages/about/coffe_page.dart' as _i3;
-import 'package:diyar_express/features/about_us/presentation/pages/about/hall_page.dart' as _i9;
-import 'package:diyar_express/features/about_us/presentation/pages/about/restoran_page.dart' as _i22;
-import 'package:diyar_express/features/about_us/presentation/pages/about/vip_page.dart' as _i29;
-import 'package:diyar_express/features/about_us/presentation/pages/contact/contact_page.dart' as _i4;
-import 'package:diyar_express/features/auth/data/models/user_mpdel.dart' as _i33;
-import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart' as _i25;
-import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_page.dart' as _i26;
-import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_succes.dart' as _i27;
-import 'package:diyar_express/features/auth/presentation/pages/splash/splash_page.dart' as _i28;
-import 'package:diyar_express/features/auth/presentation/widgets/reset_password.dart' as _i21;
+import 'package:diyar_express/features/about_us/presentation/pages/about/about_us_page.dart'
+    as _i1;
+import 'package:diyar_express/features/about_us/presentation/pages/about/coffe_page.dart'
+    as _i3;
+import 'package:diyar_express/features/about_us/presentation/pages/about/hall_page.dart'
+    as _i9;
+import 'package:diyar_express/features/about_us/presentation/pages/about/restoran_page.dart'
+    as _i22;
+import 'package:diyar_express/features/about_us/presentation/pages/about/vip_page.dart'
+    as _i29;
+import 'package:diyar_express/features/about_us/presentation/pages/contact/contact_page.dart'
+    as _i4;
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart'
+    as _i33;
+import 'package:diyar_express/features/auth/presentation/pages/sign_in/sign_in_page.dart'
+    as _i25;
+import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_page.dart'
+    as _i26;
+import 'package:diyar_express/features/auth/presentation/pages/sign_up/sign_up_succes.dart'
+    as _i27;
+import 'package:diyar_express/features/auth/presentation/pages/splash/splash_page.dart'
+    as _i28;
+import 'package:diyar_express/features/auth/presentation/widgets/reset_password.dart'
+    as _i21;
 import 'package:diyar_express/features/cart/data/models/models.dart' as _i32;
-import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart' as _i2;
-import 'package:diyar_express/features/curier/presentation/pages/curier_page.dart' as _i6;
-import 'package:diyar_express/features/curier/presentation/pages/curier_profile_page.dart' as _i7;
-import 'package:diyar_express/features/curier/presentation/pages/history_page.dart' as _i10;
-import 'package:diyar_express/features/history/presentation/pages/order_active/order_detail_page.dart' as _i15;
-import 'package:diyar_express/features/history/presentation/pages/order_history_page.dart' as _i16;
-import 'package:diyar_express/features/home_features/presentation/pages/news/news_page.dart' as _i14;
-import 'package:diyar_express/features/home_features/presentation/pages/sale/sale_page.dart' as _i23;
-import 'package:diyar_express/features/map/presentation/user_map/order_map.dart' as _i17;
-import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart' as _i13;
-import 'package:diyar_express/features/menu/presentation/pages/search_menu_page.dart' as _i24;
-import 'package:diyar_express/features/order/presentation/pages/create_order/create_order_page.dart' as _i5;
-import 'package:diyar_express/features/order/presentation/pages/create_order/delivery_order.dart' as _i8;
-import 'package:diyar_express/features/order/presentation/pages/create_order/order_success.dart' as _i18;
-import 'package:diyar_express/features/profile/presentation/pages/profile/profile_page.dart' as _i20;
-import 'package:diyar_express/features/profile/presentation/pages/profile_info/profile_info_page.dart' as _i19;
+import 'package:diyar_express/features/cart/presentation/pages/cart_page.dart'
+    as _i2;
+import 'package:diyar_express/features/curier/presentation/pages/curier_page.dart'
+    as _i6;
+import 'package:diyar_express/features/curier/presentation/pages/curier_profile_page.dart'
+    as _i7;
+import 'package:diyar_express/features/curier/presentation/pages/history_page.dart'
+    as _i10;
+import 'package:diyar_express/features/history/presentation/pages/order_active/order_detail_page.dart'
+    as _i15;
+import 'package:diyar_express/features/history/presentation/pages/order_history_page.dart'
+    as _i16;
+import 'package:diyar_express/features/home_features/presentation/pages/news/news_page.dart'
+    as _i14;
+import 'package:diyar_express/features/home_features/presentation/pages/sale/sale_page.dart'
+    as _i23;
+import 'package:diyar_express/features/map/presentation/user_map/order_map.dart'
+    as _i17;
+import 'package:diyar_express/features/menu/presentation/pages/menu_page.dart'
+    as _i13;
+import 'package:diyar_express/features/menu/presentation/pages/search_menu_page.dart'
+    as _i24;
+import 'package:diyar_express/features/order/presentation/pages/create_order/create_order_page.dart'
+    as _i5;
+import 'package:diyar_express/features/order/presentation/pages/create_order/delivery_order.dart'
+    as _i8;
+import 'package:diyar_express/features/order/presentation/pages/create_order/order_success.dart'
+    as _i18;
+import 'package:diyar_express/features/profile/presentation/pages/profile/profile_page.dart'
+    as _i20;
+import 'package:diyar_express/features/profile/presentation/pages/profile_info/profile_info_page.dart'
+    as _i19;
 import 'package:diyar_express/shared/pages/main_home/home_page.dart' as _i11;
 import 'package:diyar_express/shared/pages/main_home/main_page.dart' as _i12;
 import 'package:flutter/material.dart' as _i31;
@@ -101,6 +129,7 @@ abstract class $AppRouter extends _i30.RootStackRouter {
         child: _i8.DeliveryFormPage(
           key: args.key,
           cart: args.cart,
+          user: args.user,
         ),
       );
     },
@@ -317,7 +346,8 @@ class CreateOrderRoute extends _i30.PageRouteInfo<CreateOrderRouteArgs> {
 
   static const String name = 'CreateOrderRoute';
 
-  static const _i30.PageInfo<CreateOrderRouteArgs> page = _i30.PageInfo<CreateOrderRouteArgs>(name);
+  static const _i30.PageInfo<CreateOrderRouteArgs> page =
+      _i30.PageInfo<CreateOrderRouteArgs>(name);
 }
 
 class CreateOrderRouteArgs {
@@ -373,34 +403,40 @@ class DeliveryFormRoute extends _i30.PageRouteInfo<DeliveryFormRouteArgs> {
   DeliveryFormRoute({
     _i31.Key? key,
     required List<_i32.CartItemModel> cart,
+    _i33.UserModel? user,
     List<_i30.PageRouteInfo>? children,
   }) : super(
           DeliveryFormRoute.name,
           args: DeliveryFormRouteArgs(
             key: key,
             cart: cart,
+            user: user,
           ),
           initialChildren: children,
         );
 
   static const String name = 'DeliveryFormRoute';
 
-  static const _i30.PageInfo<DeliveryFormRouteArgs> page = _i30.PageInfo<DeliveryFormRouteArgs>(name);
+  static const _i30.PageInfo<DeliveryFormRouteArgs> page =
+      _i30.PageInfo<DeliveryFormRouteArgs>(name);
 }
 
 class DeliveryFormRouteArgs {
   const DeliveryFormRouteArgs({
     this.key,
     required this.cart,
+    this.user,
   });
 
   final _i31.Key? key;
 
   final List<_i32.CartItemModel> cart;
 
+  final _i33.UserModel? user;
+
   @override
   String toString() {
-    return 'DeliveryFormRouteArgs{key: $key, cart: $cart}';
+    return 'DeliveryFormRouteArgs{key: $key, cart: $cart, user: $user}';
   }
 }
 
@@ -506,7 +542,8 @@ class OrderDetailRoute extends _i30.PageRouteInfo<OrderDetailRouteArgs> {
 
   static const String name = 'OrderDetailRoute';
 
-  static const _i30.PageInfo<OrderDetailRouteArgs> page = _i30.PageInfo<OrderDetailRouteArgs>(name);
+  static const _i30.PageInfo<OrderDetailRouteArgs> page =
+      _i30.PageInfo<OrderDetailRouteArgs>(name);
 }
 
 class OrderDetailRouteArgs {
@@ -585,7 +622,8 @@ class ProfileInfoRoute extends _i30.PageRouteInfo<ProfileInfoRouteArgs> {
 
   static const String name = 'ProfileInfoRoute';
 
-  static const _i30.PageInfo<ProfileInfoRouteArgs> page = _i30.PageInfo<ProfileInfoRouteArgs>(name);
+  static const _i30.PageInfo<ProfileInfoRouteArgs> page =
+      _i30.PageInfo<ProfileInfoRouteArgs>(name);
 }
 
 class ProfileInfoRouteArgs {

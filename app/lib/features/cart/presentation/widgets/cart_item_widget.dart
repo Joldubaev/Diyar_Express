@@ -55,7 +55,8 @@ class CartItemWidgets extends StatelessWidget {
                       fadeInCurve: Curves.easeIn,
                       fadeOutCurve: Curves.easeOut,
                       imageUrl: food.urlPhoto ?? '',
-                      errorWidget: (context, url, error) => Image.asset('assets/images/placeholder.png'),
+                      errorWidget: (context, url, error) =>
+                          Image.asset('assets/images/placeholder.png'),
                       width: 120,
                       height: 120,
                       placeholder: (context, url) => const Center(
@@ -79,12 +80,15 @@ class CartItemWidgets extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        FittedBox(
-                          child: Text(
-                            "${food.name}",
-                            style: theme.textTheme.bodyMedium,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
+                        Expanded(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "${food.name}",
+                              style: theme.textTheme.bodyMedium,
+                              overflow: TextOverflow.clip,
+                              maxLines: 2,
+                            ),
                           ),
                         ),
                         IconButton(
@@ -94,7 +98,9 @@ class CartItemWidgets extends StatelessWidget {
                               title: context.l10n.deleteOrder,
                               content: Text(context.l10n.deleteOrderText),
                               confirmPressed: () {
-                                context.read<CartCubit>().removeFromCart(food.id ?? '');
+                                context
+                                    .read<CartCubit>()
+                                    .removeFromCart(food.id ?? '');
                                 context.maybePop();
                               },
                             );
@@ -110,13 +116,15 @@ class CartItemWidgets extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           text: TextSpan(
                             text: "${food.weight} гр.",
-                            style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
+                            style: theme.textTheme.bodySmall!
+                                .copyWith(color: AppColors.grey),
                           ),
                         ),
                         const SizedBox(width: 10),
                         Text(
                           '${(food.price ?? 0) * counter} сом',
-                          style: theme.textTheme.bodySmall!.copyWith(color: AppColors.green),
+                          style: theme.textTheme.bodySmall!
+                              .copyWith(color: AppColors.green),
                         ),
                       ],
                     ),
