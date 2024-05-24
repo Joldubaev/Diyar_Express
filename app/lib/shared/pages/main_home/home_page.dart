@@ -99,10 +99,8 @@ class _HomePageState extends State<HomePage> {
                       child: StreamBuilder<List<CartItemModel>>(
                         stream: context.read<CartCubit>().cart,
                         builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                                child: CircularProgressIndicator());
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const Center(child: CircularProgressIndicator());
                           }
                           final cart = snapshot.data ?? [];
                           return PageView.builder(
@@ -112,13 +110,11 @@ class _HomePageState extends State<HomePage> {
                               final food = menu[index];
                               final cartItem = cart.firstWhere(
                                 (element) => element.food?.id == food.id,
-                                orElse: () =>
-                                    CartItemModel(food: food, quantity: 0),
+                                orElse: () => CartItemModel(food: food, quantity: 0),
                               );
 
                               return Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 10),
+                                padding: const EdgeInsets.symmetric(horizontal: 10),
                                 child: ProductItemWidget(
                                   food: food,
                                   quantity: cartItem.quantity ?? 0,
@@ -151,8 +147,7 @@ class _HomePageState extends State<HomePage> {
                     child: SettingsTile(
                       icon: Icons.phone,
                       text: l10n.contact,
-                      onPressed: () =>
-                          context.router.push(const ContactRoute()),
+                      onPressed: () => context.router.push(const ContactRoute()),
                     ),
                   ),
                 ],

@@ -37,10 +37,11 @@ class _CurierPageState extends State<CurierPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(context.l10n.activeOrders, style: const TextStyle(fontSize: 16)),
+        backgroundColor: AppColors.primary,
+        title: Text(context.l10n.activeOrders, style: theme.textTheme.titleMedium!.copyWith(color: AppColors.white)),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
+            icon: const Icon(Icons.logout, color: AppColors.white),
             onPressed: () {
               AppAlert.showConfirmDialog(
                 context: context,
@@ -62,6 +63,7 @@ class _CurierPageState extends State<CurierPage> {
           ),
         ],
       ),
+      drawerScrimColor: AppColors.black1.withOpacity(0.5),
       drawer: const CustomDrawer(),
       body: BlocBuilder<CurierCubit, CurierState>(
         builder: (context, state) {

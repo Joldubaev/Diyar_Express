@@ -68,7 +68,7 @@ class _PickupFormState extends State<PickupForm> {
           return Center(
             child: Text(
               context.l10n.someThingIsWrong,
-              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.red),
+              style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: AppColors.red),
             ),
           );
         }
@@ -124,7 +124,7 @@ class _PickupFormState extends State<PickupForm> {
               ),
               const SizedBox(height: 10),
               SubmitButtonWidget(
-                  title: context.l10n.orderHistory,
+                  title: context.l10n.confirmOrder,
                   bgColor: theme.primaryColor,
                   textStyle: theme.textTheme.bodyMedium!.copyWith(color: Colors.white),
                   onTap: () {

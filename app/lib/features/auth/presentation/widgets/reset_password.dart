@@ -25,15 +25,16 @@ class _RessetPasswordPageState extends State<RessetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios),
-          onPressed: () {
-            context.router.maybePop();
-          },
-        ),
+            icon: const Icon(
+              Icons.arrow_back_ios,
+              color: AppColors.white,
+            ),
+            onPressed: () => context.router.push(const SignInRoute())),
         title: Text(
           context.l10n.passwordRecovery,
-          style: theme.textTheme.titleSmall,
+          style: theme.textTheme.titleSmall!.copyWith(color: AppColors.white),
         ),
       ),
       body: Padding(
