@@ -1,5 +1,6 @@
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HistoryEmptyWidget extends StatelessWidget {
   const HistoryEmptyWidget({Key? key}) : super(key: key);
@@ -9,11 +10,7 @@ class HistoryEmptyWidget extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Image.asset(
-          'assets/images/active.png',
-          width: 150,
-          height: 150,
-        ),
+        SvgPicture.asset('assets/icons/active.svg', width: 200, height: 200),
         const SizedBox(height: 20),
         Text(
           context.l10n.noOrders,

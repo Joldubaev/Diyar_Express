@@ -4,6 +4,7 @@ import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../cubit/home_features_cubit.dart';
@@ -58,11 +59,7 @@ class _NewsPageState extends State<NewsPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/images/cuate.png',
-                      width: 200,
-                      height: 200,
-                    ),
+                    SvgPicture.asset('assets/icons/cuate.svg', width: 200, height: 200),
                     const SizedBox(height: 20),
                     Text(
                       context.l10n.emptyText,
