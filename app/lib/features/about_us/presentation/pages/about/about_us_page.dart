@@ -33,7 +33,6 @@ class _AboutUsPageState extends State<AboutUsPage> {
             context.l10n.aboutUs,
             style: theme.textTheme.titleSmall?.copyWith(
               color: AppColors.white,
-              fontFamily: 'Caveat',
             ),
           )),
       body: const SafeArea(

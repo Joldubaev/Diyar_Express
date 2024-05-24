@@ -35,7 +35,6 @@ class _ProfilePageState extends State<ProfilePage> {
           context.l10n.cabinet,
           style: theme.textTheme.titleSmall?.copyWith(
             color: AppColors.white,
-            fontFamily: 'Caveat',
           ),
         ),
         automaticallyImplyLeading: false,

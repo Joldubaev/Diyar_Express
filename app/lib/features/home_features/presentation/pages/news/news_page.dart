@@ -38,7 +38,6 @@ class _NewsPageState extends State<NewsPage> {
           context.l10n.news,
           style: theme.textTheme.titleSmall?.copyWith(
             color: AppColors.white,
-            fontFamily: 'Caveat',
           ),
         ),
       ),

@@ -51,7 +51,6 @@ class _ProfileInfoPageState extends State<ProfileInfoPage> {
             context.l10n.profile,
             style: theme.textTheme.titleSmall?.copyWith(
               color: AppColors.white,
-              fontFamily: 'Caveat',
             ),
           )),
       body: Padding(

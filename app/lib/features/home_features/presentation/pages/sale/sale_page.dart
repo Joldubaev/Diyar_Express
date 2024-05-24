@@ -38,7 +38,6 @@ class _SalePageState extends State<SalePage> {
           context.l10n.sales,
           style: theme.textTheme.titleSmall?.copyWith(
             color: AppColors.white,
-            fontFamily: 'Caveat',
           ),
         ),
       ),

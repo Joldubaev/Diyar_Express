@@ -27,7 +27,6 @@ class CartPage extends StatelessWidget {
           context.l10n.cart,
           style: theme.textTheme.titleSmall?.copyWith(
             color: AppColors.white,
-            fontFamily: 'Caveat',
           ),
         ),
         automaticallyImplyLeading: false,

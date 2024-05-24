@@ -18,7 +18,6 @@ class OrderHistoryPage extends StatelessWidget {
             context.l10n.orderHistory,
             style: theme.textTheme.titleSmall?.copyWith(
               color: AppColors.white,
-              fontFamily: 'Caveat',
             ),
           ),
           centerTitle: true,

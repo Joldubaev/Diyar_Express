@@ -46,7 +46,6 @@ class _HomePageState extends State<HomePage> {
               '${l10n.welcome}, ${context.read<ProfileCubit>().user?.name ?? ''}!',
               style: theme.textTheme.titleSmall?.copyWith(
                 color: AppColors.white,
-                fontFamily: 'Caveat',
               ),
             ),
           ),

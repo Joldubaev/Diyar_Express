@@ -46,7 +46,6 @@ class NewsWidgets extends StatelessWidget {
                     title,
                     style: theme.textTheme.titleLarge?.copyWith(
                       color: AppColors.black1,
-                      fontFamily: 'Caveat',
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -54,7 +53,6 @@ class NewsWidgets extends StatelessWidget {
                     subtitle,
                     style: theme.textTheme.titleLarge?.copyWith(
                       color: AppColors.black1,
-                      fontFamily: 'Caveat',
                       fontWeight: FontWeight.bold,
                     ),
                   ),
