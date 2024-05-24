@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:auto_route/auto_route.dart';
@@ -24,6 +25,7 @@ class ActiveOrderPage extends StatefulWidget {
 class _ActiveOrderPageState extends State<ActiveOrderPage> {
   List<ActiveOrderModel> orders = [];
   late final IOWebSocketChannel _channel;
+  final StreamController<List<OrderStatusModel>> _controller = StreamController.broadcast();
 
   @override
   void initState() {
@@ -38,11 +40,20 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
 
     _channel = IOWebSocketChannel.connect(
         'ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
+
+    _channel.stream.listen((data) {
+      final List<dynamic> jsonData = jsonDecode(data as String);
+      final List<OrderStatusModel> orderStatuses = jsonData
+          .map((dynamic json) => OrderStatusModel.fromJson(json))
+          .toList();
+      _controller.add(orderStatuses);
+    });
   }
 
   @override
   void dispose() {
     _channel.sink.close();
+    _controller.close();
     super.dispose();
   }
 
@@ -57,12 +68,13 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
         } else if (state is GetActiveOrdersLoaded) {
           orders = state.orders;
           if (orders.isEmpty) {
+            _channel.sink.close();
             return const EmptyActiveOrders();
           }
         }
 
-        return StreamBuilder(
-          stream: _channel.stream,
+        return StreamBuilder<List<OrderStatusModel>>(
+          stream: _controller.stream,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return const Center(child: Text('Ошибка при получении данных.'));
@@ -70,10 +82,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
               return const Center(child: CircularProgressIndicator());
             }
 
-            final List<dynamic> data = jsonDecode(snapshot.data as String);
-            final List<OrderStatusModel> orderStatuses = data
-                .map((dynamic json) => OrderStatusModel.fromJson(json))
-                .toList();
+            final orderStatuses = snapshot.data!;
 
             return ListView.separated(
               padding: const EdgeInsets.symmetric(horizontal: 20),
