@@ -68,7 +68,9 @@ class _CurierPageState extends State<CurierPage> {
         ],
       ),
       drawerScrimColor: AppColors.black1.withOpacity(0.5),
-      drawer: const CustomDrawer(),
+      drawer: Theme(
+          data: Theme.of(context).copyWith(iconTheme: const IconThemeData(color: AppColors.white)),
+          child: const CustomDrawer()),
       body: BlocBuilder<CurierCubit, CurierState>(
         builder: (context, state) {
           if (state is GetCourierActualOrdersError) {
@@ -151,6 +153,15 @@ class _CurierPageState extends State<CurierPage> {
           AppLaunch.launchURL('https://2gis.kg/bishkek');
         },
         child: Image.asset('assets/images/gis.png'),
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+        child: SubmitButtonWidget(
+          onTap: () => _refresh(),
+          title: 'Обновить',
+          bgColor: AppColors.primary,
+          textStyle: theme.textTheme.bodyLarge!.copyWith(color: AppColors.white),
+        ),
       ),
     );
   }

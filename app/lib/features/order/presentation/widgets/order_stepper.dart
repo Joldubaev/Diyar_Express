@@ -48,7 +48,7 @@ class _OrderStepperState extends State<OrderStepper> {
                 activeStep: activeStep,
                 maxReachedStep: reachedStep,
                 lineStyle: LineStyle(
-                  lineLength: 67,
+                  lineLength: 70,
                   lineType: LineType.normal,
                   unreachedLineColor: Colors.grey.withOpacity(0.5),
                   finishedLineColor: AppColors.primary,
