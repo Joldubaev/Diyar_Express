@@ -97,7 +97,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
                 return Card(
                   child: ExpansionTile(
                     shape: const Border(
-                      bottom: BorderSide(color: Colors.transparent, width: 0),
+                      bottom: BorderSide(color: Colors.transparent),
                     ),
                     childrenPadding: const EdgeInsets.fromLTRB(10, 10, 10, 8),
                     title: Text(
