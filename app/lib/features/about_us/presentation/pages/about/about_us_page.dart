@@ -8,7 +8,6 @@ import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class AboutUsPage extends StatefulWidget {
@@ -32,10 +31,8 @@ class _AboutUsPageState extends State<AboutUsPage> {
           ),
           title: Text(
             context.l10n.aboutUs,
-            style: GoogleFonts.aBeeZee(
+            style: theme.textTheme.titleSmall?.copyWith(
               color: AppColors.white,
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
             ),
           )),
       body: const SafeArea(

@@ -38,7 +38,7 @@ class _TotalPriceWidgetState extends State<TotalPriceWidget> {
           return Column(
             children: [
               CustomTile(title: context.l10n.costOfMeal, trailing: '${widget.price} ${context.l10n.som}'),
-              CustomTile(title: context.l10n.dishes, trailing: '${context.read<CartCubit>().dishCount}'),
+              CustomTile(title: context.l10n.dishes, trailing: '15 ${context.l10n.som}'),
               CustomTile(title: context.l10n.sale, trailing: '${widget.sale} ${context.l10n.som}'),
               const Divider(color: Colors.grey),
               CustomTile(

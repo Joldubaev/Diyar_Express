@@ -1,6 +1,5 @@
-import 'package:diyar_express/shared/theme/app_colors.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class NewsWidgets extends StatelessWidget {
   const NewsWidgets({
@@ -45,16 +44,14 @@ class NewsWidgets extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: GoogleFonts.caveat(
-                      fontSize: 34,
+                    style: theme.textTheme.titleLarge?.copyWith(
                       color: AppColors.black1,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
                     subtitle,
-                    style: GoogleFonts.caveat(
-                      fontSize: 34,
+                    style: theme.textTheme.titleLarge?.copyWith(
                       color: AppColors.black1,
                       fontWeight: FontWeight.bold,
                     ),

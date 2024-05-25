@@ -11,7 +11,6 @@ import 'package:diyar_express/shared/pages/widgets/sale_widget.dart';
 import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 @RoutePage()
 class HomePage extends StatefulWidget {
@@ -45,10 +44,8 @@ class _HomePageState extends State<HomePage> {
           child: FittedBox(
             child: Text(
               '${l10n.welcome}, ${context.read<ProfileCubit>().user?.name ?? ''}!',
-              style: GoogleFonts.aBeeZee(
+              style: theme.textTheme.titleSmall?.copyWith(
                 color: AppColors.white,
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
               ),
             ),
           ),

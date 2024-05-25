@@ -5,7 +5,6 @@ import 'package:diyar_express/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../../cubit/home_features_cubit.dart';
 
@@ -35,12 +34,12 @@ class _NewsPageState extends State<NewsPage> {
             context.router.maybePop();
           },
         ),
-        title: Text(context.l10n.news,
-            style: GoogleFonts.aBeeZee(
-              color: AppColors.white,
-              fontSize: 26,
-              fontWeight: FontWeight.bold,
-            )),
+        title: Text(
+          context.l10n.news,
+          style: theme.textTheme.titleSmall?.copyWith(
+            color: AppColors.white,
+          ),
+        ),
       ),
       body: BlocConsumer<HomeFeaturesCubit, HomeFeaturesState>(
         listener: (context, state) {
