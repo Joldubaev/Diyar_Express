@@ -1,10 +1,14 @@
+import 'dart:developer';
+
 import 'package:diyar_express/features/history/data/model/order_status_model.dart';
+import 'package:diyar_express/features/history/history.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/constants/constant.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:easy_stepper/easy_stepper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OrderStepper extends StatefulWidget {
   final OrderStatusModel orderStatus;
@@ -32,8 +36,9 @@ class _OrderStepperState extends State<OrderStepper> {
   @override
   Widget build(BuildContext context) {
     checkStep();
+
     return SizedBox(
-      height: 100,
+      height: 110,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -97,10 +102,14 @@ class _OrderStepperState extends State<OrderStepper> {
   }
 
   bool _allowTabStepping(int index, StepEnabling enabling) {
-    return enabling == StepEnabling.sequential ? index <= reachedStep : reachedSteps.contains(index);
+    return enabling == StepEnabling.sequential
+        ? index <= reachedStep
+        : reachedSteps.contains(index);
   }
 
   checkStep() {
+    log(widget.orderStatus.status);
+    
     widget.orderStatus.status == AppConst.awaits
         ? activeStep = 0
         : widget.orderStatus.status == AppConst.cooked
@@ -110,6 +119,10 @@ class _OrderStepperState extends State<OrderStepper> {
                 : widget.orderStatus.status == AppConst.finished
                     ? activeStep = 3
                     : activeStep = 0;
+
+    if (widget.orderStatus.status == AppConst.finished) {
+      context.read<HistoryCubit>().getActiveOrders();
+    }
   }
 }
 

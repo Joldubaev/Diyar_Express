@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
+import 'package:diyar_express/core/router/routes.gr.dart';
 import 'package:diyar_express/features/curier/curier.dart';
 import 'package:diyar_express/features/history/history.dart';
 import 'package:diyar_express/l10n/l10n.dart';
 import 'package:diyar_express/shared/components/components.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
-import 'package:diyar_express/shared/utils/fmt/show_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -56,7 +57,8 @@ class _OrderHistoryState extends State<OrderHistory> {
                 ),
                 subtitle: Text(
                   '${context.l10n.orderNumber} ${orders[index].orderNumber}',
-                  style: theme.textTheme.bodySmall!.copyWith(color: AppColors.grey),
+                  style: theme.textTheme.bodySmall!
+                      .copyWith(color: AppColors.grey),
                 ),
                 children: [
                   CustomTile(
@@ -65,16 +67,13 @@ class _OrderHistoryState extends State<OrderHistory> {
                   ),
                   CustomTextButton(
                     onPressed: () {
-                      AppAlert.showConfirmDialog(
-                        context: context,
-                        title: context.l10n.orderRepeat,
-                        content: Text(context.l10n.orderRepeatText),
-                        confirmPressed: () {
-                          Navigator.pop(context);
-                        },
+                      context.pushRoute(
+                        OrderDetailRoute(
+                          orderNumber: "${orders[index].orderNumber}",
+                        ),
                       );
                     },
-                    textButton: context.l10n.orderRepeat,
+                    textButton: context.l10n.orderDetailsText,
                     description: context.l10n.orderCancelText2,
                   ),
                 ],

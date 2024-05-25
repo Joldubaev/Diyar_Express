@@ -1,10 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:diyar_express/features/cart/data/models/cart_item_model.dart';
 import 'package:diyar_express/features/cart/presentation/cubit/cart_cubit.dart';
 import 'package:diyar_express/features/features.dart';
 import 'package:diyar_express/shared/theme/theme.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:transparent_image/transparent_image.dart';
 
 class ProductItemContentWidget extends StatelessWidget {
   final VoidCallback? onTap;
@@ -51,12 +51,24 @@ class ProductItemContentWidget extends StatelessWidget {
               ),
               child: Padding(
                 padding: const EdgeInsets.only(left: 6, right: 6, top: 0),
-                child: FadeInImage.memoryNetwork(
-                  placeholder: kTransparentImage,
-                  image: food.urlPhoto ?? 'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
-                  fit: BoxFit.contain,
+                child: CachedNetworkImage(
+                  imageUrl: food.urlPhoto ??
+                      'https://i.ibb.co/GkL25DB/ALE-1357-7.png',
+                  errorWidget: (context, url, error) => Image.asset(
+                    'assets/images/app_logo.png',
+                    color: Colors.grey,
+                  ),
                   width: double.infinity,
                   height: 120,
+                  memCacheHeight: 100,
+                  placeholder: (context, url) => const Center(
+                    child: SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: CircularProgressIndicator(),
+                    ),
+                  ),
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
@@ -108,7 +120,8 @@ class ProductItemContentWidget extends StatelessWidget {
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                mainAxisSize: isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
+                mainAxisSize:
+                    isShadowVisible! ? MainAxisSize.max : MainAxisSize.min,
                 children: [
                   IconButton(
                     splashRadius: 20,
