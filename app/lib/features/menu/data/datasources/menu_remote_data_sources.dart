@@ -51,10 +51,10 @@ class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
     try {
       var token = _prefs.getString(AppConst.accessToken) ?? '';
 
-      var res = await _dio.get(
-        ApiConst.getCategories,
+      var res = await _dio.post(
+        ApiConst.searchFoodsByName,
         options: Options(headers: ApiConst.authMap(token)),
-        queryParameters: {if (name != null) 'foodName': name},
+        data: {if (name != null) 'foodName': name, 'page': 1, 'pageSize': 10},
       );
 
       if (res.statusCode == 200) {

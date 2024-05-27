@@ -102,14 +102,12 @@ class _OrderStepperState extends State<OrderStepper> {
   }
 
   bool _allowTabStepping(int index, StepEnabling enabling) {
-    return enabling == StepEnabling.sequential
-        ? index <= reachedStep
-        : reachedSteps.contains(index);
+    return enabling == StepEnabling.sequential ? index <= reachedStep : reachedSteps.contains(index);
   }
 
   checkStep() {
     log(widget.orderStatus.status);
-    
+
     widget.orderStatus.status == AppConst.awaits
         ? activeStep = 0
         : widget.orderStatus.status == AppConst.cooked

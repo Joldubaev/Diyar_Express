@@ -183,8 +183,8 @@ class _MenuPageState extends State<MenuPage> {
   }
 
   double _calculateCategoryHeight(int index) {
-    double categoryHeight = 40.0; 
-    double productsHeight = (menu[index].foods?.length ?? 0) * 120.0; 
+    double categoryHeight = 40.0;
+    double productsHeight = (menu[index].foods?.length ?? 0) * 120.0;
     return categoryHeight + productsHeight;
   }
 }
