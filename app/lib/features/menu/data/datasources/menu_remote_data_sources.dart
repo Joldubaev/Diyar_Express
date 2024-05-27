@@ -65,10 +65,22 @@ class MenuRemoteDataSourceImpl implements MenuRemoteDataSource {
         }
         return [];
       } else {
+        log('Server responded with status code: ${res.statusCode}');
         throw ServerException();
       }
+    } on DioException catch (e) {
+      if (e.response != null) {
+        // The server responded with a non-2xx status code
+        log('Status code: ${e.response?.statusCode}');
+        log('Response data: ${e.response?.data}');
+        log('Headers: ${e.response?.headers}');
+      } else {
+        // There was an error sending the request
+        log('Error sending request: $e');
+      }
+      throw ServerException();
     } catch (e) {
-      log("Error: $e");
+      log('Unexpected error: $e');
       throw ServerException();
     }
   }

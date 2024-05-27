@@ -1,15 +1,16 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:diyar_express/core/router/routes.gr.dart';
-import 'package:diyar_express/l10n/l10n.dart';
-import 'package:diyar_express/shared/components/components.dart';
-import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
-import 'package:diyar_express/features/features.dart';
-import 'package:diyar_express/shared/theme/theme.dart';
-import 'package:diyar_express/shared/utils/snackbar/snackbar_message.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+
+import 'package:diyar_express/core/router/routes.gr.dart';
+import 'package:diyar_express/features/auth/data/models/user_mpdel.dart';
+import 'package:diyar_express/features/features.dart';
+import 'package:diyar_express/l10n/l10n.dart';
+import 'package:diyar_express/shared/components/components.dart';
+import 'package:diyar_express/shared/theme/theme.dart';
+import 'package:diyar_express/shared/utils/snackbar/snackbar_message.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({Key? key}) : super(key: key);
@@ -125,11 +126,6 @@ class _SignUpFormState extends State<SignUpForm> {
                 context.router.pushAndPopUntil(
                   const SignUpSucces(),
                   predicate: (_) => false,
-                );
-              } else if (state is SignUpFailure) {
-                SnackBarMessage().showErrorSnackBar(
-                  message: state.message,
-                  context: context,
                 );
               }
             },

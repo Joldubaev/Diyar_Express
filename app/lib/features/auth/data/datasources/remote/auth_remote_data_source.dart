@@ -92,15 +92,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
           access: res.data['accessToken'],
           email: user.email!,
         );
-      } else {
-        if (res.statusCode == 418) {
-          showToast('Такой аккаунт уже существует', isError: true);
-        }
-        throw ServerException();
       }
     } catch (e) {
-      log("$e");
-      throw ServerException();
+      if (e is DioException && e.response?.statusCode == 400) {
+        showToast('Пользователь с таким email уже существует', isError: true);
+        throw ServerException();
+      } else {
+        throw DioException(
+          error: 'Ошибка сервера',
+          requestOptions: RequestOptions(path: ApiConst.signUp),
+        );
+      }
     }
   }
 
