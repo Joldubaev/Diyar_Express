@@ -45,8 +45,6 @@ class _NewsPageState extends State<NewsPage> {
         listener: (context, state) {
           if (state is HomeFeaturesError) {
             SnackBarMessage().showErrorSnackBar(message: state.message, context: context);
-          } else if (state is HomeFeaturesLoaded) {
-            SnackBarMessage().showSuccessSnackBar(message: context.l10n.dataIsLoaded, context: context);
           }
         },
         builder: (context, state) {

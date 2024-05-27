@@ -26,6 +26,7 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
   List<ActiveOrderModel> orders = [];
   late final IOWebSocketChannel _channel;
   final StreamController<List<OrderStatusModel>> _controller = StreamController.broadcast();
+  bool _isControllerClosed = false;
 
   @override
   void initState() {
@@ -41,17 +42,31 @@ class _ActiveOrderPageState extends State<ActiveOrderPage> {
     _channel = IOWebSocketChannel.connect('ws://20.55.72.226:8080/ws/get-status-with-websocket?token=$token');
 
     _channel.stream.listen((data) {
-      final List<dynamic> jsonData = jsonDecode(data as String);
-      final List<OrderStatusModel> orderStatuses =
-          jsonData.map((dynamic json) => OrderStatusModel.fromJson(json)).toList();
-      _controller.add(orderStatuses);
+      if (!_isControllerClosed) {
+        final List<dynamic> jsonData = jsonDecode(data as String);
+        final List<OrderStatusModel> orderStatuses =
+            jsonData.map((dynamic json) => OrderStatusModel.fromJson(json)).toList();
+        _controller.add(orderStatuses);
+      }
+    }, onError: (error) {
+      if (!_isControllerClosed) {
+        _controller.addError(error);
+      }
+    }, onDone: () {
+      if (!_isControllerClosed) {
+        _controller.close();
+        _isControllerClosed = true;
+      }
     });
   }
 
   @override
   void dispose() {
     _channel.sink.close();
-    _controller.close();
+    if (!_isControllerClosed) {
+      _controller.close();
+      _isControllerClosed = true;
+    }
     super.dispose();
   }
 

@@ -25,7 +25,7 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
       appBar: AppBar(
         title: Text(context.l10n.searchMeal, style: Theme.of(context).textTheme.titleSmall),
       ),
-      body: ListView(
+      body: Column(
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -53,76 +53,73 @@ class _SearchMenuPageState extends State<SearchMenuPage> {
             ),
           ),
           const SizedBox(height: 10),
-          BlocConsumer<MenuCubit, MenuState>(
-            listener: (context, state) {
-              if (state is SearchMenuLoaded) {
-                foods = state.foods;
-                context.read<CartCubit>().getCartItems();
-              }
-            },
-            builder: (context, state) {
-              if (state is SearchMenuLoaded) {
-                if (state.foods.isEmpty) {
-                  return Expanded(
-                    child: Center(
+          Expanded(
+            child: BlocConsumer<MenuCubit, MenuState>(
+              listener: (context, state) {
+                if (state is SearchMenuLoaded) {
+                  setState(() {
+                    foods = state.foods;
+                  });
+                  context.read<CartCubit>().getCartItems();
+                }
+              },
+              builder: (context, state) {
+                if (state is SearchMenuLoaded) {
+                  if (state.foods.isEmpty) {
+                    return Center(
                       child: Text(
                         context.l10n.notFound,
                         style: const TextStyle(fontSize: 16),
                       ),
-                    ),
-                  );
+                    );
+                  }
+                } else if (state is SearchMenuLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is SearchMenuFailure) {
+                  return Center(child: Text(context.l10n.loadedWrong));
                 }
-              } else if (state is SearchMenuLoading) {
-                return const Expanded(
-                  child: Center(child: CircularProgressIndicator()),
-                );
-              } else if (state is SearchMenuFailure) {
-                return Expanded(
-                  child: Center(child: Text(context.l10n.loadedWrong)),
-                );
-              }
 
-              return foods.isEmpty
-                  ? Expanded(
-                      child: Center(
+                return foods.isEmpty
+                    ? Center(
                         child: Text(
                           context.l10n.searchByNames,
                           style: const TextStyle(fontSize: 16),
                         ),
-                      ),
-                    )
-                  : StreamBuilder<List<CartItemModel>>(
-                      stream: context.read<CartCubit>().cart,
-                      builder: (context, snapshot) {
-                        List cart = [];
-                        if (snapshot.hasData) {
-                          cart = snapshot.data ?? [];
-                        }
-                        return GridView.count(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10,
-                          crossAxisSpacing: 10,
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          childAspectRatio: 0.72,
-                          shrinkWrap: true,
-                          children: List.generate(
-                            foods.length,
-                            (index) {
-                              final food = foods[index];
-                              final cartItem = cart.firstWhere(
-                                (element) => element.food?.id == food.id,
-                                orElse: () => CartItemModel(food: food, quantity: 0),
-                              );
-                              return ProductItemWidget(
-                                food: food,
-                                quantity: cartItem.quantity ?? 0,
-                              );
-                            },
-                          ),
-                        );
-                      });
-            },
-          )
+                      )
+                    : StreamBuilder<List<CartItemModel>>(
+                        stream: context.read<CartCubit>().cart,
+                        builder: (context, snapshot) {
+                          List cart = [];
+                          if (snapshot.hasData) {
+                            cart = snapshot.data ?? [];
+                          }
+                          return GridView.count(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 10,
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            childAspectRatio: 0.72,
+                            shrinkWrap: true,
+                            children: List.generate(
+                              foods.length,
+                              (index) {
+                                final food = foods[index];
+                                final cartItem = cart.firstWhere(
+                                  (element) => element.food?.id == food.id,
+                                  orElse: () => CartItemModel(food: food, quantity: 0),
+                                );
+                                return ProductItemWidget(
+                                  food: food,
+                                  quantity: cartItem.quantity ?? 0,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      );
+              },
+            ),
+          ),
         ],
       ),
     );
